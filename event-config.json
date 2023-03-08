@@ -1,0 +1,52 @@
+{
+  "info": {
+    "product": "RUTX11",
+    "ip-address": "90.141.1.140"
+  },
+  "events-triggers": [
+    {
+      "event-data": {
+        "event-type": "PAVYZDYS type: string PAVYZDYS",
+        "event-subtype": "type: string",
+        "action": "email/sms (type: string)",
+        "email-config": {
+          "subject": "email's subject (type: string)",
+          "email-acc": "account which was precreated in webui (type: string)",
+          "recievers": [
+            "mail1@domain.com (type: string)"
+          ]
+        },
+        "sms-config": {
+          "recipients": "single/group (type: string)",
+          "reciever": "phone number/group which was precreated in webui (type: string)"
+        },
+        "message": "type: string"
+      },
+      "trigger-data": {
+        "parameter": "PAVYZDYS parameter's setting (type: string) PAVYZDYS"
+      }
+    },
+    {
+      "event-data": {
+        "event-type": "",
+        "event-subtype": "",
+        "action": "",
+        "email-config": {
+          "subject": "",
+          "email-acc": "",
+          "recievers": [
+            ""
+          ]
+        },
+        "sms-config": {
+          "recipients": "",
+          "reciever": ""
+        },
+        "message": ""
+      },
+      "trigger-data": {
+        "parameter": ""
+      }
+    }
+  ]
+}
