@@ -5,7 +5,7 @@ The purpose of this automated test is to create a program that will test all Eve
 
 The assignment must be completed using the Python programming language. Use third version of python. The test must be able to test Events Reporting with every device that has mobile capabilities. All Events Reporting Types and subtypes must be tested. You must use API to configure Events Reporting rules and to trigger it.
 
-API documentation can be found [here] (https://teltonikalt.sharepoint.com/sites/NetworksIoTakademija/SitePages/API.aspx#to-read-api-documentation-upload-it-here)
+API documentation can be found [here](https://teltonikalt.sharepoint.com/sites/NetworksIoTakademija/SitePages/API.aspx#to-read-api-documentation-upload-it-here)
 ### Test functionality
 The test must have a JSON configuration file that fill hold all Events reporting rules configurations and triggers that will make the device send SMS message about it to another device. Configuration file must also contain information what information the received message on certain events reporting rule will contain and from which number it must come. When starting the test, it is necessary to check whether the connected product is the one indicated as being tested. Which product commands to test must be specified as an argument when running the test.
 
