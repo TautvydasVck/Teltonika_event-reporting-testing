@@ -7,7 +7,7 @@
       "event-data": {
         "event-type": "PAVYZDYS type: string PAVYZDYS",
         "event-subtype": "type: string",
-        "action": "email/sms (type: string)",
+        "action": "sendEmail/sendSMS (type: string)",
         "email-config": {
           "subject": "email's subject (type: string)",
           "email-acc": "account which was precreated in webui (type: string)",
