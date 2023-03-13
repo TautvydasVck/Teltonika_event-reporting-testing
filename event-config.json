@@ -1,7 +1,6 @@
 {
   "info": {
-    "product": "RUTX11",
-    "ip-address": "90.141.1.140"
+    "product": "RUTX11"
   },
   "events-triggers": [
     {

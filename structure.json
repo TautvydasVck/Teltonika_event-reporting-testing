@@ -1,7 +1,6 @@
 {
   "info": {
-    "product": "product model (type: string)",
-    "ip-address": "IP (type: string)"
+    "product": "product model (type: string)"
   },
   "events-triggers": [
     {
