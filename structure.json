@@ -9,7 +9,7 @@
         "event-subtype": "type: string",
         "action": "email/sms (type: string)",
         "email-config": {
-          "subject": "email's subject (type: string)",
+          "subject": "email subject (type: string)",
           "email-acc": "account which was precreated in webui (type: string)",
           "recievers": [
             "mail1@domain.com (type: string)"
@@ -21,9 +21,12 @@
         },
         "message": "type: string"
       },
-      "trigger-data": {
-        "parameter": "PAVYZDYS parameter's setting (type: string) PAVYZDYS"
-      }
+      "trigger-data": [
+        {
+          "parameter1": "PAVYZDYS parameter1's setting (type: string) PAVYZDYS"
+        },
+        {}
+      ]
     },
     {
       "event-data": {
@@ -43,9 +46,12 @@
         },
         "message": ""
       },
-      "trigger-data": {
-        "parameter": ""
-      }
+      "trigger-data": [
+        {
+          "parameter": ""
+        },
+        {}
+      ]
     }
   ]
 }

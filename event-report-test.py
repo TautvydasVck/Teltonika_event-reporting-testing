@@ -18,11 +18,12 @@ def Main():
     # print("Enter router's IP address")
     # print("IP: ", end="")
     # ipAddr = input()
-    reqsData.ipAddr = "192.168.1.1"
+    reqsData.ipAddr = "192.168.1.4"
     reqsData.baseURL = "http://"+reqsData.ipAddr+"/api"
     LoginToken(reqsData)
-    CheckForMobile(reqsData)
     data = GetConfigData()
+    CheckForModel(data, reqsData)
+    CheckForMobile(reqsData)
     CreateEvents(data, reqsData)
 
 
@@ -44,9 +45,10 @@ def GetSysInfo(reqsData, endpoint):
 def SendEvent(reqsData, endpoint, bodyData):
     head = {"Content-Type": "application/json",
             "Authorization": "Bearer " + reqsData.token}
-    data = {"data": bodyData}
-    response = requests.put(reqsData.baseURL+endpoint,
-                            headers=head, json=data).json()
+    data = "{\"data\":"+bodyData+"}"
+    # print("Before send\n"+data)
+    response = requests.post(reqsData.baseURL+endpoint,
+                             headers=head, data=data).json()
     return response
 
 
@@ -76,8 +78,6 @@ def GetConfigData():
 
 def CheckForMobile(reqsData):
     res = GetSysInfo(reqsData, "/system/device/info")
-    print(
-        "---Device being tested: {0}---". format(res["data"]["mnfinfo"]["name"]))
     if (res["data"]["board"]["hwinfo"]["mobile"] != True):
         print(Text.Yellow(
             "Device does not have mobile capabilities. Events can be sent only via email"))
@@ -88,65 +88,67 @@ def CheckForMobile(reqsData):
         reqsData.mobile = True
 
 
-"""
---change if statement--
-
 def CheckForModel(data, reqsData):
-    res = SendGet(reqsData, "/system/device/info", "get")
-    model = res["data"]["mnfinfo"]["name"]
-    print(model.lower())
-    print(data["info"]["product"] in model.lower())
-    if data["info"]["product"] in model.lower():
-        print(Colors.Green("Device model in JSON matches actual model"))
+    res = GetSysInfo(reqsData, "/system/device/info")
+    print(
+        "--Device being tested: {0}--".
+          format(res["data"]["mnfinfo"]["name"]))
+    modelA = str(res["data"]["mnfinfo"]["name"])
+    modelF = data["info"]["product"]
+    if modelA.startswith(modelF):
+        print(Text.Green("Device model in JSON matches actual device model"))
     else:
-        print(Colors.Red("Device model mismatch"))
+        print(Text.Red("Device model mismatch"))
         sys.exit(
-            "Device model between config file and actual model doesn not match.\nCheck JSON configuration file")
-"""
+            "Device model in config file ({0}) and actual model ({1}) do not match.\nCheck JSON configuration file". format(modelF, modelA))
 
 
-def CreateEvents(json, reqsData):
+def CreateEvents(file, reqsData):
     results = {}
     i = 0
-    for test in json["events-triggers"]:
+    for test in file["events-triggers"]:
         print("Event: " +
               Text.Underline("{0}".format(test["event-data"]["event-type"])))
         print(
             "Subtype: "+Text.Underline("{0}".format(test["event-data"]["event-subtype"])))
-        print("Current test: {0}/{1}".format(i+1, len(test)))
-        data = {".type": "rule",
-                "enable": "1",
-                "event": test["event-data"]["event-type"],
-                "eventMark": test["event-data"]["event-subtype"],
-                "message": test["event-data"]["message"]}
-        if (len(test["event-data"]["email-config"]["recievers"]) != 0):
-            data.update({
-                "action": "sendEmail",
-                "subject": test["event-data"]["email-config"]["subject"],
-                "recipEmail": test["event-data"]["email-config"]["recievers"],
-                "eventMark": test["event-data"]["event-subtype"],
-                "emailgroup": test["event-data"]["email-config"]["email-acc"]})
+        if (len(test["event-data"]["email-config"]["recievers"]) > 0):
+            data = json.dumps({".type": "rule",
+                               "enable": "0",
+                               "event": test["event-data"]["event-type"],
+                               "eventMark": test["event-data"]["event-subtype"],
+                               "message": test["event-data"]["message"],
+                               "action": "sendEmail",
+                               "subject": test["event-data"]["email-config"]["subject"],
+                               "recipEmail": test["event-data"]["email-config"]["recievers"],
+                               "eventMark": test["event-data"]["event-subtype"],
+                               "emailgroup": test["event-data"]["email-config"]["email-acc"]})
+
         elif (test["event-data"]["sms-config"]["reciever"] != ""):
-            data.update({  # "action": "sendEmail",
-                # "subject": test["event-data"]["email-config"]["subject"],
-                # "sms-config": ""
-                # "recipients": "",
-                # "reciever": ""
-            })        
+            data = json.dumps({".type": "rule",
+                               "enable": "0",
+                               "event": test["event-data"]["event-type"],
+                               "eventMark": test["event-data"]["event-subtype"],
+                               "message": test["event-data"]["message"],
+                               "action": "sendSMS"
+                               })
         response = SendEvent(
             reqsData, "/services/events_reporting/config", data)
+        # print(response)
         # FillTestResults(response, results)
-        if (response["success"] == True):
-            print(Text.Green("Event created succesfully"))
-            TriggerEvent(response, reqsData)
-        else:
+        if (response["success"] == False):
             print(Text.Red("Event was not created"))
+        elif (response["success"] == True):
+            TriggerEvent(test)
+        print("Current test: {0}/{1}".format(i+1, len(test)))
         print("-"*40)
         i += 1
 
 
-def TriggerEvent(json, reqsData):
-    print("trigger")
+def TriggerEvent(event):
+    for trig in event["trigger-data"]:
+        data = json.dumps({
+
+        })
 # def FillTestResults(response, results):
 
 
@@ -161,7 +163,7 @@ class RequestData:
         self.name = ""
         self.pswd = ""
         self.mobile = False
-        self.smsToRouer = False
+        self.smsToRouter = False
 
 
 class TestResultsData:

@@ -1,30 +1,35 @@
 {
   "info": {
-    "product": "RUTX11"
+    "product": "RUTX10"
   },
   "events-triggers": [
     {
       "event-data": {
-        "event-type": "PAVYZDYS type: string PAVYZDYS",
-        "event-subtype": "type: string",
-        "action": "sendEmail/sendSMS (type: string)",
+        "event-type": "Web UI",
+        "event-subtype": "was successful",
+        "action": "sendEmail",
         "email-config": {
-          "subject": "email's subject (type: string)",
-          "email-acc": "account which was precreated in webui (type: string)",
+          "subject": "email subject",
+          "email-acc": "ttv_email",
           "recievers": [
-            "mail1@domain.com",
-            "mail2@domain.com"
+            "gotranukno@gufum.com",
+            "nemilesus.curihece@jollyfree.com"
           ]
         },
         "sms-config": {
           "recipients": "",
           "reciever": ""
         },
-        "message": "type: string"
+        "message": "Zinute"
       },
-      "trigger-data": {
-        "parameter": "PAVYZDYS parameter's setting (type: string) PAVYZDYS"
-      }
+      "trigger-data": [
+        {
+          "username": "admin"
+        },
+        {
+          "password": "Admin123"
+        }
+      ]
     },
     {
       "event-data": {
