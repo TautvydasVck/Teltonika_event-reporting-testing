@@ -161,6 +161,7 @@ class RequestData:
         self.name = ""
         self.pswd = ""
         self.mobile = False
+        self.smsToRouer = False
 
 
 class TestResultsData:
