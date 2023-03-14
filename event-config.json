@@ -12,12 +12,13 @@
           "subject": "email's subject (type: string)",
           "email-acc": "account which was precreated in webui (type: string)",
           "recievers": [
-            "mail1@domain.com (type: string)"
+            "mail1@domain.com",
+            "mail2@domain.com"
           ]
         },
         "sms-config": {
-          "recipients": "single/group (type: string)",
-          "reciever": "phone number/group which was precreated in webui (type: string)"
+          "recipients": "",
+          "reciever": ""
         },
         "message": "type: string"
       },

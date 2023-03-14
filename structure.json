@@ -5,7 +5,7 @@
   "events-triggers": [
     {
       "event-data": {
-        "event-type": "PAVYZDYS type: string PAVYZDYS",
+        "event-type": "PAVYZDYS (type: string) PAVYZDYS",
         "event-subtype": "type: string",
         "action": "email/sms (type: string)",
         "email-config": {

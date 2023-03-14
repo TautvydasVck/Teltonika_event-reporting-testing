@@ -7,7 +7,7 @@ The assignment must be completed using the Python programming language. Use thir
 
 [API documentation](https://teltonikalt.sharepoint.com/sites/NetworksIoTakademija/SitePages/API.aspx#to-read-api-documentation-upload-it-here).
 ### Test functionality
-The test must have a JSON configuration file that fill hold all Events reporting rules configurations and triggers that will make the device send SMS message about it to another device. Configuration file must also contain information what information the received message on certain events reporting rule will contain and from which number it must come. When starting the test, it is necessary to check whether the connected product is the one indicated as being tested. Which product commands to test must be specified as an argument when running the test.
+The test must have a JSON configuration file that fill hold all Events reporting rules configurations and triggers that will make the device send SMS message or email about it to another device. Configuration file must also contain information what information the received message on certain events reporting rule will contain and from which number it must come. When starting the test, it is necessary to check whether the connected product is the one indicated as being tested.
 
 When the other device receives SMS message about the event it is needed to check the content and sender of the SMS message.
 
