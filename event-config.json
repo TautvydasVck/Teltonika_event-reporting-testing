@@ -22,14 +22,10 @@
         },
         "message": "Zinute"
       },
-      "trigger-data": [
-        {
-          "username": "admin"
-        },
-        {
-          "password": "Admin123"
-        }
-      ]
+      "trigger-data": {
+        "API-path":"/network/interfaces/config",
+        "status-change":"0/1"
+      }
     },
     {
       "event-data": {

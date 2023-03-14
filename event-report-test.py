@@ -92,7 +92,7 @@ def CheckForModel(data, reqsData):
     res = GetSysInfo(reqsData, "/system/device/info")
     print(
         "--Device being tested: {0}--".
-          format(res["data"]["mnfinfo"]["name"]))
+        format(res["data"]["mnfinfo"]["name"]))
     modelA = str(res["data"]["mnfinfo"]["name"])
     modelF = data["info"]["product"]
     if modelA.startswith(modelF):
@@ -122,7 +122,8 @@ def CreateEvents(file, reqsData):
                                "recipEmail": test["event-data"]["email-config"]["recievers"],
                                "eventMark": test["event-data"]["event-subtype"],
                                "emailgroup": test["event-data"]["email-config"]["email-acc"]})
-
+        """
+        --for later--
         elif (test["event-data"]["sms-config"]["reciever"] != ""):
             data = json.dumps({".type": "rule",
                                "enable": "0",
@@ -131,6 +132,7 @@ def CreateEvents(file, reqsData):
                                "message": test["event-data"]["message"],
                                "action": "sendSMS"
                                })
+        """
         response = SendEvent(
             reqsData, "/services/events_reporting/config", data)
         # print(response)
@@ -146,9 +148,7 @@ def CreateEvents(file, reqsData):
 
 def TriggerEvent(event):
     for trig in event["trigger-data"]:
-        data = json.dumps({
-
-        })
+       print("123")
 # def FillTestResults(response, results):
 
 
@@ -163,7 +163,6 @@ class RequestData:
         self.name = ""
         self.pswd = ""
         self.mobile = False
-        self.smsToRouter = False
 
 
 class TestResultsData:
