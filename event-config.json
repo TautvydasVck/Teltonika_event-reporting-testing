@@ -6,7 +6,7 @@
     {
       "event-data": {
         "event-type": "Web UI",
-        "event-subtype": "was successful",
+        "event-subtype": "was successful",[]
         "action": "sendEmail",
         "email-config": {
           "subject": "email subject",
@@ -24,7 +24,9 @@
       },
       "trigger-data": {
         "API-path":"/network/interfaces/config",
-        "status-change":"0/1"
+        "API-body":{
+
+        }
       }
     },
     {

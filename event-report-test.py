@@ -139,16 +139,19 @@ def CreateEvents(file, reqsData):
         # FillTestResults(response, results)
         if (response["success"] == False):
             print(Text.Red("Event was not created"))
-        elif (response["success"] == True):
-            TriggerEvent(test)
+        #elif (response["success"] == True):
+            #TriggerEvent(test)
         print("Current test: {0}/{1}".format(i+1, len(test)))
         print("-"*40)
         i += 1
 
 
-def TriggerEvent(event):
-    for trig in event["trigger-data"]:
-       print("123")
+def TriggerEvent(event, reqsData):
+    response = SendEvent(reqsData, event["trigger-data"]["API-path"],
+                          event["trigger-data"]["API-body"])
+    if(response["success"]==False):
+        print(Text.Red("Trigger failed"))
+
 # def FillTestResults(response, results):
 
 
