@@ -23,7 +23,7 @@
         {
           "steps": [
             {
-              "API-path": "/wireless/devices/config/radio1",
+              "API-path": "/network/wireless/devices/config/radio1",
               "API-body": {
                 "enabled": "0"
               }
@@ -33,7 +33,7 @@
         {
           "steps": [
             {
-              "API-path": "/wireless/devices/config/radio1",
+              "API-path": "/network/wireless/devices/config/radio1",
               "API-body": {
                 "enabled": "0"
               }

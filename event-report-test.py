@@ -18,12 +18,17 @@ def GetSysInfo(endpoint):
         return response
 
 
-def SendEvent(endpoint, bodyData):
+def SendEvent(endpoint, bodyData, type):
     head = {"Content-Type": "application/json",
             "Authorization": "Bearer " + reqsDataSender.token}
     data = "{\"data\":"+bodyData+"}"
-    response = requests.post(reqsDataSender.baseURL+endpoint,
-                             headers=head, data=data).json()
+    match type:
+        case "post":
+            response = requests.post(reqsDataSender.baseURL+endpoint,
+                                     headers=head, data=data).json()
+        case "put":
+            response = requests.put(reqsDataSender.baseURL+endpoint,
+                                    headers=head, data=data).json()
     return response
 
 
@@ -141,17 +146,16 @@ def CreateEvents(file):
                 print(Text.Red("JSON file is malformed. Check configuration file"))
                 sys.exit()
             # print(data)
-            response = SendEvent("/services/events_reporting/config", data)
+            response = SendEvent(
+                "/services/events_reporting/config", data, "post")
             # print(response)
             # FillTestResults(response, results)
-            if (response["success"] == False):
-                print(Text.Red("Event was not created"))
-            else:
+            if (response["success"] == True):
                 res = TriggerEvent(test["trigger-data"][index])
-                if (res == -1):
-                    continue
-                elif (res == 0):
-                    print("Test reciever")
+                if (res == 0):
+                    print("Test reciever")                                   
+            else:
+                print(Text.Red("Event was not created"))
             index += 1
             currTest += 1
             print("-"*40)
@@ -162,7 +166,8 @@ def TriggerEvent(trigger):
     # print(Text.Underline("Paht:{0}| JSON data: {1}".format(
     #     test["API-path"], test["API-body"])))
     for step in trigger["steps"]:
-        response = SendEvent(step["API-path"], step["API-body"])
+        data = json.dumps(step["API-body"])
+        response = SendEvent(step["API-path"], data, "put")
         if (response["success"] == False):
             print(Text.Red("Trigger failed"))
             return -1
