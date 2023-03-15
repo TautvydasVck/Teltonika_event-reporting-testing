@@ -3,6 +3,7 @@ import json
 import sys
 import requests
 import argparse
+from datetime import datetime
 
 
 def GetSysInfo(endpoint):
@@ -97,9 +98,11 @@ def CreateEvents(file):
     CheckTotalEvents(file)
     currTest = 1
     index = 0
-    failedCnt = 0
-    passedCnt = 0
+    # failedCnt = 0
+    # passedCnt = 0
     # results = {}
+    start = datetime.now()
+    print("Started at: {0}".format(start))
     print("Test nr: {0}".format(currTest))
     for test in file["events-triggers"]:
         for subtype in test["event-data"]["event-subtype"]:
@@ -111,7 +114,7 @@ def CreateEvents(file):
                 data = json.dumps({
                     ".type": "rule",
                     "enable": "1",
-                    "event": test["event-data"]["event-type"],                    
+                    "event": test["event-data"]["event-type"],
                     "eventMark": subtype,
                     "message": test["event-data"]["message"][index],
                     "action": "sendEmail",
@@ -137,30 +140,32 @@ def CreateEvents(file):
             else:
                 print(Text.Red("JSON file is malformed. Check configuration file"))
                 sys.exit()
-            #print(data)
+            # print(data)
             response = SendEvent("/services/events_reporting/config", data)
             # print(response)
             # FillTestResults(response, results)
             if (response["success"] == False):
                 print(Text.Red("Event was not created"))
             else:
-                if(TriggerEvent(test["trigger-data"][index]) == -1):
-                    failedCnt+=1
-                elif(TriggerEvent(test["trigger-data"][index]) == 0):
-                    passedCnt+=1
+                res = TriggerEvent(test["trigger-data"][index])
+                if (res == -1):
+                    continue
+                elif (res == 0):
+                    print("Test reciever")
             index += 1
             currTest += 1
             print("-"*40)
         index = 0
 
 
-def TriggerEvent(test):
+def TriggerEvent(trigger):
     # print(Text.Underline("Paht:{0}| JSON data: {1}".format(
     #     test["API-path"], test["API-body"])))
-    response = SendEvent(test["API-path"], test["API-body"])
-    if (response["success"] == False):
-        print(Text.Red("Trigger failed"))
-        return -1
+    for step in trigger["steps"]:
+        response = SendEvent(step["API-path"], step["API-body"])
+        if (response["success"] == False):
+            print(Text.Red("Trigger failed"))
+            return -1
 
 # def CreateCSV():
 # create csv file
@@ -188,7 +193,6 @@ class TestResultData:
     def __init__(self):
         self.passed = False
         self.data = {}
-        self.id = ""
 
 # Utilities
 

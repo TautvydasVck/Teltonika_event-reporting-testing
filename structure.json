@@ -7,15 +7,12 @@
       "event-data": {
         "event-type": "",
         "event-subtype": [
-          "",
           ""
         ],
-        "action": "",
         "email-config": {
           "subject": "",
           "email-acc": "",
           "recievers": [
-            "",
             ""
           ]
         },
@@ -23,22 +20,17 @@
           "reciever": ""
         },
         "message": [
-          "",
           ""
         ]
       },
       "trigger-data": [
         {
-          "API-path": "",
-          "API-body": {
-            "": ""
-          }
-        },
-        {
-          "API-path": "",
-          "API-body": {
-            "": ""
-          }
+          "steps": [
+            {
+              "API-path": "",
+              "API-body": {}
+            }
+          ]
         }
       ]
     }
