@@ -1,0 +1,96 @@
+{
+  "events": [
+    {
+      "SSH": [
+        "all",
+        "succeeded",
+        "bad"
+      ]
+    },
+    {
+      "WiFi": [
+        "all",
+        "client connected",
+        "client disconnected"
+      ]
+    },
+    {
+      "Reboot": [
+        "all",
+        "web ui",
+        "input/output",
+        "ping reboot",
+        "reboot scheduler",
+        "from button"
+      ]
+    },
+    {
+      "Failover": [
+        "all",
+        "Switched to main",
+        "Switched to backup"
+      ]
+    },
+    {
+      "Switch Topology": [
+        "Changes in topology"
+      ]
+    },
+    {
+      "Config": [
+        "all",
+        "openvpn",
+        "events_reporting",
+        "periodic_reboot",
+        "ping_reboot",
+        "profile",
+        "ipsec",
+        "dhcp",
+        "dropbear",
+        "network",
+        "firewall",
+        "ntp",
+        "ddns",
+        "snmpd",
+        "sqm",
+        "ulogd",
+        "modbus_data_sender",
+        "mosquitto",
+        "mqtt_pub",
+        "chilli",
+        "samba",
+        "etherwake",
+        "blesem",
+        "ioman",
+        "wireless",
+        "hostblock",
+        "privoxy",
+        "vrrpd",
+        "upnp"
+      ]
+    },
+    {
+      "Web UI": [
+        "all",
+        "was successful",
+        "not successful"
+      ]
+    },
+    {
+      "Switch Events": [
+        "all",
+        "Port link state",
+        "Port speed for",
+        "changed to DOWN",
+        "changed to UP"
+      ]
+    },
+    {
+      "DHCP": [
+        "all",
+        "lan",
+        "wifi"
+      ]
+    }
+  ]
+}

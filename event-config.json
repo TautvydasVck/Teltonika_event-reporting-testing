@@ -5,51 +5,49 @@
   "events-triggers": [
     {
       "event-data": {
-        "event-type": "Web UI",
-        "event-subtype": "was successful",[]
+        "event-type": "WiFi",
+        "event-subtype": [
+          "all",
+          "client connected",
+          "client disconnected"
+        ],
         "action": "sendEmail",
         "email-config": {
           "subject": "email subject",
           "email-acc": "ttv_email",
           "recievers": [
-            "gotranukno@gufum.com",
-            "nemilesus.curihece@jollyfree.com"
+            "gorzupokna@gufum.com"
           ]
         },
         "sms-config": {
-          "recipients": "",
           "reciever": ""
         },
-        "message": "Zinute"
+        "message": [
+          "WIFI, all",
+          "WIFI, client connected",
+          "WIFI, client disconnected"
+        ]
       },
-      "trigger-data": {
-        "API-path":"/network/interfaces/config",
-        "API-body":{
-
+      "trigger-data": [
+        {
+          "API-path": "/network/wireless",
+          "API-body": {
+            "name": "1 trigeris"
+          }
+        },
+        {
+          "API-path": "/network/wireless",
+          "API-body": {
+            "name": "2 trigeris"
+          }
+        },
+        {
+          "API-path": "/network/wireless",
+          "API-body": {
+            "name": "3 trigeris"
+          }
         }
-      }
-    },
-    {
-      "event-data": {
-        "event-type": "",
-        "event-subtype": "",
-        "action": "",
-        "email-config": {
-          "subject": "",
-          "email-acc": "",
-          "recievers": [
-            ""
-          ]
-        },
-        "sms-config": {
-          "recipients": "",
-          "reciever": ""
-        },
-        "message": ""
-      },
-      "trigger-data": {
-        "parameter": ""
-      }
+      ]
     }
   ]
 }

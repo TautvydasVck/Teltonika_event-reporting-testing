@@ -1,0 +1,19 @@
+{
+	"data": {
+		".type": "rule",
+		"action": "sendSMS",
+		"emailgroup": "",
+		"enable": "0",
+		"event": "Config",
+		"eventMark": "all",
+		"group": "",
+		"id": "cfg0192bd",
+		"message": "Router name - %rn; Event type - %et; Event text - %ex; Time stamp - %ts",
+		"recipEmail": "",
+		"recipient_format": "single",
+		"subject": "",
+		"telnum": "+37060211799"
+	}
+}
+
+'{"data":{".type": "rule", "enable": "0", "event": "Config", "eventMark": "all", "message": "Zinute", "action": "sendEmail", "subject": "email subject", "recipEmail": ["zurdozalmi@gufum.com"], "emailgroup": "ttv_email"}}'

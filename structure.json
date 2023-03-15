@@ -1,56 +1,45 @@
 {
   "info": {
-    "product": "product model (type: string)"
+    "product": ""
   },
   "events-triggers": [
     {
       "event-data": {
-        "event-type": "PAVYZDYS (type: string) PAVYZDYS",
-        "event-subtype": "type: string",
-        "action": "email/sms (type: string)",
-        "email-config": {
-          "subject": "email subject (type: string)",
-          "email-acc": "account which was precreated in webui (type: string)",
-          "recievers": [
-            "mail1@domain.com (type: string)"
-          ]
-        },
-        "sms-config": {
-          "recipients": "single/group (type: string)",
-          "reciever": "phone number/group which was precreated in webui (type: string)"
-        },
-        "message": "type: string"
-      },
-      "trigger-data": [
-        {
-          "parameter1": "PAVYZDYS parameter1's setting (type: string) PAVYZDYS"
-        },
-        {}
-      ]
-    },
-    {
-      "event-data": {
         "event-type": "",
-        "event-subtype": "",
+        "event-subtype": [
+          "",
+          ""
+        ],
         "action": "",
         "email-config": {
           "subject": "",
           "email-acc": "",
           "recievers": [
+            "",
             ""
           ]
         },
         "sms-config": {
-          "recipients": "",
           "reciever": ""
         },
-        "message": ""
+        "message": [
+          "",
+          ""
+        ]
       },
       "trigger-data": [
         {
-          "parameter": ""
+          "API-path": "",
+          "API-body": {
+            "": ""
+          }
         },
-        {}
+        {
+          "API-path": "",
+          "API-body": {
+            "": ""
+          }
+        }
       ]
     }
   ]

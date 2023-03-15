@@ -1,0 +1,77 @@
+{
+  "info": {
+    "product": "RUTX10"
+  },
+  "events-triggers": [
+    {
+      "event-data": {
+        "event-type": "Config",
+        "event-subtype": "all",
+        "action": "sendEmail",
+        "email-config": {
+          "subject": "email subject",
+          "email-acc": "ttv_email",
+          "recievers": [
+            "gotranukno@gufum.com",
+            "nemilesus.curihece@jollyfree.com"
+          ]
+        },
+        "sms-config": {
+          "recipients": "",
+          "reciever": ""
+        },
+        "message": "Zinute"
+      },
+      "trigger-data": {
+        "API-path":"/network/interfaces/config",
+        "API-body":{}
+      }
+    },
+    {
+      "event-data": {
+        "event-type": "",
+        "event-subtype": "",
+        "action": "",
+        "email-config": {
+          "subject": "",
+          "email-acc": "",
+          "recievers": [
+            ""
+          ]
+        },
+        "sms-config": {
+          "recipients": "",
+          "reciever": ""
+        },
+        "message": ""
+      },
+      "trigger-data": {
+        "API-path":"",
+        "API-body":{}
+      }
+    },
+    {
+      "event-data": {
+        "event-type": "",
+        "event-subtype": "",
+        "action": "",
+        "email-config": {
+          "subject": "",
+          "email-acc": "",
+          "recievers": [
+            ""
+          ]
+        },
+        "sms-config": {
+          "recipients": "",
+          "reciever": ""
+        },
+        "message": ""
+      },
+      "trigger-data": {
+        "API-path":"",
+        "API-body":{}
+      }
+    }
+  ]
+}
