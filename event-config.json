@@ -1,6 +1,6 @@
 {
   "info": {
-    "product": "RUTX10"
+    "product": "RUTX11"
   },
   "events-triggers": [
     {
@@ -12,15 +12,9 @@
           "client disconnected"
         ],
         "action": "sendEmail",
-        "email-config": {
-          "subject": "email subject",
-          "email-acc": "ttv_email",
-          "recievers": [
-            "gorzupokna@gufum.com"
-          ]
-        },
+        "email-config": "",
         "sms-config": {
-          "reciever": ""
+          "reciever": "+37060211799"
         },
         "message": [
           "WIFI, all",
@@ -30,21 +24,27 @@
       },
       "trigger-data": [
         {
-          "API-path": "/network/wireless",
+          "API-path": "/wireless/devices/config/radio1",
           "API-body": {
-            "name": "1 trigeris"
+            "data":{
+              "enabled":"0"
+            }
           }
         },
         {
-          "API-path": "/network/wireless",
+          "API-path": "/wireless/devices/config/radio1",
           "API-body": {
-            "name": "2 trigeris"
+            "data":{
+              "enabled":"0"
+            }
           }
         },
         {
-          "API-path": "/network/wireless",
+          "API-path": "/wireless/devices/config/radio1",
           "API-body": {
-            "name": "3 trigeris"
+            "data":{
+              "enabled":"0"
+            }
           }
         }
       ]
