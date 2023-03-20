@@ -6,6 +6,7 @@ import argparse
 import paramiko
 import time
 import os
+import ftplib
 from datetime import datetime
 
 
@@ -44,6 +45,7 @@ def SendCommand(data, address):
     client.connect(hostname=address.ipAddr,
                    username="root", password=address.pswd, port=22)
     stdin, stdout, stderr = client.exec_command(data)
+    client.close()
     return stdout.readlines()
 
 # def CheckBadLogins
@@ -120,18 +122,18 @@ def TestEvents(file):
     CheckTotalEvents(file)
     currTest = 1
     index = 0
-    # failedCnt = 0
-    # passedCnt = 0
-    # results = {}
+    failedCnt = 0
+    passedCnt = 0
     start = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    fileInit = "echo \"Number;Event type;Event subtype;Expected message;Received message;Sent from;Got from;Result\" >> \"{0}_{1}.csv\"".format(
-        file["info"]["product"], start)
+    fileName = "\"{0}_{1}.csv\"".format(file["info"]["product"], start)
+    fileInit = "echo \"Number;Event type;Event subtype;Expected message;Received message;Sent from;Got from;Result\" >> "+fileName
     os.system(fileInit)
+    eventResults.fileName = fileName
     print("Started at: {0}".format(start))
     for test in file["events-triggers"]:
         for subtype in test["event-data"]["event-subtype"]:
             print("Nr: {0}".format(currTest))
-            eventResults.messageOut = test["event-data"]["message"][index]            
+            eventResults.messageOut = test["event-data"]["message"][index]
             print("Event type: " +
                   Text.Underline("{0}".format(test["event-data"]["event-type"])))
             print(
@@ -148,7 +150,7 @@ def TestEvents(file):
                     "recipEmail": test["event-data"]["email-config"]["recievers"],
                     "emailgroup": test["event-data"]["email-config"]["email-acc"]
                 })
-                eventResults.sent = test["event-data"]["email-config"]["recievers"]                
+                eventResults.sent = test["event-data"]["email-config"]["recievers"]
 
             elif (test["event-data"]["sms-config"] != "" and dataSender.mobile == True):
                 data = json.dumps({
@@ -173,7 +175,12 @@ def TestEvents(file):
             if (response["success"] == True):
                 eventResults.eventId = response["data"]["id"]
                 # TriggerEvent(test["trigger-data"][index])
-                TestRecieved()
+                TestReceived()
+                if (eventResults.passed == True):
+                    passedCnt += 1
+                else:
+                    failedCnt += 1
+                UpdateCSV(index, test)
                 SendEvent("/services/events_reporting/config/" +
                           eventResults.eventId, "", "delete")
             else:
@@ -204,24 +211,43 @@ def TriggerEvent(trigger):
             sys.exit()
 
 
-def TestRecieved():
-    # res = SendCommand("gsmctl -S -l all", dataReciever)
-    # if (len(res) != 0):
-    #    print(Text.Red("Router has old messages"))
-    #    print("Delete all old messages and restart the test")
-    #    sys.exit()
-    res = SendCommand("gsmctl -S -r 0", dataReciever)
+def TestReceived():
+    res = SendCommand("gsmctl -S -l all", dataReceiver)
+    if (len(res) != 0):
+        print(Text.Red("Router has old messages"))
+        print("Delete all old messages and restart the test")
+        sys.exit()
+    res = SendCommand("gsmctl -S -r 0", dataReceiver)
     eventResults.received = res[2].split(":")[1][:-1]
     eventResults.messageIn = res[4].split(": ")[1][:-1]
-    
-    print("test recieved SMS")
+    if (eventResults.received == eventResults.sent
+            and eventResults.messageIn == eventResults.messageOut):
+        eventResults.passed = True
+        print(Text.Green("Passed"))
+    else:
+        print(Text.Red("Failed"))
+    SendCommand("gsmctl -S -d 0", dataReceiver)
 
-# def UpdateCSV():
-# update csv file with new result
 
-# def UploadCSV():
-# send CSV to server via FTP
+def UpdateCSV(index, test):
+    # Number;Event type;Event subtype;Expected message;
+    # Received message;Sent from;Got from;Result
 
+    os.system("echo \"{0};{1};{2};{3};{4};{5};{6};{7}\" >> {8}"
+              .format(index+1, test["event-data"]["event-type"],
+                      test["event-data"]["event-subtype"],
+                      eventResults.messageOut, eventResults.messageIn,
+                      eventResults.sent, eventResults.received,
+                      eventResults.passed, eventResults.fileName))
+
+
+"""
+def UploadCSV():
+    ftp = ftplib.FTP("84.15.249.182", "akademija", "akademija")
+    ftp.encoding = "utf-8"
+    with open(eventResults.fileName) as f:
+        ftp.storbinary(f"STOR {eventResults.fileName}", f)
+"""
 # Constructors
 
 
@@ -243,6 +269,7 @@ class ResultData:
         self.messageIn = ""
         self.sent = ""
         self.received = ""
+        self.fileName = ""
 
 # Utilities
 
@@ -270,7 +297,7 @@ dataSender.pswd = "Admin123"
 dataSender.ipAddr = "192.168.1.1"
 dataSender.baseURL = "http://"+dataSender.ipAddr+"/api"
 
-dataReciever = dataSender
+dataReceiver = dataSender
 # reqsDataReciever.ipAddr = "192.168.1.1"
 
 print(end="\n")
@@ -279,3 +306,4 @@ data = GetConfigData()
 CheckForModel(data)
 CheckForMobile()
 TestEvents(data)
+# UploadCSV()
