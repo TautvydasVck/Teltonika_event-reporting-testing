@@ -31,6 +31,9 @@ def SendEvent(endpoint, bodyData, type):
         case "put":
             response = requests.put(reqsDataSender.baseURL+endpoint,
                                     headers=head, data=data).json()
+        case "delete":
+            response = requests.delete(reqsDataSender.baseURL+endpoint,
+                                       headers=head).json()
     return response
 
 
@@ -118,10 +121,11 @@ def CreateEvents(file):
     # passedCnt = 0
     # results = {}
     start = datetime.now()
-    print("Started at: {0}".format(start))
-    print("Test nr: {0}".format(currTest))
+    print("Started at: {0}".format(start))    
     for test in file["events-triggers"]:
         for subtype in test["event-data"]["event-subtype"]:
+            print("Test nr: {0}".format(currTest))
+            eventResults.messageOut = test["event-data"]["message"][index]
             print("Event: " +
                   Text.Underline("{0}".format(test["event-data"]["event-type"])))
             print(
@@ -135,7 +139,7 @@ def CreateEvents(file):
                     "message": test["event-data"]["message"][index],
                     "action": "sendEmail",
                     "subject": test["event-data"]["email-config"]["subject"],
-                    "recipEmail": test["event-data"]["email-config"]["recievers"],                    "eventMark": subtype,
+                    "recipEmail": test["event-data"]["email-config"]["recievers"],                    
                     "emailgroup": test["event-data"]["email-config"]["email-acc"]
                 })
 
@@ -157,16 +161,17 @@ def CreateEvents(file):
                 print(Text.Red("JSON file is malformed. Check configuration file"))
                 sys.exit()
             # print(data)
-            # response = SendEvent(
-            #     "/services/events_reporting/config", data, "post")
+            response = SendEvent(
+                "/services/events_reporting/config", data, "post")
             # print(response)
-            # FillTestResults(response, results)
-            # if (response["success"] == True):
-            res = TriggerEvent(test["trigger-data"][index])
-            #    if (res == 0):
-            #        print("Test reciever")
-            # else:
-            #    print(Text.Red("Event was not created"))
+            if (response["success"] == True):
+                eventResults.id = response["data"]["id"]
+                TriggerEvent(test["trigger-data"][index])
+                print("TEMP test reciever TEMP")
+                SendEvent("/services/events_reporting/config/" +
+                          eventResults.id, "", "delete")
+            else:
+                print(Text.Red("Event was not created"))
             index += 1
             currTest += 1
             print("-"*40)
@@ -181,20 +186,21 @@ def TriggerEvent(trigger):
             time.sleep(10)
             if (response["success"] == False):
                 print(Text.Red("Trigger using API failed"))
-                return -1
         elif (trigger["type"].lower() == "ssh"):
             data = step["command"]
-            response = SendCommand(data)
+            SendCommand(data)
             time.sleep(10)
 
+# def TestRecieved():
+# test recieved SMS
 # def CreateCSV():
 # create csv file
 
+# def UpdateCSV():
+# update csv file with new result
+
 # def UploadCSV():
 # send CSV to server via FTP
-
-# def ClearEvents():
-# delete created events from device
 
 # Constructors
 
@@ -212,7 +218,9 @@ class RequestData:
 class TestResultData:
     def __init__(self):
         self.passed = False
-        self.data = {}
+        self.id = ""
+        self.messageOut = ""
+        self.messageIn = ""
 
 # Utilities
 
@@ -234,6 +242,7 @@ class Text():
 # Program's main part
 reqsDataSender = RequestData()
 # reqsDataReciever = RequestData()
+eventResults = TestResultData()
 
 reqsDataSender.name = "admin"
 reqsDataSender.pswd = "Admin123"
