@@ -131,7 +131,7 @@ def TestEvents(file):
     for test in file["events-triggers"]:
         for subtype in test["event-data"]["event-subtype"]:
             print("Nr: {0}".format(currTest))
-            eventResults.messageOut = test["event-data"]["message"][index]
+            eventResults.messageOut = test["event-data"]["message"][index]            
             print("Event type: " +
                   Text.Underline("{0}".format(test["event-data"]["event-type"])))
             print(
@@ -148,6 +148,7 @@ def TestEvents(file):
                     "recipEmail": test["event-data"]["email-config"]["recievers"],
                     "emailgroup": test["event-data"]["email-config"]["email-acc"]
                 })
+                eventResults.sent = test["event-data"]["email-config"]["recievers"]                
 
             elif (test["event-data"]["sms-config"] != "" and dataSender.mobile == True):
                 data = json.dumps({
@@ -163,17 +164,18 @@ def TestEvents(file):
                     "recipient_format": "single",
                     "telnum": test["event-data"]["sms-config"]["reciever"]
                 })
+                eventResults.sent = test["event-data"]["sms-config"]["reciever"]
             else:
                 print(Text.Red("JSON file is misformed. Check configuration file"))
-                sys.exit()            
+                sys.exit()
             response = SendEvent(
-                "/services/events_reporting/config", data, "post")            
+                "/services/events_reporting/config", data, "post")
             if (response["success"] == True):
-                eventResults.id = response["data"]["id"]
-                #TriggerEvent(test["trigger-data"][index])
-                TestRecieved()                
+                eventResults.eventId = response["data"]["id"]
+                # TriggerEvent(test["trigger-data"][index])
+                TestRecieved()
                 SendEvent("/services/events_reporting/config/" +
-                          eventResults.id, "", "delete")
+                          eventResults.eventId, "", "delete")
             else:
                 print(Text.Red("Event was not created"))
             index += 1
@@ -184,13 +186,13 @@ def TestEvents(file):
 
 def TriggerEvent(trigger):
     for step in trigger["steps"]:
-        if (trigger["type"]== "api"):
+        if (trigger["type"] == "api"):
             data = json.dumps(step["API-body"])
             response = SendEvent(step["API-path"], data, "put")
             time.sleep(10)
             if (response["success"] == False):
                 print(Text.Red("Trigger using API failed"))
-        elif (trigger["type"]== "ssh"):
+        elif (trigger["type"] == "ssh"):
             # if(step["command"] == "bad"):
             #    data = "bad login"
             # else:
@@ -201,12 +203,16 @@ def TriggerEvent(trigger):
             print(Text.Red("JSON file is misformed. Check configuration file"))
             sys.exit()
 
+
 def TestRecieved():
-    res = SendCommand("gsmctl -S -l all", dataReciever)
-    if(res != ""):
-        print(Text.Red("Router has old messages"))
-        print("Delete all old messages and restart the test")
-        sys.exit()
+    # res = SendCommand("gsmctl -S -l all", dataReciever)
+    # if (len(res) != 0):
+    #    print(Text.Red("Router has old messages"))
+    #    print("Delete all old messages and restart the test")
+    #    sys.exit()
+    res = SendCommand("gsmctl -S -r 0", dataReciever)
+    eventResults.received = res[2].split(":")[1][:-1]
+    eventResults.messageIn = res[4].split(": ")[1][:-1]
     
     print("test recieved SMS")
 
@@ -229,12 +235,14 @@ class RequestData:
         self.mobile = False
 
 
-class TestResultData:
+class ResultData:
     def __init__(self):
+        self.eventId = ""
         self.passed = False
-        self.id = ""
         self.messageOut = ""
         self.messageIn = ""
+        self.sent = ""
+        self.received = ""
 
 # Utilities
 
@@ -255,7 +263,7 @@ class Text():
 
 # Program's main part
 dataSender = RequestData()
-eventResults = TestResultData()
+eventResults = ResultData()
 
 dataSender.name = "admin"
 dataSender.pswd = "Admin123"
