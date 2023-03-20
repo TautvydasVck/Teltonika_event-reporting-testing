@@ -186,13 +186,13 @@ def TestEvents(file):
 
 def TriggerEvent(trigger):
     for step in trigger["steps"]:
-        if (trigger["type"].lower() == "api"):
+        if (trigger["type"]== "api"):
             data = json.dumps(step["API-body"])
             response = SendEvent(step["API-path"], data, "put")
             time.sleep(10)
             if (response["success"] == False):
                 print(Text.Red("Trigger using API failed"))
-        elif (trigger["type"].lower() == "ssh"):
+        elif (trigger["type"]== "ssh"):
             # if(step["command"] == "bad"):
             #    data = "bad login"
             # else:
