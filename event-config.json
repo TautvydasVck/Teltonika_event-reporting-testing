@@ -46,7 +46,7 @@
           "type": "ssh",
           "steps": [
             {
-              "command": "bad",
+              "command": "",
               "API-path": "",
               "API-body": {}
             }

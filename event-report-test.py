@@ -11,8 +11,8 @@ from datetime import datetime
 
 def GetSysInfo(endpoint):
     head = {"Content-Type": "application/json",
-            "Authorization": "Bearer " + reqsDataSender.token}
-    response = requests.get(reqsDataSender.baseURL +
+            "Authorization": "Bearer " + dataSender.token}
+    response = requests.get(dataSender.baseURL +
                             endpoint, headers=head).json()
     if (response["success"] == False):
         print(Text.Red("Could not retrieve device information."))
@@ -23,26 +23,26 @@ def GetSysInfo(endpoint):
 
 def SendEvent(endpoint, bodyData, type):
     head = {"Content-Type": "application/json",
-            "Authorization": "Bearer " + reqsDataSender.token}
+            "Authorization": "Bearer " + dataSender.token}
     data = "{\"data\":"+bodyData+"}"
     match type:
         case "post":
-            response = requests.post(reqsDataSender.baseURL+endpoint,
+            response = requests.post(dataSender.baseURL+endpoint,
                                      headers=head, data=data).json()
         case "put":
-            response = requests.put(reqsDataSender.baseURL+endpoint,
+            response = requests.put(dataSender.baseURL+endpoint,
                                     headers=head, data=data).json()
         case "delete":
-            response = requests.delete(reqsDataSender.baseURL+endpoint,
+            response = requests.delete(dataSender.baseURL+endpoint,
                                        headers=head).json()
     return response
 
 
-def SendCommand(data):
+def SendCommand(data, address):
     client = paramiko.SSHClient()
     client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    client.connect(hostname=reqsDataSender.ipAddr,
-                   username="root", password=reqsDataSender.pswd, port=22)
+    client.connect(hostname=address.ipAddr,
+                   username="root", password=address.pswd, port=22)
     stdin, stdout, stderr = client.exec_command(data)
     return stdout.readlines()
 
@@ -51,12 +51,12 @@ def SendCommand(data):
 
 def LoginToken():
     head = {"Content-Type": "application/json"}
-    creds = {"username": reqsDataSender.name, "password": reqsDataSender.pswd}
+    creds = {"username": dataSender.name, "password": dataSender.pswd}
     try:
         response = requests.post(
-            reqsDataSender.baseURL+"/login", json=creds, headers=head).json()
+            dataSender.baseURL+"/login", json=creds, headers=head).json()
         if (response["success"] == True):
-            reqsDataSender.token = response["jwtToken"]
+            dataSender.token = response["jwtToken"]
         else:
             sys.exit(Text.Red("Login was unsuccessful"))
     except OSError as err:
@@ -76,11 +76,11 @@ def CheckForMobile():
     if (res["data"]["board"]["hwinfo"]["mobile"] == False):
         print(Text.Yellow(
             "Device does not have mobile capabilities. Messages can be sent only via email"))
-        reqsDataSender.mobile = False
+        dataSender.mobile = False
     elif (res["data"]["board"]["hwinfo"]["mobile"] == True):
         print(Text.Green(
             "Device has mobile capabilities. Messages can be sent via email and phone number"))
-        reqsDataSender.mobile = True
+        dataSender.mobile = True
     else:
         print(Text.Red("Could not get information about mobile capabilities"))
         sys.exit()
@@ -149,7 +149,7 @@ def TestEvents(file):
                     "emailgroup": test["event-data"]["email-config"]["email-acc"]
                 })
 
-            elif (test["event-data"]["sms-config"] != "" and reqsDataSender.mobile == True):
+            elif (test["event-data"]["sms-config"] != "" and dataSender.mobile == True):
                 data = json.dumps({
                     ".type": "rule",
                     "enable": "1",
@@ -165,15 +165,13 @@ def TestEvents(file):
                 })
             else:
                 print(Text.Red("JSON file is misformed. Check configuration file"))
-                sys.exit()
-            # print(data)
+                sys.exit()            
             response = SendEvent(
-                "/services/events_reporting/config", data, "post")
-            # print(response)
+                "/services/events_reporting/config", data, "post")            
             if (response["success"] == True):
                 eventResults.id = response["data"]["id"]
-                TriggerEvent(test["trigger-data"][index])
-                print("TEMP test reciever TEMP")
+                #TriggerEvent(test["trigger-data"][index])
+                TestRecieved()                
                 SendEvent("/services/events_reporting/config/" +
                           eventResults.id, "", "delete")
             else:
@@ -197,17 +195,20 @@ def TriggerEvent(trigger):
             #    data = "bad login"
             # else:
             data = step["command"]
-            SendCommand(data)
+            SendCommand(data, dataSender)
             time.sleep(10)
         else:
             print(Text.Red("JSON file is misformed. Check configuration file"))
             sys.exit()
 
-# def TestRecieved():
-# test recieved SMS
-
-# def CreateCSV():
-# create csv file
+def TestRecieved():
+    res = SendCommand("gsmctl -S -l all", dataReciever)
+    if(res != ""):
+        print(Text.Red("Router has old messages"))
+        print("Delete all old messages and restart the test")
+        sys.exit()
+    
+    print("test recieved SMS")
 
 # def UpdateCSV():
 # update csv file with new result
@@ -253,16 +254,15 @@ class Text():
 
 
 # Program's main part
-reqsDataSender = RequestData()
-# reqsDataReciever = RequestData()
+dataSender = RequestData()
 eventResults = TestResultData()
 
-reqsDataSender.name = "admin"
-reqsDataSender.pswd = "Admin123"
-reqsDataSender.ipAddr = "192.168.1.1"
-reqsDataSender.baseURL = "http://"+reqsDataSender.ipAddr+"/api"
+dataSender.name = "admin"
+dataSender.pswd = "Admin123"
+dataSender.ipAddr = "192.168.1.1"
+dataSender.baseURL = "http://"+dataSender.ipAddr+"/api"
 
-# reqsDataReciever = reqsDataSender
+dataReciever = dataSender
 # reqsDataReciever.ipAddr = "192.168.1.1"
 
 print(end="\n")
