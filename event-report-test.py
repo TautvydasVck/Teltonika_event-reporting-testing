@@ -116,11 +116,11 @@ def CheckTotalEvents(file):
                 "Events and their messages count does not match trigger count. Check JSON configuration file"))
             sys.exit()
     print("Total tests: {0}".format(events))
+    return events
 
 
 def TestEvents(file):
-    CheckTotalEvents(file)
-    currTest = 1
+    total = CheckTotalEvents(file)
     index = 0
     failedCnt = 0
     passedCnt = 0
@@ -132,7 +132,7 @@ def TestEvents(file):
     print("Started at: {0}".format(start))
     for test in file["events-triggers"]:
         for subtype in test["event-data"]["event-subtype"]:
-            print("Nr: {0}".format(currTest))
+            print("Nr: {0}".format(index+1))
             eventResults.messageOut = test["event-data"]["message"][index]
             print("Event type: " +
                   Text.Underline("{0}".format(test["event-data"]["event-type"])))
@@ -174,7 +174,7 @@ def TestEvents(file):
                 "/services/events_reporting/config", data, "post")
             if (response["success"] == True):
                 eventResults.eventId = response["data"]["id"]
-                # TriggerEvent(test["trigger-data"][index])
+                TriggerEvent(test["trigger-data"][index])
                 CheckReceive()
                 if (eventResults.passed == True):
                     passedCnt += 1
@@ -185,20 +185,20 @@ def TestEvents(file):
                           eventResults.eventId, "", "delete")
             else:
                 print(Text.Red("Event was not created"))
-            index += 1
-            currTest += 1
+            index += 1            
             print("-"*40)
         index = 0
-    print("Total events tested: {0}".format(currTest))
+    print("Total events tested: {0}".format(total))
     print(Text.Green("Passed: {0}".format(passedCnt)), end=" ")
     print(Text.Red("Failed: {0}".format(failedCnt)))
+
 
 def TriggerEvent(trigger):
     for step in trigger["steps"]:
         if (trigger["type"] == "api"):
             data = json.dumps(step["API-body"])
             response = SendEvent(step["API-path"], data, "put")
-            time.sleep(10)
+            time.sleep(4)
             if (response["success"] == False):
                 print(Text.Red("Trigger using API failed"))
         elif (trigger["type"] == "ssh"):
@@ -207,7 +207,7 @@ def TriggerEvent(trigger):
             # else:
             data = step["command"]
             SendCommand(data, dataSender)
-            time.sleep(10)
+            time.sleep(4)
         else:
             print(Text.Red("JSON file is misformed. Check configuration file"))
             sys.exit()
@@ -220,7 +220,7 @@ def CheckReceive():
         print("Delete all old messages and restart the test")
         sys.exit()
     res = SendCommand("gsmctl -S -r 0", dataReceiver)
-    if(len(res) != 0):
+    if (len(res) != 0):
         eventResults.received = res[2].split(":")[1][:-1]
         eventResults.messageIn = res[4].split(": ")[1][:-1]
         if (eventResults.received == eventResults.sent
@@ -231,7 +231,7 @@ def CheckReceive():
             print(Text.Red("Failed"))
         SendCommand("gsmctl -S -d 0", dataReceiver)
     else:
-        print(Text.Red("Failed"))        
+        print(Text.Red("Failed"))
 
 
 def UpdateCSV(index, test):
@@ -294,7 +294,9 @@ class Text():
 
 
 # Program's main part
+# Get credentials
 dataSender = RequestData()
+parser = argparse.ArgumentParser("")
 dataSender.name = "admin"
 dataSender.pswd = "Admin123"
 dataSender.ipAddr = "192.168.1.1"
