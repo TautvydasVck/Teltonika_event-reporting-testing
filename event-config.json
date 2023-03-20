@@ -21,10 +21,10 @@
       },
       "trigger-data": [
         {
-          "type": "api",
+          "type": "ssh",
           "steps": [
             {
-              "command": "",
+              "command": "ls /",
               "API-path": "/network/wireless/devices/config/radio1",
               "API-body": {
                 "enabled": "0"
@@ -34,7 +34,7 @@
               "command": "",
               "API-path": "/network/wireless/devices/config/radio1",
               "API-body": {
-                "enabled": "0"
+                "enabled": "1"
               }
             }
           ]

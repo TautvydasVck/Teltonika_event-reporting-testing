@@ -3,6 +3,8 @@ import json
 import sys
 import requests
 import argparse
+import paramiko
+import time
 from datetime import datetime
 
 
@@ -36,7 +38,9 @@ def SendCommand(data):
     client = paramiko.SSHClient()
     client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     client.connect(hostname=reqsDataSender.ipAddr,
-                   username="root", password=reqsDataSender.pswd)
+                   username="root", password=reqsDataSender.pswd, port=22)
+    stdin, stdout, stderr = client.exec_command(data)
+    return stdout.readlines()
 
 
 def LoginToken():
@@ -153,16 +157,16 @@ def CreateEvents(file):
                 print(Text.Red("JSON file is malformed. Check configuration file"))
                 sys.exit()
             # print(data)
-            response = SendEvent(
-                "/services/events_reporting/config", data, "post")
+            # response = SendEvent(
+            #     "/services/events_reporting/config", data, "post")
             # print(response)
             # FillTestResults(response, results)
-            if (response["success"] == True):
-                res = TriggerEvent(test["trigger-data"][index])
-                if (res == 0):
-                    print("Test reciever")
-            else:
-                print(Text.Red("Event was not created"))
+            # if (response["success"] == True):
+            res = TriggerEvent(test["trigger-data"][index])
+            #    if (res == 0):
+            #        print("Test reciever")
+            # else:
+            #    print(Text.Red("Event was not created"))
             index += 1
             currTest += 1
             print("-"*40)
@@ -170,19 +174,18 @@ def CreateEvents(file):
 
 
 def TriggerEvent(trigger):
-    # print(Text.Underline("Paht:{0}| JSON data: {1}".format(
-    #     test["API-path"], test["API-body"])))
     for step in trigger["steps"]:
         if (trigger["type"].lower() == "api"):
             data = json.dumps(step["API-body"])
             response = SendEvent(step["API-path"], data, "put")
+            time.sleep(10)
             if (response["success"] == False):
-                print(Text.Red("Trigger failed"))
+                print(Text.Red("Trigger using API failed"))
                 return -1
         elif (trigger["type"].lower() == "ssh"):
-            data = ""
-            SendCommand(data)
-            data = step[""]
+            data = step["command"]
+            response = SendCommand(data)
+            time.sleep(10)
 
 # def CreateCSV():
 # create csv file
