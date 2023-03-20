@@ -129,7 +129,7 @@ def TestEvents(file):
     fileInit = "echo \"Number;Event type;Event subtype;Expected message;Received message;Sent from;Got from;Passed\" >> "+fileName
     os.system(fileInit)
     eventResults.fileName = fileName
-    print("Started at: {0}".format(start))
+    print("Started at: {0}\n".format(start))
     for test in file["events-triggers"]:
         for subtype in test["event-data"]["event-subtype"]:
             print("Nr: {0}".format(index+1))
