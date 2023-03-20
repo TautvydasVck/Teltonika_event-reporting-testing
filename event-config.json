@@ -5,20 +5,20 @@
   "events-triggers": [
     {
       "event-data": {
-        "event-type": "SSH",
+        "event-type": "WiFi",
         "event-subtype": [
           "all",
-          "succeeded",
-          "bad"
+          "client connected",
+          "client disconnected"
         ],
         "email-config": "",
         "sms-config": {
           "reciever": "+37060211799"
         },
         "message": [
-          "SSH, all",
-          "SSH, succeeded",
-          "SSH, bad"
+          "WiFi, all",
+          "WiFi, client connected",
+          "WiFi, client disconnected"
         ]
       },
       "trigger-data": [
@@ -46,7 +46,7 @@
           "type": "ssh",
           "steps": [
             {
-              "command": "",
+              "command": "bad",
               "API-path": "",
               "API-body": {}
             }

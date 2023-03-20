@@ -5,6 +5,7 @@ import requests
 import argparse
 import paramiko
 import time
+import os
 from datetime import datetime
 
 
@@ -44,6 +45,8 @@ def SendCommand(data):
                    username="root", password=reqsDataSender.pswd, port=22)
     stdin, stdout, stderr = client.exec_command(data)
     return stdout.readlines()
+
+# def CheckBadLogins
 
 
 def LoginToken():
@@ -110,23 +113,26 @@ def CheckTotalEvents(file):
             print(Text.Red(
                 "Events and their messages count does not match trigger count. Check JSON configuration file"))
             sys.exit()
-    print("Total tests: {0}\n".format(events))
+    print("Total tests: {0}".format(events))
 
 
-def CreateEvents(file):
+def TestEvents(file):
     CheckTotalEvents(file)
     currTest = 1
     index = 0
     # failedCnt = 0
     # passedCnt = 0
     # results = {}
-    start = datetime.now()
-    print("Started at: {0}".format(start))    
+    start = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    fileInit = "echo \"Number;Event type;Event subtype;Expected message;Received message;Sent from;Got from;Result\" >> \"{0}_{1}.csv\"".format(
+        file["info"]["product"], start)
+    os.system(fileInit)
+    print("Started at: {0}".format(start))
     for test in file["events-triggers"]:
         for subtype in test["event-data"]["event-subtype"]:
-            print("Test nr: {0}".format(currTest))
+            print("Nr: {0}".format(currTest))
             eventResults.messageOut = test["event-data"]["message"][index]
-            print("Event: " +
+            print("Event type: " +
                   Text.Underline("{0}".format(test["event-data"]["event-type"])))
             print(
                 "Subtype: "+Text.Underline("{0}".format(subtype)))
@@ -139,7 +145,7 @@ def CreateEvents(file):
                     "message": test["event-data"]["message"][index],
                     "action": "sendEmail",
                     "subject": test["event-data"]["email-config"]["subject"],
-                    "recipEmail": test["event-data"]["email-config"]["recievers"],                    
+                    "recipEmail": test["event-data"]["email-config"]["recievers"],
                     "emailgroup": test["event-data"]["email-config"]["email-acc"]
                 })
 
@@ -158,7 +164,7 @@ def CreateEvents(file):
                     "telnum": test["event-data"]["sms-config"]["reciever"]
                 })
             else:
-                print(Text.Red("JSON file is malformed. Check configuration file"))
+                print(Text.Red("JSON file is misformed. Check configuration file"))
                 sys.exit()
             # print(data)
             response = SendEvent(
@@ -187,12 +193,19 @@ def TriggerEvent(trigger):
             if (response["success"] == False):
                 print(Text.Red("Trigger using API failed"))
         elif (trigger["type"].lower() == "ssh"):
+            # if(step["command"] == "bad"):
+            #    data = "bad login"
+            # else:
             data = step["command"]
             SendCommand(data)
             time.sleep(10)
+        else:
+            print(Text.Red("JSON file is misformed. Check configuration file"))
+            sys.exit()
 
 # def TestRecieved():
 # test recieved SMS
+
 # def CreateCSV():
 # create csv file
 
@@ -257,4 +270,4 @@ LoginToken()
 data = GetConfigData()
 CheckForModel(data)
 CheckForMobile()
-CreateEvents(data)
+TestEvents(data)
