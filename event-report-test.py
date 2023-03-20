@@ -126,7 +126,7 @@ def TestEvents(file):
     passedCnt = 0
     start = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     fileName = "\"{0}_{1}.csv\"".format(file["info"]["product"], start)
-    fileInit = "echo \"Number;Event type;Event subtype;Expected message;Received message;Sent from;Got from;Result\" >> "+fileName
+    fileInit = "echo \"Number;Event type;Event subtype;Expected message;Received message;Sent from;Got from;Passed\" >> "+fileName
     os.system(fileInit)
     eventResults.fileName = fileName
     print("Started at: {0}".format(start))
@@ -175,7 +175,7 @@ def TestEvents(file):
             if (response["success"] == True):
                 eventResults.eventId = response["data"]["id"]
                 # TriggerEvent(test["trigger-data"][index])
-                TestReceived()
+                CheckReceive()
                 if (eventResults.passed == True):
                     passedCnt += 1
                 else:
@@ -189,7 +189,9 @@ def TestEvents(file):
             currTest += 1
             print("-"*40)
         index = 0
-
+    print("Total events tested: {0}".format(currTest))
+    print(Text.Green("Passed: {0}".format(passedCnt)), end=" ")
+    print(Text.Red("Failed: {0}".format(failedCnt)))
 
 def TriggerEvent(trigger):
     for step in trigger["steps"]:
@@ -211,31 +213,34 @@ def TriggerEvent(trigger):
             sys.exit()
 
 
-def TestReceived():
+def CheckReceive():
     res = SendCommand("gsmctl -S -l all", dataReceiver)
     if (len(res) != 0):
         print(Text.Red("Router has old messages"))
         print("Delete all old messages and restart the test")
         sys.exit()
     res = SendCommand("gsmctl -S -r 0", dataReceiver)
-    eventResults.received = res[2].split(":")[1][:-1]
-    eventResults.messageIn = res[4].split(": ")[1][:-1]
-    if (eventResults.received == eventResults.sent
-            and eventResults.messageIn == eventResults.messageOut):
-        eventResults.passed = True
-        print(Text.Green("Passed"))
+    if(len(res) != 0):
+        eventResults.received = res[2].split(":")[1][:-1]
+        eventResults.messageIn = res[4].split(": ")[1][:-1]
+        if (eventResults.received == eventResults.sent
+                and eventResults.messageIn == eventResults.messageOut):
+            eventResults.passed = True
+            print(Text.Green("Passed"))
+        else:
+            print(Text.Red("Failed"))
+        SendCommand("gsmctl -S -d 0", dataReceiver)
     else:
-        print(Text.Red("Failed"))
-    SendCommand("gsmctl -S -d 0", dataReceiver)
+        print(Text.Red("Failed"))        
 
 
 def UpdateCSV(index, test):
     # Number;Event type;Event subtype;Expected message;
-    # Received message;Sent from;Got from;Result
+    # Received message;Sent from;Got from;Passed
 
     os.system("echo \"{0};{1};{2};{3};{4};{5};{6};{7}\" >> {8}"
               .format(index+1, test["event-data"]["event-type"],
-                      test["event-data"]["event-subtype"],
+                      test["event-data"]["event-subtype"][index],
                       eventResults.messageOut, eventResults.messageIn,
                       eventResults.sent, eventResults.received,
                       eventResults.passed, eventResults.fileName))
@@ -290,8 +295,6 @@ class Text():
 
 # Program's main part
 dataSender = RequestData()
-eventResults = ResultData()
-
 dataSender.name = "admin"
 dataSender.pswd = "Admin123"
 dataSender.ipAddr = "192.168.1.1"
@@ -299,6 +302,8 @@ dataSender.baseURL = "http://"+dataSender.ipAddr+"/api"
 
 dataReceiver = dataSender
 # reqsDataReciever.ipAddr = "192.168.1.1"
+
+eventResults = ResultData()
 
 print(end="\n")
 LoginToken()
