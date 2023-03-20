@@ -21,8 +21,17 @@
       },
       "trigger-data": [
         {
+          "type": "api",
           "steps": [
             {
+              "command": "",
+              "API-path": "/network/wireless/devices/config/radio1",
+              "API-body": {
+                "enabled": "0"
+              }
+            },
+            {
+              "command": "",
               "API-path": "/network/wireless/devices/config/radio1",
               "API-body": {
                 "enabled": "0"
@@ -31,36 +40,11 @@
           ]
         },
         {
+          "type": "api",
           "steps": [
             {
+              "command": "",
               "API-path": "/network/wireless/devices/config/radio1",
-              "API-body": {
-                "enabled": "0"
-              }
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "event-data": {
-        "event-type": "GPS",
-        "event-subtype": [
-          "left geofence"
-        ],
-        "email-config": "",
-        "sms-config": {
-          "reciever": "+37060211799"
-        },
-        "message": [
-          "GPS, left geofence"
-        ]
-      },
-      "trigger-data": [
-        {
-          "steps": [
-            {
-              "API-path": "/gps/general/config",
               "API-body": {
                 "enabled": "0"
               }

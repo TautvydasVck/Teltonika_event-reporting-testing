@@ -32,6 +32,13 @@ def SendEvent(endpoint, bodyData, type):
     return response
 
 
+def SendCommand(data):
+    client = paramiko.SSHClient()
+    client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+    client.connect(hostname=reqsDataSender.ipAddr,
+                   username="root", password=reqsDataSender.pswd)
+
+
 def LoginToken():
     head = {"Content-Type": "application/json"}
     creds = {"username": reqsDataSender.name, "password": reqsDataSender.pswd}
@@ -153,7 +160,7 @@ def CreateEvents(file):
             if (response["success"] == True):
                 res = TriggerEvent(test["trigger-data"][index])
                 if (res == 0):
-                    print("Test reciever")                                   
+                    print("Test reciever")
             else:
                 print(Text.Red("Event was not created"))
             index += 1
@@ -166,11 +173,16 @@ def TriggerEvent(trigger):
     # print(Text.Underline("Paht:{0}| JSON data: {1}".format(
     #     test["API-path"], test["API-body"])))
     for step in trigger["steps"]:
-        data = json.dumps(step["API-body"])
-        response = SendEvent(step["API-path"], data, "put")
-        if (response["success"] == False):
-            print(Text.Red("Trigger failed"))
-            return -1
+        if (trigger["type"].lower() == "api"):
+            data = json.dumps(step["API-body"])
+            response = SendEvent(step["API-path"], data, "put")
+            if (response["success"] == False):
+                print(Text.Red("Trigger failed"))
+                return -1
+        elif (trigger["type"].lower() == "ssh"):
+            data = ""
+            SendCommand(data)
+            data = step[""]
 
 # def CreateCSV():
 # create csv file

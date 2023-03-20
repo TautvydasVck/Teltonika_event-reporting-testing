@@ -25,10 +25,12 @@
       },
       "trigger-data": [
         {
+          "type":"api/ssh",
           "steps": [
             {
-              "API-path": "",
-              "API-body": {}
+              "command": "",
+              "api-path": "",
+              "api-body": {}
             }
           ]
         }
