@@ -296,28 +296,28 @@ dataSender = RequestData()
 dataReceiver = RequestData()
 eventResults = ResultData()
 
-parser = argparse.ArgumentParser(description="Automatically test Teltonika Networks device's event reporting funcionality")
-parser.add_argument("-sn", help="SMS sender device login name", required="True")
-parser.add_argument("-sp", help="SMS sender device login password", required="True")
-parser.add_argument("-sip", help="SMS sender device IP address", required="True")
-parser.add_argument("-rn", help="SMS receiver device login name", required="True")
-parser.add_argument("-rp", help="SMS receiver device login password", required="True")
-parser.add_argument("-rip", help="SMS receiver device IP address", required="True")
-parser.add_argument("-file", help="configuration file path", required="True")
+parser = argparse.ArgumentParser(description="Automatically test device's event reporting funcionality")
+parser.add_argument("-sn","--sName", help="SMS sender device's login name", required="True")
+parser.add_argument("-sp","--sPassword", help="SMS sender device's login password", required="True")
+parser.add_argument("-sip","--sAddress", help="SMS sender device's IP address", required="True")
+parser.add_argument("-rn","--rName", help="SMS receiver device's login name", required="True")
+parser.add_argument("-rp","--rPassword", help="SMS receiver device's login password", required="True")
+parser.add_argument("-rip","--rAddress", help="SMS receiver device's IP address", required="True")
+parser.add_argument("-file","--configFile", help="configuration file's path", required="True")
 args = parser.parse_args()
 
-dataSender.name = args.sn
-dataSender.pswd = args.sp
-dataSender.ipAddr = args.sip
+dataSender.name = args.sName
+dataSender.pswd = args.sPassword
+dataSender.ipAddr = args.sAddress
 dataSender.baseURL = "http://"+dataSender.ipAddr+"/api"
 
-dataReceiver.name = args.rn
-dataReceiver.pswd = args.rp
-dataReceiver.ipAddr = args.rip
+dataReceiver.name = args.rName
+dataReceiver.pswd = args.rPassword
+dataReceiver.ipAddr = args.rAddress
 
 print(end="\n")
 LoginToken()
-data = GetConfigData(args.file)
+data = GetConfigData(args.configFile)
 CheckForModel(data)
 CheckForMobile()
 TestEvents(data)
