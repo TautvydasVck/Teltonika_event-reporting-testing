@@ -101,7 +101,7 @@
           ]
         },
         {
-          "type": "api--openvpn",
+          "type": "api",
           "steps": [
             {
               "command": "",
@@ -115,7 +115,7 @@
           ]
         },
         {
-          "type": "api--events_reporting",
+          "type": "api",
           "steps": [
             {
               "command": "",
@@ -127,9 +127,9 @@
               }
             }
           ]
-        },        
+        },
         {
-          "type": "api--reboot-scheduler",
+          "type": "api",
           "steps": [
             {
               "command": "",
@@ -138,9 +138,9 @@
               "API-body": {}
             }
           ]
-        },        
+        },
         {
-          "type": "api--ping-reboot",
+          "type": "api",
           "steps": [
             {
               "command": "",
@@ -149,9 +149,9 @@
               "API-body": {}
             }
           ]
-        },        
+        },
         {
-          "type": "api--profiles",
+          "type": "api",
           "steps": [
             {
               "command": "",
@@ -161,21 +161,49 @@
                 "id": "test",
                 "from_current_profile": "0",
                 ".type": "profile"
-            }
+              }
             }
           ]
-        },                
+        },
         {
-          "type": "api--ipsec",
+          "type": "api",
           "steps": [
             {
               "command": "",
               "method": "post",
               "API-path": "/services/ipsec/config",
-              "API-body": {"id":"test"}
+              "API-body": {
+                "id": "test"
+              }
             }
           ]
-        }        
+        },
+        {
+          "type": "api",
+          "steps": [
+            {
+              "command": "",
+              "method": "put",
+              "API-path": "/network/dhcp/servers/config/lan",
+              "API-body": {
+                "leasetime": "10h"
+              }
+            }
+          ]
+        },
+        {
+          "type": "api",
+          "steps": [
+            {
+              "command": "",
+              "method": "post",
+              "API-path": "/network/dhcp/servers/config/lan",
+              "API-body": {
+                "leasetime": "10h"
+              }
+            }
+          ]
+        }
       ]
     }
   ]

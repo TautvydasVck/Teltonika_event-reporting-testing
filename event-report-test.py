@@ -39,11 +39,11 @@ def SendEvent(endpoint, bodyData, type):
     return response
 
 
-def SendCommand(data, address):
+def SendCommand(data, device):
     client = paramiko.SSHClient()
     client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    client.connect(hostname=address.ipAddr,
-                   username="root", password=address.pswd, port=22)
+    client.connect(hostname=device.ipAddr,
+                   username="root", password=device.pswd, port=22)
     stdin, stdout, stderr = client.exec_command(data)
     client.close()
     return stdout.readlines()
@@ -115,7 +115,6 @@ def CheckTotalEvents(file):
             print(Text.Red(
                 "Events and their messages count does not match trigger count. Check JSON configuration file"))
             sys.exit()
-    print("Total tests: {0}".format(events))
     return events
 
 
@@ -130,6 +129,7 @@ def TestEvents(file):
     os.system(fileInit)
     eventResults.fileName = fileName
     print("Started at: {0}\n".format(start))
+    # print("Total tests: {0}".format(total))
     for test in file["events-triggers"]:
         for subtype in test["event-data"]["event-subtype"]:
             print("Nr: {0}".format(index+1))
@@ -171,7 +171,7 @@ def TestEvents(file):
                 print(Text.Red("JSON file is misformed. Check configuration file"))
                 sys.exit()
             response = SendEvent(
-                "/services/events_reporting/config", data, "post")            
+                "/services/events_reporting/config", data, "post")
             """
             if (response["success"] == True):
                 eventResults.eventId = response["data"]["id"]
@@ -190,7 +190,7 @@ def TestEvents(file):
             index += 1
             print("-"*40)
         index = 0
-    #print("Total events tested: {0}".format(total))
+    # print("Total events tested: {0}".format(total))
     print(Text.Green("Passed: {0}".format(passedCnt)), end=" ")
     print(Text.Red("Failed: {0}".format(failedCnt)))
 
@@ -204,9 +204,6 @@ def TriggerEvent(trigger):
             if (response["success"] == False):
                 print(Text.Red("Trigger using API failed"))
         elif (trigger["type"] == "ssh"):
-            # if(step["command"] == "bad"):
-            #    data = "bad login"
-            # else:
             data = step["command"]
             SendCommand(data, dataSender)
             time.sleep(4)
@@ -242,7 +239,8 @@ def UpdateCSV(index, test):
                       test["event-data"]["event-subtype"][index],
                       eventResults.messageOut, eventResults.messageIn,
                       eventResults.sent, eventResults.received,
-                      eventResults.passed, eventResults.fileName))    
+                      eventResults.passed, eventResults.fileName))
+
 
 """
 def UploadCSV(delete):
@@ -254,6 +252,7 @@ def UploadCSV(delete):
         os.system("rm \"{0}\"".format(eventResults.fileName))
 """
 # Constructors
+
 
 class RequestData:
     def __init__(self):
@@ -293,20 +292,29 @@ class Text():
 
 
 # Program's main part
-# Get credentials
+
 dataSender = RequestData()
 dataReceiver = RequestData()
 eventResults = ResultData()
-
-parser = argparse.ArgumentParser(description="Automatically test device's event reporting funcionality")
-parser.add_argument("-sn","--sName", help="SMS sender device's login name", required="True")
-parser.add_argument("-sp","--sPassword", help="SMS sender device's login password", required="True")
-parser.add_argument("-sip","--sAddress", help="SMS sender device's IP address", required="True")
-parser.add_argument("-rn","--rName", help="SMS receiver device's login name", required="True")
-parser.add_argument("-rp","--rPassword", help="SMS receiver device's login password", required="True")
-parser.add_argument("-rip","--rAddress", help="SMS receiver device's IP address", required="True")
-parser.add_argument("-file","--configFile", help="Configuration file's path", required="True")
-parser.add_argument("-d","--deleteOutput", help="Delete test results file from PC", action="store_true")
+# Get credentials and file path
+parser = argparse.ArgumentParser(
+    description="Automatically test device's event reporting funcionality")
+parser.add_argument(
+    "-sn", "--sName", help="SMS sender device's login name", required="True")
+parser.add_argument(
+    "-sp", "--sPassword", help="SMS sender device's login password", required="True")
+parser.add_argument(
+    "-sip", "--sAddress", help="SMS sender device's IP address", required="True")
+parser.add_argument(
+    "-rn", "--rName", help="SMS receiver device's login name", required="True")
+parser.add_argument(
+    "-rp", "--rPassword", help="SMS receiver device's login password", required="True")
+parser.add_argument(
+    "-rip", "--rAddress", help="SMS receiver device's IP address", required="True")
+parser.add_argument(
+    "-file", "--configFile", help="Configuration file's path", required="True")
+parser.add_argument(
+    "-d", "--deleteOutput", help="Delete test results file from PC", action="store_true")
 args = parser.parse_args()
 
 dataSender.name = args.sName
