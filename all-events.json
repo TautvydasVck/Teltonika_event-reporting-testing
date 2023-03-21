@@ -7,7 +7,8 @@
 			"Signal strength dropped below -93 dBm",
 			"Signal strength dropped below -75 dBm",
 			"Signal strength dropped below -60 dBm",
-			"Signal strength dropped below -50 dBm"
+			"Signal strength dropped below -50 dBm",
+			"NEREIKIA"
 		],
 		"WiFi": [
 			"all",
@@ -17,7 +18,8 @@
 		"GPS": [
 			"all",
 			"left geofence",
-			"entered geofence"
+			"entered geofence",
+			"NEREIKIA"
 		],
 		"Switch Topology": [
 			"Changes in topology"

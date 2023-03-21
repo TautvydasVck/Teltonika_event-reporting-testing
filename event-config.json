@@ -85,15 +85,97 @@
       },
       "trigger-data": [
         {
-          "type": "api",
+          "type": "api--all ir wireless",
           "steps": [
             {
               "command": "",
-              "API-path": "",
+              "method": "put",
+              "API-path": "/network/wireless/devices/config/radio0",
+              "API-body": {
+                "data": {
+                  ".type": "wifi-device",
+                  "country": "UK"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "api--openvpn",
+          "steps": [
+            {
+              "command": "",
+              "method": "post",
+              "API-path": "/services/openvpn/config",
+              "API-body": {
+                "id": "test",
+                "type": "client"
+              }
+            }
+          ]
+        },
+        {
+          "type": "api--events_reporting",
+          "steps": [
+            {
+              "command": "",
+              "method": "post",
+              "API-path": "/services/events_reporting/config",
+              "API-body": {
+                ".type": "rule",
+                "action": "sendEmail"
+              }
+            }
+          ]
+        },        
+        {
+          "type": "api--reboot-scheduler",
+          "steps": [
+            {
+              "command": "",
+              "method": "post",
+              "API-path": "/services/auto_reboot/periodic/config",
               "API-body": {}
             }
           ]
-        }
+        },        
+        {
+          "type": "api--ping-reboot",
+          "steps": [
+            {
+              "command": "",
+              "method": "post",
+              "API-path": "/services/auto_reboot/ping/config",
+              "API-body": {}
+            }
+          ]
+        },        
+        {
+          "type": "api--profiles",
+          "steps": [
+            {
+              "command": "",
+              "method": "post",
+              "API-path": "/system/profiles/config",
+              "API-body": {
+                "id": "test",
+                "from_current_profile": "0",
+                ".type": "profile"
+            }
+            }
+          ]
+        },                
+        {
+          "type": "api--ipsec",
+          "steps": [
+            {
+              "command": "",
+              "method": "post",
+              "API-path": "/services/ipsec/config",
+              "API-body": {"id":"test"}
+            }
+          ]
+        }        
       ]
     }
   ]
