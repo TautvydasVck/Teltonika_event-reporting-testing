@@ -171,7 +171,7 @@ def TestEvents(file):
                 print(Text.Red("JSON file is misformed. Check configuration file"))
                 sys.exit()
             response = SendEvent(
-                "/services/events_reporting/config", data, "post")
+                "/services/events_reporting/config", data, "post")            
             if (response["success"] == True):
                 eventResults.eventId = response["data"]["id"]
                 TriggerEvent(test["trigger-data"][index])
@@ -240,18 +240,18 @@ def UpdateCSV(index, test):
                       test["event-data"]["event-subtype"][index],
                       eventResults.messageOut, eventResults.messageIn,
                       eventResults.sent, eventResults.received,
-                      eventResults.passed, eventResults.fileName))
-
+                      eventResults.passed, eventResults.fileName))    
 
 """
-def UploadCSV():
+def UploadCSV(delete):
     ftp = ftplib.FTP("84.15.249.182", "akademija", "akademija")
     ftp.encoding = "utf-8"
     with open(eventResults.fileName) as f:
         ftp.storbinary(f"STOR {eventResults.fileName}", f)
+    if(delete==True):
+        os.system("rm \"{0}\"".format(eventResults.fileName))
 """
 # Constructors
-
 
 class RequestData:
     def __init__(self):
@@ -303,7 +303,8 @@ parser.add_argument("-sip","--sAddress", help="SMS sender device's IP address", 
 parser.add_argument("-rn","--rName", help="SMS receiver device's login name", required="True")
 parser.add_argument("-rp","--rPassword", help="SMS receiver device's login password", required="True")
 parser.add_argument("-rip","--rAddress", help="SMS receiver device's IP address", required="True")
-parser.add_argument("-file","--configFile", help="configuration file's path", required="True")
+parser.add_argument("-file","--configFile", help="Configuration file's path", required="True")
+parser.add_argument("-d","--deleteOutput", help="Delete test results file from PC", action="store_true")
 args = parser.parse_args()
 
 dataSender.name = args.sName
@@ -321,4 +322,4 @@ data = GetConfigData(args.configFile)
 CheckForModel(data)
 CheckForMobile()
 TestEvents(data)
-# UploadCSV()
+# UploadCSV(args.deleteOutput)
