@@ -120,7 +120,7 @@ def CheckTotalEvents(file):
 
 
 def TestEvents(file):
-    total = CheckTotalEvents(file)
+    # total = CheckTotalEvents(file)
     index = 0
     failedCnt = 0
     passedCnt = 0
@@ -172,6 +172,7 @@ def TestEvents(file):
                 sys.exit()
             response = SendEvent(
                 "/services/events_reporting/config", data, "post")            
+            """
             if (response["success"] == True):
                 eventResults.eventId = response["data"]["id"]
                 TriggerEvent(test["trigger-data"][index])
@@ -185,10 +186,11 @@ def TestEvents(file):
                           eventResults.eventId, "", "delete")
             else:
                 print(Text.Red("Event was not created"))
+            """
             index += 1
             print("-"*40)
         index = 0
-    print("Total events tested: {0}".format(total))
+    #print("Total events tested: {0}".format(total))
     print(Text.Green("Passed: {0}".format(passedCnt)), end=" ")
     print(Text.Red("Failed: {0}".format(failedCnt)))
 

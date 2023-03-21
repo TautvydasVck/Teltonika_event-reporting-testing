@@ -85,27 +85,7 @@
       },
       "trigger-data": [
         {
-          "type": "ssh",
-          "steps": [
-            {
-              "command": "",
-              "API-path": "",
-              "API-body": {}
-            }
-          ]
-        },
-        {
-          "type": "ssh",
-          "steps": [
-            {
-              "command": "",
-              "API-path": "",
-              "API-body": {}
-            }
-          ]
-        },
-        {
-          "type": "ssh",
+          "type": "api",
           "steps": [
             {
               "command": "",
