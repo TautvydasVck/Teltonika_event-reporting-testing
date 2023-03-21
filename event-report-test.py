@@ -296,7 +296,8 @@ class Text():
 # Program's main part
 # Get credentials
 dataSender = RequestData()
-parser = argparse.ArgumentParser("")
+parser = argparse.ArgumentParser(prog="Auto event reporting tester",
+                                 description="Automatically test device's event reporting funcionality")
 dataSender.name = "admin"
 dataSender.pswd = "Admin123"
 dataSender.ipAddr = "192.168.1.1"
