@@ -36,3 +36,6 @@ Methods must be clear and specific. A single method does not have to perform the
 Think about the places where the program can break and make error management so that the program does not break unexpectedly. A try and except block can help.
 
 All parameters that will be passed to the program as arguments at startup must be described as flags.
+### To activate virtual environment
+Install virtualenv (python3 -m pip install virtualenv)
+Execute the activate script (source <virtualenv folder>/bin/activate
