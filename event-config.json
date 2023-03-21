@@ -192,15 +192,13 @@
           ]
         },
         {
-          "type": "api",
+          "type": "ssh",
           "steps": [
             {
-              "command": "",
-              "method": "post",
-              "API-path": "/network/dhcp/servers/config/lan",
-              "API-body": {
-                "leasetime": "10h"
-              }
+              "command": "dropbear.cfg014dd4.enable_key_ssh='0'",
+              "method": "",
+              "API-path": "",
+              "API-body": {}
             }
           ]
         }
