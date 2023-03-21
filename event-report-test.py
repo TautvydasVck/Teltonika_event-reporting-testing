@@ -67,8 +67,8 @@ def LoginToken():
         sys.exit()
 
 
-def GetConfigData():
-    with open("event-config.json") as f:
+def GetConfigData(filePath):
+    with open(filePath) as f:
         data = json.load(f)
     return data
 
@@ -185,7 +185,7 @@ def TestEvents(file):
                           eventResults.eventId, "", "delete")
             else:
                 print(Text.Red("Event was not created"))
-            index += 1            
+            index += 1
             print("-"*40)
         index = 0
     print("Total events tested: {0}".format(total))
@@ -235,9 +235,6 @@ def CheckReceive():
 
 
 def UpdateCSV(index, test):
-    # Number;Event type;Event subtype;Expected message;
-    # Received message;Sent from;Got from;Passed
-
     os.system("echo \"{0};{1};{2};{3};{4};{5};{6};{7}\" >> {8}"
               .format(index+1, test["event-data"]["event-type"],
                       test["event-data"]["event-subtype"][index],
@@ -296,21 +293,31 @@ class Text():
 # Program's main part
 # Get credentials
 dataSender = RequestData()
-parser = argparse.ArgumentParser(prog="Auto event reporting tester",
-                                 description="Automatically test device's event reporting funcionality")
-dataSender.name = "admin"
-dataSender.pswd = "Admin123"
-dataSender.ipAddr = "192.168.1.1"
+dataReceiver = RequestData()
+eventResults = ResultData()
+
+parser = argparse.ArgumentParser(description="Automatically test Teltonika Networks device's event reporting funcionality")
+parser.add_argument("-sn", help="SMS sender device login name", required="True")
+parser.add_argument("-sp", help="SMS sender device login password", required="True")
+parser.add_argument("-sip", help="SMS sender device IP address", required="True")
+parser.add_argument("-rn", help="SMS receiver device login name", required="True")
+parser.add_argument("-rp", help="SMS receiver device login password", required="True")
+parser.add_argument("-rip", help="SMS receiver device IP address", required="True")
+parser.add_argument("-file", help="configuration file path", required="True")
+args = parser.parse_args()
+
+dataSender.name = args.sn
+dataSender.pswd = args.sp
+dataSender.ipAddr = args.sip
 dataSender.baseURL = "http://"+dataSender.ipAddr+"/api"
 
-dataReceiver = dataSender
-# reqsDataReciever.ipAddr = "192.168.1.1"
-
-eventResults = ResultData()
+dataReceiver.name = args.rn
+dataReceiver.pswd = args.rp
+dataReceiver.ipAddr = args.rip
 
 print(end="\n")
 LoginToken()
-data = GetConfigData()
+data = GetConfigData(args.file)
 CheckForModel(data)
 CheckForMobile()
 TestEvents(data)
