@@ -15,32 +15,7 @@
           "profile",
           "ipsec",
           "dhcp",
-          "dropbear",
-          "network",
-          "firewall",
-          "ntp",
-          "ddns",
-          "snmpd",
-          "sqm",
-          "ulogd",
-          "modbus_data_sender",
-          "mosquitto",
-          "mqtt_pub",
-          "chilli",
-          "samba",
-          "etherwake",
-          "sms",
-          "simcard",
-          "mwan",
-          "quota_limit",
-          "gps",
-          "blesem",
-          "ioman",
-          "wireless",
-          "hostblock",
-          "privoxy",
-          "vrrpd",
-          "upnp"
+          "dropbear"
         ],
         "email-config": "",
         "sms-config": {
@@ -55,47 +30,20 @@
           "Config, profile",
           "Config, ipsec",
           "Config, dhcp",
-          "Config, dropbear",
-          "Config, network",
-          "Config, firewall",
-          "Config, ntp",
-          "Config, ddns",
-          "Config, snmpd",
-          "Config, sqm",
-          "Config, ulogd",
-          "Config, modbus_data_sender",
-          "Config, mosquitto",
-          "Config, mqtt_pub",
-          "Config, chilli",
-          "Config, samba",
-          "Config, etherwake",
-          "Config, sms",
-          "Config, simcard",
-          "Config, mwan",
-          "Config, quota_limit",
-          "Config, gps",
-          "Config, blesem",
-          "Config, ioman",
-          "Config, wireless",
-          "Config, hostblock",
-          "Config, privoxy",
-          "Config, vrrpd",
-          "Config, upnp"
+          "Config, dropbear"
         ]
       },
       "trigger-data": [
         {
-          "type": "api--all ir wireless",
+          "type": "api",
           "steps": [
             {
               "command": "",
               "method": "put",
               "API-path": "/network/wireless/devices/config/radio0",
               "API-body": {
-                "data": {
-                  ".type": "wifi-device",
-                  "country": "UK"
-                }
+                ".type": "wifi-device",
+                "country": "UA"
               }
             }
           ]

@@ -119,7 +119,7 @@ def CheckTotalEvents(file):
 
 
 def TestEvents(file):
-    # total = CheckTotalEvents(file)
+    total = CheckTotalEvents(file)
     index = 0
     failedCnt = 0
     passedCnt = 0
@@ -129,7 +129,7 @@ def TestEvents(file):
     os.system(fileInit)
     eventResults.fileName = fileName
     print("Started at: {0}\n".format(start))
-    # print("Total tests: {0}".format(total))
+    print("Total tests: {0}".format(total))
     for test in file["events-triggers"]:
         for subtype in test["event-data"]["event-subtype"]:
             print("Nr: {0}".format(index+1))
@@ -172,10 +172,11 @@ def TestEvents(file):
                 sys.exit()
             response = SendEvent(
                 "/services/events_reporting/config", data, "post")
-            """
+            
             if (response["success"] == True):
                 eventResults.eventId = response["data"]["id"]
                 TriggerEvent(test["trigger-data"][index])
+                time.sleep(4)
                 CheckReceive()
                 if (eventResults.passed == True):
                     passedCnt += 1
@@ -186,11 +187,11 @@ def TestEvents(file):
                           eventResults.eventId, "", "delete")
             else:
                 print(Text.Red("Event was not created"))
-            """
+            
             index += 1
             print("-"*40)
         index = 0
-    # print("Total events tested: {0}".format(total))
+    print("Total events tested: {0}".format(total))
     print(Text.Green("Passed: {0}".format(passedCnt)), end=" ")
     print(Text.Red("Failed: {0}".format(failedCnt)))
 
@@ -199,14 +200,12 @@ def TriggerEvent(trigger):
     for step in trigger["steps"]:
         if (trigger["type"] == "api"):
             data = json.dumps(step["API-body"])
-            response = SendEvent(step["API-path"], data, "put")
-            time.sleep(4)
+            response = SendEvent(step["API-path"], data, step["method"])
             if (response["success"] == False):
                 print(Text.Red("Trigger using API failed"))
         elif (trigger["type"] == "ssh"):
             data = step["command"]
             SendCommand(data, dataSender)
-            time.sleep(4)
         else:
             print(Text.Red("JSON file is misformed. Check configuration file"))
             sys.exit()
@@ -297,6 +296,7 @@ dataSender = RequestData()
 dataReceiver = RequestData()
 eventResults = ResultData()
 # Get credentials and file path
+"""
 parser = argparse.ArgumentParser(
     description="Automatically test device's event reporting funcionality")
 parser.add_argument(
@@ -325,10 +325,19 @@ dataSender.baseURL = "http://"+dataSender.ipAddr+"/api"
 dataReceiver.name = args.rName
 dataReceiver.pswd = args.rPassword
 dataReceiver.ipAddr = args.rAddress
+"""
+dataSender.name = "admin"
+dataSender.pswd = "Admin123"
+dataSender.ipAddr = "192.168.1.1"
+dataSender.baseURL = "http://"+dataSender.ipAddr+"/api"
+
+dataReceiver.name = "admin"
+dataReceiver.pswd = "Admin123"
+dataReceiver.ipAddr = "192.168.1.1"
 
 print(end="\n")
 LoginToken()
-data = GetConfigData(args.configFile)
+data = GetConfigData("event-config.json")
 CheckForModel(data)
 CheckForMobile()
 TestEvents(data)
