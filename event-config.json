@@ -74,8 +74,8 @@
           "Config, mwan",
           "Config, quota_limit",
           "Config, gps",
-          "Config, blesem",
-          "Config, ioman",
+          "Config, blesem (bluetooth)",
+          "Config, ioman (I/O settings)",
           "Config, wireless",
           "Config, hostblock",
           "Config, privoxy",
@@ -431,7 +431,7 @@
               "API-path": "/services/gps/general/config/gpsd",
               "API-body": {
                 "enabled": "1"
-            }
+              }
             }
           ]
         },
@@ -441,10 +441,149 @@
             {
               "command": "",
               "method": "put",
-              "API-path": "/services/gps/general/config/gpsd",
+              "API-path": "/services/bluetooth/general/config/general",
               "API-body": {
                 "enabled": "1"
+              }
             }
+          ]
+        },
+        {
+          "type": "api",
+          "steps": [
+            {
+              "command": "",
+              "method": "put",
+              "API-path": "/services/io/scheduler/config/general",
+              "API-body": {
+                "enabled": "1"
+              }
+            }
+          ]
+        },
+        {
+          "type": "api",
+          "steps": [
+            {
+              "command": "",
+              "method": "put",
+              "API-path": "/network/wireless/devices/config/radio0",
+              "API-body": {
+                ".type": "wifi-device",
+                "country": "US"
+              }
+            }
+          ]
+        },
+        {
+          "type": "ssh--site-blocking kol kas neveikia",
+          "steps": [
+            {
+              "command": "uci set hostblock.config.enabled='1'",
+              "method": "",
+              "API-path": "",
+              "API-body": {}
+            },
+            {
+              "command": "uci commit hostblock",
+              "method": "",
+              "API-path": "",
+              "API-body": {}
+            },
+            {
+              "command": "/etc/init.d/hostblock restart",
+              "method": "",
+              "API-path": "",
+              "API-body": {}
+            }
+          ]
+        },
+        {
+          "type": "ssh--proxy-blocking kol kas neveikia",
+          "steps": [
+            {
+              "command": "",
+              "method": "",
+              "API-path": "",
+              "API-body": {}
+            }
+          ]
+        },
+        {
+          "type": "api",
+          "steps": [
+            {
+              "command": "",
+              "method": "post",
+              "API-path": "/services/vrrp/config",
+              "API-body": {
+                "id": "test"
+              }
+            }
+          ]
+        },
+        {
+          "type": "api",
+          "steps": [
+            {
+              "command": "",
+              "method": "",
+              "API-path": "/services/upnp/acls/config",
+              "API-body": {}
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "event-data": {
+        "event-type": "WiFi",
+        "event-subtype": [
+          "all",
+          "client connected",
+          "client disconnected"
+        ],
+        "email-config": {},
+        "sms-config": {
+          "reciever": "+37060211799"
+        },
+        "message": [
+          "WiFi, all",
+          "WiFi, client connected",
+          "WiFi, client disconnected"
+        ]
+      },
+      "trigger-data": [
+        {
+          "type": "api",
+          "steps": [
+            {
+              "command": "",
+              "method": "",
+              "api-path": "",
+              "api-body": {}
+            }
+          ]
+        },
+        {
+          "type": "api",
+          "steps": [
+            {
+              "command": "",
+              "method": "",
+              "api-path": "",
+              "api-body": {}
+            }
+          ]
+        },
+        {
+          "type": "api",
+          "steps": [
+            {
+              "command": "",
+              "method": "",
+              "api-path": "",
+              "api-body": {}
             }
           ]
         }
