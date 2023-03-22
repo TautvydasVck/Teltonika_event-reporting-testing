@@ -253,6 +253,12 @@
               "method": "",
               "API-path": "",
               "API-body": {}
+            },
+            {
+              "command": "/etc/init.d/snmpd restart",
+              "method": "",
+              "API-path": "",
+              "API-body": {}
             }
           ]
         },
@@ -300,7 +306,9 @@
               "command": "",
               "method": "post",
               "API-path": "/services/mqtt_broker/bridge/config",
-              "API-body": {"connection_name":"test"}
+              "API-body": {
+                "connection_name": "test"
+              }
             }
           ]
         },
@@ -314,18 +322,7 @@
               "API-body": {
                 "enabled": "0",
                 "remote_addr": "test"
-            }
-            }
-          ]
-        },
-        {
-          "type": "api",
-          "steps": [
-            {
-              "command": "",
-              "method": "post",
-              "API-path": "/services/hotspot/users/config",
-              "API-body": {"username":"test","password":"test"}
+              }
             }
           ]
         },
@@ -336,7 +333,118 @@
               "command": "",
               "method": "post",
               "API-path": "/services/hotspot/users/config",
-              "API-body": {"username":"test","password":"test"}
+              "API-body": {
+                "username": "test",
+                "password": "test"
+              }
+            }
+          ]
+        },
+        {
+          "type": "api",
+          "steps": [
+            {
+              "command": "",
+              "method": "post",
+              "API-path": "/services/samba/users/config",
+              "API-body": {
+                "username": "test",
+                "password": "Test!808"
+              }
+            }
+          ]
+        },
+        {
+          "type": "api",
+          "steps": [
+            {
+              "command": "",
+              "method": "post",
+              "API-path": "/services/wol_devices/config",
+              "API-body": {}
+            }
+          ]
+        },
+        {
+          "type": "api",
+          "steps": [
+            {
+              "command": "",
+              "method": "post",
+              "API-path": "/services/mobile_utilities/sms_rules/config",
+              "API-body": {
+                "smstext": "1342",
+                "action": "reboot"
+              }
+            }
+          ]
+        },
+        {
+          "type": "api",
+          "steps": [
+            {
+              "command": "",
+              "method": "put",
+              "API-path": "/network/mobile/simcards/config/cfg01aa0e",
+              "API-body": {
+                "volte": "off"
+              }
+            }
+          ]
+        },
+        {
+          "type": "api",
+          "steps": [
+            {
+              "command": "",
+              "method": "put",
+              "API-path": "/network/mwan3/rules/config",
+              "API-body": {
+                "id": "test"
+              }
+            }
+          ]
+        },
+        {
+          "type": "api",
+          "steps": [
+            {
+              "command": "",
+              "method": "put",
+              "API-path": "/network/interfaces/config/mob1s1a1",
+              "API-body": {
+                "data_limit": "1000",
+                "enable_warning": "0",
+                "reset_hour": "0",
+                "mob_limit_enabled": "1",
+                "period": "day"
+              }
+            }
+          ]
+        },
+        {
+          "type": "api",
+          "steps": [
+            {
+              "command": "",
+              "method": "put",
+              "API-path": "/services/gps/general/config/gpsd",
+              "API-body": {
+                "enabled": "1"
+            }
+            }
+          ]
+        },
+        {
+          "type": "api",
+          "steps": [
+            {
+              "command": "",
+              "method": "put",
+              "API-path": "/services/gps/general/config/gpsd",
+              "API-body": {
+                "enabled": "1"
+            }
             }
           ]
         }
