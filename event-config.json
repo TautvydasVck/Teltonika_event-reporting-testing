@@ -15,7 +15,32 @@
           "profile",
           "ipsec",
           "dhcp",
-          "dropbear"
+          "dropbear",
+          "network",
+          "firewall",
+          "ntp",
+          "ddns",
+          "snmpd",
+          "sqm",
+          "ulogd",
+          "modbus_data_sender",
+          "mosquitto",
+          "mqtt_pub",
+          "chilli",
+          "samba",
+          "etherwake",
+          "sms",
+          "simcard",
+          "mwan",
+          "quota_limit",
+          "gps",
+          "blesem",
+          "ioman",
+          "wireless",
+          "hostblock",
+          "privoxy",
+          "vrrpd",
+          "upnp"
         ],
         "email-config": "",
         "sms-config": {
@@ -30,7 +55,32 @@
           "Config, profile",
           "Config, ipsec",
           "Config, dhcp",
-          "Config, dropbear"
+          "Config, dropbear",
+          "Config, network",
+          "Config, firewall",
+          "Config, ntp",
+          "Config, ddns",
+          "Config, snmpd",
+          "Config, sqm",
+          "Config, ulogd",
+          "Config, modbus_data_sender",
+          "Config, mosquitto",
+          "Config, mqtt_pub",
+          "Config, chilli (hotspot)",
+          "Config, samba",
+          "Config, etherwake",
+          "Config, sms",
+          "Config, simcard",
+          "Config, mwan",
+          "Config, quota_limit",
+          "Config, gps",
+          "Config, blesem",
+          "Config, ioman",
+          "Config, wireless",
+          "Config, hostblock",
+          "Config, privoxy",
+          "Config, vrrpd",
+          "Config, upnp"
         ]
       },
       "trigger-data": [
@@ -161,7 +211,7 @@
               "API-path": "/network/interfaces/config",
               "API-body": {
                 "id": "test"
-            }
+              }
             }
           ]
         },
@@ -183,8 +233,87 @@
               "command": "",
               "method": "post",
               "API-path": "/services/ddns/config",
-              "API-body": {     
+              "API-body": {
                 "id": "test"
+              }
+            }
+          ]
+        },
+        {
+          "type": "ssh--snmp kol kas neveikia",
+          "steps": [
+            {
+              "command": "uci set snmpd.@system[0].sysLocation='naujas'",
+              "method": "",
+              "API-path": "",
+              "API-body": {}
+            },
+            {
+              "command": "uci commit snmpd",
+              "method": "",
+              "API-path": "",
+              "API-body": {}
+            }
+          ]
+        },
+        {
+          "type": "api",
+          "steps": [
+            {
+              "command": "",
+              "method": "post",
+              "API-path": "/services/sqm/config",
+              "API-body": {
+                "id": "test2"
+              }
+            }
+          ]
+        },
+        {
+          "type": "api",
+          "steps": [
+            {
+              "command": "",
+              "method": "post",
+              "API-path": "/services/ulog/ftp/config/ftp",
+              "API-body": {
+                "host": "tekstas"
+              }
+            }
+          ]
+        },
+        {
+          "type": "api",
+          "steps": [
+            {
+              "command": "",
+              "method": "post",
+              "API-path": "/services/data_sender/config",
+              "API-body": {}
+            }
+          ]
+        },
+        {
+          "type": "api",
+          "steps": [
+            {
+              "command": "",
+              "method": "post",
+              "API-path": "/services/mqtt_broker/bridge/config",
+              "API-body": {"connection_name":"test"}
+            }
+          ]
+        },
+        {
+          "type": "api",
+          "steps": [
+            {
+              "command": "",
+              "method": "put",
+              "API-path": "/services/mqtt_pub/config/general",
+              "API-body": {
+                "enabled": "0",
+                "remote_addr": "test"
             }
             }
           ]
@@ -195,10 +324,19 @@
             {
               "command": "",
               "method": "post",
-              "API-path": "/services/ddns/config",
-              "API-body": {     
-                "id": "test"
+              "API-path": "/services/hotspot/users/config",
+              "API-body": {"username":"test","password":"test"}
             }
+          ]
+        },
+        {
+          "type": "api",
+          "steps": [
+            {
+              "command": "",
+              "method": "post",
+              "API-path": "/services/hotspot/users/config",
+              "API-body": {"username":"test","password":"test"}
             }
           ]
         }
