@@ -140,13 +140,65 @@
           ]
         },
         {
-          "type": "ssh",
+          "type": "api",
           "steps": [
             {
-              "command": "dropbear.cfg014dd4.enable_key_ssh='0'",
-              "method": "",
-              "API-path": "",
+              "command": "",
+              "method": "put",
+              "API-path": "/system/access_control/ssh/config/cfg014dd4",
+              "API-body": {
+                "enable_key_ssh": "1"
+              }
+            }
+          ]
+        },
+        {
+          "type": "api",
+          "steps": [
+            {
+              "command": "",
+              "method": "post",
+              "API-path": "/network/interfaces/config",
+              "API-body": {
+                "id": "test"
+            }
+            }
+          ]
+        },
+        {
+          "type": "api",
+          "steps": [
+            {
+              "command": "",
+              "method": "post",
+              "API-path": "/network/firewall/zones/config",
               "API-body": {}
+            }
+          ]
+        },
+        {
+          "type": "api",
+          "steps": [
+            {
+              "command": "",
+              "method": "post",
+              "API-path": "/services/ddns/config",
+              "API-body": {     
+                "id": "test"
+            }
+            }
+          ]
+        },
+        {
+          "type": "api",
+          "steps": [
+            {
+              "command": "",
+              "method": "post",
+              "API-path": "/services/ddns/config",
+              "API-body": {     
+                "id": "test"
+            }
             }
           ]
         }
