@@ -25,7 +25,7 @@
       },
       "trigger-data": [
         {
-          "type":"api/ssh",          
+          "type":"api/ssh/cmd",          
           "steps": [
             {
               "command": "",

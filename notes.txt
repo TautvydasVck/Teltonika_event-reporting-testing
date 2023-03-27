@@ -1,0 +1,4 @@
+papildomi linux paketai:
+1.
+sshpass (ssh komanda ir slaptazodis vienoje eiluteje)
+sudo apt install sshpass

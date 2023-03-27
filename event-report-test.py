@@ -138,7 +138,7 @@ def TestEvents(file):
             if (test["event-data"]["email-config"]["email-acc"] != ""):
                 data = json.dumps({
                     ".type": "rule",
-                    "enable": "0",
+                    "enable": "1",
                     "event": test["event-data"]["event-type"],
                     "eventMark": subtype,
                     "message": test["event-data"]["message"][index],
@@ -152,7 +152,7 @@ def TestEvents(file):
             elif (test["event-data"]["sms-config"]["reciever"] != "" and dataSender.mobile == True):
                 data = json.dumps({
                     ".type": "rule",
-                    "enable": "0",
+                    "enable": "1",
                     "event": test["event-data"]["event-type"],
                     "eventMark": subtype,
                     "message": test["event-data"]["message"][index],
@@ -169,22 +169,24 @@ def TestEvents(file):
                 sys.exit()
             response = SendEvent(
                 "/services/events_reporting/config", data, "post")
-            """
+            
             if (response["success"] == True):
                 eventResults.eventId = response["data"]["id"]
                 TriggerEvent(test["trigger-data"][index])
                 time.sleep(4)
+                #"""
                 CheckReceive()
                 if (eventResults.passed == True):
                     passedCnt += 1
                 else:
                     failedCnt += 1
+                #"""
                 UpdateCSV(index, test)
                 SendEvent("/services/events_reporting/config/" +
                           eventResults.eventId, "", "delete")
             else:
                 print(Text.Red("Event was not created"))
-            """
+            
             index += 1
             print("-"*40)
         index = 0
@@ -195,17 +197,20 @@ def TestEvents(file):
 
 def TriggerEvent(trigger):
     for step in trigger["steps"]:
-        if (trigger["type"] == "api"):
-            data = json.dumps(step["API-body"])
-            response = SendEvent(step["API-path"], data, step["method"])
-            if (response["success"] == False):
-                print(Text.Red("Trigger using API failed"))
-        elif (trigger["type"] == "ssh"):
-            data = step["command"]
-            SendCommand(data, dataSender)
-        else:
-            print(Text.Red("JSON file is misformed. Check configuration file"))
-            sys.exit()
+        match trigger["type"]:
+            case "api":   
+                data = json.dumps(step["API-body"])
+                response = SendEvent(step["API-path"], data, step["method"])
+                if (response["success"] == False):
+                    print(Text.Red("Trigger using API failed"))
+            case "ssh":
+                data = step["command"]
+                SendCommand(data, dataSender)
+            case "cmd":
+                os.system(step["command"])
+            case _:
+                print(Text.Red("JSON file is misformed. Check configuration file"))
+                sys.exit()
 
 
 def CheckReceive():
@@ -224,6 +229,7 @@ def CheckReceive():
             print(Text.Green("Passed"))
         else:
             print(Text.Red("Failed"))
+        SendCommand("gsmctl -S -d 1", dataReceiver)
         SendCommand("gsmctl -S -d 0", dataReceiver)
     else:
         print(Text.Red("Failed"))
