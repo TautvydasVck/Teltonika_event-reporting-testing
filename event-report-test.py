@@ -7,6 +7,7 @@ import paramiko
 import time
 import os
 import ftplib
+import keyboard
 from datetime import datetime
 
 
@@ -119,12 +120,12 @@ def CheckTotalEvents(file):
 
 
 def TestEvents(file):
-    #total = CheckTotalEvents(file)
+    # total = CheckTotalEvents(file)
     index = 0
     failedCnt = 0
     passedCnt = 0
     start = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    CreateCSV(file, start) 
+    CreateCSV(file, start)
     print("Started at: {0}\n".format(start))
     # print("Total tests: {0}".format(total))
     for test in file["events-triggers"]:
@@ -169,24 +170,24 @@ def TestEvents(file):
                 sys.exit()
             response = SendEvent(
                 "/services/events_reporting/config", data, "post")
-            
+
             if (response["success"] == True):
                 eventResults.eventId = response["data"]["id"]
                 TriggerEvent(test["trigger-data"][index])
                 time.sleep(4)
-                #"""
+                # """
                 CheckReceive()
                 if (eventResults.passed == True):
                     passedCnt += 1
                 else:
                     failedCnt += 1
-                #"""
+                # """
                 UpdateCSV(index, test)
                 SendEvent("/services/events_reporting/config/" +
                           eventResults.eventId, "", "delete")
             else:
                 print(Text.Red("Event was not created"))
-            
+
             index += 1
             print("-"*40)
         index = 0
@@ -198,7 +199,7 @@ def TestEvents(file):
 def TriggerEvent(trigger):
     for step in trigger["steps"]:
         match trigger["type"]:
-            case "api":   
+            case "api":
                 data = json.dumps(step["API-body"])
                 response = SendEvent(step["API-path"], data, step["method"])
                 if (response["success"] == False):
@@ -206,8 +207,9 @@ def TriggerEvent(trigger):
             case "ssh":
                 data = step["command"]
                 SendCommand(data, dataSender)
-            case "cmd":
-                os.system(step["command"])
+            case "cmd":                
+                time.sleep(1)
+                os.system(step["command"])                
             case _:
                 print(Text.Red("JSON file is misformed. Check configuration file"))
                 sys.exit()
@@ -234,11 +236,13 @@ def CheckReceive():
     else:
         print(Text.Red("Failed"))
 
+
 def CreateCSV(file, start):
     fileName = "\"{0}_{1}.csv\"".format(file["info"]["product"], start)
     fileInit = "echo \"Number;Event type;Event subtype;Expected message;Received message;Sent from;Got from;Passed\" >> "+fileName
     os.system(fileInit)
     eventResults.fileName = fileName
+
 
 def UpdateCSV(index, test):
     os.system("echo \"{0};{1};{2};{3};{4};{5};{6};{7}\" >> {8}"
@@ -269,6 +273,7 @@ class RequestData:
         self.name = ""
         self.pswd = ""
         self.mobile = False
+        self.smsCheck = False
 
 
 class ResultData:

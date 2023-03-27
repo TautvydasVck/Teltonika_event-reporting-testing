@@ -54,7 +54,7 @@
           "type": "cmd",
           "steps": [
             {
-              "command": "sshpass -p 123456789 ssh root@192.168.1.1",
+              "command": "sshpass -p 1324 ssh root@192.168.1.1 -o ExitOnForwardFailure='yes'",
               "method": "",
               "api-path": "",
               "api-body": {}
