@@ -38,57 +38,11 @@
             {
               "command": "",
               "wait-time": "",
-              "method": "",
-              "api-path": "",
-              "api-body": {}
-            }
-          ]
-        },
-        {
-          "type": "ssh",
-          "steps": [
-            {
-              "command": "",
-              "wait-time": "",
-              "method": "",
-              "api-path": "",
-              "api-body": {}
-            }
-          ]
-        },
-        {
-          "type": "ssh",
-          "steps": [
-            {
-              "command": "",
-              "wait-time": "",
-              "method": "",
-              "api-path": "",
-              "api-body": {}
-            }
-          ]
-        },
-        {
-          "type": "ssh",
-          "steps": [
-            {
-              "command": "",
-              "wait-time": "",
-              "method": "",
-              "api-path": "",
-              "api-body": {}
-            }
-          ]
-        },
-        {
-          "type": "ssh",
-          "steps": [
-            {
-              "command": "",
-              "wait-time": "",
-              "method": "",
-              "api-path": "",
-              "api-body": {}
+              "method": "post",
+              "api-path": "/network/vlan/port_based/config",
+              "api-body": {
+                ".type": "switch_vlan"
+              }
             }
           ]
         }

@@ -693,6 +693,111 @@
           ]
         }
       ]
+    },
+    {
+      "event-data": {
+        "event-type": "Switch Events",
+        "event-subtype": [
+          "all",
+          "Port link state",
+          "Port speed for",
+          "changed to DOWN",
+          "changed to UP"
+        ],
+        "email-config": {
+          "subject": "",
+          "email-acc": "",
+          "recievers": [
+            ""
+          ]
+        },
+        "sms-config": {
+          "reciever": "+37060211799"
+        },
+        "message": [
+          "Switch Events, all",
+          "Switch Events, Port link state",
+          "Switch Events, Port speed for",
+          "Switch Events, changed to DOWN",
+          "Switch Events, changed to UP"
+        ]
+      },
+      "trigger-data": [
+        {
+          "type": "ssh",
+          "steps": [
+            {
+              "command": "",
+              "wait-time": "",
+              "method": "post",
+              "api-path": "/network/vlan/port_based/config",
+              "api-body": {
+                ".type": "switch_vlan"
+              }
+            }
+          ]
+        },
+        {
+          "type": "ssh",
+          "steps": [
+            {
+              "command": "",
+              "wait-time": "",
+              "method": "put",
+              "api-path": "/network/vlan/port_based/config",
+              "api-body": {
+                ".type": "switch_vlan",
+                "vid": "3",
+                "lan1": "t"
+              }
+            }
+          ]
+        },
+        {
+          "type": "ssh",
+          "steps": [
+            {
+              "command": "",
+              "wait-time": "",
+              "method": "put",
+              "api-path": "/network/vlan/port_based/config",
+              "api-body": {
+                ".type": "switch_vlan",
+                "vid": "3",
+                "lan1": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "ssh",
+          "steps": [
+            {
+              "command": "",
+              "wait-time": "",
+              "method": "put",
+              "api-path": "/network/vlan/port_based/config",
+              "api-body": {
+                ".type": "switch_vlan",
+                "vid": "3",
+                "lan1": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "ssh",
+          "steps": [
+            {
+              "command": "",
+              "wait-time": "",
+              "method": "",
+              "api-path": "",
+              "api-body": {}
+            }
+          ]
+        }
+      ]
     }
   ]
 }
