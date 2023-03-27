@@ -7,7 +7,6 @@ import paramiko
 import time
 import os
 import ftplib
-import keyboard
 from datetime import datetime
 
 
@@ -173,18 +172,18 @@ def TestEvents(file):
 
             if (response["success"] == True):
                 eventResults.eventId = response["data"]["id"]
+                #"""
                 TriggerEvent(test["trigger-data"][index])
-                time.sleep(4)
-                # """
+                time.sleep(4)                
                 CheckReceive()
                 if (eventResults.passed == True):
                     passedCnt += 1
                 else:
-                    failedCnt += 1
-                # """
+                    failedCnt += 1                
                 UpdateCSV(index, test)
                 SendEvent("/services/events_reporting/config/" +
                           eventResults.eventId, "", "delete")
+                #"""
             else:
                 print(Text.Red("Event was not created"))
 

@@ -28,10 +28,11 @@
           "type":"api/ssh/cmd",          
           "steps": [
             {
-              "command": "",
+              "command": "",              
               "method": "put/post/delete",
               "api-path": "",
-              "api-body": {}
+              "api-body": {},
+              "wait-time": ""
             }
           ]
         }

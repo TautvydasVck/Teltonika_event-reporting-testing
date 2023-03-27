@@ -5,9 +5,13 @@
   "events-triggers": [
     {
       "event-data": {
-        "event-type": "Switch Topology",
+        "event-type": "Switch Events",
         "event-subtype": [
-          "Changes in topology"
+          "all",
+          "Port link state",
+          "Port speed for",
+          "changed to DOWN",
+          "changed to UP"
         ],
         "email-config": {
           "subject": "",
@@ -20,7 +24,11 @@
           "reciever": "+37060211799"
         },
         "message": [
-          "Switch Topology, Changes in topology"
+          "Switch Events, all",
+          "Switch Events, Port link state",
+          "Switch Events, Port speed for",
+          "Switch Events, changed to DOWN",
+          "Switch Events, changed to UP"
         ]
       },
       "trigger-data": [
@@ -28,11 +36,59 @@
           "type": "ssh",
           "steps": [
             {
-              "command": "reboot",
-              "wait-time":"",
+              "command": "",
+              "wait-time": "",
               "method": "",
               "api-path": "",
-              "api-body": {}              
+              "api-body": {}
+            }
+          ]
+        },
+        {
+          "type": "ssh",
+          "steps": [
+            {
+              "command": "",
+              "wait-time": "",
+              "method": "",
+              "api-path": "",
+              "api-body": {}
+            }
+          ]
+        },
+        {
+          "type": "ssh",
+          "steps": [
+            {
+              "command": "",
+              "wait-time": "",
+              "method": "",
+              "api-path": "",
+              "api-body": {}
+            }
+          ]
+        },
+        {
+          "type": "ssh",
+          "steps": [
+            {
+              "command": "",
+              "wait-time": "",
+              "method": "",
+              "api-path": "",
+              "api-body": {}
+            }
+          ]
+        },
+        {
+          "type": "ssh",
+          "steps": [
+            {
+              "command": "",
+              "wait-time": "",
+              "method": "",
+              "api-path": "",
+              "api-body": {}
             }
           ]
         }
