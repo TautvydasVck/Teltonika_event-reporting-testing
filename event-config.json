@@ -32,7 +32,33 @@
               "wait-time":"",
               "method": "",
               "api-path": "",
+<<<<<<< HEAD
               "api-body": {}              
+=======
+              "api-body": {}
+            }
+          ]
+        },
+        {
+          "type": "ssh",
+          "steps": [
+            {
+              "command": "",
+              "method": "",
+              "api-path": "",
+              "api-body": {}
+            }
+          ]
+        },
+        {
+          "type": "cmd",
+          "steps": [
+            {
+              "command": "sshpass -p 1324 ssh root@192.168.1.1 -o ExitOnForwardFailure='yes'",
+              "method": "",
+              "api-path": "",
+              "api-body": {}
+>>>>>>> f5fb0dcbba2acaf1cd23b14f8c145a208fd079ff
             }
           ]
         }
