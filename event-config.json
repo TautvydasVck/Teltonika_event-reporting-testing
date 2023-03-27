@@ -5,11 +5,9 @@
   "events-triggers": [
     {
       "event-data": {
-        "event-type": "SSH",
+        "event-type": "Switch Topology",
         "event-subtype": [
-          "all",
-          "succeeded",
-          "bad"
+          "Changes in topology"
         ],
         "email-config": {
           "subject": "",
@@ -22,9 +20,7 @@
           "reciever": "+37060211799"
         },
         "message": [
-          "SSH, all",
-          "SSH, succeeded",
-          "SSH, bad"
+          "Switch Topology, Changes in topology"
         ]
       },
       "trigger-data": [
@@ -32,32 +28,11 @@
           "type": "ssh",
           "steps": [
             {
-              "command": "",
+              "command": "reboot",
+              "wait-time":"",
               "method": "",
               "api-path": "",
-              "api-body": {}
-            }
-          ]
-        },
-        {
-          "type": "ssh",
-          "steps": [
-            {
-              "command": "",
-              "method": "",
-              "api-path": "",
-              "api-body": {}
-            }
-          ]
-        },
-        {
-          "type": "cmd",
-          "steps": [
-            {
-              "command": "sshpass -p 1324 ssh root@192.168.1.1 -o ExitOnForwardFailure='yes'",
-              "method": "",
-              "api-path": "",
-              "api-body": {}
+              "api-body": {}              
             }
           ]
         }

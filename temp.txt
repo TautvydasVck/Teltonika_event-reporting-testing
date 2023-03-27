@@ -660,7 +660,7 @@
       },
       "trigger-data": [
         {
-          "type": "api",
+          "type": "ssh",
           "steps": [
             {
               "command": "",
@@ -671,7 +671,7 @@
           ]
         },
         {
-          "type": "api",
+          "type": "ssh",
           "steps": [
             {
               "command": "",
@@ -682,10 +682,10 @@
           ]
         },
         {
-          "type": "api",
+          "type": "cmd",
           "steps": [
             {
-              "command": "",
+              "command": "sshpass -p 1324 ssh root@192.168.1.1 -o ExitOnForwardFailure='yes'",
               "method": "",
               "api-path": "",
               "api-body": {}
