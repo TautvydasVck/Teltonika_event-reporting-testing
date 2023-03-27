@@ -42,7 +42,13 @@
           "vrrpd",
           "upnp"
         ],
-        "email-config": "",
+        "email-config": {
+          "subject": "",
+          "email-acc": "",
+          "recievers": [
+            ""
+          ]
+        },
         "sms-config": {
           "reciever": "+37060211799"
         },
@@ -240,25 +246,16 @@
           ]
         },
         {
-          "type": "ssh--snmp kol kas neveikia",
+          "type": "api",
           "steps": [
             {
-              "command": "uci set snmpd.@system[0].sysLocation='naujas'",
+              "command": "",
               "method": "",
-              "API-path": "",
-              "API-body": {}
-            },
-            {
-              "command": "uci commit snmpd",
-              "method": "",
-              "API-path": "",
-              "API-body": {}
-            },
-            {
-              "command": "/etc/init.d/snmpd restart",
-              "method": "",
-              "API-path": "",
-              "API-body": {}
+              "API-path": "/services/snmp/system/config/general",
+              "API-body": {
+                "sysLocation": "naujas",
+                "id": "general"
+              }
             }
           ]
         },
@@ -476,36 +473,35 @@
           ]
         },
         {
-          "type": "ssh--site-blocking kol kas neveikia",
-          "steps": [
-            {
-              "command": "uci set hostblock.config.enabled='1'",
-              "method": "",
-              "API-path": "",
-              "API-body": {}
-            },
-            {
-              "command": "uci commit hostblock",
-              "method": "",
-              "API-path": "",
-              "API-body": {}
-            },
-            {
-              "command": "/etc/init.d/hostblock restart",
-              "method": "",
-              "API-path": "",
-              "API-body": {}
-            }
-          ]
-        },
-        {
-          "type": "ssh--proxy-blocking kol kas neveikia",
+          "type": "api",
           "steps": [
             {
               "command": "",
               "method": "",
-              "API-path": "",
-              "API-body": {}
+              "API-path": "/services/webfilter/config/general",
+              "API-body": {
+                "enabled": "1",
+                ".type": "hostblock",
+                "id": "general",
+                "mode": "blacklist"
+              }
+            }
+          ]
+        },
+        {
+          "type": "api",
+          "steps": [
+            {
+              "command": "",
+              "method": "",
+              "API-path": "/services/privoxy/config/general",
+              "API-body": {
+                "enabled": "1",
+                ".type": "privoxy",
+                "id": "general",
+                "_mode": "blacklist",
+                "url": []
+              }
             }
           ]
         },
@@ -543,7 +539,13 @@
           "client connected",
           "client disconnected"
         ],
-        "email-config": {},
+        "email-config": {
+          "subject": "",
+          "email-acc": "",
+          "recievers": [
+            ""
+          ]
+        },
         "sms-config": {
           "reciever": "+37060211799"
         },

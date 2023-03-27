@@ -58,7 +58,7 @@ def LoginToken():
         response = requests.post(
             dataSender.baseURL+"/login", json=creds, headers=head).json()
         if (response["success"] == True):
-            dataSender.token = response["jwtToken"]
+            dataSender.token = response["ubus_rpc_session"]
         else:
             sys.exit(Text.Red("Login was unsuccessful"))
     except OSError as err:
@@ -135,7 +135,7 @@ def TestEvents(file):
                   Text.Underline("{0}".format(test["event-data"]["event-type"])))
             print(
                 "Subtype: "+Text.Underline("{0}".format(subtype)))
-            if (test["event-data"]["email-config"] != ""):
+            if (test["event-data"]["email-config"]["email-acc"] != ""):
                 data = json.dumps({
                     ".type": "rule",
                     "enable": "0",
@@ -149,7 +149,7 @@ def TestEvents(file):
                 })
                 eventResults.sent = test["event-data"]["email-config"]["recievers"]
 
-            elif (test["event-data"]["sms-config"] != "" and dataSender.mobile == True):
+            elif (test["event-data"]["sms-config"]["reciever"] != "" and dataSender.mobile == True):
                 data = json.dumps({
                     ".type": "rule",
                     "enable": "0",
