@@ -32,7 +32,8 @@
               "method": "put/post/delete",
               "api-path": "",
               "api-body": {},
-              "wait-time": ""
+              "wait-time": "",
+              "retrieve-token":""
             }
           ]
         }

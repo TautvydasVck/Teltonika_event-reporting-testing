@@ -36,6 +36,9 @@ def SendEvent(endpoint, bodyData, type):
         case "delete":
             response = requests.delete(dataSender.baseURL+endpoint,
                                        headers=head).json()
+        case _:
+            print(Text.Red("JSON file is misformed. Check configuration file"))
+            sys.exit()
     return response
 
 
@@ -125,8 +128,8 @@ def TestEvents(file):
     passedCnt = 0
     start = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     CreateCSV(file, start)
-    print("Started at: {0}\n".format(start))
-    print("Total tests: {0}".format(total))
+    print("Started at: {0}".format(start))
+    print("Total tests: {0}\n".format(total))
     for test in file["events-triggers"]:
         for subtype in test["event-data"]["event-subtype"]:
             print("Nr: {0}".format(index+1))
@@ -138,7 +141,7 @@ def TestEvents(file):
             if (test["event-data"]["email-config"]["email-acc"] != ""):
                 data = json.dumps({
                     ".type": "rule",
-                    "enable": "0",
+                    "enable": "1",
                     "event": test["event-data"]["event-type"],
                     "eventMark": subtype,
                     "message": test["event-data"]["message"][index],
@@ -152,7 +155,7 @@ def TestEvents(file):
             elif (test["event-data"]["sms-config"]["reciever"] != "" and dataSender.mobile == True):
                 data = json.dumps({
                     ".type": "rule",
-                    "enable": "0",
+                    "enable": "1",
                     "event": test["event-data"]["event-type"],
                     "eventMark": subtype,
                     "message": test["event-data"]["message"][index],
@@ -172,18 +175,18 @@ def TestEvents(file):
 
             if (response["success"] == True):
                 eventResults.eventId = response["data"]["id"]
-                """
+                # """
                 TriggerEvent(test["trigger-data"][index])
-                time.sleep(4)                
+                time.sleep(4)
                 CheckReceive()
                 if (eventResults.passed == True):
                     passedCnt += 1
                 else:
-                    failedCnt += 1                
+                    failedCnt += 1
                 UpdateCSV(index, test)
                 SendEvent("/services/events_reporting/config/" +
-                              eventResults.eventId, "", "delete")
-                """
+                          eventResults.eventId, "", "delete")
+                # """
             else:
                 print(Text.Red("Event was not created"))
 
@@ -197,27 +200,29 @@ def TestEvents(file):
 
 def TriggerEvent(trigger):
     for step in trigger["steps"]:
-        match trigger["type"]:
+        match step["type"]:
             case "api":
-                data = json.dumps(step["API-body"])
+                data = json.dumps(step["api-body"])
                 time.sleep(1)
-                response = SendEvent(step["API-path"], data, step["method"])
+                response = SendEvent(step["api-path"], data, step["method"])
                 if (response["success"] == False):
                     print(Text.Red("Trigger using API failed"))
             case "ssh":
                 data = step["command"]
                 time.sleep(1)
                 SendCommand(data, dataSender)
-            case "cmd":                
+            case "cmd":
                 time.sleep(1)
-                os.system(step["command"])                
+                os.system(step["command"])
             case _:
                 print(Text.Red("JSON file is misformed. Check configuration file"))
                 sys.exit()
         pause = step["wait-time"]
-        if(pause!= ""):
-            print("Program will pause for: {0} seconds".format(pause))
+        if (pause != ""):
+            print(Text.Yellow("Program is paused for: {0} seconds".format(pause)))
             time.sleep(int(pause))
+        if (step["retrieve-token"] == "1"):
+            LoginToken()
 
 
 def CheckReceive():
@@ -295,13 +300,13 @@ class ResultData:
 
 class Text():
     def Green(text):
-        return "\033[42m"+text+"\033[0m "
+        return "\033[32m"+text+"\033[0m "
 
     def Red(text):
-        return "\033[41m"+text+"\033[0m "
+        return "\033[31m"+text+"\033[0m "
 
     def Yellow(text):
-        return "\033[43m"+text+"\033[0m "
+        return "\033[33m"+text+"\033[0m "
 
     def Underline(text):
         return "\033[4m"+text+"\033[0m "
@@ -345,12 +350,12 @@ dataReceiver.ipAddr = args.rAddress
 """
 dataSender.name = "admin"
 dataSender.pswd = "Admin123"
-dataSender.ipAddr = "192.168.1.4"
+dataSender.ipAddr = "192.168.1.1"
 dataSender.baseURL = "http://"+dataSender.ipAddr+"/api"
 
 dataReceiver.name = "admin"
 dataReceiver.pswd = "Admin123"
-dataReceiver.ipAddr = "192.168.1.4"
+dataReceiver.ipAddr = "192.168.1.1"
 
 print(end="\n")
 LoginToken()
