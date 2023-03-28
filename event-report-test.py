@@ -138,7 +138,7 @@ def TestEvents(file):
             if (test["event-data"]["email-config"]["email-acc"] != ""):
                 data = json.dumps({
                     ".type": "rule",
-                    "enable": "1",
+                    "enable": "0",
                     "event": test["event-data"]["event-type"],
                     "eventMark": subtype,
                     "message": test["event-data"]["message"][index],
@@ -152,7 +152,7 @@ def TestEvents(file):
             elif (test["event-data"]["sms-config"]["reciever"] != "" and dataSender.mobile == True):
                 data = json.dumps({
                     ".type": "rule",
-                    "enable": "1",
+                    "enable": "0",
                     "event": test["event-data"]["event-type"],
                     "eventMark": subtype,
                     "message": test["event-data"]["message"][index],
@@ -172,7 +172,7 @@ def TestEvents(file):
 
             if (response["success"] == True):
                 eventResults.eventId = response["data"]["id"]
-                #"""
+                """
                 TriggerEvent(test["trigger-data"][index])
                 time.sleep(4)                
                 CheckReceive()
@@ -183,7 +183,7 @@ def TestEvents(file):
                 UpdateCSV(index, test)
                 SendEvent("/services/events_reporting/config/" +
                           eventResults.eventId, "", "delete")
-                #"""
+                """
             else:
                 print(Text.Red("Event was not created"))
 
@@ -212,6 +212,8 @@ def TriggerEvent(trigger):
             case _:
                 print(Text.Red("JSON file is misformed. Check configuration file"))
                 sys.exit()
+        if(step["wait-time"]!= ""):
+            os.system(step["wait-time"])
 
 
 def CheckReceive():

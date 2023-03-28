@@ -13,7 +13,7 @@
           "ping reboot",
           "reboot scheduler",
           "from button",
-          "sms"
+          "sms reboot"
         ],
         "email-config": {
           "subject": "",
@@ -32,7 +32,7 @@
           "Reboot, ping reboot",
           "Reboot, reboot scheduler",
           "Reboot, from button",
-          "Reboot, sms"
+          "Reboot, sms reboot"
         ]
       },
       "trigger-data": [
@@ -41,7 +41,7 @@
           "steps": [
             {
               "command": "",
-              "wait-time": "",
+              "wait-time": "300",
               "method": "",
               "api-path": "",
               "api-body": {}
