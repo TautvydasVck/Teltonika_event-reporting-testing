@@ -686,6 +686,7 @@
           "steps": [
             {
               "command": "sshpass -p 1324 ssh root@192.168.1.1 -o ExitOnForwardFailure='yes'",
+              "wait-time": "",
               "method": "",
               "api-path": "",
               "api-body": {}
@@ -724,7 +725,7 @@
       },
       "trigger-data": [
         {
-          "type": "ssh",
+          "type": "api",
           "steps": [
             {
               "command": "",
@@ -738,7 +739,7 @@
           ]
         },
         {
-          "type": "ssh",
+          "type": "api",
           "steps": [
             {
               "command": "",
@@ -754,7 +755,7 @@
           ]
         },
         {
-          "type": "ssh",
+          "type": "api",
           "steps": [
             {
               "command": "",
@@ -770,7 +771,23 @@
           ]
         },
         {
-          "type": "ssh",
+          "type": "api",
+          "steps": [
+            {
+              "command": "",
+              "wait-time": "",
+              "method": "put",
+              "api-path": "/network/vlan/port_based/config",
+              "api-body": {
+                ".type": "switch_vlan",
+                "vid": "3",
+                "lan1": "t"
+              }
+            }
+          ]
+        },
+        {
+          "type": "api",
           "steps": [
             {
               "command": "",
@@ -782,18 +799,6 @@
                 "vid": "3",
                 "lan1": ""
               }
-            }
-          ]
-        },
-        {
-          "type": "ssh",
-          "steps": [
-            {
-              "command": "",
-              "wait-time": "",
-              "method": "",
-              "api-path": "",
-              "api-body": {}
             }
           ]
         }

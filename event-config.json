@@ -5,13 +5,15 @@
   "events-triggers": [
     {
       "event-data": {
-        "event-type": "Switch Events",
+        "event-type": "Reboot",
         "event-subtype": [
           "all",
-          "Port link state",
-          "Port speed for",
-          "changed to DOWN",
-          "changed to UP"
+          "web ui",
+          "input/output",
+          "ping reboot",
+          "reboot scheduler",
+          "from button",
+          "sms"
         ],
         "email-config": {
           "subject": "",
@@ -24,11 +26,13 @@
           "reciever": "+37060211799"
         },
         "message": [
-          "Switch Events, all",
-          "Switch Events, Port link state",
-          "Switch Events, Port speed for",
-          "Switch Events, changed to DOWN",
-          "Switch Events, changed to UP"
+          "Reboot, all",
+          "Reboot, web ui",
+          "Reboot, input/output",
+          "Reboot, ping reboot",
+          "Reboot, reboot scheduler",
+          "Reboot, from button",
+          "Reboot, sms"
         ]
       },
       "trigger-data": [
@@ -38,11 +42,9 @@
             {
               "command": "",
               "wait-time": "",
-              "method": "post",
-              "api-path": "/network/vlan/port_based/config",
-              "api-body": {
-                ".type": "switch_vlan"
-              }
+              "method": "",
+              "api-path": "",
+              "api-body": {}
             }
           ]
         }
