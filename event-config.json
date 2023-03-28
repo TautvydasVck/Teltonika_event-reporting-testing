@@ -1,6 +1,6 @@
 {
   "info": {
-    "product": "RUTX11"
+    "product": "RUTX10"
   },
   "events-triggers": [
     {
@@ -95,7 +95,7 @@
               "wait-time": "",
               "method": "put",
               "api-path": "/services/auto_reboot/ping/config",
-              "api-body":  {
+              "api-body": {
                 "type": "ping",
                 "enable": "0",
                 "id": "cfg01c21d"
@@ -108,17 +108,14 @@
           "steps": [
             {
               "command": "",
-              "wait-time": "210",
-              "method": "",
-              "api-path": "",
+              "wait-time": "",
+              "method": "put",
+              "api-path": "/services/auto_reboot/periodic/config/cfg0210a4",
               "api-body": {
-                ".type": "reboot_instance",
-                "action": "1",
                 "id": "cfg0210a4",
                 "enable": "1",
-                "time": [
-                    "10:"
-                ],
+                "action": "1",
+                "period": "week",
                 "days": [
                     "mon",
                     "tue",
@@ -128,18 +125,9 @@
                     "sat",
                     "sun"
                 ],
-                "period": "week"
-            }
-            },
-            {
-              "command": "",
-              "wait-time": "",
-              "method": "",
-              "api-path": "",
-              "api-body": {
-                ".type": "reboot_instance",                
-                "id": "cfg0210a4",
-                "enable": "0"
+                "time": [
+                    "00:00"
+                ]
             }
             }
           ]
