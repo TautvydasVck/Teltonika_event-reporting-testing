@@ -28,7 +28,7 @@
           "steps": [
             {
               "type":"api/ssh/cmd",
-              "command": "",              
+              "command": "",      
               "method": "put/post/delete",
               "api-path": "",
               "api-body": {},

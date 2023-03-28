@@ -37,9 +37,9 @@
       },
       "trigger-data": [
         {
-          "type": "ssh",
           "steps": [
             {
+              "type": "ssh",
               "command": "reboot",
               "wait-time": "210",
               "method": "",
@@ -49,9 +49,9 @@
           ]
         },
         {
-          "type": "api",
           "steps": [
             {
+              "type": "api",
               "command": "",
               "wait-time": "",
               "method": "post",
@@ -61,9 +61,9 @@
           ]
         },
         {
-          "type": "api--I/O kol kas neveikia",
           "steps": [
             {
+              "type": "api--I/O kol kas neveikia",
               "command": "",
               "wait-time": "210",
               "method": "",
@@ -73,9 +73,9 @@
           ]
         },
         {
-          "type": "api",
           "steps": [
             {
+              "type": "api",
               "command": "",
               "wait-time": "240",
               "method": "put",
@@ -91,6 +91,7 @@
               }
             },
             {
+              "type": "api",
               "command": "",
               "wait-time": "",
               "method": "put",
@@ -104,9 +105,9 @@
           ]
         },
         {
-          "type": "api",
           "steps": [
             {
+              "type": "api",
               "command": "",
               "wait-time": "",
               "method": "put",
@@ -117,18 +118,26 @@
                 "action": "1",
                 "period": "week",
                 "days": [
-                    "mon",
-                    "tue",
-                    "wed",
-                    "thu",
-                    "fri",
-                    "sat",
-                    "sun"
+                  "mon",
+                  "tue",
+                  "wed",
+                  "thu",
+                  "fri",
+                  "sat",
+                  "sun"
                 ],
                 "time": [
-                    "00:00"
+                  "00:05"
                 ]
-            }
+              }
+            },
+            {
+              "type": "ssh",
+              "command": "date -s 00:00",
+              "wait-time": "220",
+              "method": "",
+              "api-path": "",
+              "api-body": {}
             }
           ]
         }
