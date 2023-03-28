@@ -49,14 +49,98 @@
           ]
         },
         {
-          "type": "ssh",
+          "type": "api",
           "steps": [
             {
-              "command": "reboot",
-              "wait-time": "300",
+              "command": "",
+              "wait-time": "",
+              "method": "post",
+              "api-path": "/system/administration/general/actions/reboot",
+              "api-body": {}
+            }
+          ]
+        },
+        {
+          "type": "api--I/O kol kas neveikia",
+          "steps": [
+            {
+              "command": "",
+              "wait-time": "210",
               "method": "",
               "api-path": "",
               "api-body": {}
+            }
+          ]
+        },
+        {
+          "type": "api",
+          "steps": [
+            {
+              "command": "",
+              "wait-time": "240",
+              "method": "put",
+              "api-path": "/services/auto_reboot/ping/config",
+              "api-body": {
+                "type": "ping",
+                "retry": "1",
+                "enable": "1",
+                "id": "cfg01c21d",
+                "host": "192.168.134.80",
+                "time": "5",
+                "time_out": "1"
+              }
+            },
+            {
+              "command": "",
+              "wait-time": "",
+              "method": "put",
+              "api-path": "/services/auto_reboot/ping/config",
+              "api-body":  {
+                "type": "ping",
+                "enable": "0",
+                "id": "cfg01c21d"
+              }
+            }
+          ]
+        },
+        {
+          "type": "api",
+          "steps": [
+            {
+              "command": "",
+              "wait-time": "210",
+              "method": "",
+              "api-path": "",
+              "api-body": {
+                ".type": "reboot_instance",
+                "action": "1",
+                "id": "cfg0210a4",
+                "enable": "1",
+                "time": [
+                    "10:"
+                ],
+                "days": [
+                    "mon",
+                    "tue",
+                    "wed",
+                    "thu",
+                    "fri",
+                    "sat",
+                    "sun"
+                ],
+                "period": "week"
+            }
+            },
+            {
+              "command": "",
+              "wait-time": "",
+              "method": "",
+              "api-path": "",
+              "api-body": {
+                ".type": "reboot_instance",                
+                "id": "cfg0210a4",
+                "enable": "0"
+            }
             }
           ]
         }
