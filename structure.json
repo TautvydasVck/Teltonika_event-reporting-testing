@@ -24,10 +24,10 @@
         ]
       },
       "trigger-data": [
-        {
-          "type":"api/ssh/cmd",          
+        {                  
           "steps": [
             {
+              "type":"api/ssh/cmd",
               "command": "",              
               "method": "put/post/delete",
               "api-path": "",
