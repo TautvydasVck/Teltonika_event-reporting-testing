@@ -40,7 +40,19 @@
           "type": "ssh",
           "steps": [
             {
-              "command": "",
+              "command": "reboot",
+              "wait-time": "210",
+              "method": "",
+              "api-path": "",
+              "api-body": {}
+            }
+          ]
+        },
+        {
+          "type": "ssh",
+          "steps": [
+            {
+              "command": "reboot",
               "wait-time": "300",
               "method": "",
               "api-path": "",
