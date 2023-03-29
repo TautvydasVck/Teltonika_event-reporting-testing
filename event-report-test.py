@@ -25,7 +25,8 @@ def GetSysInfo(endpoint):
 def SendEvent(endpoint, bodyData, type):
     head = {"Content-Type": "application/json",
             "Authorization": "Bearer " + dataSender.token}
-    data = "{\"data\":"+bodyData+"}"
+    # ATNAUJINTI TRIGERIUS (prideti  data{} api-body lauke)
+    #data = "{\"data\":"+bodyData+"}"
     match type:
         case "post":
             response = requests.post(dataSender.baseURL+endpoint,
@@ -264,7 +265,7 @@ def UpdateCSV(index, test):
                       eventResults.passed, eventResults.fileName))
 
 
-"""
+
 def UploadCSV(delete):
     ftp = ftplib.FTP("84.15.249.182", "akademija", "akademija")
     ftp.encoding = "utf-8"
@@ -272,7 +273,7 @@ def UploadCSV(delete):
         ftp.storbinary(f"STOR {eventResults.fileName}", f)
     if(delete==True):
         os.system("rm \"{0}\"".format(eventResults.fileName))
-"""
+
 # Constructors
 
 

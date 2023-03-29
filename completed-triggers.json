@@ -992,6 +992,207 @@
           ]
         }
       ]
+    },
+    {
+      "event-data": {
+        "event-type": "Failover",
+        "event-subtype": [
+          "all",
+          "Switched to main",
+          "Switched to backup"
+        ],
+        "email-config": {
+          "subject": "",
+          "email-acc": "",
+          "recievers": [
+            ""
+          ]
+        },
+        "sms-config": {
+          "reciever": "+37060211799"
+        },
+        "message": [
+          "Failover, all",
+          "Failover, Switched to main",
+          "Failover, Switched to backup"
+        ]
+      },
+      "trigger-data": [
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "put",
+              "api-path": "/network/mwan3/interfaces/config/wan",
+              "api-body": {
+                "enabled":"1",
+                "metric":"2"
+              },
+              "retrieve-token": ""
+            },
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "10",
+              "method": "put",
+              "api-path": "/network/mwan3/interfaces/config/mob1s1a1",
+              "api-body": {
+                "enabled":"1",
+                "metric":"1"
+              },
+              "retrieve-token": ""
+            },
+            {
+              "type": "ssh",
+              "command": "/etc/init.d/network restart",
+              "wait-time": "30",
+              "method": "",
+              "api-path": "",
+              "api-body": {},
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "ssh",
+              "command": "gsmctl -Q",
+              "wait-time": "80",
+              "method": "",
+              "api-path": "",
+              "api-body": {},
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "ssh",
+              "command": "gsmctl -Q",
+              "wait-time": "60",
+              "method": "",
+              "api-path": "",
+              "api-body": {},
+              "retrieve-token": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "event-data": {
+        "event-type": "Mobile Data",
+        "event-subtype": [
+          "all",
+          "data connected",
+          "data disconnected"
+        ],
+        "email-config": {
+          "subject": "",
+          "email-acc": "",
+          "recievers": [
+            ""
+          ]
+        },
+        "sms-config": {
+          "reciever": "+37060211799"
+        },
+        "message": [
+          "Mobile Data, all",
+          "Mobile Data, data connected",
+          "Mobile Data, data disconnected"
+        ]
+      },
+      "trigger-data": [
+        {
+          "steps": [
+            {
+              "type": "ssh",
+              "command": "gsmctl -Q",
+              "wait-time": "80",
+              "method": "",
+              "api-path": "",
+              "api-body": {},
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "ssh",
+              "command": "gsmctl -Q",
+              "wait-time": "80",
+              "method": "",
+              "api-path": "",
+              "api-body": {},
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "ssh",
+              "command": "gsmctl -Q",
+              "wait-time": "80",
+              "method": "",
+              "api-path": "",
+              "api-body": {},
+              "retrieve-token": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "event-data": {
+        "event-type": "SMS",
+        "event-subtype": [
+          "received from"
+        ],
+        "email-config": {
+          "subject": "",
+          "email-acc": "",
+          "recievers": [
+            ""
+          ]
+        },
+        "sms-config": {
+          "reciever": "+37060211799"
+        },
+        "message": [
+          "SMS, received from"
+        ]
+      },
+      "trigger-data": [
+        {
+          "steps": [
+            {
+              "type": "ssh",
+              "command": "gsmctl -S -s \"+37060789118 SMS test\"",
+              "wait-time": "",
+              "method": "",
+              "api-path": "",
+              "api-body": {},
+              "retrieve-token": ""
+            },
+            {
+              "type": "ssh",
+              "command": "gsmctl -S -d 0",
+              "wait-time": "",
+              "method": "",
+              "api-path": "",
+              "api-body": {},
+              "retrieve-token": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }

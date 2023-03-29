@@ -5,11 +5,11 @@
   "events-triggers": [
     {
       "event-data": {
-        "event-type": "Failover",
+        "event-type": "Web UI",
         "event-subtype": [
           "all",
-          "Switched to main",
-          "Switched to backup"
+          "was successful",
+          "not successful"
         ],
         "email-config": {
           "subject": "",
@@ -22,9 +22,9 @@
           "reciever": "+37060211799"
         },
         "message": [
-          "Failover, all",
-          "Failover, Switched to main",
-          "Failover, Switched to backup"
+          "Web UI, all",
+          "Web UI, was successful",
+          "Web UI, not successful"
         ]
       },
       "trigger-data": [
@@ -34,59 +34,44 @@
               "type": "api",
               "command": "",
               "wait-time": "",
-              "method": "put",
-              "api-path": "/network/mwan3/interfaces/config/wan",
+              "method": "post",
+              "api-path": "/login",
               "api-body": {
-                "enabled":"1",
-                "metric":"2"
+                "username": "admin",
+                "password": "Admin123"
               },
               "retrieve-token": ""
-            },
+            }
+          ]
+        },
+        {
+          "steps": [
             {
               "type": "api",
               "command": "",
-              "wait-time": "10",
-              "method": "put",
-              "api-path": "/network/mwan3/interfaces/config/mob1s1a1",
+              "wait-time": "",
+              "method": "post",
+              "api-path": "/login",
               "api-body": {
-                "enabled":"1",
-                "metric":"1"
+                "username": "admin",
+                "password": "Admin123"
               },
               "retrieve-token": ""
-            },
-            {
-              "type": "ssh",
-              "command": "/etc/init.d/network restart",
-              "wait-time": "30",
-              "method": "",
-              "api-path": "",
-              "api-body": {},
-              "retrieve-token": ""
             }
           ]
         },
         {
           "steps": [
             {
-              "type": "ssh",
-              "command": "gsmctl -Q",
-              "wait-time": "60",
-              "method": "",
-              "api-path": "",
-              "api-body": {},
-              "retrieve-token": ""
-            }
-          ]
-        },
-        {
-          "steps": [
-            {
-              "type": "ssh",
-              "command": "gsmctl -Q",
-              "wait-time": "60",
-              "method": "",
-              "api-path": "",
-              "api-body": {},
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "post",
+              "api-path": "/login",
+              "api-body": {
+                "username": "admin",
+                "password": "blogas"
+              },
               "retrieve-token": ""
             }
           ]
