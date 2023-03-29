@@ -1268,6 +1268,99 @@
           ]
         }
       ]
+    },
+    {
+      "event-data": {
+        "event-type": "DHCP",
+        "event-subtype": [
+          "all",
+          "lan",
+          "wifi"
+        ],
+        "email-config": {
+          "subject": "",
+          "email-acc": "",
+          "recievers": [
+            ""
+          ]
+        },
+        "sms-config": {
+          "reciever": "+37060211799"
+        },
+        "message": [
+          "DHCP, all",
+          "DHCP, lan",
+          "DHCP, wifi"
+        ]
+      },
+      "trigger-data": [
+        {
+          "steps": [
+            {
+              "type": "ssh",
+              "command": "rm /tmp/dhcp.leases",
+              "wait-time": "",
+              "method": "",
+              "api-path": "",
+              "api-body": {},
+              "retrieve-token": ""
+            },
+            {
+              "type": "ssh",
+              "command": "/etc/init.d/network restart",
+              "wait-time": "",
+              "method": "",
+              "api-path": "",
+              "api-body": {},
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "ssh",
+              "command": "rm /tmp/dhcp.leases",
+              "wait-time": "",
+              "method": "",
+              "api-path": "",
+              "api-body": {},
+              "retrieve-token": ""
+            },
+            {
+              "type": "ssh",
+              "command": "/etc/init.d/network restart",
+              "wait-time": "",
+              "method": "",
+              "api-path": "",
+              "api-body": {},
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "ssh",
+              "command": "rm /tmp/dhcp.leases",
+              "wait-time": "",
+              "method": "",
+              "api-path": "",
+              "api-body": {},
+              "retrieve-token": ""
+            },
+            {
+              "type": "ssh",
+              "command": "/etc/init.d/network restart",
+              "wait-time": "",
+              "method": "",
+              "api-path": "",
+              "api-body": {},
+              "retrieve-token": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }

@@ -21,14 +21,16 @@ def GetSysInfo():
     else:
         return response
 
+
 def GetSimNumber(file):
-    return file[""]
+    return file["info"]["SIM-card-number"]
+
 
 def SendEvent(endpoint, bodyData, type):
     head = {"Content-Type": "application/json",
             "Authorization": "Bearer " + dataSender.token}
     # ATNAUJINTI TRIGERIUS (prideti  data{} api-body lauke)
-    #data = "{\"data\":"+bodyData+"}"
+    # data = "{\"data\":"+bodyData+"}"
     match type:
         case "post":
             response = requests.post(dataSender.baseURL+endpoint,
@@ -40,7 +42,8 @@ def SendEvent(endpoint, bodyData, type):
             response = requests.delete(dataSender.baseURL+endpoint,
                                        headers=head).json()
         case _:
-            print(Text.Red("JSON file is misformed (missing HTTP method)\nCheck configuration file"))
+            print(Text.Red(
+                "JSON file is misformed (missing HTTP method)\nCheck configuration file"))
             sys.exit()
     return response
 
@@ -135,12 +138,13 @@ def TestEvents(file):
     print("Total tests: {0}\n".format(total))
     for test in file["events-triggers"]:
         for subtype in test["event-data"]["event-subtype"]:
-            print("Nr: {0}".format(index+1))
-            eventResults.messageOut = test["event-data"]["message"][index]
+            print("Nr: {0}".format(index+1))            
             print("Event type: " +
                   Text.Underline("{0}".format(test["event-data"]["event-type"])))
             print(
                 "Subtype: "+Text.Underline("{0}".format(subtype)))
+            eventResults.messageOut = test["event-data"]["message"][index]
+            # Eventai su el. pastu yra netestuoti
             if (test["event-data"]["email-config"]["email-acc"] != ""):
                 data = json.dumps({
                     ".type": "rule",
@@ -169,7 +173,7 @@ def TestEvents(file):
                     "recipient_format": "single",
                     "telnum": test["event-data"]["sms-config"]["reciever"]
                 })
-                eventResults.sent = test["event-data"]["sms-config"]["reciever"]                
+                eventResults.sent = GetSimNumber(file)
             else:
                 print(Text.Red("JSON file is misformed. Check configuration file"))
                 sys.exit()
@@ -222,7 +226,8 @@ def TriggerEvent(trigger):
                 sys.exit()
         pause = step["wait-time"]
         if (pause != ""):
-            print(Text.Yellow("Program is paused for: {0} seconds".format(pause)))
+            print(Text.Yellow(
+                "Program is paused for: {0} seconds".format(pause)))
             time.sleep(int(pause))
         if (step["retrieve-token"] == "1"):
             LoginToken()
@@ -237,7 +242,7 @@ def CheckReceive():
     elif (len(res) == 0):
         print(Text.Red("Device did not receive the message"))
     elif (len(res) == 15):
-        res = SendCommand("gsmctl -S -r 0", dataReceiver)    
+        res = SendCommand("gsmctl -S -r 0", dataReceiver)
         eventResults.received = res[2].split(":\t\t")[1][:-1]
         eventResults.messageIn = res[13].split(":\t\t")[1][:-1]
         if (eventResults.received == eventResults.sent
@@ -246,7 +251,7 @@ def CheckReceive():
             print(Text.Green("Passed"))
         else:
             print(Text.Red("Failed"))
-        SendCommand("gsmctl -S -d 0", dataReceiver)    
+        SendCommand("gsmctl -S -d 0", dataReceiver)
     else:
         print(Text.Red("Error reading received SMS"))
 
@@ -267,7 +272,7 @@ def UpdateCSV(index, test):
                       eventResults.passed, eventResults.fileName))
 
 
-"""
+
 def UploadCSV(delete):
     ftp = ftplib.FTP("84.15.249.182", "akademija", "akademija")
     ftp.encoding = "utf-8"
@@ -275,7 +280,7 @@ def UploadCSV(delete):
         ftp.storbinary(f"STOR {eventResults.fileName}", f)
     if(delete==True):
         os.system("rm \"{0}\"".format(eventResults.fileName))
-"""
+
 # Constructors
 
 

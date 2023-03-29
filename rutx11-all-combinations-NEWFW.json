@@ -10,55 +10,55 @@
 			"Signal strength dropped below -50 dBm",
             "NEREIKIA"
 		],
-		"Config": [
-			"all",
+		"+/-Config": [
+			"+all",
 			"avl",
 			"ble_devices",
-			"blesem",
+			"+blesem",
 			"buttons",
 			"call_utils",
-			"chilli",
+			"+chilli",
 			"cli",
-			"ddns",
-			"dhcp",
+			"+ddns",
+			"+dhcp",
 			"dmvpn",
-			"dropbear",
+			"+dropbear",
 			"email_to_sms",
-			"etherwake",
-			"events_reporting",
-			"firewall",
+			"+etherwake",
+			"+events_reporting",
+			"+firewall",
 			"frr",
 			"fstab",
-			"gps",
-			"hostblock",
+			"+gps",
+			"+hostblock",
 			"iojuggler",
-			"ioman",
+			"+ioman",
 			"ip_blockd",
-			"ipsec",
+			"+ipsec",
 			"landingpage",
 			"modbus",
-			"modbus_data_sender",
+			"+modbus_data_sender",
 			"modbus_master",
 			"modbusgateway",
-			"mosquitto",
-			"mqtt_pub",
+			"+mosquitto",
+			"+mqtt_pub",
 			"multi_wifi",
-			"mwan3",
-			"network",
+			"+/-mwan3(kitas pavadinimas)",
+			"+network",
 			"ntpclient",
 			"ntpserver",
-			"openvpn",
+			"+openvpn",
 			"operctl",
 			"overview",
 			"p910nd",
 			"package_restore",
-			"periodic_reboot",
-			"ping_reboot",
+			"+periodic_reboot",
+			"+ping_reboot",
 			"post_get",
 			"pptpd",
-			"privoxy",
-			"profiles",
-			"quota_limit",
+			"+privoxy",
+			"+/-profiles(kitas pavadinimas)",
+			"+quota_limit",
 			"rms_mqtt",
 			"rpcd",
 			"rs_console",
@@ -66,29 +66,29 @@
 			"rs_modem",
 			"rs_overip",
 			"rut_fota",
-			"samba",
+			"+samba",
 			"sim_switch",
-			"simcard",
+			"+simcard",
 			"sms_gateway",
 			"sms_utils",
-			"snmpd",
+			"+snmpd",
 			"snmptrap",
 			"socat",
-			"sqm",
+			"+sqm",
 			"stunnel",
 			"system",
 			"telnetd",
 			"uhttpd",
-			"ulogd",
-			"upnpd",
+			"+ulogd",
+			"+/-upnpd(kitas pavadinimas)",
 			"user_groups",
-			"vrrpd",
+			"+vrrpd",
 			"widget",
 			"wifi_scanner",
-			"wireless",
+			"+wireless",
 			"xl2tpd"
 		],
-		"WiFi": [
+		"+WiFi": [
 			"all",
 			"client connected",
 			"client disconnected"
@@ -99,7 +99,7 @@
 			"entered geofence",
             "NEREIKIA"
 		],
-		"SSH": [
+		"+SSH": [
 			"all",
 			"succeeded",
 			"bad"
@@ -107,36 +107,36 @@
 		"Switch Topology": [
 			"Changes in topology"
 		],
-		"Switch Events": [
+		"+Switch Events": [
 			"all",
 			"Port link state",
 			"Port speed for",
 			"changed to DOWN",
 			"changed to UP"
 		],
-		"Reboot": [
+		"+/-Reboot": [
 			"all",
 			"web ui",
-			"input/output",
+			"-input/output",
 			"ping reboot",
 			"reboot scheduler",
 			"from button",
 			"sms reboot"
 		],
-		"Failover": [
+		"+Failover": [
 			"all",
 			"Switched to main",
 			"Switched to backup"
 		],
-		"Mobile Data": [
+		"+Mobile Data": [
 			"all",
 			"data connected",
 			"data disconnected"
 		],
-		"SMS": [
+		"+SMS": [
 			"received from"
 		],
-		"Web UI": [
+		"+Web UI": [
 			"all",
 			"was successful",
 			"not successful"
@@ -146,7 +146,7 @@
 			"to SIM1",
 			"to SIM2"
 		],
-		"DHCP": [
+		"+DHCP": [
 			"all",
 			"lan",
 			"wifi"

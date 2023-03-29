@@ -1,16 +1,13 @@
 {
   "info": {
-    "product": "RUTX11",
-    "SIM-card-number": "+37060789118"
+    "product": "RUTX11"
   },
   "events-triggers": [
     {
       "event-data": {
-        "event-type": "SIM switch",
+        "event-type": "Switch Topology--kol kas neveikia",
         "event-subtype": [
-          "all",
-          "was successful",
-          "not successful"
+          "Changes in topology"
         ],
         "email-config": {
           "subject": "",
@@ -23,24 +20,28 @@
           "reciever": "+37060211799"
         },
         "message": [
-          "Web UI, all",
-          "Web UI, was successful",
-          "Web UI, not successful"
+          "Switch Topology, Changes in topology"
         ]
       },
       "trigger-data": [
         {
           "steps": [
             {
-              "type": "api",
-              "command": "",
+              "type": "ssh",
+              "command": "rm /tmp/dhcp.leases",
               "wait-time": "",
-              "method": "post",
-              "api-path": "/login",
-              "api-body": {
-                "username": "admin",
-                "password": "Admin123"
-              },
+              "method": "",
+              "api-path": "",
+              "api-body": {},
+              "retrieve-token": ""
+            },
+            {
+              "type": "ssh",
+              "command": "/etc/init.d/network restart",
+              "wait-time": "",
+              "method": "",
+              "api-path": "",
+              "api-body": {},
               "retrieve-token": ""
             }
           ]
