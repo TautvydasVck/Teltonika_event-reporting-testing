@@ -65,7 +65,7 @@
         {
           "steps": [
             {
-              "type": "api--I/o kol kas neveikia",
+              "type": "--I/o kol kas neveikia",
               "command": "",
               "wait-time": "",
               "method": "post",
@@ -168,7 +168,20 @@
           "steps": [
             {
               "type": "ssh",
-              "command": "",
+              "command": "reboot -b",
+              "wait-time": "120",
+              "method": "",
+              "api-path": "",
+              "api-body": {},
+              "retrieve-token": "1"
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "ssh",
+              "command": "gsmctl -S -s \"+37060789118 Admin123 reboot\"",
               "wait-time": "120",
               "method": "",
               "api-path": "",
