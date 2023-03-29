@@ -1193,6 +1193,81 @@
           ]
         }
       ]
+    },
+    {
+      "event-data": {
+        "event-type": "Web UI",
+        "event-subtype": [
+          "all",
+          "was successful",
+          "not successful"
+        ],
+        "email-config": {
+          "subject": "",
+          "email-acc": "",
+          "recievers": [
+            ""
+          ]
+        },
+        "sms-config": {
+          "reciever": "+37060211799"
+        },
+        "message": [
+          "Web UI, all",
+          "Web UI, was successful",
+          "Web UI, not successful"
+        ]
+      },
+      "trigger-data": [
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "post",
+              "api-path": "/login",
+              "api-body": {
+                "username": "admin",
+                "password": "Admin123"
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "post",
+              "api-path": "/login",
+              "api-body": {
+                "username": "admin",
+                "password": "Admin123"
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "post",
+              "api-path": "/login",
+              "api-body": {
+                "username": "admin",
+                "password": "blogas"
+              },
+              "retrieve-token": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }

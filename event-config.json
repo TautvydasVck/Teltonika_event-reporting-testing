@@ -1,11 +1,12 @@
 {
   "info": {
-    "product": "RUTX11"
+    "product": "RUTX11",
+    "SIM-card-number": "+37060789118"
   },
   "events-triggers": [
     {
       "event-data": {
-        "event-type": "Web UI",
+        "event-type": "SIM switch",
         "event-subtype": [
           "all",
           "was successful",
@@ -39,38 +40,6 @@
               "api-body": {
                 "username": "admin",
                 "password": "Admin123"
-              },
-              "retrieve-token": ""
-            }
-          ]
-        },
-        {
-          "steps": [
-            {
-              "type": "api",
-              "command": "",
-              "wait-time": "",
-              "method": "post",
-              "api-path": "/login",
-              "api-body": {
-                "username": "admin",
-                "password": "Admin123"
-              },
-              "retrieve-token": ""
-            }
-          ]
-        },
-        {
-          "steps": [
-            {
-              "type": "api",
-              "command": "",
-              "wait-time": "",
-              "method": "post",
-              "api-path": "/login",
-              "api-body": {
-                "username": "admin",
-                "password": "blogas"
               },
               "retrieve-token": ""
             }

@@ -1,6 +1,7 @@
 {
   "info": {
-    "product": ""
+    "product": "",
+    "SIM-card-number": ""
   },
   "events-triggers": [
     {

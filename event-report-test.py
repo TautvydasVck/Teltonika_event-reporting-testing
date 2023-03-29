@@ -10,17 +10,19 @@ import ftplib
 from datetime import datetime
 
 
-def GetSysInfo(endpoint):
+def GetSysInfo():
     head = {"Content-Type": "application/json",
             "Authorization": "Bearer " + dataSender.token}
     response = requests.get(dataSender.baseURL +
-                            endpoint, headers=head).json()
+                            "/system/device/info", headers=head).json()
     if (response["success"] == False):
         print(Text.Red("Could not retrieve device information."))
         sys.exit("Program will stop")
     else:
         return response
 
+def GetSimNumber(file):
+    return file[""]
 
 def SendEvent(endpoint, bodyData, type):
     head = {"Content-Type": "application/json",
@@ -30,10 +32,10 @@ def SendEvent(endpoint, bodyData, type):
     match type:
         case "post":
             response = requests.post(dataSender.baseURL+endpoint,
-                                     headers=head, data=data).json()
+                                     headers=head, data=bodyData).json()
         case "put":
             response = requests.put(dataSender.baseURL+endpoint,
-                                    headers=head, data=data).json()
+                                    headers=head, data=bodyData).json()
         case "delete":
             response = requests.delete(dataSender.baseURL+endpoint,
                                        headers=head).json()
@@ -78,7 +80,7 @@ def GetConfigData(filePath):
 
 
 def CheckForMobile():
-    res = GetSysInfo("/system/device/info")
+    res = GetSysInfo()
     if (res["data"]["board"]["hwinfo"]["mobile"] == False):
         print(Text.Yellow(
             "Device does not have mobile capabilities. Messages can be sent only via email"))
@@ -93,7 +95,7 @@ def CheckForMobile():
 
 
 def CheckForModel(data):
-    res = GetSysInfo("/system/device/info")
+    res = GetSysInfo()
     print(
         "--Device being tested: {0}--".
         format(res["data"]["mnfinfo"]["name"]))
@@ -167,7 +169,7 @@ def TestEvents(file):
                     "recipient_format": "single",
                     "telnum": test["event-data"]["sms-config"]["reciever"]
                 })
-                eventResults.sent = test["event-data"]["sms-config"]["reciever"]
+                eventResults.sent = test["event-data"]["sms-config"]["reciever"]                
             else:
                 print(Text.Red("JSON file is misformed. Check configuration file"))
                 sys.exit()
@@ -265,7 +267,7 @@ def UpdateCSV(index, test):
                       eventResults.passed, eventResults.fileName))
 
 
-
+"""
 def UploadCSV(delete):
     ftp = ftplib.FTP("84.15.249.182", "akademija", "akademija")
     ftp.encoding = "utf-8"
@@ -273,7 +275,7 @@ def UploadCSV(delete):
         ftp.storbinary(f"STOR {eventResults.fileName}", f)
     if(delete==True):
         os.system("rm \"{0}\"".format(eventResults.fileName))
-
+"""
 # Constructors
 
 
