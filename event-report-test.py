@@ -37,7 +37,7 @@ def SendEvent(endpoint, bodyData, type):
             response = requests.delete(dataSender.baseURL+endpoint,
                                        headers=head).json()
         case _:
-            print(Text.Red("JSON file is misformed. Check configuration file"))
+            print(Text.Red("JSON file is misformed (missing HTTP method)\nCheck configuration file"))
             sys.exit()
     return response
 
@@ -227,23 +227,25 @@ def TriggerEvent(trigger):
 
 def CheckReceive():
     res = SendCommand("gsmctl -S -l all", dataReceiver)
-    if (len(res) != 0):
-        print(Text.Red("Router has old messages"))
+    if (len(res) > 15):
+        print(Text.Red("Device has old messages"))
         print("Delete all old messages and restart the test")
         sys.exit()
-    res = SendCommand("gsmctl -S -r 0", dataReceiver)
-    if (len(res) != 0):
-        eventResults.received = res[2].split(":")[1][:-1]
-        eventResults.messageIn = res[4].split(": ")[1][:-1]
+    elif (len(res) == 0):
+        print(Text.Red("Device did not receive the message"))
+    elif (len(res) == 15):
+        res = SendCommand("gsmctl -S -r 0", dataReceiver)    
+        eventResults.received = res[2].split(":\t\t")[1][:-1]
+        eventResults.messageIn = res[13].split(":\t\t")[1][:-1]
         if (eventResults.received == eventResults.sent
                 and eventResults.messageIn == eventResults.messageOut):
             eventResults.passed = True
             print(Text.Green("Passed"))
         else:
             print(Text.Red("Failed"))
-        SendCommand("gsmctl -S -d 0", dataReceiver)
+        SendCommand("gsmctl -S -d 0", dataReceiver)    
     else:
-        print(Text.Red("Failed"))
+        print(Text.Red("Error reading received SMS"))
 
 
 def CreateCSV(file, start):

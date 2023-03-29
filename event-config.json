@@ -5,15 +5,11 @@
   "events-triggers": [
     {
       "event-data": {
-        "event-type": "Reboot",
+        "event-type": "Failover",
         "event-subtype": [
           "all",
-          "web ui",
-          "input/output",
-          "ping reboot",
-          "reboot scheduler",
-          "from button",
-          "sms reboot"
+          "Switched to main",
+          "Switched to backup"
         ],
         "email-config": {
           "subject": "",
@@ -26,137 +22,42 @@
           "reciever": "+37060211799"
         },
         "message": [
-          "Reboot, all",
-          "Reboot, web ui",
-          "Reboot, input/output",
-          "Reboot, ping reboot",
-          "Reboot, reboot scheduler",
-          "Reboot, from button",
-          "Reboot, sms reboot"
+          "Failover, all",
+          "Failover, Switched to main",
+          "Failover, Switched to backup"
         ]
       },
       "trigger-data": [
         {
           "steps": [
             {
-              "type": "ssh",
-              "command": "reboot",
-              "wait-time": "120",
-              "method": "",
-              "api-path": "",
-              "api-body": {},
-              "retrieve-token": "1"
-            }
-          ]
-        },
-        {
-          "steps": [
-            {
-              "type": "api",
-              "command": "",
-              "wait-time": "120",
-              "method": "post",
-              "api-path": "/system/administration/general/actions/reboot",
-              "api-body": {},
-              "retrieve-token": "1"
-            }
-          ]
-        },
-        {
-          "steps": [
-            {
-              "type": "--I/o kol kas neveikia",
-              "command": "",
-              "wait-time": "",
-              "method": "post",
-              "api-path": "",
-              "api-body": {},
-              "retrieve-token": "1"
-            }
-          ]
-        },
-        {
-          "steps": [
-            {
-              "type": "api",
-              "command": "",
-              "wait-time": "300",
-              "method": "post",
-              "api-path": "/services/auto_reboot/ping/config",
-              "api-body": {
-                "type": "ping",
-                "retry": "1",
-                "enable": "1",
-                ".type": "ping_reboot",
-                "packet_size": "56",
-                "id": "cfg01c21d",
-                "host": "192.168.134.80",
-                "ip_type": "ipv4",
-                "action": "1",
-                "stop_action": "0",
-                "interface": "1",
-                "time": "5",
-                "time_out": "1",
-                "number": ""
-              },
-              "retrieve-token": "1"
-            },
-            {
               "type": "api",
               "command": "",
               "wait-time": "",
               "method": "put",
-              "api-path": "/services/auto_reboot/ping/config/cfg01c21d",
+              "api-path": "/network/mwan3/interfaces/config/wan",
               "api-body": {
-                "type": "ping",
-                "retry": "1",
-                "enable": "0",
-                ".type": "ping_reboot",
-                "packet_size": "56",
-                "id": "cfg01c21d",
-                "host": "192.168.134.80",
-                "ip_type": "ipv4",
-                "action": "1",
-                "stop_action": "0",
-                "interface": "1",
-                "time": "5",
-                "time_out": "1",
-                "number": ""
+                "enabled":"1",
+                "metric":"2"
               },
-              "retrieve-token": "0"
-            }
-          ]
-        },
-        {
-          "steps": [
+              "retrieve-token": ""
+            },
             {
               "type": "api",
               "command": "",
-              "wait-time": "",
+              "wait-time": "10",
               "method": "put",
-              "api-path": "/services/auto_reboot/periodic/config/cfg0210a4",
+              "api-path": "/network/mwan3/interfaces/config/mob1s1a1",
               "api-body": {
-                "id": "cfg0210a4",
-                "enable": "1",
-                "action": "1",
-                "period": "week",
-                "days": [
-                  "mon",
-                  "tue",
-                  "wed",
-                  "thu",
-                  "fri"
-                ],
-                "time": [
-                  "00:05"
-                ]
+                "enabled":"1",
+                "metric":"1"
               },
-              "retrieve-token": "1"
+              "retrieve-token": ""
             },
             {
               "type": "ssh",
-              "command": "date -s 00:00",
-              "wait-time": "120",
+              "command": "/etc/init.d/network restart",
+              "wait-time": "30",
               "method": "",
               "api-path": "",
               "api-body": {},
@@ -168,12 +69,12 @@
           "steps": [
             {
               "type": "ssh",
-              "command": "reboot -b",
-              "wait-time": "120",
+              "command": "gsmctl -Q",
+              "wait-time": "60",
               "method": "",
               "api-path": "",
               "api-body": {},
-              "retrieve-token": "1"
+              "retrieve-token": ""
             }
           ]
         },
@@ -181,12 +82,12 @@
           "steps": [
             {
               "type": "ssh",
-              "command": "",
-              "wait-time": "120",
+              "command": "gsmctl -Q",
+              "wait-time": "60",
               "method": "",
               "api-path": "",
               "api-body": {},
-              "retrieve-token": "1"
+              "retrieve-token": ""
             }
           ]
         }
