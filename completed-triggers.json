@@ -803,6 +803,195 @@
           ]
         }
       ]
+    },
+    {
+      "event-data": {
+        "event-type": "Reboot",
+        "event-subtype": [
+          "all",
+          "web ui",
+          "input/output",
+          "ping reboot",
+          "reboot scheduler",
+          "from button",
+          "sms reboot"
+        ],
+        "email-config": {
+          "subject": "",
+          "email-acc": "",
+          "recievers": [
+            ""
+          ]
+        },
+        "sms-config": {
+          "reciever": "+37060211799"
+        },
+        "message": [
+          "Reboot, all",
+          "Reboot, web ui",
+          "Reboot, input/output",
+          "Reboot, ping reboot",
+          "Reboot, reboot scheduler",
+          "Reboot, from button",
+          "Reboot, sms reboot"
+        ]
+      },
+      "trigger-data": [
+        {
+          "steps": [
+            {
+              "type": "ssh",
+              "command": "reboot",
+              "wait-time": "120",
+              "method": "",
+              "api-path": "",
+              "api-body": {},
+              "retrieve-token": "1"
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "120",
+              "method": "post",
+              "api-path": "/system/administration/general/actions/reboot",
+              "api-body": {},
+              "retrieve-token": "1"
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "--I/o kol kas neveikia",
+              "command": "",
+              "wait-time": "",
+              "method": "post",
+              "api-path": "",
+              "api-body": {},
+              "retrieve-token": "1"
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "300",
+              "method": "post",
+              "api-path": "/services/auto_reboot/ping/config",
+              "api-body": {
+                "type": "ping",
+                "retry": "1",
+                "enable": "1",
+                ".type": "ping_reboot",
+                "packet_size": "56",
+                "id": "cfg01c21d",
+                "host": "192.168.134.80",
+                "ip_type": "ipv4",
+                "action": "1",
+                "stop_action": "0",
+                "interface": "1",
+                "time": "5",
+                "time_out": "1",
+                "number": ""
+              },
+              "retrieve-token": "1"
+            },
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "put",
+              "api-path": "/services/auto_reboot/ping/config/cfg01c21d",
+              "api-body": {
+                "type": "ping",
+                "retry": "1",
+                "enable": "0",
+                ".type": "ping_reboot",
+                "packet_size": "56",
+                "id": "cfg01c21d",
+                "host": "192.168.134.80",
+                "ip_type": "ipv4",
+                "action": "1",
+                "stop_action": "0",
+                "interface": "1",
+                "time": "5",
+                "time_out": "1",
+                "number": ""
+              },
+              "retrieve-token": "0"
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "put",
+              "api-path": "/services/auto_reboot/periodic/config/cfg0210a4",
+              "api-body": {
+                "id": "cfg0210a4",
+                "enable": "1",
+                "action": "1",
+                "period": "week",
+                "days": [
+                  "mon",
+                  "tue",
+                  "wed",
+                  "thu",
+                  "fri"
+                ],
+                "time": [
+                  "00:05"
+                ]
+              },
+              "retrieve-token": "1"
+            },
+            {
+              "type": "ssh",
+              "command": "date -s 00:00",
+              "wait-time": "120",
+              "method": "",
+              "api-path": "",
+              "api-body": {},
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "ssh",
+              "command": "reboot -b",
+              "wait-time": "120",
+              "method": "",
+              "api-path": "",
+              "api-body": {},
+              "retrieve-token": "1"
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "ssh",
+              "command": "gsmctl -S -s \"+37060789118 Admin123 reboot\"",
+              "wait-time": "120",
+              "method": "",
+              "api-path": "",
+              "api-body": {},
+              "retrieve-token": "1"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

@@ -181,7 +181,7 @@
           "steps": [
             {
               "type": "ssh",
-              "command": "gsmctl -S -s \"+37060789118 Admin123 reboot\"",
+              "command": "",
               "wait-time": "120",
               "method": "",
               "api-path": "",
