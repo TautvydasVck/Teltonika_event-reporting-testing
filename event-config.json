@@ -115,18 +115,161 @@
           "Config, xl2tpd"
         ]
       },
-      "trigger-data": [        
+      "trigger-data": [
         {
           "steps": [
             {
-              "type": "ubus",
-              "command": "ubus call uci set {\"config\":\"frr\", \"section\":\"bgp\", \"values\":{\"enabled\":true}, \"ubus_rpc_session\":\"\"}",
+              "type": "api",
+              "command": "",
+              "wait-time": "4",
+              "method": "put",
+              "api-path": "/services/gps/avl/config/general",
+              "api-body": {
+                "data": {
+                  "id": "general",
+                  "hostname": "192.168.0.2",
+                  ".type": "section"
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "ssh",
+              "command": "echo -e \"config device\n\toption address '11:22:33:44:55:66'\n\toption name 'test'\n\toption store_data'0'\" > /etc/config/ble_devices",
               "wait-time": "",
               "method": "",
               "api-path": "",
               "api-body": {
-               
+                "data": {}
               },
+              "retrieve-token": ""
+            },
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "put",
+              "api-path": "/services/bluetooth/paired/config/cfg010f15",
+              "api-body": {
+                "data": {
+                  "store_data": "1"
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "put",
+              "api-path": "/system/administration/buttons/config/cfg035d81",
+              "api-body": {
+                "data": {
+                  ".type": "button",
+                  "enabled": "1",
+                  "max": "21",
+                  "min": "12"
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "post",
+              "api-path": "/services/mobile_utilities/call_utilities/rules/config",
+              "api-body": {
+                "data": {
+                  "action": "send_status"
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "put",
+              "api-path": "/system/access_control/cli/config/general",
+              "api-body": {
+                "data": {
+                  "shell_limit": "6"
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "post",
+              "api-path": "/services/dmvpn/config",
+              "api-body": {
+                "data": {
+                  "id": "test"
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "put",
+              "api-path": "/services/mobile_utilities/sms_gateway/email_to_sms/config/general",
+              "api-body": {
+                "data": {
+                  "time": "min",
+                  "min": "2"
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "ubus",
+              "command": "ubus call uci set '{\"config\":\"frr\", \"section\":\"bgp\", \"values\":{\"enabled\":true}, \"ubus_rpc_session\":\"\"}'",
+              "wait-time": "",
+              "method": "",
+              "api-path": "",
+              "api-body": {},
+              "retrieve-token": ""
+            },
+            {
+              "type": "ubus",
+              "command": "ubus call uci apply '{\"timeout\":10,\"ubus_rpc_session\":\"\"}'",
+              "wait-time": "",
+              "method": "",
+              "api-path": "",
+              "api-body": {},
               "retrieve-token": ""
             }
           ]

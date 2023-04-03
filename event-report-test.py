@@ -58,10 +58,10 @@ def SendTrigger(endpoint, bodyData, type):
 
 def SendCommand(data, device):
     client = paramiko.SSHClient()
-    client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+    client.set_missing_host_key_policy(paramiko.AutoAddPolicy())    
     client.connect(hostname=device.ipAddr,
                    username="root", password=device.pswd, port=22)
-    stdin, stdout, stderr = client.exec_command(data)
+    stdin, stdout, stderr = client.exec_command(str(data))
     client.close()
     return stdout.readlines()
 
@@ -156,7 +156,7 @@ def TestEvents(file):
             if (test["event-data"]["email-config"]["email-acc"] != ""):
                 data = json.dumps({
                     ".type": "rule",
-                    "enable": "0",
+                    "enable": "1",
                     "event": test["event-data"]["event-type"],
                     "eventMark": subtype,
                     "message": test["event-data"]["message"][index],
@@ -170,7 +170,7 @@ def TestEvents(file):
             elif (test["event-data"]["sms-config"]["reciever"] != "" and dataSender.mobile == True):
                 data = json.dumps({
                     ".type": "rule",
-                    "enable": "0",
+                    "enable": "1",
                     "event": test["event-data"]["event-type"],
                     "eventMark": subtype,
                     "message": test["event-data"]["message"][index],
@@ -184,26 +184,24 @@ def TestEvents(file):
             else:
                 print(Text.Red("JSON file is misformed. Check configuration file"))
                 sys.exit()
-            #response = SendEvent(
-            #    "/services/events_reporting/config", data, "post")
-
-            #if (response["success"] == True):
-            #    eventResults.eventId = response["data"]["id"]
-                
-            TriggerEvent(test["trigger-data"][index])
-            time.sleep(4)
-            # pakeisti tikrinimo logika (durnai tikrina gaveja)
-            CheckReceive()
-            if (eventResults.passed == True):
-                passedCnt += 1
+            response = SendEvent(
+                "/services/events_reporting/config", data, "post")
+            time.sleep(2)
+            if (response["success"] == True):
+                eventResults.eventId = response["data"]["id"]                
+                TriggerEvent(test["trigger-data"][index])                
+                # pakeisti tikrinimo logika (durnai gauna ir tikrina gaveja)
+                time.sleep(4)
+                CheckReceive()
+                if (eventResults.passed == True):
+                    passedCnt += 1
+                else:
+                    failedCnt += 1
+                UpdateCSV(index, test)
+                SendEvent("/services/events_reporting/config/" +
+                          eventResults.eventId, "", "delete")          
             else:
-                failedCnt += 1
-            UpdateCSV(index, test)
-            SendEvent("/services/events_reporting/config/" +
-                      eventResults.eventId, "", "delete")
-                
-            #else:
-            #    print(Text.Red("Event was not created"))
+                print(Text.Red("Event was not created"))
 
             index += 1
             print("-"*40)
@@ -231,16 +229,14 @@ def TriggerEvent(trigger):
                 os.system(step["command"])
             case "ubus":
                 data = step["command"]                
-                data = data[:(len(data)-2)]+dataSender.token+data[(len(data)-2):]
-                index = data.index("{")
-                data = data[:index]+"'"+data[index:]
-                print(data)
-                SendCommand(data, dataSender)
+                data = data[:(len(data)-3)]+dataSender.token+data[(len(data)-3):]                                                
+                time.sleep(1)
+                SendCommand(data, dataSender)                
             case _:
                 print(Text.Red("JSON file is misformed. Check configuration file"))
                 sys.exit()
         pause = step["wait-time"]
-        if (pause != ""):
+        if (pause != ""):            
             print(Text.Yellow(
                 "Program is paused for: {0} seconds".format(pause)))
             time.sleep(int(pause))
@@ -249,7 +245,7 @@ def TriggerEvent(trigger):
 
 
 def CheckReceive():
-    # pakeisti tikrinimo logika (durnai tikrina gaveja)
+    # pakeisti tikrinimo logika (durnai gauna ir tikrina gaveja)
     res = SendCommand("gsmctl -S -l all", dataReceiver)
     if (len(res) > 15):
         print(Text.Red("Device has old messages"))

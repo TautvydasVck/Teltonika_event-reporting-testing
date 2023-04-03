@@ -27,13 +27,13 @@
         {                  
           "steps": [
             {
-              "type":"api/ssh/cmd",
+              "type":"api/ssh/cmd/ubus",
               "command": "",      
-              "method": "put/post/delete",
+              "method": "put/post",
               "api-path": "",
               "api-body": {},
-              "wait-time": "",
-              "retrieve-token":""
+              "wait-time": "laikas/(nieko)",
+              "retrieve-token":"1/(nieko)"
             }
           ]
         }
