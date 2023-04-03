@@ -21,12 +21,24 @@ def GetSysInfo():
     else:
         return response
 
-
-def GetSimNumber(file):
-    return file["info"]["SIM-card-number"]
-
-
 def SendEvent(endpoint, bodyData, type):
+    head = {"Content-Type": "application/json",
+            "Authorization": "Bearer " + dataSender.token}    
+    data = "{\"data\":"+bodyData+"}"
+    match type:
+        case "post":
+            response = requests.post(dataSender.baseURL+endpoint,
+                                     headers=head, data=data).json()        
+        case "delete":
+            response = requests.delete(dataSender.baseURL+endpoint,
+                                       headers=head).json()
+        case _:
+            print(Text.Red(
+                "JSON file is misformed (missing HTTP method)\nCheck configuration file"))
+            sys.exit()
+    return response
+
+def SendTrigger(endpoint, bodyData, type):
     head = {"Content-Type": "application/json",
             "Authorization": "Bearer " + dataSender.token}
     # ATNAUJINTI TRIGERIUS (prideti  data{} api-body lauke)
@@ -38,15 +50,11 @@ def SendEvent(endpoint, bodyData, type):
         case "put":
             response = requests.put(dataSender.baseURL+endpoint,
                                     headers=head, data=bodyData).json()
-        case "delete":
-            response = requests.delete(dataSender.baseURL+endpoint,
-                                       headers=head).json()
         case _:
             print(Text.Red(
                 "JSON file is misformed (missing HTTP method)\nCheck configuration file"))
             sys.exit()
     return response
-
 
 def SendCommand(data, device):
     client = paramiko.SSHClient()
@@ -128,14 +136,14 @@ def CheckTotalEvents(file):
 
 
 def TestEvents(file):
-    total = CheckTotalEvents(file)
+    #total = CheckTotalEvents(file)
     index = 0
     failedCnt = 0
     passedCnt = 0
     start = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     CreateCSV(file, start)
     print("Started at: {0}".format(start))
-    print("Total tests: {0}\n".format(total))
+    #print("Total tests: {0}\n".format(total))
     for test in file["events-triggers"]:
         for subtype in test["event-data"]["event-subtype"]:
             print("Nr: {0}".format(index+1))            
@@ -148,7 +156,7 @@ def TestEvents(file):
             if (test["event-data"]["email-config"]["email-acc"] != ""):
                 data = json.dumps({
                     ".type": "rule",
-                    "enable": "1",
+                    "enable": "0",
                     "event": test["event-data"]["event-type"],
                     "eventMark": subtype,
                     "message": test["event-data"]["message"][index],
@@ -162,7 +170,7 @@ def TestEvents(file):
             elif (test["event-data"]["sms-config"]["reciever"] != "" and dataSender.mobile == True):
                 data = json.dumps({
                     ".type": "rule",
-                    "enable": "1",
+                    "enable": "0",
                     "event": test["event-data"]["event-type"],
                     "eventMark": subtype,
                     "message": test["event-data"]["message"][index],
@@ -172,35 +180,34 @@ def TestEvents(file):
                     "subject": "",
                     "recipient_format": "single",
                     "telnum": test["event-data"]["sms-config"]["reciever"]
-                })
-                eventResults.sent = GetSimNumber(file)
+                })                
             else:
                 print(Text.Red("JSON file is misformed. Check configuration file"))
                 sys.exit()
-            response = SendEvent(
-                "/services/events_reporting/config", data, "post")
+            #response = SendEvent(
+            #    "/services/events_reporting/config", data, "post")
 
-            if (response["success"] == True):
-                eventResults.eventId = response["data"]["id"]
-                # """
-                TriggerEvent(test["trigger-data"][index])
-                time.sleep(4)
-                CheckReceive()
-                if (eventResults.passed == True):
-                    passedCnt += 1
-                else:
-                    failedCnt += 1
-                UpdateCSV(index, test)
-                SendEvent("/services/events_reporting/config/" +
-                          eventResults.eventId, "", "delete")
-                # """
+            #if (response["success"] == True):
+            #    eventResults.eventId = response["data"]["id"]
+                
+            TriggerEvent(test["trigger-data"][index])
+            time.sleep(4)
+            CheckReceive()
+            if (eventResults.passed == True):
+                passedCnt += 1
             else:
-                print(Text.Red("Event was not created"))
+                failedCnt += 1
+            UpdateCSV(index, test)
+            SendEvent("/services/events_reporting/config/" +
+                      eventResults.eventId, "", "delete")
+                
+            #else:
+            #    print(Text.Red("Event was not created"))
 
             index += 1
             print("-"*40)
         index = 0
-    print("Total events tested: {0}".format(total))
+    #print("Total events tested: {0}".format(total))
     print(Text.Green("Passed: {0}".format(passedCnt)), end=" ")
     print(Text.Red("Failed: {0}".format(failedCnt)))
 
@@ -211,7 +218,7 @@ def TriggerEvent(trigger):
             case "api":
                 data = json.dumps(step["api-body"])
                 time.sleep(1)
-                response = SendEvent(step["api-path"], data, step["method"])
+                response = SendTrigger(step["api-path"], data, step["method"])
                 if (response["success"] == False):
                     print(Text.Red("Trigger using API failed"))
             case "ssh":
@@ -221,6 +228,13 @@ def TriggerEvent(trigger):
             case "cmd":
                 time.sleep(1)
                 os.system(step["command"])
+            case "ubus":
+                data = step["command"]                
+                data = data[:(len(data)-2)]+dataSender.token+data[(len(data)-2):]
+                index = data.index("{")
+                data = data[:index]+"'"+data[index:]
+                print(data)
+                SendCommand(data, dataSender)
             case _:
                 print(Text.Red("JSON file is misformed. Check configuration file"))
                 sys.exit()
