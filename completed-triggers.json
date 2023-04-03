@@ -91,73 +91,83 @@
       },
       "trigger-data": [
         {
-          "type": "api",
           "steps": [
             {
+              "type": "api",
               "command": "",
               "method": "put",
               "API-path": "/network/wireless/devices/config/radio0",
               "API-body": {
                 ".type": "wifi-device",
                 "country": "UA"
-              }
+              },
+              "retrieve-token": "",
+              "wait-time": ""
             }
           ]
         },
         {
-          "type": "api",
           "steps": [
             {
+              "type": "api",
               "command": "",
               "method": "post",
               "API-path": "/services/openvpn/config",
               "API-body": {
                 "id": "test",
                 "type": "client"
-              }
+              },
+              "retrieve-token": "",
+              "wait-time": ""
             }
           ]
         },
         {
-          "type": "api",
           "steps": [
             {
+              "type": "api",
               "command": "",
               "method": "post",
               "API-path": "/services/events_reporting/config",
               "API-body": {
                 ".type": "rule",
                 "action": "sendEmail"
-              }
+              },
+              "retrieve-token": "",
+              "wait-time": ""
             }
           ]
         },
         {
-          "type": "api",
           "steps": [
             {
+              "type": "api",
               "command": "",
               "method": "post",
               "API-path": "/services/auto_reboot/periodic/config",
-              "API-body": {}
+              "API-body": {},
+              "retrieve-token": "",
+              "wait-time": ""
             }
           ]
         },
         {
-          "type": "api",
           "steps": [
             {
+              "type": "api",
               "command": "",
               "method": "post",
               "API-path": "/services/auto_reboot/ping/config",
-              "API-body": {}
+              "API-body": {},
+              "retrieve-token": "",
+              "wait-time": ""
             }
           ]
         },
         {
-          "type": "api",
           "steps": [
             {
+              "type": "api",
               "command": "",
               "method": "post",
               "API-path": "/system/profiles/config",
@@ -165,247 +175,285 @@
                 "id": "test",
                 "from_current_profile": "0",
                 ".type": "profile"
-              }
+              },
+              "retrieve-token": "",
+              "wait-time": ""
             }
           ]
         },
         {
-          "type": "api",
           "steps": [
             {
+              "type": "api",
               "command": "",
               "method": "post",
               "API-path": "/services/ipsec/config",
               "API-body": {
                 "id": "test"
-              }
+              },
+              "retrieve-token": "",
+              "wait-time": ""
             }
           ]
         },
         {
-          "type": "api",
           "steps": [
             {
+              "type": "api",
               "command": "",
               "method": "put",
               "API-path": "/network/dhcp/servers/config/lan",
               "API-body": {
                 "leasetime": "10h"
-              }
+              },
+              "retrieve-token": "",
+              "wait-time": ""
             }
           ]
         },
         {
-          "type": "api",
           "steps": [
             {
+              "type": "api",
               "command": "",
               "method": "put",
               "API-path": "/system/access_control/ssh/config/cfg014dd4",
               "API-body": {
                 "enable_key_ssh": "1"
-              }
+              },
+              "retrieve-token": "",
+              "wait-time": ""
             }
           ]
         },
         {
-          "type": "api",
           "steps": [
             {
+              "type": "api",
               "command": "",
               "method": "post",
               "API-path": "/network/interfaces/config",
               "API-body": {
                 "id": "test"
-              }
+              },
+              "retrieve-token": "",
+              "wait-time": ""
             }
           ]
         },
         {
-          "type": "api",
           "steps": [
             {
+              "type": "api",
               "command": "",
               "method": "post",
               "API-path": "/network/firewall/zones/config",
-              "API-body": {}
+              "API-body": {},
+              "retrieve-token": "",
+              "wait-time": ""
             }
           ]
         },
         {
-          "type": "api",
           "steps": [
             {
+              "type": "api",
               "command": "",
               "method": "post",
               "API-path": "/services/ddns/config",
               "API-body": {
                 "id": "test"
-              }
+              },
+              "retrieve-token": "",
+              "wait-time": ""
             }
           ]
         },
         {
-          "type": "api",
           "steps": [
             {
+              "type": "api",
               "command": "",
               "method": "",
               "API-path": "/services/snmp/system/config/general",
               "API-body": {
                 "sysLocation": "naujas",
                 "id": "general"
-              }
+              },
+              "retrieve-token": "",
+              "wait-time": ""
             }
           ]
         },
         {
-          "type": "api",
           "steps": [
             {
+              "type": "api",
               "command": "",
               "method": "post",
               "API-path": "/services/sqm/config",
               "API-body": {
                 "id": "test2"
-              }
+              },
+              "retrieve-token": "",
+              "wait-time": ""
             }
           ]
         },
         {
-          "type": "api",
           "steps": [
             {
+              "type": "api",
               "command": "",
               "method": "post",
               "API-path": "/services/ulog/ftp/config/ftp",
               "API-body": {
                 "host": "tekstas"
-              }
+              },
+              "retrieve-token": "",
+              "wait-time": ""
             }
           ]
         },
         {
-          "type": "api",
           "steps": [
             {
+              "type": "api",
               "command": "",
               "method": "post",
               "API-path": "/services/data_sender/config",
-              "API-body": {}
+              "API-body": {},
+              "retrieve-token": "",
+              "wait-time": ""
             }
           ]
         },
         {
-          "type": "api",
           "steps": [
             {
+              "type": "api",
               "command": "",
               "method": "post",
               "API-path": "/services/mqtt_broker/bridge/config",
               "API-body": {
                 "connection_name": "test"
-              }
+              },
+              "retrieve-token": "",
+              "wait-time": ""
             }
           ]
         },
         {
-          "type": "api",
           "steps": [
             {
+              "type": "api",
               "command": "",
               "method": "put",
               "API-path": "/services/mqtt_pub/config/general",
               "API-body": {
                 "enabled": "0",
                 "remote_addr": "test"
-              }
+              },
+              "retrieve-token": "",
+              "wait-time": ""
             }
           ]
         },
         {
-          "type": "api",
           "steps": [
             {
+              "type": "api",
               "command": "",
               "method": "post",
               "API-path": "/services/hotspot/users/config",
               "API-body": {
                 "username": "test",
                 "password": "test"
-              }
+              },
+              "retrieve-token": "",
+              "wait-time": ""
             }
           ]
         },
         {
-          "type": "api",
           "steps": [
             {
+              "type": "api",
               "command": "",
               "method": "post",
               "API-path": "/services/samba/users/config",
               "API-body": {
                 "username": "test",
                 "password": "Test!808"
-              }
+              },
+              "retrieve-token": "",
+              "wait-time": ""
             }
           ]
         },
         {
-          "type": "api",
           "steps": [
             {
+              "type": "api",
               "command": "",
               "method": "post",
               "API-path": "/services/wol_devices/config",
-              "API-body": {}
+              "API-body": {},
+              "retrieve-token": "",
+              "wait-time": ""
             }
           ]
         },
         {
-          "type": "api",
           "steps": [
             {
+              "type": "api",
               "command": "",
               "method": "post",
               "API-path": "/services/mobile_utilities/sms_rules/config",
               "API-body": {
                 "smstext": "1342",
                 "action": "reboot"
-              }
+              },
+              "retrieve-token": "",
+              "wait-time": ""
             }
           ]
         },
         {
-          "type": "api",
           "steps": [
             {
+              "type": "api",
               "command": "",
               "method": "put",
               "API-path": "/network/mobile/simcards/config/cfg01aa0e",
               "API-body": {
                 "volte": "off"
-              }
+              },
+              "retrieve-token": "",
+              "wait-time": ""
             }
           ]
         },
         {
-          "type": "api",
           "steps": [
             {
+              "type": "api",
               "command": "",
               "method": "put",
               "API-path": "/network/mwan3/rules/config",
               "API-body": {
                 "id": "test"
-              }
+              },
+              "retrieve-token": "",
+              "wait-time": ""
             }
           ]
         },
         {
-          "type": "api",
           "steps": [
             {
+              "type": "api",
               "command": "",
               "method": "put",
               "API-path": "/network/interfaces/config/mob1s1a1",
@@ -415,67 +463,77 @@
                 "reset_hour": "0",
                 "mob_limit_enabled": "1",
                 "period": "day"
-              }
+              },
+              "retrieve-token": "",
+              "wait-time": ""
             }
           ]
         },
         {
-          "type": "api",
           "steps": [
             {
+              "type": "api",
               "command": "",
               "method": "put",
               "API-path": "/services/gps/general/config/gpsd",
               "API-body": {
                 "enabled": "1"
-              }
+              },
+              "retrieve-token": "",
+              "wait-time": ""
             }
           ]
         },
         {
-          "type": "api",
           "steps": [
             {
+              "type": "api",
               "command": "",
               "method": "put",
               "API-path": "/services/bluetooth/general/config/general",
               "API-body": {
                 "enabled": "1"
-              }
+              },
+              "retrieve-token": "",
+              "wait-time": ""
             }
           ]
         },
         {
-          "type": "api",
           "steps": [
             {
+              "type": "api",
               "command": "",
               "method": "put",
               "API-path": "/services/io/scheduler/config/general",
               "API-body": {
                 "enabled": "1"
-              }
+              },
+              "retrieve-token": "",
+              "wait-time": ""
             }
           ]
         },
         {
-          "type": "api",
           "steps": [
             {
+              "type": "api",
               "command": "",
               "method": "put",
               "API-path": "/network/wireless/devices/config/radio0",
               "API-body": {
                 ".type": "wifi-device",
                 "country": "LT"
-              }
+              },
+              "retrieve-token": "",
+              "wait-time": ""
             }
           ]
         },
         {
-          "type": "api",
           "steps": [
             {
+              "type": "api",
               "command": "",
               "method": "",
               "API-path": "/services/webfilter/config/general",
@@ -484,14 +542,16 @@
                 ".type": "hostblock",
                 "id": "general",
                 "mode": "blacklist"
-              }
+              },
+              "retrieve-token": "",
+              "wait-time": ""
             }
           ]
         },
         {
-          "type": "api",
           "steps": [
             {
+              "type": "api",
               "command": "",
               "method": "",
               "API-path": "/services/privoxy/config/general",
@@ -501,31 +561,37 @@
                 "id": "general",
                 "_mode": "blacklist",
                 "url": []
-              }
+              },
+              "retrieve-token": "",
+              "wait-time": ""
             }
           ]
         },
         {
-          "type": "api",
           "steps": [
             {
+              "type": "api",
               "command": "",
               "method": "post",
               "API-path": "/services/vrrp/config",
               "API-body": {
                 "id": "test"
-              }
+              },
+              "retrieve-token": "",
+              "wait-time": ""
             }
           ]
         },
         {
-          "type": "api",
           "steps": [
             {
+              "type": "api",
               "command": "",
               "method": "post",
               "API-path": "/services/upnp/acls/config",
-              "API-body": {}
+              "API-body": {},
+              "retrieve-token": "",
+              "wait-time": ""
             }
           ]
         }
@@ -557,44 +623,50 @@
       },
       "trigger-data": [
         {
-          "type": "api",
           "steps": [
             {
+              "type": "api",
               "command": "",
               "method": "put",
               "api-path": "/network/wireless/devices/config/radio1",
               "api-body": {
                 ".type": "wifi-device",
                 "country": "CA"
-              }
+              },
+              "retrieve-token": "",
+              "wait-time": ""
             }
           ]
         },
         {
-          "type": "api",
           "steps": [
             {
+              "type": "api",
               "command": "",
               "method": "put",
               "api-path": "/network/wireless/devices/config/radio1",
               "api-body": {
                 ".type": "wifi-device",
                 "country": "AL"
-              }
+              },
+              "retrieve-token": "",
+              "wait-time": ""
             }
           ]
         },
         {
-          "type": "api",
           "steps": [
             {
+              "type": "api",
               "command": "",
               "method": "put",
               "api-path": "/network/wireless/devices/config/radio1",
               "api-body": {
                 ".type": "wifi-device",
                 "country": "AQ"
-              }
+              },
+              "retrieve-token": "",
+              "wait-time": ""
             }
           ]
         }
@@ -622,13 +694,15 @@
       },
       "trigger-data": [
         {
-          "type": "api",
           "steps": [
             {
+              "type": "api",
               "command": "",
               "method": "",
               "api-path": "",
-              "api-body": {}
+              "api-body": {},
+              "retrieve-token": "",
+              "wait-time": ""
             }
           ]
         }
@@ -660,36 +734,41 @@
       },
       "trigger-data": [
         {
-          "type": "ssh",
           "steps": [
             {
+              "type": "ssh",
               "command": "",
               "method": "",
               "api-path": "",
-              "api-body": {}
+              "api-body": {},
+              "retrieve-token": "",
+              "wait-time": ""
             }
           ]
         },
         {
-          "type": "ssh",
           "steps": [
             {
+              "type": "ssh",
               "command": "",
               "method": "",
               "api-path": "",
-              "api-body": {}
+              "api-body": {},
+              "retrieve-token": "",
+              "wait-time": ""
             }
           ]
         },
         {
-          "type": "cmd",
           "steps": [
             {
+              "type": "cmd",
               "command": "sshpass -p 1324 ssh root@192.168.1.1 -o ExitOnForwardFailure='yes'",
-              "wait-time": "",
               "method": "",
               "api-path": "",
-              "api-body": {}
+              "api-body": {},
+              "retrieve-token": "",
+              "wait-time": ""
             }
           ]
         }
@@ -725,80 +804,85 @@
       },
       "trigger-data": [
         {
-          "type": "api",
           "steps": [
             {
+              "type": "api",
               "command": "",
-              "wait-time": "",
               "method": "post",
               "api-path": "/network/vlan/port_based/config",
               "api-body": {
                 ".type": "switch_vlan"
-              }
+              },
+              "retrieve-token": "",
+              "wait-time": ""
             }
           ]
         },
         {
-          "type": "api",
           "steps": [
             {
+              "type": "api",
               "command": "",
-              "wait-time": "",
               "method": "put",
               "api-path": "/network/vlan/port_based/config",
               "api-body": {
                 ".type": "switch_vlan",
                 "vid": "3",
                 "lan1": "t"
-              }
+              },
+              "retrieve-token": "",
+              "wait-time": ""
             }
           ]
         },
         {
-          "type": "api",
           "steps": [
             {
+              "type": "api",
               "command": "",
-              "wait-time": "",
               "method": "put",
               "api-path": "/network/vlan/port_based/config",
               "api-body": {
                 ".type": "switch_vlan",
                 "vid": "3",
                 "lan1": ""
-              }
+              },
+              "retrieve-token": "",
+              "wait-time": ""
             }
           ]
         },
         {
-          "type": "api",
           "steps": [
             {
+              "type": "api",
               "command": "",
-              "wait-time": "",
               "method": "put",
               "api-path": "/network/vlan/port_based/config",
               "api-body": {
                 ".type": "switch_vlan",
                 "vid": "3",
                 "lan1": "t"
-              }
+              },
+              "retrieve-token": "",
+              "wait-time": ""
             }
           ]
         },
         {
-          "type": "api",
           "steps": [
             {
+              "type": "api",
               "command": "",
-              "wait-time": "",
               "method": "put",
               "api-path": "/network/vlan/port_based/config",
               "api-body": {
                 ".type": "switch_vlan",
                 "vid": "3",
                 "lan1": ""
-              }
+              },
+              "retrieve-token": "",
+              "wait-time": ""
             }
           ]
         }
@@ -1027,8 +1111,8 @@
               "method": "put",
               "api-path": "/network/mwan3/interfaces/config/wan",
               "api-body": {
-                "enabled":"1",
-                "metric":"2"
+                "enabled": "1",
+                "metric": "2"
               },
               "retrieve-token": ""
             },
@@ -1039,8 +1123,8 @@
               "method": "put",
               "api-path": "/network/mwan3/interfaces/config/mob1s1a1",
               "api-body": {
-                "enabled":"1",
-                "metric":"1"
+                "enabled": "1",
+                "metric": "1"
               },
               "retrieve-token": ""
             },
