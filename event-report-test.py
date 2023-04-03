@@ -192,6 +192,7 @@ def TestEvents(file):
                 
             TriggerEvent(test["trigger-data"][index])
             time.sleep(4)
+            # pakeisti tikrinimo logika (durnai tikrina gaveja)
             CheckReceive()
             if (eventResults.passed == True):
                 passedCnt += 1
@@ -248,6 +249,7 @@ def TriggerEvent(trigger):
 
 
 def CheckReceive():
+    # pakeisti tikrinimo logika (durnai tikrina gaveja)
     res = SendCommand("gsmctl -S -l all", dataReceiver)
     if (len(res) > 15):
         print(Text.Red("Device has old messages"))
