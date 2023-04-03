@@ -67,7 +67,7 @@
         },
         "message": [
           "Config, avl",
-          "Config, ble_devices--kol kas neveikia",
+          "Config, ble_devices",
           "Config, buttons",
           "Config, call_utils",
           "Config, cli",
@@ -270,6 +270,86 @@
               "method": "",
               "api-path": "",
               "api-body": {},
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "put",
+              "api-path": "/services/usb_tools/general/config/general",
+              "api-body": {
+                "data": {
+                  "id": "general",
+                  ".type": "global",
+                  "auto_sync": "1"
+              }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "put",
+              "api-path": "/services/io/juggler/config/general",
+              "api-body": {
+                "data": {
+                  "enabled": "1",
+                  ".type": "general",
+                  "id": "general"
+              }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "put",
+              "api-path": "/system/access_control/security/general/config/general",
+              "api-body": {
+                "data": {
+                  "enabled": "1",
+                  ".type": "globals",
+                  "max_attempt_count": "11",
+                  "id": "general",
+                  "reboot_clear": "0"
+              }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "put",
+              "api-path": "/system/access_control/security/general/config/general",
+              "api-body": {
+                "data": {
+                  "enabled": "1",
+                  ".type": "globals",
+                  "max_attempt_count": "11",
+                  "id": "general",
+                  "reboot_clear": "0"
+              }
+              },
               "retrieve-token": ""
             }
           ]

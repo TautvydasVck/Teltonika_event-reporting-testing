@@ -65,9 +65,6 @@ def SendCommand(data, device):
     client.close()
     return stdout.readlines()
 
-# def CheckBadLogins
-
-
 def LoginToken():
     head = {"Content-Type": "application/json"}
     creds = {"username": dataSender.name, "password": dataSender.pswd}
@@ -156,7 +153,7 @@ def TestEvents(file):
             if (test["event-data"]["email-config"]["email-acc"] != ""):
                 data = json.dumps({
                     ".type": "rule",
-                    "enable": "1",
+                    "enable": "0",
                     "event": test["event-data"]["event-type"],
                     "eventMark": subtype,
                     "message": test["event-data"]["message"][index],
@@ -170,7 +167,7 @@ def TestEvents(file):
             elif (test["event-data"]["sms-config"]["reciever"] != "" and dataSender.mobile == True):
                 data = json.dumps({
                     ".type": "rule",
-                    "enable": "1",
+                    "enable": "0",
                     "event": test["event-data"]["event-type"],
                     "eventMark": subtype,
                     "message": test["event-data"]["message"][index],
@@ -186,6 +183,7 @@ def TestEvents(file):
                 sys.exit()
             response = SendEvent(
                 "/services/events_reporting/config", data, "post")
+            """
             time.sleep(2)
             if (response["success"] == True):
                 eventResults.eventId = response["data"]["id"]                
@@ -202,7 +200,7 @@ def TestEvents(file):
                           eventResults.eventId, "", "delete")          
             else:
                 print(Text.Red("Event was not created"))
-
+            """
             index += 1
             print("-"*40)
         index = 0
