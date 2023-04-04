@@ -182,8 +182,8 @@
               "type": "api",
               "command": "",
               "method": "put",
-              "API-path": "/network/wireless/devices/config/radio0",
-              "API-body": {
+              "api-path": "/network/wireless/devices/config/radio0",
+              "api-body": {
                 "data": {
                   ".type": "wifi-device",
                   "country": "UA"
@@ -200,8 +200,8 @@
               "type": "api",
               "command": "",
               "method": "post",
-              "API-path": "/services/openvpn/config",
-              "API-body": {
+              "api-path": "/services/openvpn/config",
+              "api-body": {
                 "data": {
                   "id": "test",
                   "type": "client"
@@ -218,8 +218,8 @@
               "type": "api",
               "command": "",
               "method": "post",
-              "API-path": "/services/events_reporting/config",
-              "API-body": {
+              "api-path": "/services/events_reporting/config",
+              "api-body": {
                 "data": {
                   ".type": "rule",
                   "action": "sendEmail"
@@ -236,8 +236,8 @@
               "type": "api",
               "command": "",
               "method": "post",
-              "API-path": "/services/auto_reboot/periodic/config",
-              "API-body": {
+              "api-path": "/services/auto_reboot/periodic/config",
+              "api-body": {
                 "data": {}
               },
               "retrieve-token": "",
@@ -251,8 +251,8 @@
               "type": "api",
               "command": "",
               "method": "post",
-              "API-path": "/services/auto_reboot/ping/config",
-              "API-body": {
+              "api-path": "/services/auto_reboot/ping/config",
+              "api-body": {
                 "data": {}
               },
               "retrieve-token": "",
@@ -266,8 +266,8 @@
               "type": "api",
               "command": "",
               "method": "post",
-              "API-path": "/services/ipsec/config",
-              "API-body": {
+              "api-path": "/services/ipsec/config",
+              "api-body": {
                 "data": {
                   "id": "test"
                 }
@@ -283,8 +283,8 @@
               "type": "api",
               "command": "",
               "method": "put",
-              "API-path": "/network/dhcp/servers/config/lan",
-              "API-body": {
+              "api-path": "/network/dhcp/servers/config/lan",
+              "api-body": {
                 "data": {
                   "leasetime": "10h"
                 }
@@ -300,8 +300,8 @@
               "type": "api",
               "command": "",
               "method": "put",
-              "API-path": "/system/access_control/ssh/config/cfg014dd4",
-              "API-body": {
+              "api-path": "/system/access_control/ssh/config/cfg014dd4",
+              "api-body": {
                 "data": {
                   "enable_key_ssh": "1"
                 }
@@ -317,8 +317,8 @@
               "type": "api",
               "command": "",
               "method": "post",
-              "API-path": "/network/interfaces/config",
-              "API-body": {
+              "api-path": "/network/interfaces/config",
+              "api-body": {
                 "data": {
                   "id": "test"
                 }
@@ -334,8 +334,8 @@
               "type": "api",
               "command": "",
               "method": "post",
-              "API-path": "/network/firewall/zones/config",
-              "API-body": {
+              "api-path": "/network/firewall/zones/config",
+              "api-body": {
                 "data": {}
               },
               "retrieve-token": "",
@@ -349,8 +349,8 @@
               "type": "api",
               "command": "",
               "method": "post",
-              "API-path": "/services/ddns/config",
-              "API-body": {
+              "api-path": "/services/ddns/config",
+              "api-body": {
                 "data": {
                   "id": "test"
                 }
@@ -366,8 +366,8 @@
               "type": "api",
               "command": "",
               "method": "",
-              "API-path": "/services/snmp/system/config/general",
-              "API-body": {
+              "api-path": "/services/snmp/system/config/general",
+              "api-body": {
                 "data": {
                   "sysLocation": "naujas",
                   "id": "general"
@@ -384,8 +384,8 @@
               "type": "api",
               "command": "",
               "method": "post",
-              "API-path": "/services/sqm/config",
-              "API-body": {
+              "api-path": "/services/sqm/config",
+              "api-body": {
                 "data": {
                   "id": "test2"
                 }
@@ -401,8 +401,8 @@
               "type": "api",
               "command": "",
               "method": "post",
-              "API-path": "/services/ulog/ftp/config/ftp",
-              "API-body": {
+              "api-path": "/services/ulog/ftp/config/ftp",
+              "api-body": {
                 "data": {
                   "host": "tekstas"
                 }
@@ -418,8 +418,8 @@
               "type": "api",
               "command": "",
               "method": "post",
-              "API-path": "/services/data_sender/config",
-              "API-body": {
+              "api-path": "/services/data_sender/config",
+              "api-body": {
                 "data": {}
               },
               "retrieve-token": "",
@@ -433,8 +433,8 @@
               "type": "api",
               "command": "",
               "method": "post",
-              "API-path": "/services/mqtt_broker/bridge/config",
-              "API-body": {
+              "api-path": "/services/mqtt_broker/bridge/config",
+              "api-body": {
                 "data": {
                   "connection_name": "test"
                 }
@@ -450,8 +450,8 @@
               "type": "api",
               "command": "",
               "method": "put",
-              "API-path": "/services/mqtt_pub/config/general",
-              "API-body": {
+              "api-path": "/services/mqtt_pub/config/general",
+              "api-body": {
                 "data": {
                   "enabled": "0",
                   "remote_addr": "test"
@@ -468,8 +468,8 @@
               "type": "api",
               "command": "",
               "method": "post",
-              "API-path": "/services/hotspot/users/config",
-              "API-body": {
+              "api-path": "/services/hotspot/users/config",
+              "api-body": {
                 "data": {
                   "username": "test",
                   "password": "test"
@@ -486,8 +486,8 @@
               "type": "api",
               "command": "",
               "method": "post",
-              "API-path": "/services/samba/users/config",
-              "API-body": {
+              "api-path": "/services/samba/users/config",
+              "api-body": {
                 "data": {
                   "username": "test",
                   "password": "Test!808"
@@ -504,8 +504,8 @@
               "type": "api",
               "command": "",
               "method": "post",
-              "API-path": "/services/wol_devices/config",
-              "API-body": {
+              "api-path": "/services/wol_devices/config",
+              "api-body": {
                 "data": {}
               },
               "retrieve-token": "",
@@ -519,8 +519,8 @@
               "type": "api",
               "command": "",
               "method": "post",
-              "API-path": "/services/mobile_utilities/sms_rules/config",
-              "API-body": {
+              "api-path": "/services/mobile_utilities/sms_rules/config",
+              "api-body": {
                 "data": {
                   "smstext": "1342",
                   "action": "reboot"
@@ -537,8 +537,8 @@
               "type": "api",
               "command": "",
               "method": "put",
-              "API-path": "/network/mobile/simcards/config/cfg01aa0e",
-              "API-body": {
+              "api-path": "/network/mobile/simcards/config/cfg01aa0e",
+              "api-body": {
                 "data": {
                   "volte": "off"
                 }
@@ -554,8 +554,8 @@
               "type": "api",
               "command": "",
               "method": "put",
-              "API-path": "/network/interfaces/config/mob1s1a1",
-              "API-body": {
+              "api-path": "/network/interfaces/config/mob1s1a1",
+              "api-body": {
                 "data": {
                   "data_limit": "1000",
                   "enable_warning": "0",
@@ -575,8 +575,8 @@
               "type": "api",
               "command": "",
               "method": "put",
-              "API-path": "/services/gps/general/config/gpsd",
-              "API-body": {
+              "api-path": "/services/gps/general/config/gpsd",
+              "api-body": {
                 "data": {
                   "enabled": "1"
                 }
@@ -592,8 +592,8 @@
               "type": "api",
               "command": "",
               "method": "put",
-              "API-path": "/services/bluetooth/general/config/general",
-              "API-body": {
+              "api-path": "/services/bluetooth/general/config/general",
+              "api-body": {
                 "data": {
                   "enabled": "1"
                 }
@@ -609,8 +609,8 @@
               "type": "api",
               "command": "",
               "method": "put",
-              "API-path": "/services/io/scheduler/config/general",
-              "API-body": {
+              "api-path": "/services/io/scheduler/config/general",
+              "api-body": {
                 "data": {
                   "enabled": "1"
                 }
@@ -626,8 +626,8 @@
               "type": "api",
               "command": "",
               "method": "put",
-              "API-path": "/network/wireless/devices/config/radio0",
-              "API-body": {
+              "api-path": "/network/wireless/devices/config/radio0",
+              "api-body": {
                 "data": {
                   ".type": "wifi-device",
                   "country": "LT"
@@ -644,8 +644,8 @@
               "type": "api",
               "command": "",
               "method": "",
-              "API-path": "/services/webfilter/config/general",
-              "API-body": {
+              "api-path": "/services/webfilter/config/general",
+              "api-body": {
                 "data": {
                   "enabled": "1",
                   ".type": "hostblock",
@@ -664,8 +664,8 @@
               "type": "api",
               "command": "",
               "method": "",
-              "API-path": "/services/privoxy/config/general",
-              "API-body": {
+              "api-path": "/services/privoxy/config/general",
+              "api-body": {
                 "data": {
                   "enabled": "1",
                   ".type": "privoxy",
@@ -685,8 +685,8 @@
               "type": "api",
               "command": "",
               "method": "post",
-              "API-path": "/services/vrrp/config",
-              "API-body": {
+              "api-path": "/services/vrrp/config",
+              "api-body": {
                 "data": {
                   "id": "test"
                 }

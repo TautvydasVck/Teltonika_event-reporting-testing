@@ -21,6 +21,9 @@ def GetSysInfo():
     else:
         return response
 
+#def GetPhoneNumbers():
+
+
 def SendEvent(endpoint, bodyData, type):
     head = {"Content-Type": "application/json",
             "Authorization": "Bearer " + dataSender.token}    
@@ -153,7 +156,7 @@ def TestEvents(file):
             if (test["event-data"]["email-config"]["email-acc"] != ""):
                 data = json.dumps({
                     ".type": "rule",
-                    "enable": "0",
+                    "enable": "1",
                     "event": test["event-data"]["event-type"],
                     "eventMark": subtype,
                     "message": test["event-data"]["message"][index],
@@ -167,7 +170,7 @@ def TestEvents(file):
             elif (test["event-data"]["sms-config"]["reciever"] != "" and dataSender.mobile == True):
                 data = json.dumps({
                     ".type": "rule",
-                    "enable": "0",
+                    "enable": "1",
                     "event": test["event-data"]["event-type"],
                     "eventMark": subtype,
                     "message": test["event-data"]["message"][index],
@@ -380,7 +383,7 @@ dataReceiver.ipAddr = "192.168.1.1"
 
 print(end="\n")
 LoginToken()
-data = GetConfigData("event-config.json")
+data = GetConfigData("completed-triggers.json")
 CheckForModel(data)
 CheckForMobile()
 TestEvents(data)
