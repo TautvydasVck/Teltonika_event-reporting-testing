@@ -287,7 +287,7 @@
                   "id": "general",
                   ".type": "global",
                   "auto_sync": "1"
-              }
+                }
               },
               "retrieve-token": ""
             }
@@ -306,7 +306,7 @@
                   "enabled": "1",
                   ".type": "general",
                   "id": "general"
-              }
+                }
               },
               "retrieve-token": ""
             }
@@ -327,7 +327,36 @@
                   "max_attempt_count": "11",
                   "id": "general",
                   "reboot_clear": "0"
-              }
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "ssh",
+              "command": "opkg install hs_theme_airport",
+              "wait-time": "",
+              "method": "",
+              "api-path": "",
+              "api-body": {},
+              "retrieve-token": ""
+            },
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "put",
+              "api-path": "/services/hotspot/landing/config/general",
+              "api-body": {
+                "data": {
+                  ".type": "landing",
+                  "id": "general",
+                  "theme": "airport",
+                  "auth_proto": "pap"
+                }
               },
               "retrieve-token": ""
             }
@@ -340,15 +369,634 @@
               "command": "",
               "wait-time": "",
               "method": "put",
-              "api-path": "/system/access_control/security/general/config/general",
+              "api-path": "/services/modbus/tcp_slave/config/general",
+              "api-body": {
+                "data": {
+                  ".type": "modbus",
+                  "id": "general",
+                  "port": "503"
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "post",
+              "api-path": "/services/modbus/tcp/config",
+              "api-body": {
+                "data": {}
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "put",
+              "api-path": "/services/modbus/gateway/config/general",
+              "api-body": {
+                "data": {
+                  ".type": "gateway",
+                  "id": "general",
+                  "request": "requestTEST"
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "put",
+              "api-path": "/network/wireless/multi_ap/general/config/general",
+              "api-body": {
+                "data": {
+                  "enabled": "0",
+                  ".type": "multi_wifi",
+                  "id": "general",
+                  "scan_time": "70"
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "post",
+              "api-path": "/network/mwan3/rules/config",
+              "api-body": {
+                "data": {
+                  "id": "test"
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "post",
+              "api-path": "/services/ntp/remote_servers/config",
+              "api-body": {
+                "data": {
+                  ".type": "ntpserver"
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "put",
+              "api-path": "/services/ntp/server/config/general",
               "api-body": {
                 "data": {
                   "enabled": "1",
-                  ".type": "globals",
-                  "max_attempt_count": "11",
+                  ".type": "ntpserver",
+                  "id": "general"
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "post",
+              "api-path": "/network/mobile/operator_lists/config",
+              "api-body": {
+                "data": {
+                  "name": "test"
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "put",
+              "api-path": "/status/overview/config",
+              "api-body": {
+                "data": [
+                  {
+                    "id": "cfg010a5c",
+                    "position": "1",
+                    "enabled": "0"
+                  }
+                ]
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "put",
+              "api-path": "/services/usb_tools/p910nd/config/general",
+              "api-body": {
+                "data": {
+                  "port": "9101",
                   "id": "general",
-                  "reboot_clear": "0"
-              }
+                  ".type": "p910nd"
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "package_restore--kol kas neveikia",
+              "command": "",
+              "wait-time": "",
+              "method": "",
+              "api-path": "",
+              "api-body": {},
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "put",
+              "api-path": "/services/io/post_get/config/general",
+              "api-body": {
+                "data": {
+                  "password": "test",
+                  ".type": "post_get",
+                  "id": "general",
+                  "username": "test",
+                  "password_confirm": "test"
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "post",
+              "api-path": "/services/pptp/server/config",
+              "api-body": {
+                "data": {
+                  "id": "test",
+                  ".type": "service"
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "post",
+              "api-path": "/system/profiles/config",
+              "api-body": {
+                "data": {
+                  "id": "test",
+                  "from_current_profile": "0",
+                  ".type": "profile"
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "put",
+              "api-path": "/services/cloud_solutions/rms/config/general",
+              "api-body": {
+                "data": {
+                  ".type": "rms_connect_mqtt",
+                  "enable": "0",
+                  "id": "general"
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "post",
+              "api-path": "/system/users/config",
+              "api-body": {
+                "data": {
+                  "username": "test",
+                  "password": "Test1234",
+                  "group": "user"
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "post",
+              "api-path": "/services/console/config",
+              "api-body": {
+                "data": {
+                  "name": "test",
+                  "device": []
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "post",
+              "api-path": "/services/modbus/tcp_over_serial/config",
+              "api-body": {
+                "data": {
+                  "name": "test",
+                  "device": []
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "post",
+              "api-path": "/services/rs_modem/config",
+              "api-body": {
+                "data": {
+                  "name": "test",
+                  "device": []
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "post",
+              "api-path": "/services/overip/config",
+              "api-body": {
+                "data": {
+                  "name": "test",
+                  "device": []
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "put",
+              "api-path": "/system/fota/config/general",
+              "api-body": {
+                "data": {
+                  "enabled": "0",
+                  ".type": "rut_fota",
+                  "id": "general"
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "put",
+              "api-path": "/network/mobile/sim_switch/config/cfg01aa0e",
+              "api-body": {
+                "data": {
+                  "enabled": "1",
+                  ".type": "sim",
+                  "denied": "0",
+                  "retry_count": "3",
+                  "no_network": "0",
+                  "on_signal": "0",
+                  "data_limit": "0",
+                  "roaming": "0",
+                  "sms_limit": "0",
+                  "fail_flag": "0",
+                  "interval": "10"
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "put",
+              "api-path": "/services/mobile_utilities/sms_gateway/auto_reply/config/general",
+              "api-body": {
+                "data": {
+                  "enabled": "0",
+                  ".type": "reply",
+                  "delete_sms": "1",
+                  "id": "general",
+                  "mode": "everyone",
+                  "every_sms": "0",
+                  "tel": "",
+                  "msg": ""
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "post",
+              "api-path": "/services/mobile_utilities/sms_rules/config",
+              "api-body": {
+                "data": {
+                  "smstext": "test",
+                  "action": "send_status"
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "post",
+              "api-path": "/services/snmp/trap_rules/config",
+              "api-body": {
+                "data": {}
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "console--kol kas neveikia",
+              "command": "",
+              "wait-time": "",
+              "method": "",
+              "api-path": "",
+              "api-body": {
+                "data": {}
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "post",
+              "api-path": "/services/stunnel/interfaces/config",
+              "api-body": {
+                "data": {
+                  "id": "test"
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "put",
+              "api-path": "/system/administration/system/config/general",
+              "api-body": {
+                "data": {
+                  ".type": "system",
+                  "hostname": "Teltonika-RUTX11.com",
+                  "id": "general",
+                  "routername": "RUTx11"
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "put",
+              "api-path": "/system/access_control/telnet/config/general",
+              "api-body": {
+                "data": {
+                  "enable": "1",
+                  ".type": "telnetd",
+                  "id": "general"
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "put",
+              "api-path": "/system/access_control/webui/config/general",
+              "api-body": {
+                "data": {
+                  ".type": "uhttpd",
+                  "enable_https": "1",
+                  "listen_https": "443"
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "put",
+              "api-path": "/services/upnp/settings/config/general",
+              "api-body": {
+                "data": {
+                  ".type": "upnpd",
+                  "port": "5001",
+                  "id": "general"
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "user_groups--kol kas neveikia",
+              "command": "",
+              "wait-time": "",
+              "method": "",
+              "api-path": "",
+              "api-body": {},
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "widget--kol kas neveikia",
+              "command": "",
+              "wait-time": "",
+              "method": "",
+              "api-path": "",
+              "api-body": {},
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "put",
+              "api-path": "/network/wireless/wifi_scanner/config/general",
+              "api-body": {
+                "data": {
+                  ".type": "section",
+                  "interval": "11",
+                  "id": "general",
+                  "two_g_enabled": "0"
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "post",
+              "api-path": "/services/l2tp/server/config",
+              "api-body": {
+                "data": {
+                  "id": "test",
+                  ".type": "service"
+                }
               },
               "retrieve-token": ""
             }
