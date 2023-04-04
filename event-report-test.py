@@ -133,14 +133,14 @@ def CheckTotalEvents(file):
 
 
 def TestEvents(file):
-    #total = CheckTotalEvents(file)
+    total = CheckTotalEvents(file)
     index = 0
     failedCnt = 0
     passedCnt = 0
     start = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     CreateCSV(file, start)
     print("Started at: {0}".format(start))
-    #print("Total tests: {0}\n".format(total))
+    print("Total tests: {0}\n".format(total))
     for test in file["events-triggers"]:
         for subtype in test["event-data"]["event-subtype"]:
             print("Nr: {0}".format(index+1))            
@@ -183,7 +183,7 @@ def TestEvents(file):
                 sys.exit()
             response = SendEvent(
                 "/services/events_reporting/config", data, "post")
-            """
+            #"""
             time.sleep(2)
             if (response["success"] == True):
                 eventResults.eventId = response["data"]["id"]                
@@ -196,15 +196,16 @@ def TestEvents(file):
                 else:
                     failedCnt += 1
                 UpdateCSV(index, test)
+                time.sleep(10)
                 SendEvent("/services/events_reporting/config/" +
                           eventResults.eventId, "", "delete")          
             else:
                 print(Text.Red("Event was not created"))
-            """
+            #"""
             index += 1
             print("-"*40)
         index = 0
-    #print("Total events tested: {0}".format(total))
+    print("Total events tested: {0}".format(total))
     print(Text.Green("Passed: {0}".format(passedCnt)), end=" ")
     print(Text.Red("Failed: {0}".format(failedCnt)))
 
