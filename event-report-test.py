@@ -299,14 +299,14 @@ def UpdateCSV(index, test):
                       eventResults.sent, eventResults.received,
                       eventResults.passed, eventResults.fileName))
 
-
+"""
 def UploadCSV(delete):    
     ftp.encoding = "utf-8"
     with open(eventResults.fileName) as f:
         ftp.storbinary(f"STOR {eventResults.fileName}", f)
     if (delete == True):
         os.system("rm \"{0}\"".format(eventResults.fileName))
-
+"""
 # Constructors
 
 
