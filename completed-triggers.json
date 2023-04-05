@@ -1,9 +1,4 @@
 {
-  "info": {
-    "product": "RUTX11",
-    "SIM1-nr":"",
-    "SIM2-nr":""
-  },
   "events-triggers": [
     {
       "event-data": {
@@ -13,12 +8,12 @@
           "openvpn",
           "events_reporting",
           "periodic_reboot",
-          "ping_reboot",          
+          "ping_reboot",
           "ipsec",
           "dhcp",
           "dropbear",
           "network",
-          "firewall",          
+          "firewall",
           "ddns",
           "snmpd",
           "sqm",
@@ -29,8 +24,8 @@
           "chilli",
           "samba",
           "etherwake",
-          "sms",
-          "simcard",          
+          "sms_utils",
+          "simcard",
           "quota_limit",
           "gps",
           "blesem",
@@ -61,7 +56,6 @@
           "operctl",
           "overview",
           "p910nd",
-          "package_restore",
           "post_get",
           "pptpd",
           "profiles",
@@ -76,14 +70,11 @@
           "sms_gateway",
           "sms_utils",
           "snmptrap",
-          "socat",
           "stunnel",
           "system",
           "telnetd",
           "uhttpd",
           "upnpd",
-          "user_groups",          
-          "widget",
           "wifi_scanner",
           "xl2tpd"
         ],
@@ -102,12 +93,12 @@
           "Config, openvpn",
           "Config, events_reporting",
           "Config, periodic_reboot",
-          "Config, ping_reboot",          
+          "Config, ping_reboot",
           "Config, ipsec",
           "Config, dhcp",
           "Config, dropbear",
           "Config, network",
-          "Config, firewall",          
+          "Config, firewall",
           "Config, ddns",
           "Config, snmpd",
           "Config, sqm",
@@ -119,7 +110,7 @@
           "Config, samba (network shares)",
           "Config, etherwake (Wake on Lan)",
           "Config, sms",
-          "Config, simcard",          
+          "Config, simcard",
           "Config, quota_limit",
           "Config, gps",
           "Config, blesem (bluetooth)",
@@ -150,7 +141,6 @@
           "Config, operctl",
           "Config, overview",
           "Config, p910nd",
-          "Config, package_restore",
           "Config, post_get",
           "Config, pptpd",
           "Config, profiles",
@@ -165,16 +155,13 @@
           "Config, sms_gateway",
           "Config, sms_utils",
           "Config, snmptrap",
-          "Config, socat",
           "Config, stunnel",
           "Config, system",
           "Config, telnetd",
           "Config, uhttpd",
           "Config, upnpd",
-          "Config, user_groups",
-          "Config, widget",
           "Config, wifi_scanner",
-          "Config, xl2tpd"    
+          "Config, xl2tpd"
         ]
       },
       "trigger-data": [
@@ -302,14 +289,20 @@
               "type": "api",
               "command": "",
               "method": "put",
-              "api-path": "/system/access_control/ssh/config/cfg014dd4",
+              "api-path": "/system/access_control/ssh/config/general",
               "api-body": {
                 "data": {
-                  "enable_key_ssh": "1"
+                  ".type": "dropbear",
+                  "id": "general",
+                  "port": "22",
+                  "_sshWanAccess": "0",
+                  "enable": "1",
+                  "enable_key_ssh": "1",
+                  "ssh_keys": ""
                 }
               },
               "retrieve-token": "",
-              "wait-time": ""
+              "wait-time": "10"
             }
           ]
         },
@@ -367,12 +360,13 @@
             {
               "type": "api",
               "command": "",
-              "method": "",
+              "method": "put",
               "api-path": "/services/snmp/system/config/general",
               "api-body": {
                 "data": {
                   "sysLocation": "naujas",
-                  "id": "general"
+                  "id": "general",
+                  ".type": "system"
                 }
               },
               "retrieve-token": "",
@@ -402,8 +396,8 @@
             {
               "type": "api",
               "command": "",
-              "method": "post",
-              "api-path": "/services/ulog/ftp/config/ftp",
+              "method": "put",
+              "api-path": "/services/ulog/ftp/config/general",
               "api-body": {
                 "data": {
                   "host": "tekstas"
@@ -487,12 +481,17 @@
             {
               "type": "api",
               "command": "",
-              "method": "post",
-              "api-path": "/services/samba/users/config",
+              "method": "put",
+              "api-path": "/services/samba/general/config/general",
               "api-body": {
                 "data": {
-                  "username": "test",
-                  "password": "Test!808"
+                  "workgroup": "WORKGROUP",
+                  ".type": "samba",
+                  "description": "Router",
+                  "id": "general",
+                  "name": "Router_share",
+                  "homes": "1",
+                  "enabled": "0"
                 }
               },
               "retrieve-token": "",
@@ -524,7 +523,7 @@
               "api-path": "/services/mobile_utilities/sms_rules/config",
               "api-body": {
                 "data": {
-                  "smstext": "1342",
+                  "smstext": "1423",
                   "action": "reboot"
                 }
               },
@@ -577,10 +576,12 @@
               "type": "api",
               "command": "",
               "method": "put",
-              "api-path": "/services/gps/general/config/gpsd",
+              "api-path": "/services/gps/general/config/general",
               "api-body": {
                 "data": {
-                  "enabled": "1"
+                  "enabled": "1",
+                  ".type": "section",
+                  "id": "general"
                 }
               },
               "retrieve-token": "",
@@ -645,7 +646,7 @@
             {
               "type": "api",
               "command": "",
-              "method": "",
+              "method": "put",
               "api-path": "/services/webfilter/config/general",
               "api-body": {
                 "data": {
@@ -665,7 +666,7 @@
             {
               "type": "api",
               "command": "",
-              "method": "",
+              "method": "put",
               "api-path": "/services/privoxy/config/general",
               "api-body": {
                 "data": {
@@ -809,7 +810,7 @@
               "api-path": "/services/dmvpn/config",
               "api-body": {
                 "data": {
-                  "id": "test"
+                  "id": "00000001"
                 }
               },
               "retrieve-token": ""
@@ -918,12 +919,16 @@
         {
           "steps": [
             {
-              "type": "ssh",
-              "command": "opkg install hs_theme_airport",
-              "wait-time": "",
-              "method": "",
-              "api-path": "",
-              "api-body": {},
+              "type": "api",
+              "command": "",
+              "wait-time": "10",
+              "method": "post",
+              "api-path": "/services/packages/actions/install_package",
+              "api-body": {
+                "data": {
+                  "package": "hs_theme_airport"
+                }
+              },
               "retrieve-token": ""
             },
             {
@@ -1024,10 +1029,12 @@
               "command": "",
               "wait-time": "",
               "method": "post",
-              "api-path": "/network/mwan3/rules/config",
+              "api-path": "/network/mwan3/policies/config",
               "api-body": {
                 "data": {
-                  "id": "test"
+                  "id": "policy",
+                  "mode": "mwan",
+                  ".type": "policy"
                 }
               },
               "retrieve-token": ""
@@ -1123,19 +1130,6 @@
                   ".type": "p910nd"
                 }
               },
-              "retrieve-token": ""
-            }
-          ]
-        },
-        {
-          "steps": [
-            {
-              "type": "package_restore--kol kas neveikia",
-              "command": "",
-              "wait-time": "",
-              "method": "",
-              "api-path": "",
-              "api-body": {},
               "retrieve-token": ""
             }
           ]
@@ -1414,21 +1408,6 @@
         {
           "steps": [
             {
-              "type": "console--kol kas neveikia",
-              "command": "",
-              "wait-time": "",
-              "method": "",
-              "api-path": "",
-              "api-body": {
-                "data": {}
-              },
-              "retrieve-token": ""
-            }
-          ]
-        },
-        {
-          "steps": [
-            {
               "type": "api",
               "command": "",
               "wait-time": "",
@@ -1516,32 +1495,6 @@
                   "id": "general"
                 }
               },
-              "retrieve-token": ""
-            }
-          ]
-        },
-        {
-          "steps": [
-            {
-              "type": "user_groups--kol kas neveikia",
-              "command": "",
-              "wait-time": "",
-              "method": "",
-              "api-path": "",
-              "api-body": {},
-              "retrieve-token": ""
-            }
-          ]
-        },
-        {
-          "steps": [
-            {
-              "type": "widget--kol kas neveikia",
-              "command": "",
-              "wait-time": "",
-              "method": "",
-              "api-path": "",
-              "api-body": {},
               "retrieve-token": ""
             }
           ]
@@ -1669,44 +1622,6 @@
     },
     {
       "event-data": {
-        "event-type": "Switch Topology",
-        "event-subtype": [
-          "Changes in topology"
-        ],
-        "email-config": {
-          "subject": "",
-          "email-acc": "",
-          "recievers": [
-            ""
-          ]
-        },
-        "sms-config": {
-          "reciever": "+37060211799"
-        },
-        "message": [
-          "Switch Topology, Changes in topology"
-        ]
-      },
-      "trigger-data": [
-        {
-          "steps": [
-            {
-              "type": "topology--kol kas neveikia",
-              "command": "",
-              "method": "",
-              "api-path": "",
-              "api-body": {
-                "data": {}
-              },
-              "retrieve-token": "",
-              "wait-time": ""
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "event-data": {
         "event-type": "SSH",
         "event-subtype": [
           "all",
@@ -1805,11 +1720,12 @@
             {
               "type": "api",
               "command": "",
-              "method": "post",
-              "api-path": "/network/vlan/port_based/config",
+              "method": "put",
+              "api-path": "/network/vlan/port_based/config/cfg081ec7",
               "api-body": {
                 "data": {
-                  ".type": "switch_vlan"
+                  ".type": "switch_vlan",
+                  "lan3": "u"
                 }
               },
               "retrieve-token": "",
@@ -1823,12 +1739,11 @@
               "type": "api",
               "command": "",
               "method": "put",
-              "api-path": "/network/vlan/port_based/config",
+              "api-path": "/network/vlan/port_based/config/cfg081ec7",
               "api-body": {
                 "data": {
                   ".type": "switch_vlan",
-                  "vid": "3",
-                  "lan1": "t"
+                  "lan3": ""
                 }
               },
               "retrieve-token": "",
@@ -1842,12 +1757,11 @@
               "type": "api",
               "command": "",
               "method": "put",
-              "api-path": "/network/vlan/port_based/config",
+              "api-path": "/network/vlan/port_based/config/cfg081ec7",
               "api-body": {
                 "data": {
                   ".type": "switch_vlan",
-                  "vid": "3",
-                  "lan1": ""
+                  "lan3": "u"
                 }
               },
               "retrieve-token": "",
@@ -1861,12 +1775,11 @@
               "type": "api",
               "command": "",
               "method": "put",
-              "api-path": "/network/vlan/port_based/config",
+              "api-path": "/network/vlan/port_based/config/cfg081ec7",
               "api-body": {
                 "data": {
                   ".type": "switch_vlan",
-                  "vid": "3",
-                  "lan1": "t"
+                  "lan3": ""
                 }
               },
               "retrieve-token": "",
@@ -1880,12 +1793,11 @@
               "type": "api",
               "command": "",
               "method": "put",
-              "api-path": "/network/vlan/port_based/config",
+              "api-path": "/network/vlan/port_based/config/cfg081ec7",
               "api-body": {
                 "data": {
                   ".type": "switch_vlan",
-                  "vid": "3",
-                  "lan1": ""
+                  "lan3": "u"
                 }
               },
               "retrieve-token": "",
@@ -1901,7 +1813,6 @@
         "event-subtype": [
           "all",
           "web ui",
-          "input/output",
           "ping reboot",
           "reboot scheduler",
           "from button",
@@ -1920,7 +1831,6 @@
         "message": [
           "Reboot, all",
           "Reboot, web ui",
-          "Reboot, input/output",
           "Reboot, ping reboot",
           "Reboot, reboot scheduler",
           "Reboot, from button",
@@ -1959,23 +1869,10 @@
         {
           "steps": [
             {
-              "type": "I/--kol kas neveikia",
-              "command": "",
-              "wait-time": "",
-              "method": "post",
-              "api-path": "",
-              "api-body": {},
-              "retrieve-token": "1"
-            }
-          ]
-        },
-        {
-          "steps": [
-            {
               "type": "api",
               "command": "",
-              "wait-time": "300",
-              "method": "post",
+              "wait-time": "180",
+              "method": "put",
               "api-path": "/services/auto_reboot/ping/config",
               "api-body": {
                 "data": {
@@ -2006,19 +1903,9 @@
               "api-body": {
                 "data": {
                   "type": "ping",
-                  "retry": "1",
                   "enable": "0",
                   ".type": "ping_reboot",
-                  "packet_size": "56",
-                  "id": "cfg01c21d",
-                  "host": "192.168.134.80",
-                  "ip_type": "ipv4",
-                  "action": "1",
-                  "stop_action": "0",
-                  "interface": "1",
-                  "time": "5",
-                  "time_out": "1",
-                  "number": ""
+                  "id": "cfg01c21d"
                 }
               },
               "retrieve-token": "0"
@@ -2055,7 +1942,7 @@
             },
             {
               "type": "ssh",
-              "command": "date -s 00:00",
+              "command": "date -s 00:04:55",
               "wait-time": "120",
               "method": "",
               "api-path": "",
@@ -2146,7 +2033,11 @@
                 }
               },
               "retrieve-token": ""
-            },
+            }
+          ]
+        },
+        {
+          "steps": [
             {
               "type": "ssh",
               "command": "/etc/init.d/network restart",
@@ -2161,25 +2052,33 @@
         {
           "steps": [
             {
-              "type": "ssh",
-              "command": "gsmctl -Q",
-              "wait-time": "80",
-              "method": "",
-              "api-path": "",
-              "api-body": {},
+              "type": "api",
+              "command": "",
+              "wait-time": "10",
+              "method": "put",
+              "api-path": "/network/interfaces/config/mob1s1a1",
+              "api-body": {
+                "data": {
+                  "enabled": "0",
+                  ".type": "interface",
+                  "id": "wan"
+                }
+              },
               "retrieve-token": ""
-            }
-          ]
-        },
-        {
-          "steps": [
+            },
             {
-              "type": "ssh",
-              "command": "gsmctl -Q",
-              "wait-time": "80",
-              "method": "",
-              "api-path": "",
-              "api-body": {},
+              "type": "api",
+              "command": "",
+              "wait-time": "10",
+              "method": "put",
+              "api-path": "/network/interfaces/config/mob1s1a1",
+              "api-body": {
+                "data": {
+                  "enabled": "1",
+                  ".type": "interface",
+                  "id": "wan"
+                }
+              },
               "retrieve-token": ""
             }
           ]
@@ -2215,8 +2114,8 @@
           "steps": [
             {
               "type": "ssh",
-              "command": "gsmctl -Q",
-              "wait-time": "80",
+              "command": "/etc/init.d/network restart",
+              "wait-time": "30",
               "method": "",
               "api-path": "",
               "api-body": {},
@@ -2228,8 +2127,8 @@
           "steps": [
             {
               "type": "ssh",
-              "command": "gsmctl -Q",
-              "wait-time": "80",
+              "command": "/etc/init.d/network restart",
+              "wait-time": "30",
               "method": "",
               "api-path": "",
               "api-body": {},
@@ -2241,8 +2140,8 @@
           "steps": [
             {
               "type": "ssh",
-              "command": "gsmctl -Q",
-              "wait-time": "80",
+              "command": "/etc/init.d/network restart",
+              "wait-time": "30",
               "method": "",
               "api-path": "",
               "api-body": {},
@@ -2411,7 +2310,7 @@
             {
               "type": "ssh",
               "command": "/etc/init.d/network restart",
-              "wait-time": "",
+              "wait-time": "30",
               "method": "",
               "api-path": "",
               "api-body": {},
@@ -2433,7 +2332,7 @@
             {
               "type": "ssh",
               "command": "/etc/init.d/network restart",
-              "wait-time": "",
+              "wait-time": "30",
               "method": "",
               "api-path": "",
               "api-body": {},
@@ -2455,7 +2354,7 @@
             {
               "type": "ssh",
               "command": "/etc/init.d/network restart",
-              "wait-time": "",
+              "wait-time": "30",
               "method": "",
               "api-path": "",
               "api-body": {},

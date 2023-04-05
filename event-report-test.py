@@ -23,8 +23,8 @@ def GetSysInfo():
 
 
 def GetPhoneNumbers(file):
-    deviceInfo.sim1 = file["info"]["SIM1-nr"]
-    deviceInfo.sim2 = file["info"]["SIM2-nr"]
+    deviceInfo.sims[0] = file["info"]["SIM1-nr"]
+    deviceInfo.sims[1] = file["info"]["SIM2-nr"]
 
 def SendEvent(endpoint, bodyData, type):
     head = {"Content-Type": "application/json",
@@ -46,16 +46,14 @@ def SendEvent(endpoint, bodyData, type):
 
 def SendTrigger(endpoint, bodyData, type):
     head = {"Content-Type": "application/json",
-            "Authorization": "Bearer " + dataSender.token}
-    # ATNAUJINTI TRIGERIUS (prideti  data{} api-body lauke)
-    # data = "{\"data\":"+bodyData+"}"
+            "Authorization": "Bearer " + dataSender.token}    
     match type:
         case "post":
             response = requests.post(dataSender.baseURL+endpoint,
                                      headers=head, data=bodyData).json()
         case "put":
             response = requests.put(dataSender.baseURL+endpoint,
-                                    headers=head, data=bodyData).json()
+                                    headers=head, data=bodyData).json()        
         case _:
             print(Text.Red(
                 "JSON file is misformed (missing HTTP method)\nCheck configuration file"))
@@ -69,6 +67,7 @@ def SendCommand(data, device):
     client.connect(hostname=device.ipAddr,
                    username="root", password=device.pswd, port=22)
     stdin, stdout, stderr = client.exec_command(str(data))
+    time.sleep(1)
     client.close()
     return stdout.readlines()
 
@@ -125,13 +124,12 @@ def CheckForModel(file):
             "Device model in config file ({0}) and actual model ({1}) do not match.\nCheck JSON configuration file". format(modelF, modelA))
 
 
-def CheckWhichSim():
-    res = SendCommand("ubus call sim get", dataSender)
+def CheckWhichSim():    
+    res = SendCommand("ubus call sim get", dataSender)              
     if(res[1].__contains__('1')):
-        res = deviceInfo.sim1
+        deviceInfo.activeSim=0
     elif(res[1].__contains__('2')):
-        res = deviceInfo.sim2
-    return res
+        deviceInfo.activeSim=1        
 
 def CheckTotalEvents(file):
     events = 0
@@ -158,8 +156,7 @@ def TestEvents(file):
     print("Started at: {0}".format(start))
     print("Total tests: {0}\n".format(total))
     for test in file["events-triggers"]:
-        for subtype in test["event-data"]["event-subtype"]:
-            print("Nr: {0}".format(index+1))
+        for subtype in test["event-data"]["event-subtype"]:            
             print("Event type: " +
                   Text.Underline("{0}".format(test["event-data"]["event-type"])))
             print(
@@ -206,13 +203,13 @@ def TestEvents(file):
                 TriggerEvent(test["trigger-data"][index])
                 # pakeisti tikrinimo logika (durnai gauna ir tikrina gaveja)
                 time.sleep(4)
+                CheckWhichSim()
                 CheckReceive()
                 if (eventResults.passed == True):
                     passedCnt += 1
                 else:
-                    failedCnt += 1
+                    failedCnt += 1                      
                 UpdateCSV(index, test)
-                time.sleep(10)
                 SendEvent("/services/events_reporting/config/" +
                           eventResults.eventId, "", "delete")
             else:
@@ -273,7 +270,7 @@ def CheckReceive():
         res = SendCommand("gsmctl -S -r 0", dataReceiver)
         eventResults.received = res[2].split(":\t\t")[1][:-1]
         eventResults.messageIn = res[13].split(":\t\t")[1][:-1]        
-        if (eventResults.received == CheckWhichSim()
+        if (eventResults.received == deviceInfo.sims[deviceInfo.activeSim]
                 and eventResults.messageIn == eventResults.messageOut):
             eventResults.passed = True
             print(Text.Green("Passed"))
@@ -286,17 +283,17 @@ def CheckReceive():
 
 def CreateCSV(file, start):
     fileName = "\"{0}_{1}.csv\"".format(file["info"]["product"], start)
-    fileInit = "echo \"Number;Event type;Event subtype;Expected message;Received message;Sent from;Got from;Passed\" >> "+fileName
+    fileInit = "echo \"Event type;Event subtype;Expected message;Received message;Sent from;Got from;Passed\" >> "+fileName
     os.system(fileInit)
     eventResults.fileName = fileName
 
 
 def UpdateCSV(index, test):
-    os.system("echo \"{0};{1};{2};{3};{4};{5};{6};{7}\" >> {8}"
-              .format(index+1, test["event-data"]["event-type"],
+    os.system("echo \"{0};{1};{2};{3};{4};{5};{6}\" >> {7}"
+              .format(test["event-data"]["event-type"],
                       test["event-data"]["event-subtype"][index],
                       eventResults.messageOut, eventResults.messageIn,
-                      eventResults.sent, eventResults.received,
+                      deviceInfo.sims[deviceInfo.activeSim], eventResults.received,
                       eventResults.passed, eventResults.fileName))
 
 """
@@ -314,8 +311,8 @@ class DeviceData:
     def __init__(self):
         self.mobile = False
         self.smsCheck = False
-        self.sim1 = ""
-        self.sim2 = ""
+        self.sims = ["",""]        
+        self.activeSim = 0
 
 
 class RequestData:
@@ -403,7 +400,6 @@ print(end="\n")
 LoginToken()
 data = GetConfigData("event-config.json")
 GetPhoneNumbers(data)
-#CheckWhichSim()
 CheckForModel(data)
 CheckForMobile()
 TestEvents(data)
