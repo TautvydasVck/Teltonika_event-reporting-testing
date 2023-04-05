@@ -300,8 +300,7 @@ def UpdateCSV(index, test):
                       eventResults.passed, eventResults.fileName))
 
 
-def UploadCSV(delete):
-    ftp = ftplib.FTP("84.15.249.182", "akademija", "akademija")
+def UploadCSV(delete):    
     ftp.encoding = "utf-8"
     with open(eventResults.fileName) as f:
         ftp.storbinary(f"STOR {eventResults.fileName}", f)
