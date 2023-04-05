@@ -26,6 +26,7 @@ def GetPhoneNumbers(file):
     deviceInfo.sims[0] = file["info"]["SIM1-nr"]
     deviceInfo.sims[1] = file["info"]["SIM2-nr"]
 
+
 def SendEvent(endpoint, bodyData, type):
     head = {"Content-Type": "application/json",
             "Authorization": "Bearer " + dataSender.token}
@@ -39,24 +40,24 @@ def SendEvent(endpoint, bodyData, type):
                                        headers=head).json()
         case _:
             print(Text.Red(
-                "JSON file is misformed (missing HTTP method)\nCheck configuration file"))
+                "JSON file is misformed (Event is missing HTTP method)\nCheck configuration file"))
             sys.exit()
     return response
 
 
 def SendTrigger(endpoint, bodyData, type):
     head = {"Content-Type": "application/json",
-            "Authorization": "Bearer " + dataSender.token}    
+            "Authorization": "Bearer " + dataSender.token}
     match type:
         case "post":
             response = requests.post(dataSender.baseURL+endpoint,
                                      headers=head, data=bodyData).json()
         case "put":
             response = requests.put(dataSender.baseURL+endpoint,
-                                    headers=head, data=bodyData).json()        
+                                    headers=head, data=bodyData).json()
         case _:
             print(Text.Red(
-                "JSON file is misformed (missing HTTP method)\nCheck configuration file"))
+                "JSON file is misformed (Trigger is missing HTTP method)\nCheck configuration file"))
             sys.exit()
     return response
 
@@ -124,12 +125,13 @@ def CheckForModel(file):
             "Device model in config file ({0}) and actual model ({1}) do not match.\nCheck JSON configuration file". format(modelF, modelA))
 
 
-def CheckWhichSim():    
-    res = SendCommand("ubus call sim get", dataSender)              
-    if(res[1].__contains__('1')):
-        deviceInfo.activeSim=0
-    elif(res[1].__contains__('2')):
-        deviceInfo.activeSim=1        
+def CheckWhichSim():
+    res = SendCommand("ubus call sim get", dataSender)
+    if (res[1].__contains__('1')):
+        deviceInfo.activeSim = 0
+    elif (res[1].__contains__('2')):
+        deviceInfo.activeSim = 1
+
 
 def CheckTotalEvents(file):
     events = 0
@@ -156,7 +158,7 @@ def TestEvents(file):
     print("Started at: {0}".format(start))
     print("Total tests: {0}\n".format(total))
     for test in file["events-triggers"]:
-        for subtype in test["event-data"]["event-subtype"]:            
+        for subtype in test["event-data"]["event-subtype"]:
             print("Event type: " +
                   Text.Underline("{0}".format(test["event-data"]["event-type"])))
             print(
@@ -200,15 +202,15 @@ def TestEvents(file):
             time.sleep(2)
             if (response["success"] == True):
                 eventResults.eventId = response["data"]["id"]
+                PurgeAllSms()
                 TriggerEvent(test["trigger-data"][index])
-                # pakeisti tikrinimo logika (durnai gauna ir tikrina gaveja)
-                time.sleep(4)
+                time.sleep(10)
                 CheckWhichSim()
                 CheckReceive()
                 if (eventResults.passed == True):
                     passedCnt += 1
                 else:
-                    failedCnt += 1                      
+                    failedCnt += 1
                 UpdateCSV(index, test)
                 SendEvent("/services/events_reporting/config/" +
                           eventResults.eventId, "", "delete")
@@ -227,15 +229,13 @@ def TriggerEvent(trigger):
     for step in trigger["steps"]:
         match step["type"]:
             case "api":
-                data = json.dumps(step["api-body"])
                 time.sleep(1)
-                response = SendTrigger(step["api-path"], data, step["method"])
+                response = SendTrigger(
+                    step["api-path"], json.dumps(step["api-body"]), step["method"])
                 if (response["success"] == False):
-                    print(Text.Red("Trigger using API failed"))
+                    print(Text.Yellow("Request using API failed"))
             case "ssh":
-                data = step["command"]
-                time.sleep(1)
-                SendCommand(data, dataSender)
+                SendCommand(step["command"], dataSender)
             case "cmd":
                 time.sleep(1)
                 os.system(step["command"])
@@ -243,7 +243,6 @@ def TriggerEvent(trigger):
                 data = step["command"]
                 data = data[:(len(data)-3)]+dataSender.token + \
                     data[(len(data)-3):]
-                time.sleep(1)
                 SendCommand(data, dataSender)
             case _:
                 print(Text.Red("JSON file is misformed. Check configuration file"))
@@ -257,26 +256,29 @@ def TriggerEvent(trigger):
             LoginToken()
 
 
-def CheckReceive():
-    # pakeisti tikrinimo logika (durnai gauna ir tikrina gaveja)
+def PurgeAllSms():
     res = SendCommand("gsmctl -S -l all", dataReceiver)
-    if (len(res) > 15):
-        print(Text.Red("Device has old messages"))
-        print("Delete all old messages and restart the test")
-        sys.exit()
-    elif (len(res) == 0):
+    ammount = (len(res))/15
+    i = 0
+    while i < ammount:
+        SendCommand("gsmctl -S -d {0}".format(i), dataReceiver)
+        i += 1
+
+
+def CheckReceive():
+    res = SendCommand("gsmctl -S -l all", dataReceiver)
+    if (len(res) == 0):
         print(Text.Red("Device did not receive the message"))
-    elif (len(res) == 15):
-        res = SendCommand("gsmctl -S -r 0", dataReceiver)
+    elif (len(res) >= 15):
         eventResults.received = res[2].split(":\t\t")[1][:-1]
-        eventResults.messageIn = res[13].split(":\t\t")[1][:-1]        
+        eventResults.messageIn = res[13].split(":\t\t")[1][:-1]
         if (eventResults.received == deviceInfo.sims[deviceInfo.activeSim]
                 and eventResults.messageIn == eventResults.messageOut):
             eventResults.passed = True
             print(Text.Green("Passed"))
         else:
             print(Text.Red("Failed"))
-        SendCommand("gsmctl -S -d 0", dataReceiver)
+
     else:
         print(Text.Red("Error reading received SMS"))
 
@@ -296,6 +298,7 @@ def UpdateCSV(index, test):
                       deviceInfo.sims[deviceInfo.activeSim], eventResults.received,
                       eventResults.passed, eventResults.fileName))
 
+
 """
 def UploadCSV(delete):    
     ftp.encoding = "utf-8"
@@ -309,9 +312,8 @@ def UploadCSV(delete):
 
 class DeviceData:
     def __init__(self):
-        self.mobile = False
-        self.smsCheck = False
-        self.sims = ["",""]        
+        self.mobile = False        
+        self.sims = ["", ""]
         self.activeSim = 0
 
 
@@ -329,8 +331,7 @@ class ResultData:
         self.eventId = ""
         self.passed = False
         self.messageOut = ""
-        self.messageIn = ""
-        self.sent = ""
+        self.messageIn = ""        
         self.received = ""
         self.fileName = ""
 
