@@ -21,17 +21,19 @@ def GetSysInfo():
     else:
         return response
 
-#def GetPhoneNumbers():
 
+def GetPhoneNumbers(file):
+    deviceInfo.sim1 = file["info"]["SIM1-nr"]
+    deviceInfo.sim2 = file["info"]["SIM2-nr"]
 
 def SendEvent(endpoint, bodyData, type):
     head = {"Content-Type": "application/json",
-            "Authorization": "Bearer " + dataSender.token}    
+            "Authorization": "Bearer " + dataSender.token}
     data = "{\"data\":"+bodyData+"}"
     match type:
         case "post":
             response = requests.post(dataSender.baseURL+endpoint,
-                                     headers=head, data=data).json()        
+                                     headers=head, data=data).json()
         case "delete":
             response = requests.delete(dataSender.baseURL+endpoint,
                                        headers=head).json()
@@ -40,6 +42,7 @@ def SendEvent(endpoint, bodyData, type):
                 "JSON file is misformed (missing HTTP method)\nCheck configuration file"))
             sys.exit()
     return response
+
 
 def SendTrigger(endpoint, bodyData, type):
     head = {"Content-Type": "application/json",
@@ -59,14 +62,16 @@ def SendTrigger(endpoint, bodyData, type):
             sys.exit()
     return response
 
+
 def SendCommand(data, device):
     client = paramiko.SSHClient()
-    client.set_missing_host_key_policy(paramiko.AutoAddPolicy())    
+    client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     client.connect(hostname=device.ipAddr,
                    username="root", password=device.pswd, port=22)
     stdin, stdout, stderr = client.exec_command(str(data))
     client.close()
     return stdout.readlines()
+
 
 def LoginToken():
     head = {"Content-Type": "application/json"}
@@ -95,23 +100,23 @@ def CheckForMobile():
     if (res["data"]["board"]["hwinfo"]["mobile"] == False):
         print(Text.Yellow(
             "Device does not have mobile capabilities. Messages can be sent only via email"))
-        dataSender.mobile = False
+        deviceInfo.mobile = False
     elif (res["data"]["board"]["hwinfo"]["mobile"] == True):
         print(Text.Green(
             "Device has mobile capabilities. Messages can be sent via email and phone number"))
-        dataSender.mobile = True
+        deviceInfo.mobile = True
     else:
         print(Text.Red("Could not get information about mobile capabilities"))
         sys.exit()
 
 
-def CheckForModel(data):
+def CheckForModel(file):
     res = GetSysInfo()
     print(
         "--Device being tested: {0}--".
         format(res["data"]["mnfinfo"]["name"]))
     modelA = str(res["data"]["mnfinfo"]["name"])
-    modelF = data["info"]["product"]
+    modelF = file["info"]["product"]
     if modelA.startswith(modelF):
         print(Text.Green("Device model in JSON matches actual device model"))
     else:
@@ -119,6 +124,14 @@ def CheckForModel(data):
         sys.exit(
             "Device model in config file ({0}) and actual model ({1}) do not match.\nCheck JSON configuration file". format(modelF, modelA))
 
+
+def CheckWhichSim():
+    res = SendCommand("ubus call sim get", dataSender)
+    if(res[1].__contains__('1')):
+        res = deviceInfo.sim1
+    elif(res[1].__contains__('2')):
+        res = deviceInfo.sim2
+    return res
 
 def CheckTotalEvents(file):
     events = 0
@@ -146,7 +159,7 @@ def TestEvents(file):
     print("Total tests: {0}\n".format(total))
     for test in file["events-triggers"]:
         for subtype in test["event-data"]["event-subtype"]:
-            print("Nr: {0}".format(index+1))            
+            print("Nr: {0}".format(index+1))
             print("Event type: " +
                   Text.Underline("{0}".format(test["event-data"]["event-type"])))
             print(
@@ -167,7 +180,7 @@ def TestEvents(file):
                 })
                 eventResults.sent = test["event-data"]["email-config"]["recievers"]
 
-            elif (test["event-data"]["sms-config"]["reciever"] != "" and dataSender.mobile == True):
+            elif (test["event-data"]["sms-config"]["reciever"] != "" and deviceInfo.mobile == True):
                 data = json.dumps({
                     ".type": "rule",
                     "enable": "1",
@@ -180,17 +193,17 @@ def TestEvents(file):
                     "subject": "",
                     "recipient_format": "single",
                     "telnum": test["event-data"]["sms-config"]["reciever"]
-                })                
+                })
             else:
                 print(Text.Red("JSON file is misformed. Check configuration file"))
                 sys.exit()
             response = SendEvent(
                 "/services/events_reporting/config", data, "post")
-            #"""
+            # """
             time.sleep(2)
             if (response["success"] == True):
-                eventResults.eventId = response["data"]["id"]                
-                TriggerEvent(test["trigger-data"][index])                
+                eventResults.eventId = response["data"]["id"]
+                TriggerEvent(test["trigger-data"][index])
                 # pakeisti tikrinimo logika (durnai gauna ir tikrina gaveja)
                 time.sleep(4)
                 CheckReceive()
@@ -201,10 +214,10 @@ def TestEvents(file):
                 UpdateCSV(index, test)
                 time.sleep(10)
                 SendEvent("/services/events_reporting/config/" +
-                          eventResults.eventId, "", "delete")          
+                          eventResults.eventId, "", "delete")
             else:
                 print(Text.Red("Event was not created"))
-            #"""
+            # """
             index += 1
             print("-"*40)
         index = 0
@@ -230,15 +243,16 @@ def TriggerEvent(trigger):
                 time.sleep(1)
                 os.system(step["command"])
             case "ubus":
-                data = step["command"]                
-                data = data[:(len(data)-3)]+dataSender.token+data[(len(data)-3):]                                                
+                data = step["command"]
+                data = data[:(len(data)-3)]+dataSender.token + \
+                    data[(len(data)-3):]
                 time.sleep(1)
-                SendCommand(data, dataSender)                
+                SendCommand(data, dataSender)
             case _:
                 print(Text.Red("JSON file is misformed. Check configuration file"))
                 sys.exit()
         pause = step["wait-time"]
-        if (pause != ""):            
+        if (pause != ""):
             print(Text.Yellow(
                 "Program is paused for: {0} seconds".format(pause)))
             time.sleep(int(pause))
@@ -258,8 +272,8 @@ def CheckReceive():
     elif (len(res) == 15):
         res = SendCommand("gsmctl -S -r 0", dataReceiver)
         eventResults.received = res[2].split(":\t\t")[1][:-1]
-        eventResults.messageIn = res[13].split(":\t\t")[1][:-1]
-        if (eventResults.received == eventResults.sent
+        eventResults.messageIn = res[13].split(":\t\t")[1][:-1]        
+        if (eventResults.received == CheckWhichSim()
                 and eventResults.messageIn == eventResults.messageOut):
             eventResults.passed = True
             print(Text.Green("Passed"))
@@ -286,16 +300,23 @@ def UpdateCSV(index, test):
                       eventResults.passed, eventResults.fileName))
 
 
-
 def UploadCSV(delete):
     ftp = ftplib.FTP("84.15.249.182", "akademija", "akademija")
     ftp.encoding = "utf-8"
     with open(eventResults.fileName) as f:
         ftp.storbinary(f"STOR {eventResults.fileName}", f)
-    if(delete==True):
+    if (delete == True):
         os.system("rm \"{0}\"".format(eventResults.fileName))
 
 # Constructors
+
+
+class DeviceData:
+    def __init__(self):
+        self.mobile = False
+        self.smsCheck = False
+        self.sim1 = ""
+        self.sim2 = ""
 
 
 class RequestData:
@@ -305,8 +326,6 @@ class RequestData:
         self.baseURL = ""
         self.name = ""
         self.pswd = ""
-        self.mobile = False
-        self.smsCheck = False
 
 
 class ResultData:
@@ -337,7 +356,7 @@ class Text():
 
 
 # Program's main part
-
+deviceInfo = DeviceData()
 dataSender = RequestData()
 dataReceiver = RequestData()
 eventResults = ResultData()
@@ -384,6 +403,8 @@ dataReceiver.ipAddr = "192.168.1.1"
 print(end="\n")
 LoginToken()
 data = GetConfigData("completed-triggers.json")
+GetPhoneNumbers(data)
+CheckWhichSim()
 CheckForModel(data)
 CheckForMobile()
 TestEvents(data)

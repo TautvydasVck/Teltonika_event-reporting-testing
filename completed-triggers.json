@@ -1,6 +1,8 @@
 {
   "info": {
-    "product": "RUTX11"
+    "product": "RUTX11",
+    "SIM1-nr":"",
+    "SIM2-nr":""
   },
   "events-triggers": [
     {
@@ -1345,7 +1347,7 @@
                   "roaming": "0",
                   "sms_limit": "0",
                   "fail_flag": "0",
-                  "interval": "10"
+                  "interval": "11"
                 }
               },
               "retrieve-token": ""
