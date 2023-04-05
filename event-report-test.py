@@ -402,9 +402,9 @@ dataReceiver.ipAddr = "192.168.1.1"
 
 print(end="\n")
 LoginToken()
-data = GetConfigData("completed-triggers.json")
+data = GetConfigData("event-config.json")
 GetPhoneNumbers(data)
-CheckWhichSim()
+#CheckWhichSim()
 CheckForModel(data)
 CheckForMobile()
 TestEvents(data)
