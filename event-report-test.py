@@ -210,8 +210,7 @@ def TestEvents(file):
                 if (eventResults.passed == True):
                     passedCnt += 1
                 else:
-                    failedCnt += 1
-                eventResults.passed = False
+                    failedCnt += 1            
                 UpdateCSV(index, test)
                 SendEvent("/services/events_reporting/config/" +
                           eventResults.eventId, "", "delete")
@@ -220,7 +219,9 @@ def TestEvents(file):
             # """
             index += 1
             print("-"*40)
+        # nuresetinamos reiksmes
         index = 0
+        eventResults.passed = False
     print("Total events tested: {0}".format(total))
     print(Text.Green("Passed: {0}".format(passedCnt)), end=" ")
     print(Text.Red("Failed: {0}".format(failedCnt)))
@@ -269,7 +270,7 @@ def PurgeAllSms():
 def CheckReceive():
     res = SendCommand("gsmctl -S -l all", dataReceiver)
     if (len(res) == 0):
-        print(Text.Red("Device did not receive the message"))
+        print(Text.Red("Device did not receive the message"))        
     elif (len(res) >= 15):
         eventResults.received = res[2].split(":\t\t")[1][:-1]
         eventResults.messageIn = res[13].split(":\t\t")[1][:-1]
@@ -302,7 +303,8 @@ def UpdateCSV(index, test):
 
 
 def UploadCSV(delete):
-    
+    ftp = ftplib.FTP(host='192.168.10.44', user='ftpuser',
+                     passwd='Akademija159!')
     ftp.encoding = "utf-8"
     with open(eventResults.fileName, "rb") as f:
         ftp.storbinary(f"STOR {eventResults.fileName}", f)
