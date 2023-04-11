@@ -148,7 +148,7 @@ def CheckTotalEvents(file):
     return events
 
 
-def TestEvents(file):        
+def TestEvents(file):
     total = CheckTotalEvents(file)
     index = 0
     failedCnt = 0
@@ -156,7 +156,7 @@ def TestEvents(file):
     start = datetime.now().strftime("%Y-%m-%d_%H:%M:%S")
     CreateCSV(file, start)
     print("Started at: {0}".format(start))
-    print("Total tests: {0}\n".format(total))    
+    print("Total tests: {0}\n".format(total))
     for test in file["events-triggers"]:
         for subtype in test["event-data"]["event-subtype"]:
             print("Event type: " +
@@ -285,8 +285,9 @@ def CheckReceive():
 
 
 def CreateCSV(file, start):
-    fileName = "{0}_{1}.csv".format(file["info"]["product"], start)    
-    fileInit = "echo \"Event type;Event subtype;Expected message;Received message;Sent from;Got from;Passed\" >> '{0}'".format(fileName)
+    fileName = "{0}_{1}.csv".format(file["info"]["product"], start)
+    fileInit = "echo \"Event type;Event subtype;Expected message;Received message;Sent from;Got from;Passed\" >> '{0}'".format(
+        fileName)
     os.system(fileInit)
     eventResults.fileName = fileName
 
@@ -300,22 +301,20 @@ def UpdateCSV(index, test):
                       eventResults.passed, eventResults.fileName))
 
 
-#"""
-def UploadCSV(delete):    
-    ftp = ftplib.FTP(host='192.168.10.44', user='ftpuser', passwd='Akademija159!')
-    ftp.encoding = "utf-8"            
+def UploadCSV(delete):
+    
+    ftp.encoding = "utf-8"
     with open(eventResults.fileName, "rb") as f:
         ftp.storbinary(f"STOR {eventResults.fileName}", f)
     if (delete == True):
         os.system("rm '{0}'".format(eventResults.fileName))
     ftp.quit()
-#"""
 # Constructors
 
 
 class DeviceData:
     def __init__(self):
-        self.mobile = False        
+        self.mobile = False
         self.sims = ["", ""]
         self.activeSim = 0
 
@@ -334,7 +333,7 @@ class ResultData:
         self.eventId = ""
         self.passed = False
         self.messageOut = ""
-        self.messageIn = ""        
+        self.messageIn = ""
         self.received = ""
         self.fileName = ""
 
