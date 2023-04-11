@@ -148,15 +148,15 @@ def CheckTotalEvents(file):
     return events
 
 
-def TestEvents(file):
+def TestEvents(file):        
     total = CheckTotalEvents(file)
     index = 0
     failedCnt = 0
     passedCnt = 0
-    start = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    start = datetime.now().strftime("%Y-%m-%d_%H:%M:%S")
     CreateCSV(file, start)
     print("Started at: {0}".format(start))
-    print("Total tests: {0}\n".format(total))
+    print("Total tests: {0}\n".format(total))    
     for test in file["events-triggers"]:
         for subtype in test["event-data"]["event-subtype"]:
             print("Event type: " +
@@ -211,6 +211,7 @@ def TestEvents(file):
                     passedCnt += 1
                 else:
                     failedCnt += 1
+                eventResults.passed = False
                 UpdateCSV(index, test)
                 SendEvent("/services/events_reporting/config/" +
                           eventResults.eventId, "", "delete")
@@ -284,14 +285,14 @@ def CheckReceive():
 
 
 def CreateCSV(file, start):
-    fileName = "\"{0}_{1}.csv\"".format(file["info"]["product"], start)
-    fileInit = "echo \"Event type;Event subtype;Expected message;Received message;Sent from;Got from;Passed\" >> "+fileName
+    fileName = "{0}_{1}.csv".format(file["info"]["product"], start)    
+    fileInit = "echo \"Event type;Event subtype;Expected message;Received message;Sent from;Got from;Passed\" >> '{0}'".format(fileName)
     os.system(fileInit)
     eventResults.fileName = fileName
 
 
 def UpdateCSV(index, test):
-    os.system("echo \"{0};{1};{2};{3};{4};{5};{6}\" >> {7}"
+    os.system("echo '{0};{1};{2};{3};{4};{5};{6}' >> '{7}'"
               .format(test["event-data"]["event-type"],
                       test["event-data"]["event-subtype"][index],
                       eventResults.messageOut, eventResults.messageIn,
@@ -299,14 +300,16 @@ def UpdateCSV(index, test):
                       eventResults.passed, eventResults.fileName))
 
 
-"""
+#"""
 def UploadCSV(delete):    
-    ftp.encoding = "utf-8"
-    with open(eventResults.fileName) as f:
+    ftp = ftplib.FTP(host='192.168.10.44', user='ftpuser', passwd='Akademija159!')
+    ftp.encoding = "utf-8"            
+    with open(eventResults.fileName, "rb") as f:
         ftp.storbinary(f"STOR {eventResults.fileName}", f)
     if (delete == True):
-        os.system("rm \"{0}\"".format(eventResults.fileName))
-"""
+        os.system("rm '{0}'".format(eventResults.fileName))
+    ftp.quit()
+#"""
 # Constructors
 
 
@@ -404,4 +407,4 @@ GetPhoneNumbers(data)
 CheckForModel(data)
 CheckForMobile()
 TestEvents(data)
-# UploadCSV(args.deleteOutput)
+UploadCSV(False)

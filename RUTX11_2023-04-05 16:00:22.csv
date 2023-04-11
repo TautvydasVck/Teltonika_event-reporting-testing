@@ -1,7 +1,0 @@
-Event type;Event subtype;Expected message;Received message;Sent from;Got from;Passed
-Web UI;all;Web UI, all;Web UI, all;+37060789118;+37060789118;True
-Web UI;was successful;Web UI, was successful;Web UI, was successful;+37060789118;+37060789118;True
-Web UI;not successful;Web UI, not successful;Web UI, not successful;+37060789118;+37060789118;True
-DHCP;all;DHCP, all;DHCP, all;+37060789118;+37060789118;True
-DHCP;lan;DHCP, lan;DHCP, lan;+37060789118;+37060789118;True
-DHCP;wifi;DHCP, wifi;DHCP, wifi;+37060789118;+37060789118;True
