@@ -86,7 +86,7 @@
           ]
         },
         "sms-config": {
-          "reciever": "+37060211799"
+          "reciever": "+37060789118"
         },
         "message": [
           "Config, all",
@@ -585,7 +585,7 @@
                 }
               },
               "retrieve-token": "",
-              "wait-time": ""
+              "wait-time": "10"
             }
           ]
         },
@@ -704,7 +704,7 @@
             {
               "type": "api",
               "command": "",
-              "wait-time": "4",
+              "wait-time": "",
               "method": "put",
               "api-path": "/services/gps/avl/config/general",
               "api-body": {
@@ -1555,7 +1555,7 @@
           ]
         },
         "sms-config": {
-          "reciever": "+37060211799"
+          "reciever": "+37060789118"
         },
         "message": [
           "WiFi, all",
@@ -1588,7 +1588,7 @@
               "type": "api",
               "command": "",
               "method": "put",
-              "api-path": "/network/wireless/devices/config/radio1",
+              "api-path": "/network/wireless/devices/config/radio0",
               "api-body": {
                 "data": {
                   ".type": "wifi-device",
@@ -1606,7 +1606,7 @@
               "type": "api",
               "command": "",
               "method": "put",
-              "api-path": "/network/wireless/devices/config/radio1",
+              "api-path": "/network/wireless/devices/config/radio0",
               "api-body": {
                 "data": {
                   ".type": "wifi-device",
@@ -1636,7 +1636,7 @@
           ]
         },
         "sms-config": {
-          "reciever": "+37060211799"
+          "reciever": "+37060789118"
         },
         "message": [
           "SSH, all",
@@ -1704,7 +1704,7 @@
           ]
         },
         "sms-config": {
-          "reciever": "+37060211799"
+          "reciever": "+37060789118"
         },
         "message": [
           "Switch Events, all",
@@ -1826,7 +1826,7 @@
           ]
         },
         "sms-config": {
-          "reciever": "+37060211799"
+          "reciever": "+37060789118"
         },
         "message": [
           "Reboot, all",
@@ -1873,15 +1873,14 @@
               "command": "",
               "wait-time": "180",
               "method": "put",
-              "api-path": "/services/auto_reboot/ping/config",
+              "api-path": "/services/auto_reboot/ping/config/cfg01c21d",
               "api-body": {
                 "data": {
                   "type": "ping",
                   "retry": "1",
                   "enable": "1",
                   ".type": "ping_reboot",
-                  "packet_size": "56",
-                  "id": "cfg01c21d",
+                  "packet_size": "56",                  
                   "host": "192.168.134.80",
                   "ip_type": "ipv4",
                   "action": "1",
@@ -1995,7 +1994,7 @@
           ]
         },
         "sms-config": {
-          "reciever": "+37060211799"
+          "reciever": "+37060789118"
         },
         "message": [
           "Failover, all",
@@ -2101,7 +2100,7 @@
           ]
         },
         "sms-config": {
-          "reciever": "+37060211799"
+          "reciever": "+37060789118"
         },
         "message": [
           "Mobile Data, all",
@@ -2165,7 +2164,7 @@
           ]
         },
         "sms-config": {
-          "reciever": "+37060211799"
+          "reciever": "+37060789118"
         },
         "message": [
           "SMS, received from"
@@ -2212,7 +2211,7 @@
           ]
         },
         "sms-config": {
-          "reciever": "+37060211799"
+          "reciever": "+37060789118"
         },
         "message": [
           "Web UI, all",
@@ -2287,7 +2286,7 @@
           ]
         },
         "sms-config": {
-          "reciever": "+37060211799"
+          "reciever": "+37060789118"
         },
         "message": [
           "DHCP, all",

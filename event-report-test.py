@@ -157,6 +157,7 @@ def TestEvents(file):
     CreateCSV(file, start)
     print("Started at: {0}".format(start))
     print("Total tests: {0}\n".format(total))
+    PurgeAllSms()
     for test in file["events-triggers"]:
         for subtype in test["event-data"]["event-subtype"]:
             print("Event type: " +
@@ -198,30 +199,29 @@ def TestEvents(file):
                 sys.exit()
             response = SendEvent(
                 "/services/events_reporting/config", data, "post")
-            # """
             time.sleep(2)
+            # """            
             if (response["success"] == True):
-                eventResults.eventId = response["data"]["id"]
-                PurgeAllSms()
+                eventResults.eventId = response["data"]["id"]                
                 TriggerEvent(test["trigger-data"][index])
-                time.sleep(10)
-                CheckWhichSim()
+                time.sleep(10)                
                 CheckReceive()
                 if (eventResults.passed == True):
                     passedCnt += 1
                 else:
-                    failedCnt += 1            
+                    failedCnt += 1
                 UpdateCSV(index, test)
+                #nuresetinimas, evento istrynimas                
                 SendEvent("/services/events_reporting/config/" +
-                          eventResults.eventId, "", "delete")
+                          eventResults.eventId, "", "delete")                
+                eventResults.passed = False
+                PurgeAllSms()
             else:
                 print(Text.Red("Event was not created"))
             # """
             index += 1
-            print("-"*40)
-        # nuresetinamos reiksmes
-        index = 0
-        eventResults.passed = False
+            print("-"*40)        
+        index = 0        
     print("Total events tested: {0}".format(total))
     print(Text.Green("Passed: {0}".format(passedCnt)), end=" ")
     print(Text.Red("Failed: {0}".format(failedCnt)))
@@ -261,16 +261,18 @@ def TriggerEvent(trigger):
 def PurgeAllSms():
     res = SendCommand("gsmctl -S -l all", dataReceiver)
     ammount = (len(res))/15
-    i = 0
-    while i < ammount:
-        SendCommand("gsmctl -S -d {0}".format(i), dataReceiver)
-        i += 1
+    cnt = 0
+    while cnt < ammount:        
+        index = res[cnt*15].split(":\t\t")[1][:-1]
+        SendCommand("gsmctl -S -d {0}".format(index), dataReceiver)
+        cnt += 1
 
 
 def CheckReceive():
+    CheckWhichSim()
     res = SendCommand("gsmctl -S -l all", dataReceiver)
     if (len(res) == 0):
-        print(Text.Red("Device did not receive the message"))        
+        print(Text.Red("Device did not receive the message"))
     elif (len(res) >= 15):
         eventResults.received = res[2].split(":\t\t")[1][:-1]
         eventResults.messageIn = res[13].split(":\t\t")[1][:-1]
@@ -311,7 +313,6 @@ def UploadCSV(delete):
     if (delete == True):
         os.system("rm '{0}'".format(eventResults.fileName))
     ftp.quit()
-# Constructors
 
 
 class DeviceData:
@@ -338,8 +339,6 @@ class ResultData:
         self.messageIn = ""
         self.received = ""
         self.fileName = ""
-
-# Utilities
 
 
 class Text():

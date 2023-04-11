@@ -4,7 +4,1792 @@
     "SIM1-nr": "+37060789118",
     "SIM2-nr": ""
   },
-  "events-triggers": [    
+  "events-triggers": [
+    {
+      "event-data": {
+        "event-type": "Config",
+        "event-subtype": [        
+          "quota_limit",
+          "gps",
+          "blesem",
+          "ioman",
+          "wireless",
+          "hostblock",
+          "privoxy",
+          "vrrpd",
+          "avl",
+          "ble_devices",
+          "buttons",
+          "call_utils",
+          "cli",
+          "dmvpn",
+          "email_to_sms",
+          "frr",
+          "fstab",
+          "iojuggler",
+          "ip_blockd",
+          "landingpage",
+          "modbus",
+          "modbus_master",
+          "modbusgateway",
+          "multi_wifi",
+          "mwan3",
+          "ntpclient",
+          "ntpserver",
+          "operctl",
+          "overview",
+          "p910nd",
+          "post_get",
+          "pptpd",
+          "profiles",
+          "rms_mqtt",
+          "rpcd",
+          "rs_console",
+          "rs_modbus",
+          "rs_modem",
+          "rs_overip",
+          "rut_fota",
+          "sim_switch",
+          "sms_gateway",
+          "sms_utils",
+          "snmptrap",
+          "stunnel",
+          "system",
+          "telnetd",
+          "uhttpd",
+          "upnpd",
+          "wifi_scanner",
+          "xl2tpd"
+        ],
+        "email-config": {
+          "subject": "",
+          "email-acc": "",
+          "recievers": [
+            ""
+          ]
+        },
+        "sms-config": {
+          "reciever": "+37060789118"
+        },
+        "message": [
+          "Config, quota_limit",
+          "Config, global positioning system",
+          "Config, blesem (bluetooth)",
+          "Config, ioman (I/O settings)",
+          "Config, wireless",
+          "Config, hostblock",
+          "Config, privoxy",
+          "Config, vrrpd",
+          "Config, avl",
+          "Config, ble_devices",
+          "Config, buttons",
+          "Config, call_utils",
+          "Config, cli",
+          "Config, dmvpn",
+          "Config, email_to_sms",
+          "Config, frr",
+          "Config, fstab",
+          "Config, iojuggler",
+          "Config, ip_blockd",
+          "Config, landingpage",
+          "Config, modbus",
+          "Config, modbus_master",
+          "Config, modbusgateway",
+          "Config, multi_wifi",
+          "Config, mwan3",
+          "Config, ntpclient",
+          "Config, ntpserver",
+          "Config, operctl",
+          "Config, overview",
+          "Config, p910nd",
+          "Config, post_get",
+          "Config, pptpd",
+          "Config, profiles",
+          "Config, rms_mqtt",
+          "Config, rpcd",
+          "Config, rs_console",
+          "Config, rs_modbus",
+          "Config, rs_modem",
+          "Config, rs_overip",
+          "Config, rut_fota",
+          "Config, sim_switch",
+          "Config, sms_gateway",
+          "Config, sms_utils",
+          "Config, snmptrap",
+          "Config, stunnel",
+          "Config, system",
+          "Config, telnetd",
+          "Config, uhttpd",
+          "Config, upnpd",
+          "Config, wifi_scanner",
+          "Config, xl2tpd"
+        ]
+      },
+      "trigger-data": [
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "method": "put",
+              "api-path": "/network/interfaces/config/mob1s1a1",
+              "api-body": {
+                "data": {
+                  "data_limit": "1000",
+                  "enable_warning": "0",
+                  "reset_hour": "0",
+                  "mob_limit_enabled": "1",
+                  "period": "day"
+                }
+              },
+              "retrieve-token": "",
+              "wait-time": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "method": "put",
+              "api-path": "/services/gps/general/config/general",
+              "api-body": {
+                "data": {
+                  "enabled": "1",
+                  ".type": "section",
+                  "glonass_sup": "0",
+                  "id": "general",
+                  "beidou_sup": "0",
+                  "galileo_sup": "0"
+              }
+              },
+              "retrieve-token": "",
+              "wait-time": ""
+            },
+            {
+              "type": "api",
+              "command": "",
+              "method": "put",
+              "api-path": "/services/gps/general/config/general",
+              "api-body": {
+                "data": {
+                  "enabled": "0",
+                  ".type": "section",
+                  "id": "general"
+                }
+              },
+              "retrieve-token": "",
+              "wait-time": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "method": "put",
+              "api-path": "/services/bluetooth/general/config/general",
+              "api-body": {
+                "data": {
+                  "enabled": "1"
+                }
+              },
+              "retrieve-token": "",
+              "wait-time": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "method": "put",
+              "api-path": "/services/io/scheduler/config/general",
+              "api-body": {
+                "data": {
+                  "enabled": "1"
+                }
+              },
+              "retrieve-token": "",
+              "wait-time": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "method": "put",
+              "api-path": "/network/wireless/devices/config/radio0",
+              "api-body": {
+                "data": {
+                  ".type": "wifi-device",
+                  "country": "LT"
+                }
+              },
+              "retrieve-token": "",
+              "wait-time": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "method": "put",
+              "api-path": "/services/webfilter/config/general",
+              "api-body": {
+                "data": {
+                  "enabled": "1",
+                  ".type": "hostblock",
+                  "id": "general",
+                  "mode": "blacklist"
+                }
+              },
+              "retrieve-token": "",
+              "wait-time": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "method": "put",
+              "api-path": "/services/privoxy/config/general",
+              "api-body": {
+                "data": {
+                  "enabled": "1",
+                  ".type": "privoxy",
+                  "id": "general",
+                  "_mode": "blacklist",
+                  "url": []
+                }
+              },
+              "retrieve-token": "",
+              "wait-time": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "method": "post",
+              "api-path": "/services/vrrp/config",
+              "api-body": {
+                "data": {
+                  "id": "test"
+                }
+              },
+              "retrieve-token": "",
+              "wait-time": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "put",
+              "api-path": "/services/gps/avl/config/general",
+              "api-body": {
+                "data": {
+                  "id": "general",
+                  "hostname": "192.168.0.2",
+                  ".type": "section"
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "ssh",
+              "command": "echo -e \"config device\n\toption address '11:22:33:44:55:66'\n\toption name 'test'\n\toption store_data'0'\" > /etc/config/ble_devices",
+              "wait-time": "",
+              "method": "",
+              "api-path": "",
+              "api-body": {
+                "data": {}
+              },
+              "retrieve-token": ""
+            },
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "put",
+              "api-path": "/services/bluetooth/paired/config/cfg010f15",
+              "api-body": {
+                "data": {
+                  "store_data": "1"
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "put",
+              "api-path": "/system/administration/buttons/config/cfg035d81",
+              "api-body": {
+                "data": {
+                  ".type": "button",
+                  "enabled": "1",
+                  "max": "21",
+                  "min": "12"
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "post",
+              "api-path": "/services/mobile_utilities/call_utilities/rules/config",
+              "api-body": {
+                "data": {
+                  "action": "send_status"
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "put",
+              "api-path": "/system/access_control/cli/config/general",
+              "api-body": {
+                "data": {
+                  "shell_limit": "6"
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "post",
+              "api-path": "/services/dmvpn/config",
+              "api-body": {
+                "data": {
+                  "id": "00000001"
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "put",
+              "api-path": "/services/mobile_utilities/sms_gateway/email_to_sms/config/general",
+              "api-body": {
+                "data": {
+                  "time": "min",
+                  "min": "2"
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "ubus",
+              "command": "ubus call uci set '{\"config\":\"frr\", \"section\":\"bgp\", \"values\":{\"enabled\":true}, \"ubus_rpc_session\":\"\"}'",
+              "wait-time": "",
+              "method": "",
+              "api-path": "",
+              "api-body": {},
+              "retrieve-token": ""
+            },
+            {
+              "type": "ubus",
+              "command": "ubus call uci apply '{\"timeout\":10,\"ubus_rpc_session\":\"\"}'",
+              "wait-time": "",
+              "method": "",
+              "api-path": "",
+              "api-body": {},
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "put",
+              "api-path": "/services/usb_tools/general/config/general",
+              "api-body": {
+                "data": {
+                  "id": "general",
+                  ".type": "global",
+                  "auto_sync": "1"
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "put",
+              "api-path": "/services/io/juggler/config/general",
+              "api-body": {
+                "data": {
+                  "enabled": "1",
+                  ".type": "general",
+                  "id": "general"
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "put",
+              "api-path": "/system/access_control/security/general/config/general",
+              "api-body": {
+                "data": {
+                  "enabled": "1",
+                  ".type": "globals",
+                  "max_attempt_count": "11",
+                  "id": "general",
+                  "reboot_clear": "0"
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "10",
+              "method": "post",
+              "api-path": "/services/packages/actions/install_package",
+              "api-body": {
+                "data": {
+                  "package": "hs_theme_airport"
+                }
+              },
+              "retrieve-token": ""
+            },
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "put",
+              "api-path": "/services/hotspot/landing/config/general",
+              "api-body": {
+                "data": {
+                  ".type": "landing",
+                  "id": "general",
+                  "theme": "airport",
+                  "auth_proto": "pap"
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "put",
+              "api-path": "/services/modbus/tcp_slave/config/general",
+              "api-body": {
+                "data": {
+                  ".type": "modbus",
+                  "id": "general",
+                  "port": "503"
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "post",
+              "api-path": "/services/modbus/tcp/config",
+              "api-body": {
+                "data": {}
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "put",
+              "api-path": "/services/modbus/gateway/config/general",
+              "api-body": {
+                "data": {
+                  ".type": "gateway",
+                  "id": "general",
+                  "request": "requestTEST"
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "put",
+              "api-path": "/network/wireless/multi_ap/general/config/general",
+              "api-body": {
+                "data": {
+                  "enabled": "0",
+                  ".type": "multi_wifi",
+                  "id": "general",
+                  "scan_time": "70"
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "post",
+              "api-path": "/network/mwan3/policies/config",
+              "api-body": {
+                "data": {
+                  "id": "policy",
+                  "mode": "mwan",
+                  ".type": "policy"
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "post",
+              "api-path": "/services/ntp/remote_servers/config",
+              "api-body": {
+                "data": {
+                  ".type": "ntpserver"
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "put",
+              "api-path": "/services/ntp/server/config/general",
+              "api-body": {
+                "data": {
+                  "enabled": "1",
+                  ".type": "ntpserver",
+                  "id": "general"
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "post",
+              "api-path": "/network/mobile/operator_lists/config",
+              "api-body": {
+                "data": {
+                  "name": "test"
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "put",
+              "api-path": "/status/overview/config",
+              "api-body": {
+                "data": [
+                  {
+                    "id": "cfg010a5c",
+                    "position": "1",
+                    "enabled": "0"
+                  }
+                ]
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "put",
+              "api-path": "/services/usb_tools/p910nd/config/general",
+              "api-body": {
+                "data": {
+                  "port": "9101",
+                  "id": "general",
+                  ".type": "p910nd"
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "put",
+              "api-path": "/services/io/post_get/config/general",
+              "api-body": {
+                "data": {
+                  "password": "test",
+                  ".type": "post_get",
+                  "id": "general",
+                  "username": "test",
+                  "password_confirm": "test"
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "post",
+              "api-path": "/services/pptp/server/config",
+              "api-body": {
+                "data": {
+                  "id": "test",
+                  ".type": "service"
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "post",
+              "api-path": "/system/profiles/config",
+              "api-body": {
+                "data": {
+                  "id": "test",
+                  "from_current_profile": "0",
+                  ".type": "profile"
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "put",
+              "api-path": "/services/cloud_solutions/rms/config/general",
+              "api-body": {
+                "data": {
+                  ".type": "rms_connect_mqtt",
+                  "enable": "0",
+                  "id": "general"
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "post",
+              "api-path": "/system/users/config",
+              "api-body": {
+                "data": {
+                  "username": "test",
+                  "password": "Test1234",
+                  "group": "user"
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "post",
+              "api-path": "/services/console/config",
+              "api-body": {
+                "data": {
+                  "name": "test",
+                  "device": []
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "post",
+              "api-path": "/services/modbus/tcp_over_serial/config",
+              "api-body": {
+                "data": {
+                  "name": "test",
+                  "device": []
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "post",
+              "api-path": "/services/rs_modem/config",
+              "api-body": {
+                "data": {
+                  "name": "test",
+                  "device": []
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "post",
+              "api-path": "/services/overip/config",
+              "api-body": {
+                "data": {
+                  "name": "test",
+                  "device": []
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "put",
+              "api-path": "/system/fota/config/general",
+              "api-body": {
+                "data": {
+                  "enabled": "0",
+                  ".type": "rut_fota",
+                  "id": "general"
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "put",
+              "api-path": "/network/mobile/sim_switch/config/cfg01aa0e",
+              "api-body": {
+                "data": {
+                  "enabled": "1",
+                  ".type": "sim",
+                  "denied": "0",
+                  "retry_count": "3",
+                  "no_network": "0",
+                  "on_signal": "0",
+                  "data_limit": "0",
+                  "roaming": "0",
+                  "sms_limit": "0",
+                  "fail_flag": "0",
+                  "interval": "11"
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "put",
+              "api-path": "/services/mobile_utilities/sms_gateway/auto_reply/config/general",
+              "api-body": {
+                "data": {
+                  "enabled": "0",
+                  ".type": "reply",
+                  "delete_sms": "1",
+                  "id": "general",
+                  "mode": "everyone",
+                  "every_sms": "0",
+                  "tel": "",
+                  "msg": ""
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "post",
+              "api-path": "/services/mobile_utilities/sms_rules/config",
+              "api-body": {
+                "data": {
+                  "smstext": "test",
+                  "action": "send_status"
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "post",
+              "api-path": "/services/snmp/trap_rules/config",
+              "api-body": {
+                "data": {}
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "post",
+              "api-path": "/services/stunnel/interfaces/config",
+              "api-body": {
+                "data": {
+                  "id": "test"
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "put",
+              "api-path": "/system/administration/system/config/general",
+              "api-body": {
+                "data": {
+                  ".type": "system",
+                  "hostname": "Teltonika-RUTX11.com",
+                  "id": "general",
+                  "routername": "RUTx11"
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "put",
+              "api-path": "/system/access_control/telnet/config/general",
+              "api-body": {
+                "data": {
+                  "enable": "1",
+                  ".type": "telnetd",
+                  "id": "general"
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "put",
+              "api-path": "/system/access_control/webui/config/general",
+              "api-body": {
+                "data": {
+                  ".type": "uhttpd",
+                  "enable_https": "1",
+                  "listen_https": "443"
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "put",
+              "api-path": "/services/upnp/settings/config/general",
+              "api-body": {
+                "data": {
+                  ".type": "upnpd",
+                  "port": "5001",
+                  "id": "general"
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "put",
+              "api-path": "/network/wireless/wifi_scanner/config/general",
+              "api-body": {
+                "data": {
+                  ".type": "section",
+                  "interval": "11",
+                  "id": "general",
+                  "two_g_enabled": "0"
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "post",
+              "api-path": "/services/l2tp/server/config",
+              "api-body": {
+                "data": {
+                  "id": "test",
+                  ".type": "service"
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "event-data": {
+        "event-type": "WiFi",
+        "event-subtype": [
+          "all",
+          "client connected",
+          "client disconnected"
+        ],
+        "email-config": {
+          "subject": "",
+          "email-acc": "",
+          "recievers": [
+            ""
+          ]
+        },
+        "sms-config": {
+          "reciever": "+37060789118"
+        },
+        "message": [
+          "WiFi, all",
+          "WiFi, client connected",
+          "WiFi, client disconnected"
+        ]
+      },
+      "trigger-data": [
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "method": "put",
+              "api-path": "/network/wireless/devices/config/radio1",
+              "api-body": {
+                "data": {
+                  ".type": "wifi-device",
+                  "country": "CA"
+                }
+              },
+              "retrieve-token": "",
+              "wait-time": "10"
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "method": "put",
+              "api-path": "/network/wireless/devices/config/radio0",
+              "api-body": {
+                "data": {
+                  ".type": "wifi-device",
+                  "country": "AL"
+                }
+              },
+              "retrieve-token": "",
+              "wait-time": "10"
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "method": "put",
+              "api-path": "/network/wireless/devices/config/radio0",
+              "api-body": {
+                "data": {
+                  ".type": "wifi-device",
+                  "country": "AQ"
+                }
+              },
+              "retrieve-token": "",
+              "wait-time": "10"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "event-data": {
+        "event-type": "SSH",
+        "event-subtype": [
+          "all",
+          "succeeded",
+          "bad"
+        ],
+        "email-config": {
+          "subject": "",
+          "email-acc": "",
+          "recievers": [
+            ""
+          ]
+        },
+        "sms-config": {
+          "reciever": "+37060789118"
+        },
+        "message": [
+          "SSH, all",
+          "SSH, succeeded",
+          "SSH, bad"
+        ]
+      },
+      "trigger-data": [
+        {
+          "steps": [
+            {
+              "type": "ssh",
+              "command": "",
+              "method": "",
+              "api-path": "",
+              "api-body": {},
+              "retrieve-token": "",
+              "wait-time": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "ssh",
+              "command": "",
+              "method": "",
+              "api-path": "",
+              "api-body": {},
+              "retrieve-token": "",
+              "wait-time": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "cmd",
+              "command": "sshpass -p 1324 ssh root@192.168.1.1 -o ExitOnForwardFailure='yes'",
+              "method": "",
+              "api-path": "",
+              "api-body": {},
+              "retrieve-token": "",
+              "wait-time": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "event-data": {
+        "event-type": "Switch Events",
+        "event-subtype": [
+          "all",
+          "Port link state",
+          "Port speed for",
+          "changed to DOWN",
+          "changed to UP"
+        ],
+        "email-config": {
+          "subject": "",
+          "email-acc": "",
+          "recievers": [
+            ""
+          ]
+        },
+        "sms-config": {
+          "reciever": "+37060789118"
+        },
+        "message": [
+          "Switch Events, all",
+          "Switch Events, Port link state",
+          "Switch Events, Port speed for",
+          "Switch Events, changed to DOWN",
+          "Switch Events, changed to UP"
+        ]
+      },
+      "trigger-data": [
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "method": "put",
+              "api-path": "/network/vlan/port_based/config/cfg081ec7",
+              "api-body": {
+                "data": {
+                  ".type": "switch_vlan",
+                  "lan3": "u"
+                }
+              },
+              "retrieve-token": "",
+              "wait-time": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "method": "put",
+              "api-path": "/network/vlan/port_based/config/cfg081ec7",
+              "api-body": {
+                "data": {
+                  ".type": "switch_vlan",
+                  "lan3": ""
+                }
+              },
+              "retrieve-token": "",
+              "wait-time": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "method": "put",
+              "api-path": "/network/vlan/port_based/config/cfg081ec7",
+              "api-body": {
+                "data": {
+                  ".type": "switch_vlan",
+                  "lan3": "u"
+                }
+              },
+              "retrieve-token": "",
+              "wait-time": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "method": "put",
+              "api-path": "/network/vlan/port_based/config/cfg081ec7",
+              "api-body": {
+                "data": {
+                  ".type": "switch_vlan",
+                  "lan3": ""
+                }
+              },
+              "retrieve-token": "",
+              "wait-time": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "method": "put",
+              "api-path": "/network/vlan/port_based/config/cfg081ec7",
+              "api-body": {
+                "data": {
+                  ".type": "switch_vlan",
+                  "lan3": "u"
+                }
+              },
+              "retrieve-token": "",
+              "wait-time": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "event-data": {
+        "event-type": "Reboot",
+        "event-subtype": [
+          "all",
+          "web ui",
+          "ping reboot",
+          "reboot scheduler",
+          "from button",
+          "sms reboot"
+        ],
+        "email-config": {
+          "subject": "",
+          "email-acc": "",
+          "recievers": [
+            ""
+          ]
+        },
+        "sms-config": {
+          "reciever": "+37060789118"
+        },
+        "message": [
+          "Reboot, all",
+          "Reboot, web ui",
+          "Reboot, ping reboot",
+          "Reboot, reboot scheduler",
+          "Reboot, from button",
+          "Reboot, sms reboot"
+        ]
+      },
+      "trigger-data": [
+        {
+          "steps": [
+            {
+              "type": "ssh",
+              "command": "reboot",
+              "wait-time": "120",
+              "method": "",
+              "api-path": "",
+              "api-body": {},
+              "retrieve-token": "1"
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "120",
+              "method": "post",
+              "api-path": "/system/administration/general/actions/reboot",
+              "api-body": {
+                "data": {}
+              },
+              "retrieve-token": "1"
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "180",
+              "method": "put",
+              "api-path": "/services/auto_reboot/ping/config/cfg01c21d",
+              "api-body": {
+                "data": {
+                  "type": "ping",
+                  "retry": "1",
+                  "enable": "1",
+                  ".type": "ping_reboot",
+                  "packet_size": "56",                  
+                  "host": "192.168.134.80",
+                  "ip_type": "ipv4",
+                  "action": "1",
+                  "stop_action": "0",
+                  "interface": "1",
+                  "time": "5",
+                  "time_out": "1",
+                  "number": ""
+                }
+              },
+              "retrieve-token": "1"
+            },
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "put",
+              "api-path": "/services/auto_reboot/ping/config/cfg01c21d",
+              "api-body": {
+                "data": {
+                  "type": "ping",
+                  "enable": "0",
+                  ".type": "ping_reboot",
+                  "id": "cfg01c21d"
+                }
+              },
+              "retrieve-token": "0"
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "put",
+              "api-path": "/services/auto_reboot/periodic/config/cfg0210a4",
+              "api-body": {
+                "data": {
+                  "id": "cfg0210a4",
+                  "enable": "1",
+                  "action": "1",
+                  "period": "week",
+                  "days": [
+                    "mon",
+                    "tue",
+                    "wed",
+                    "thu",
+                    "fri"
+                  ],
+                  "time": [
+                    "00:05"
+                  ]
+                }
+              },
+              "retrieve-token": "1"
+            },
+            {
+              "type": "ssh",
+              "command": "date -s 00:04:55",
+              "wait-time": "180",
+              "method": "",
+              "api-path": "",
+              "api-body": {},
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "ssh",
+              "command": "reboot -b",
+              "wait-time": "120",
+              "method": "",
+              "api-path": "",
+              "api-body": {},
+              "retrieve-token": "1"
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "ssh",
+              "command": "gsmctl -S -s \"+37060789118 Admin123 reboot\"",
+              "wait-time": "120",
+              "method": "",
+              "api-path": "",
+              "api-body": {},
+              "retrieve-token": "1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "event-data": {
+        "event-type": "Failover",
+        "event-subtype": [
+          "all",
+          "Switched to main",
+          "Switched to backup"
+        ],
+        "email-config": {
+          "subject": "",
+          "email-acc": "",
+          "recievers": [
+            ""
+          ]
+        },
+        "sms-config": {
+          "reciever": "+37060789118"
+        },
+        "message": [
+          "Failover, all",
+          "Failover, Switched to main",
+          "Failover, Switched to backup"
+        ]
+      },
+      "trigger-data": [
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "put",
+              "api-path": "/network/mwan3/interfaces/config/wan",
+              "api-body": {
+                "data": {
+                  "enabled": "1",
+                  "metric": "2"
+                }
+              },
+              "retrieve-token": ""
+            },
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "10",
+              "method": "put",
+              "api-path": "/network/mwan3/interfaces/config/mob1s1a1",
+              "api-body": {
+                "data": {
+                  "enabled": "1",
+                  "metric": "1"
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "ssh",
+              "command": "/etc/init.d/network restart",
+              "wait-time": "30",
+              "method": "",
+              "api-path": "",
+              "api-body": {},
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "10",
+              "method": "put",
+              "api-path": "/network/interfaces/config/mob1s1a1",
+              "api-body": {
+                "data": {
+                  "enabled": "0",
+                  ".type": "interface",
+                  "id": "wan"
+                }
+              },
+              "retrieve-token": ""
+            },
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "10",
+              "method": "put",
+              "api-path": "/network/interfaces/config/mob1s1a1",
+              "api-body": {
+                "data": {
+                  "enabled": "1",
+                  ".type": "interface",
+                  "id": "wan"
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "event-data": {
+        "event-type": "Mobile Data",
+        "event-subtype": [
+          "all",
+          "data connected",
+          "data disconnected"
+        ],
+        "email-config": {
+          "subject": "",
+          "email-acc": "",
+          "recievers": [
+            ""
+          ]
+        },
+        "sms-config": {
+          "reciever": "+37060789118"
+        },
+        "message": [
+          "Mobile Data, all",
+          "Mobile Data, data connected",
+          "Mobile Data, data disconnected"
+        ]
+      },
+      "trigger-data": [
+        {
+          "steps": [
+            {
+              "type": "ssh",
+              "command": "/etc/init.d/network restart",
+              "wait-time": "30",
+              "method": "",
+              "api-path": "",
+              "api-body": {},
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "ssh",
+              "command": "/etc/init.d/network restart",
+              "wait-time": "30",
+              "method": "",
+              "api-path": "",
+              "api-body": {},
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "ssh",
+              "command": "/etc/init.d/network restart",
+              "wait-time": "30",
+              "method": "",
+              "api-path": "",
+              "api-body": {},
+              "retrieve-token": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "event-data": {
+        "event-type": "SMS",
+        "event-subtype": [
+          "received from"
+        ],
+        "email-config": {
+          "subject": "",
+          "email-acc": "",
+          "recievers": [
+            ""
+          ]
+        },
+        "sms-config": {
+          "reciever": "+37060789118"
+        },
+        "message": [
+          "SMS, received from"
+        ]
+      },
+      "trigger-data": [
+        {
+          "steps": [
+            {
+              "type": "ssh",
+              "command": "gsmctl -S -s \"+37060789118 SMS test\"",
+              "wait-time": "",
+              "method": "",
+              "api-path": "",
+              "api-body": {},
+              "retrieve-token": ""
+            },
+            {
+              "type": "ssh",
+              "command": "gsmctl -S -d 0",
+              "wait-time": "",
+              "method": "",
+              "api-path": "",
+              "api-body": {},
+              "retrieve-token": ""
+            }
+          ]
+        }
+      ]
+    },
     {
       "event-data": {
         "event-type": "Web UI",
