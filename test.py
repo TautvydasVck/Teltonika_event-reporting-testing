@@ -4,7 +4,7 @@ import sys
 import time
 from datetime import datetime
 
-# created modules
+
 from modules.ResultFile import CreateCSV, UpdateCSV, UploadCSV
 from modules.PrimaryChecks import CheckForMobile, CheckForModel, CheckTotalEvents
 from modules.DataFile import GetConfigData
@@ -14,7 +14,7 @@ from modules.APIToken import GetToken
 from modules.Triggering import TriggerEvent
 from modules.Receiver import CheckReceive, GetPhoneNumbers
 from modules.Variables import ReadArgs, deviceInfo, eventResults
-# created classes
+
 from classes.Utilities import Text
 
 
@@ -95,6 +95,7 @@ def TestEvents(file):
     print("Total events tested: {0}".format(total))
     print(Text.Green("Passed: {0}".format(passedCnt)), end=" ")
     print(Text.Red("Failed: {0}".format(failedCnt)))
+
 
 # Program's main part
 # Get credentials and file path
