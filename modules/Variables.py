@@ -3,7 +3,6 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-
 from classes.DeviceData import DeviceData
 from classes.RequestData import RequestData
 from classes.ResultData import ResultData

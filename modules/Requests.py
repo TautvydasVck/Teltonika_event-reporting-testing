@@ -1,5 +1,3 @@
-from modules.Variables import dataSender
-from classes.Utilities import Text
 import paramiko
 import requests
 import time
@@ -7,7 +5,8 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-
+from modules.Variables import dataSender
+from classes.Utilities import Text
 
 def SendCommand(data, device):
     client = paramiko.SSHClient()
