@@ -6,3 +6,4 @@ class ResultData:
         self.messageIn = ""
         self.received = ""
         self.fileName = ""
+        self.delete = False

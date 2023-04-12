@@ -13,10 +13,9 @@ from modules.Requests import SendEvent
 from modules.APIToken import GetToken
 from modules.Triggering import TriggerEvent
 from modules.Receiver import CheckReceive, GetPhoneNumbers
-from modules.Variables import ReadArgs
+from modules.Variables import ReadArgs, deviceInfo, eventResults
 # created classes
 from classes.Utilities import Text
-from modules.Variables import deviceInfo, eventResults
 
 
 def TestEvents(file):
@@ -107,4 +106,4 @@ GetPhoneNumbers(data)
 CheckForModel(data)
 CheckForMobile()
 TestEvents(data)
-UploadCSV(False)
+UploadCSV(eventResults.delete)

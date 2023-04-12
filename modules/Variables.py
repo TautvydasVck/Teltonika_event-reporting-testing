@@ -31,7 +31,7 @@ def ReadArgs():
     parser.add_argument(
         "-file", "--configFile", help="Configuration file's path. Default: ./event-config.json", action="store", default="event-config.json")
     parser.add_argument(
-        "-d", "--deleteOutput", help="Delete test results file from PC. Default: false", action="store_true", default=False)
+        "-d", "--deleteFile", help="Delete test results file from PC. Default: false", action="store_true", default=False)
     args = parser.parse_args()
 
     dataSender.name = args.sName
@@ -42,3 +42,5 @@ def ReadArgs():
     dataReceiver.name = args.rName
     dataReceiver.pswd = args.rPassword
     dataReceiver.ipAddr = args.rAddress
+
+    eventResults.delete = args.deleteFile
