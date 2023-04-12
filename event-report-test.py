@@ -305,8 +305,7 @@ def UpdateCSV(index, test):
 
 
 def UploadCSV(delete):
-    ftp = ftplib.FTP(host='192.168.10.44', user='ftpuser',
-                     passwd='Akademija159!')
+
     ftp.encoding = "utf-8"
     with open(eventResults.fileName, "rb") as f:
         ftp.storbinary(f"STOR {eventResults.fileName}", f)
