@@ -24,8 +24,7 @@ def UpdateCSV(index, test):
 
 
 def UploadCSV():
-    ftp = ftplib.FTP(host='192.168.10.44', user='ftpuser',
-                     passwd='Akademija159!')
+
     ftp.encoding = "utf-8"
     with open(fileData.outFileName, "rb") as f:
         ftp.storbinary(f"STOR {fileData.outFileName}", f)
