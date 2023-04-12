@@ -13,9 +13,10 @@ from modules.Requests import SendEvent
 from modules.APIToken import GetToken
 from modules.Triggering import TriggerEvent
 from modules.Receiver import CheckReceive, GetPhoneNumbers
+from modules.Variables import ReadArgs
 # created classes
 from classes.Utilities import Text
-from variables import deviceInfo, eventResults
+from modules.Variables import deviceInfo, eventResults
 
 
 def TestEvents(file):
@@ -98,36 +99,7 @@ def TestEvents(file):
 
 # Program's main part
 # Get credentials and file path
-"""
-parser = argparse.ArgumentParser(
-    description="Automatically test device's event reporting funcionality")
-parser.add_argument(
-    "-sn", "--sName", help="SMS sender device's login name", required="True")
-parser.add_argument(
-    "-sp", "--sPassword", help="SMS sender device's login password", required="True")
-parser.add_argument(
-    "-sip", "--sAddress", help="SMS sender device's IP address", required="True")
-parser.add_argument(
-    "-rn", "--rName", help="SMS receiver device's login name", required="True")
-parser.add_argument(
-    "-rp", "--rPassword", help="SMS receiver device's login password", required="True")
-parser.add_argument(
-    "-rip", "--rAddress", help="SMS receiver device's IP address", required="True")
-parser.add_argument(
-    "-file", "--configFile", help="Configuration file's path", required="True")
-parser.add_argument(
-    "-d", "--deleteOutput", help="Delete test results file from PC", action="store_true")
-args = parser.parse_args()
-
-dataSender.name = args.sName
-dataSender.pswd = args.sPassword
-dataSender.ipAddr = args.sAddress
-dataSender.baseURL = "http://"+dataSender.ipAddr+"/api"
-
-dataReceiver.name = args.rName
-dataReceiver.pswd = args.rPassword
-dataReceiver.ipAddr = args.rAddress
-"""
+ReadArgs()
 print(end="\n")
 GetToken()
 data = GetConfigData("event-config.json")

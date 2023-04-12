@@ -4,7 +4,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from variables import eventResults, deviceInfo
+from modules.Variables import eventResults, deviceInfo
 
 def CreateCSV(file, start):
     fileName = "{0}_{1}.csv".format(file["info"]["product"], start)

@@ -8,7 +8,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from classes.Utilities import Text
 from modules.Requests import SendCommand, SendTrigger
 from modules.APIToken import GetToken
-from variables import dataSender
+from modules.Variables import dataSender
 
 def TriggerEvent(trigger):
     for step in trigger["steps"]:

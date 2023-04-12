@@ -5,7 +5,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from classes.Utilities import Text
-from variables import dataSender, deviceInfo
+from modules.Variables import dataSender, deviceInfo
 
 def CheckForMobile():
     res = GetSysInfo()

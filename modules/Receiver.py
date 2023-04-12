@@ -4,7 +4,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from modules.Requests import SendCommand
 from classes.Utilities import Text
-from variables import dataReceiver, eventResults, dataSender, deviceInfo
+from modules.Variables import dataReceiver, eventResults, dataSender, deviceInfo
 
 def CheckReceive():
     CheckWhichSim()

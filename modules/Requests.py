@@ -6,7 +6,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from classes.Utilities import Text
-from variables import dataSender
+from modules.Variables import dataSender
 
 def SendCommand(data, device):
     client = paramiko.SSHClient()

@@ -3,7 +3,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from modules.Requests import SendCommand
-from variables import dataReceiver
+from modules.Variables import dataReceiver
 
 def PurgeAllSms():
     res = SendCommand("gsmctl -S -l all", dataReceiver)
