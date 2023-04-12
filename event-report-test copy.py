@@ -10,6 +10,11 @@ from datetime import datetime
 
 # created moduls
 from moduls.ResultFile import CreateCSV, UpdateCSV, UploadCSV
+# created classes
+from classes.Utilities import Text
+from classes.DeviceData import DeviceData
+from classes.RequestData import RequestData
+from classes. ResultData import ResultData
 
 
 def GetSysInfo():
@@ -287,46 +292,6 @@ def CheckReceive():
 
     else:
         print(Text.Red("Error reading received SMS"))
-
-
-class DeviceData:
-    def __init__(self):
-        self.mobile = False
-        self.sims = ["", ""]
-        self.activeSim = 0
-
-
-class RequestData:
-    def __init__(self):
-        self.ipAddr = ""
-        self.token = ""
-        self.baseURL = ""
-        self.name = ""
-        self.pswd = ""
-
-
-class ResultData:
-    def __init__(self):
-        self.eventId = ""
-        self.passed = False
-        self.messageOut = ""
-        self.messageIn = ""
-        self.received = ""
-        self.fileName = ""
-
-
-class Text():
-    def Green(text):
-        return "\033[32m"+text+"\033[0m "
-
-    def Red(text):
-        return "\033[31m"+text+"\033[0m "
-
-    def Yellow(text):
-        return "\033[33m"+text+"\033[0m "
-
-    def Underline(text):
-        return "\033[4m"+text+"\033[0m "
 
 
 # Program's main part
