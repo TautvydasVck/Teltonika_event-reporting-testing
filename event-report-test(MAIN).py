@@ -10,23 +10,12 @@ from datetime import datetime
 
 # created moduls
 from moduls.ResultFile import CreateCSV, UpdateCSV, UploadCSV
+from moduls.PrimaryChecks import CheckForMobile, CheckForModel, CheckTotalEvents
 # created classes
 from classes.Utilities import Text
 from classes.DeviceData import DeviceData
 from classes.RequestData import RequestData
-from classes. ResultData import ResultData
-
-
-def GetSysInfo():
-    head = {"Content-Type": "application/json",
-            "Authorization": "Bearer " + dataSender.token}
-    response = requests.get(dataSender.baseURL +
-                            "/system/device/info", headers=head).json()
-    if (response["success"] == False):
-        print(Text.Red("Could not retrieve device information."))
-        sys.exit("Program will stop")
-    else:
-        return response
+from classes.ResultData import ResultData
 
 
 def GetPhoneNumbers(file):
@@ -102,57 +91,12 @@ def GetConfigData(filePath):
     return data
 
 
-def CheckForMobile():
-    res = GetSysInfo()
-    if (res["data"]["board"]["hwinfo"]["mobile"] == False):
-        print(Text.Yellow(
-            "Device does not have mobile capabilities. Messages can be sent only via email"))
-        deviceInfo.mobile = False
-    elif (res["data"]["board"]["hwinfo"]["mobile"] == True):
-        print(Text.Green(
-            "Device has mobile capabilities. Messages can be sent via email and phone number"))
-        deviceInfo.mobile = True
-    else:
-        print(Text.Red("Could not get information about mobile capabilities"))
-        sys.exit()
-
-
-def CheckForModel(file):
-    res = GetSysInfo()
-    print(
-        "--Device being tested: {0}--".
-        format(res["data"]["mnfinfo"]["name"]))
-    modelA = str(res["data"]["mnfinfo"]["name"])
-    modelF = file["info"]["product"]
-    if modelA.startswith(modelF):
-        print(Text.Green("Device model in JSON matches actual device model"))
-    else:
-        print(Text.Red("Device model mismatch"))
-        sys.exit(
-            "Device model in config file ({0}) and actual model ({1}) do not match.\nCheck JSON configuration file". format(modelF, modelA))
-
-
 def CheckWhichSim():
     res = SendCommand("ubus call sim get", dataSender)
     if (res[1].__contains__('1')):
         deviceInfo.activeSim = 0
     elif (res[1].__contains__('2')):
         deviceInfo.activeSim = 1
-
-
-def CheckTotalEvents(file):
-    events = 0
-    triggers = 0
-    messages = 0
-    for event in file["events-triggers"]:
-        events += len(event["event-data"]["event-subtype"])
-        triggers += len(event["trigger-data"])
-        messages += len(event["event-data"]["message"])
-        if (events != triggers or events != messages):
-            print(Text.Red(
-                "Events and their messages count does not match trigger count. Check JSON configuration file"))
-            sys.exit()
-    return events
 
 
 def TestEvents(file):
@@ -344,6 +288,6 @@ LoginToken()
 data = GetConfigData("event-config.json")
 GetPhoneNumbers(data)
 CheckForModel(data)
-CheckForMobile()
+CheckForMobile(deviceInfo)
 TestEvents(data)
 UploadCSV(eventResults, False)

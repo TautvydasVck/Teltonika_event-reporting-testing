@@ -1,4 +1,0 @@
-Event type;Event subtype;Expected message;Received message;Sent from;Got from;Passed
-Config;quota_limit;Config, quota_limit;Switch Events, all;+37060789118;+37060789118;False
-Config;gps;Config, global positioning system;Config, global positioning system;+37060789118;+37060789118;True
-Config;blesem;Config, blesem (bluetooth);Config, global positioning system;+37060789118;+37060789118;False

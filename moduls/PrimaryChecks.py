@@ -1,4 +1,10 @@
-def GetSysInfo():
+import sys
+import requests
+
+from classes.Utilities import Text
+
+
+def GetSysInfo(dataSender):
     head = {"Content-Type": "application/json",
             "Authorization": "Bearer " + dataSender.token}
     response = requests.get(dataSender.baseURL +
@@ -9,7 +15,8 @@ def GetSysInfo():
     else:
         return response
 
-def CheckForMobile():
+
+def CheckForMobile(deviceInfo):
     res = GetSysInfo()
     if (res["data"]["board"]["hwinfo"]["mobile"] == False):
         print(Text.Yellow(
@@ -36,4 +43,19 @@ def CheckForModel(file):
     else:
         print(Text.Red("Device model mismatch"))
         sys.exit(
-            "Device model in config file ({0}) and actual model ({1}) do not match.\nCheck JSON configuration file". format(modelF, modelA))
+            "Device model in config file ({0}) and actual model ({1}) do not match.\n" +
+            "Check JSON configuration file". format(modelF, modelA))
+
+def CheckTotalEvents(file):
+    events = 0
+    triggers = 0
+    messages = 0
+    for event in file["events-triggers"]:
+        events += len(event["event-data"]["event-subtype"])
+        triggers += len(event["trigger-data"])
+        messages += len(event["event-data"]["message"])
+        if (events != triggers or events != messages):
+            print(Text.Red(
+                "Events and their messages count does not match trigger count. Check JSON configuration file"))
+            sys.exit()
+    return events
