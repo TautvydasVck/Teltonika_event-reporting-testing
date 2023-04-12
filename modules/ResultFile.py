@@ -4,14 +4,14 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from modules.Variables import eventResults, deviceInfo
+from modules.Variables import eventResults, deviceInfo, fileData
 
 def CreateCSV(file, start):
     fileName = "{0}_{1}.csv".format(file["info"]["product"], start)
     fileInit = "echo \"Event type;Event subtype;Expected message;Received message;Sent from;Got from;Passed\" >> '{0}'".format(
         fileName)
     os.system(fileInit)
-    eventResults.fileName = fileName
+    fileData.outFileName = fileName
 
 
 def UpdateCSV(index, test):
@@ -20,15 +20,15 @@ def UpdateCSV(index, test):
                       test["event-data"]["event-subtype"][index],
                       eventResults.messageOut, eventResults.messageIn,
                       deviceInfo.sims[deviceInfo.activeSim], eventResults.received,
-                      eventResults.passed, eventResults.fileName))
+                      eventResults.passed, fileData.outFileName))
 
 
-def UploadCSV(delete):
+def UploadCSV():
     ftp = ftplib.FTP(host='192.168.10.44', user='ftpuser',
                      passwd='Akademija159!')
     ftp.encoding = "utf-8"
-    with open(eventResults.fileName, "rb") as f:
-        ftp.storbinary(f"STOR {eventResults.fileName}", f)
-    if (delete == True):
-        os.system("rm '{0}'".format(eventResults.fileName))
+    with open(fileData.outFileName, "rb") as f:
+        ftp.storbinary(f"STOR {fileData.outFileName}", f)
+    if (fileData.delete == True):
+        os.system("rm '{0}'".format(fileData.outFileName))
     ftp.quit()

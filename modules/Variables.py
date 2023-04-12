@@ -6,11 +6,13 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from classes.DeviceData import DeviceData
 from classes.RequestData import RequestData
 from classes.ResultData import ResultData
+from classes.Files import Files
 
 deviceInfo = DeviceData()
 dataSender = RequestData()
 dataReceiver = RequestData()
 eventResults = ResultData()
+fileData = Files()
 
 def ReadArgs():
     parser = argparse.ArgumentParser(
@@ -20,9 +22,7 @@ def ReadArgs():
     parser.add_argument(
         "-sp", "--sPassword", help="SMS sender device's login password. Default: Admin123", action="store", default="Admin123")
     parser.add_argument(
-        "-sip", "--sAddress", help="SMS sender device's IP address. Default: 192.168.1.1", action="store", default="192.168.1.1")
-    parser.add_argument(
-        "-rn", "--rName", help="SMS receiver device's login name. Default: admin", action="store", default="admin")
+        "-sip", "--sAddress", help="SMS sender device's IP address. Default: 192.168.1.1", action="store", default="192.168.1.1")    
     parser.add_argument(
         "-rp", "--rPassword", help="SMS receiver device's login password. Default: Admin123", action="store", default="Admin123")
     parser.add_argument(
@@ -38,8 +38,8 @@ def ReadArgs():
     dataSender.ipAddr = args.sAddress
     dataSender.baseURL = "http://"+dataSender.ipAddr+"/api"
 
-    dataReceiver.name = args.rName
     dataReceiver.pswd = args.rPassword
     dataReceiver.ipAddr = args.rAddress
 
-    eventResults.delete = args.deleteFile
+    fileData.dataFileName =args.configFile
+    fileData.delete = args.deleteFile

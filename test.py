@@ -13,7 +13,7 @@ from modules.Requests import SendEvent
 from modules.APIToken import GetToken
 from modules.Triggering import TriggerEvent
 from modules.Receiver import CheckReceive, GetPhoneNumbers
-from modules.Variables import ReadArgs, deviceInfo, eventResults
+from modules.Variables import ReadArgs, deviceInfo, eventResults, fileData
 
 from classes.Utilities import Text
 
@@ -98,13 +98,13 @@ def TestEvents(file):
 
 
 # Program's main part
-# Get credentials and file path
 ReadArgs()
 print(end="\n")
 GetToken()
-data = GetConfigData("event-config.json")
+data = GetConfigData(fileData.dataFileName)
 GetPhoneNumbers(data)
 CheckForModel(data)
 CheckForMobile()
 TestEvents(data)
-UploadCSV(eventResults.delete)
+UploadCSV()
+print(Text.Purple("FINISHED"))

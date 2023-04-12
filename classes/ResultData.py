@@ -4,6 +4,5 @@ class ResultData:
         self.passed = False
         self.messageOut = ""
         self.messageIn = ""
-        self.received = ""
-        self.fileName = ""
+        self.received = ""        
         self.delete = False

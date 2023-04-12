@@ -11,12 +11,11 @@ def GetToken():
     creds = {"username": dataSender.name, "password": dataSender.pswd}
     try:
         response = requests.post(
-            dataSender.baseURL+"/login", json=creds, headers=head).json()
+            dataSender.baseURL+"/login", json=creds, headers=head, timeout=4).json()
         if (response["success"] == True):
             dataSender.token = response["ubus_rpc_session"]
         else:
             sys.exit(Text.Red("Login was unsuccessful"))
-    except OSError as err:
-        print(Text.Red("Can not reach device. Program will stop"))
-        print("ERROR:\n{0}".format(err))
+    except OSError:
+        print(Text.Red("Could not reach device"))        
         sys.exit()

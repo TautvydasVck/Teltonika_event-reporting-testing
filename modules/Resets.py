@@ -13,3 +13,9 @@ def PurgeAllSms():
         index = res[cnt*15].split(":\t\t")[1][:-1]
         SendCommand("gsmctl -S -d {0}".format(index), dataReceiver)
         cnt += 1
+    RecheckSms()
+
+def RecheckSms():
+    res = SendCommand("gsmctl -S -l all", dataReceiver)
+    if(len(res)!=0):
+        PurgeAllSms()

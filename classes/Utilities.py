@@ -7,6 +7,9 @@ class Text():
 
     def Yellow(text):
         return "\033[33m"+text+"\033[0m "
+    
+    def Purple(text):
+        return "\033[35m"+text+"\033[0m "
 
     def Underline(text):
         return "\033[4m"+text+"\033[0m "
