@@ -1,22 +1,13 @@
-import sys
 import requests
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from classes.Utilities import Text
+from variables import dataSender, deviceInfo
 
-
-def GetSysInfo(dataSender):
-    head = {"Content-Type": "application/json",
-            "Authorization": "Bearer " + dataSender.token}
-    response = requests.get(dataSender.baseURL +
-                            "/system/device/info", headers=head).json()
-    if (response["success"] == False):
-        print(Text.Red("Could not retrieve device information."))
-        sys.exit("Program will stop")
-    else:
-        return response
-
-
-def CheckForMobile(deviceInfo):
+def CheckForMobile():
     res = GetSysInfo()
     if (res["data"]["board"]["hwinfo"]["mobile"] == False):
         print(Text.Yellow(
@@ -59,3 +50,14 @@ def CheckTotalEvents(file):
                 "Events and their messages count does not match trigger count. Check JSON configuration file"))
             sys.exit()
     return events
+
+def GetSysInfo():
+    head = {"Content-Type": "application/json",
+            "Authorization": "Bearer " + dataSender.token}
+    response = requests.get(dataSender.baseURL +
+                            "/system/device/info", headers=head).json()
+    if (response["success"] == False):
+        print(Text.Red("Could not retrieve device information."))
+        sys.exit("Program will stop")
+    else:
+        return response
