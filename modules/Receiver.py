@@ -5,6 +5,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from modules.Requests import SendCommand
 from classes.Utilities import Text
 from modules.Variables import dataReceiver, eventResults, dataSender, deviceInfo
+from modules.MessageDecode import Decode
 
 def CheckReceive():
     CheckWhichSim()
@@ -14,6 +15,7 @@ def CheckReceive():
     elif (len(res) >= 15):
         eventResults.received = res[2].split(":\t\t")[1][:-1]
         eventResults.messageIn = res[13].split(":\t\t")[1][:-1]
+        Decode()
         if (eventResults.received == deviceInfo.sims[deviceInfo.activeSim]
                 and eventResults.messageIn == eventResults.messageOut):
             eventResults.passed = True

@@ -94,7 +94,7 @@
           "reciever": "+37060789118"
         },
         "message": [
-          "Config, all",
+          "Config, all %ie",
           "Config, openvpn",
           "Config, events_reporting",
           "Config, periodic_reboot",
