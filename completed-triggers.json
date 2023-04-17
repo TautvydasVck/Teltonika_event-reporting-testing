@@ -1871,7 +1871,7 @@
             {
               "type": "api",
               "command": "",
-              "wait-time": "180",
+              "wait-time": "220",
               "method": "put",
               "api-path": "/services/auto_reboot/ping/config/cfg01c21d",
               "api-body": {
@@ -1907,7 +1907,7 @@
                   "id": "cfg01c21d"
                 }
               },
-              "retrieve-token": "0"
+              "retrieve-token": "1"
             }
           ]
         },

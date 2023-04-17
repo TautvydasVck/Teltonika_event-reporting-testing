@@ -197,7 +197,7 @@
               "api-path": "/services/openvpn/config",
               "api-body": {
                 "data": {
-                  "id": "test",
+                  "id": "1234",
                   "type": "client"
                 }
               },
@@ -263,7 +263,7 @@
               "api-path": "/services/ipsec/config",
               "api-body": {
                 "data": {
-                  "id": "test"
+                  "id": "1234"
                 }
               },
               "retrieve-token": "",
@@ -1170,7 +1170,7 @@
               "api-path": "/services/pptp/server/config",
               "api-body": {
                 "data": {
-                  "id": "test",
+                  "id": "1234",
                   ".type": "service"
                 }
               },
@@ -1534,7 +1534,7 @@
               "api-path": "/services/l2tp/server/config",
               "api-body": {
                 "data": {
-                  "id": "test",
+                  "id": "1234",
                   ".type": "service"
                 }
               },
@@ -1734,7 +1734,7 @@
                 }
               },
               "retrieve-token": "",
-              "wait-time": ""
+              "wait-time": "10"
             }
           ]
         },
@@ -1752,7 +1752,7 @@
                 }
               },
               "retrieve-token": "",
-              "wait-time": ""
+              "wait-time": "10"
             }
           ]
         },
@@ -1770,7 +1770,7 @@
                 }
               },
               "retrieve-token": "",
-              "wait-time": ""
+              "wait-time": "10"
             }
           ]
         },
@@ -1788,7 +1788,7 @@
                 }
               },
               "retrieve-token": "",
-              "wait-time": ""
+              "wait-time": "10"
             }
           ]
         },
@@ -1806,7 +1806,7 @@
                 }
               },
               "retrieve-token": "",
-              "wait-time": ""
+              "wait-time": "10"
             }
           ]
         }
@@ -1876,7 +1876,7 @@
             {
               "type": "api",
               "command": "",
-              "wait-time": "180",
+              "wait-time": "",
               "method": "put",
               "api-path": "/services/auto_reboot/ping/config/cfg01c21d",
               "api-body": {

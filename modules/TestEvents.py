@@ -7,7 +7,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from modules.ResultFile import CreateCSV, UpdateCSV
-from modules.Resets import PurgeAllSms
+from modules.Resets import PurgeAllSms, PrepForNextEvent
 from modules.Requests import SendEvent
 from modules.Triggering import TriggerEvent
 from modules.Receiver import CheckReceive
@@ -68,8 +68,8 @@ def TestEvents(file):
             time.sleep(2)            
             if (response["success"] == True):
                 eventResults.eventId = response["data"]["id"]
-                TriggerEvent(test["trigger-data"][index])
                 PurgeAllSms()
+                TriggerEvent(test["trigger-data"][index])                
                 time.sleep(10)                
                 CheckReceive()
                 if (eventResults.passed == True):
@@ -77,11 +77,7 @@ def TestEvents(file):
                 else:
                     failedCnt += 1
                 UpdateCSV(index, test)
-                # nuresetinimas, evento istrynimas
-                SendEvent("/services/events_reporting/config/" +
-                          eventResults.eventId, "", "delete")
-                eventResults.passed = False
-                PurgeAllSms()
+                PrepForNextEvent()
             else:
                 print(Text.Red("Event was not created"))            
             index += 1
