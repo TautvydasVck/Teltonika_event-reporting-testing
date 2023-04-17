@@ -1,4 +1,3 @@
-# systemic imports
 from modules.ResultFile import UploadCSV
 from modules.PrimaryChecks import CheckForMobile, CheckForModel
 from modules.DataFile import GetConfigData
@@ -8,9 +7,8 @@ from modules.Variables import ReadArgs, fileData
 from modules.TestEvents import TestEvents
 from classes.Utilities import Text
 
-# Program's main part
-ReadArgs()
 print(end="\n")
+ReadArgs()
 GetToken()
 data = GetConfigData(fileData.dataFileName)
 GetPhoneNumbers(data)
@@ -18,4 +16,4 @@ CheckForModel(data)
 CheckForMobile()
 TestEvents(data)
 UploadCSV()
-print(Text.Purple("FINISHED"))
+print(Text.Purple("|---FINISHED---|"))

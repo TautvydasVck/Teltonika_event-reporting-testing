@@ -23,8 +23,7 @@ def TestEvents(file):
     start = datetime.now().strftime("%Y-%m-%d_%H:%M:%S")
     CreateCSV(file, start)
     print("Started at: {0}".format(start))
-    print("Total tests: {0}\n".format(total))
-    PurgeAllSms()
+    print("Total tests: {0}\n".format(total))    
     for test in file["events-triggers"]:
         for subtype in test["event-data"]["event-subtype"]:
             print("Event type: " +
@@ -66,12 +65,12 @@ def TestEvents(file):
                 sys.exit()
             response = SendEvent(
                 "/services/events_reporting/config", data, "post")
-            time.sleep(2)
-            # """
+            time.sleep(2)            
             if (response["success"] == True):
                 eventResults.eventId = response["data"]["id"]
                 TriggerEvent(test["trigger-data"][index])
-                time.sleep(10)
+                PurgeAllSms()
+                time.sleep(10)                
                 CheckReceive()
                 if (eventResults.passed == True):
                     passedCnt += 1
@@ -84,8 +83,7 @@ def TestEvents(file):
                 eventResults.passed = False
                 PurgeAllSms()
             else:
-                print(Text.Red("Event was not created"))
-            # """
+                print(Text.Red("Event was not created"))            
             index += 1
             print("-"*40)
         index = 0

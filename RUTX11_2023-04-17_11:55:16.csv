@@ -1,0 +1,104 @@
+Event type;Event subtype;Expected message;Received message;Sent from;Got from;Passed
+Config;all;Config, all;Config, all;+37060789118;+37060789118;True
+Config;openvpn;Config, openvpn;Config, openvpn;+37060789118;+37060789118;True
+Config;events_reporting;Config, events_reporting;Config, events_reporting;+37060789118;+37060789118;True
+Config;periodic_reboot;Config, periodic_reboot;Config, periodic_reboot;+37060789118;+37060789118;True
+Config;ping_reboot;Config, ping_reboot;Config, ping_reboot;+37060789118;+37060789118;True
+Config;ipsec;Config, ipsec;Config, ipsec;+37060789118;+37060789118;True
+Config;dhcp;Config, dhcp;Config, dhcp;+37060789118;+37060789118;True
+Config;dropbear;Config, dropbear;Config, dropbear;+37060789118;+37060789118;True
+Config;network;Config, network;Config, network;+37060789118;+37060789118;True
+Config;firewall;Config, firewall;Config, firewall;+37060789118;+37060789118;True
+Config;ddns;Config, ddns;Config, ddns;+37060789118;+37060789118;True
+Config;snmpd;Config, snmpd;Config, snmpd;+37060789118;+37060789118;True
+Config;sqm;Config, sqm;Config, sqm;+37060789118;+37060789118;True
+Config;ulogd;Config, ulogd;Config, ulogd;+37060789118;+37060789118;True
+Config;modbus_data_sender;Config, modbus_data_sender;Config, modbus_data_sender;+37060789118;+37060789118;True
+Config;mosquitto;Config, mosquitto;Config, mosquitto;+37060789118;+37060789118;True
+Config;mqtt_pub;Config, mqtt_pub;Config, mqtt_pub;+37060789118;+37060789118;True
+Config;chilli;Config, chilli (hotspot);Config, chilli (hotspot);+37060789118;+37060789118;True
+Config;samba;Config, samba (network shares);Config, samba (network shares);+37060789118;+37060789118;True
+Config;etherwake;Config, etherwake (Wake on Lan);Config, etherwake (Wake on Lan);+37060789118;+37060789118;True
+Config;sms_utils;Config, sms;Config, sms;+37060789118;+37060789118;True
+Config;simcard;Config, simcard;Config, simcard;+37060789118;+37060789118;True
+Config;quota_limit;Config, quota_limit;Config, quota_limit;+37060789118;+37060789118;True
+Config;gps;Config, gps;Config, quota_limit;+37060789118;+37060789118;False
+Config;blesem;Config, blesem (bluetooth);Config, blesem (bluetooth);+37060789118;+37060789118;True
+Config;ioman;Config, ioman (I/O settings);Config, ioman (I/O settings);+37060789118;+37060789118;True
+Config;wireless;Config, wireless;Config, wireless;+37060789118;+37060789118;True
+Config;hostblock;Config, hostblock;Config, hostblock;+37060789118;+37060789118;True
+Config;privoxy;Config, privoxy;Config, privoxy;+37060789118;+37060789118;True
+Config;vrrpd;Config, vrrpd;Config, vrrpd;+37060789118;+37060789118;True
+Config;avl;Config, avl;Config, avl;+37060789118;+37060789118;True
+Config;ble_devices;Config, ble_devices;Config, ble_devices;+37060789118;+37060789118;True
+Config;buttons;Config, buttons;Config, buttons;+37060789118;+37060789118;True
+Config;call_utils;Config, call_utils;Config, call_utils;+37060789118;+37060789118;True
+Config;cli;Config, cli;Config, cli;+37060789118;+37060789118;True
+Config;dmvpn;Config, dmvpn;Config, dmvpn;+37060789118;+37060789118;True
+Config;email_to_sms;Config, email_to_sms;Config, email_to_sms;+37060789118;+37060789118;True
+Config;frr;Config, frr;Config, frr;+37060789118;+37060789118;True
+Config;fstab;Config, fstab;Config, fstab;+37060789118;+37060789118;True
+Config;iojuggler;Config, iojuggler;Config, iojuggler;+37060789118;+37060789118;True
+Config;ip_blockd;Config, ip_blockd;Config, ip_blockd;+37060789118;+37060789118;True
+Config;landingpage;Config, landingpage;Config, landingpage;+37060789118;+37060789118;True
+Config;modbus;Config, modbus;Config, modbus;+37060789118;+37060789118;True
+Config;modbus_master;Config, modbus_master;Config, modbus_master;+37060789118;+37060789118;True
+Config;modbusgateway;Config, modbusgateway;Config, modbusgateway;+37060789118;+37060789118;True
+Config;multi_wifi;Config, multi_wifi;Config, multi_wifi;+37060789118;+37060789118;True
+Config;mwan3;Config, mwan3;Config, multi_wifi;+37060789118;+37060789118;False
+Config;ntpclient;Config, ntpclient;Config, multi_wifi;+37060789118;+37060789118;False
+Config;ntpserver;Config, ntpserver;Config, mwan3;+37060789118;+37060789118;False
+Config;operctl;Config, operctl;Config, operctl;+37060789118;+37060789118;True
+Config;overview;Config, overview;Config, overview;+37060789118;+37060789118;True
+Config;p910nd;Config, p910nd;Config, p910nd;+37060789118;+37060789118;True
+Config;post_get;Config, post_get;Config, post_get;+37060789118;+37060789118;True
+Config;pptpd;Config, pptpd;Config, post_get;+37060789118;+37060789118;False
+Config;profiles;Config, profiles;Config, profiles;+37060789118;+37060789118;True
+Config;rms_mqtt;Config, rms_mqtt;Config, rms_mqtt;+37060789118;+37060789118;True
+Config;rpcd;Config, rpcd;Config, rpcd;+37060789118;+37060789118;True
+Config;rs_console;Config, rs_console;Config, rs_console;+37060789118;+37060789118;True
+Config;rs_modbus;Config, rs_modbus;Config, rs_modbus;+37060789118;+37060789118;True
+Config;rs_modem;Config, rs_modem;Config, rs_modem;+37060789118;+37060789118;True
+Config;rs_overip;Config, rs_overip;Config, rs_overip;+37060789118;+37060789118;True
+Config;rut_fota;Config, rut_fota;Config, rut_fota;+37060789118;+37060789118;True
+Config;sim_switch;Config, sim_switch;Config, sim_switch;+37060789118;+37060789118;True
+Config;sms_gateway;Config, sms_gateway;Config, sms_gateway;+37060789118;+37060789118;True
+Config;sms_utils;Config, sms_utils;Config, sms_utils;+37060789118;+37060789118;True
+Config;snmptrap;Config, snmptrap;Config, snmptrap;+37060789118;+37060789118;True
+Config;stunnel;Config, stunnel;Config, stunnel;+37060789118;+37060789118;True
+Config;system;Config, system;Config, system;+37060789118;+37060789118;True
+Config;telnetd;Config, telnetd;Config, telnetd;+37060789118;+37060789118;True
+Config;uhttpd;Config, uhttpd;Config, telnetd;+37060789118;+37060789118;False
+Config;upnpd;Config, upnpd;Config, upnpd;+37060789118;+37060789118;True
+Config;wifi_scanner;Config, wifi_scanner;Config, wifi_scanner;+37060789118;+37060789118;True
+Config;xl2tpd;Config, xl2tpd;Config, wifi_scanner;+37060789118;+37060789118;False
+WiFi;all;WiFi, all;Config, wifi_scanner;+37060789118;+37060789118;False
+WiFi;client connected;WiFi, client connected;Config, wifi_scanner;+37060789118;+37060789118;False
+WiFi;client disconnected;WiFi, client disconnected;Config, wifi_scanner;+37060789118;+37060789118;False
+SSH;all;SSH, all;SSH, all;+37060789118;+37060789118;True
+SSH;succeeded;SSH, succeeded;SSH, succeeded;+37060789118;+37060789118;True
+SSH;bad;SSH, bad;SSH, bad;+37060789118;+37060789118;True
+Switch Events;all;Switch Events, all;Switch Events, all;+37060789118;+37060789118;True
+Switch Events;Port link state;Switch Events, Port link state;Switch Events, Port link state;+37060789118;+37060789118;True
+Switch Events;Port speed for;Switch Events, Port speed for;Switch Events, Port link state;+37060789118;+37060789118;False
+Switch Events;changed to DOWN;Switch Events, changed to DOWN;Switch Events, changed to DOWN;+37060789118;+37060789118;True
+Switch Events;changed to UP;Switch Events, changed to UP;Switch Events, changed to UP;+37060789118;+37060789118;True
+Reboot;all;Reboot, all;Reboot, all;+37060789118;+37060789118;True
+Reboot;web ui;Reboot, web ui;Reboot, web ui;+37060789118;+37060789118;True
+Reboot;ping reboot;Reboot, ping reboot;Reboot, ping reboot;+37060789118;+37060789118;True
+Reboot;reboot scheduler;Reboot, reboot scheduler;Reboot, ping reboot;+37060789118;+37060789118;False
+Reboot;from button;Reboot, from button;Reboot, from button;+37060789118;+37060789118;True
+Reboot;sms reboot;Reboot, sms reboot;Reboot, sms reboot;+37060789118;+37060789118;True
+Failover;all;Failover, all;Reboot, sms reboot;+37060789118;+37060789118;False
+Failover;Switched to main;Failover, Switched to main;Failover, Switched to main;+37060789118;+37060789118;True
+Failover;Switched to backup;Failover, Switched to backup;Failover, Switched to main;+37060789118;+37060789118;False
+Mobile Data;all;Mobile Data, all;Mobile Data, all;+37060789118;+37060789118;True
+Mobile Data;data connected;Mobile Data, data connected;Mobile Data, data connected;+37060789118;+37060789118;True
+Mobile Data;data disconnected;Mobile Data, data disconnected;Mobile Data, data disconnected;+37060789118;+37060789118;True
+SMS;received from;SMS, received from;SMS, received from;+37060789118;+37060789118;True
+Web UI;all;Web UI, all;Web UI, all;+37060789118;+37060789118;True
+Web UI;was successful;Web UI, was successful;Web UI, was successful;+37060789118;+37060789118;True
+Web UI;not successful;Web UI, not successful;Web UI, not successful;+37060789118;+37060789118;True
+DHCP;all;DHCP, all;Web UI, not successful;+37060789118;+37060789118;False
+DHCP;lan;DHCP, lan;Web UI, not successful;+37060789118;+37060789118;False
+DHCP;wifi;DHCP, wifi;Web UI, not successful;+37060789118;+37060789118;False

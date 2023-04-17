@@ -26,7 +26,7 @@ def ReadArgs():
     parser.add_argument(
         "-rp", "--rPassword", help="SMS receiver device's login password. Default: Admin123", action="store", default="Admin123")
     parser.add_argument(
-        "-rip", "--rAddress", help="SMS receiver device's IP address. Default: 192.168.1.1", action="store", default="192.168.1.1")
+        "-rip", "--rAddress", help="SMS receiver device's IP address. Default: 192.168.1.1", action="store", default="192.168.1.8")
     parser.add_argument(
         "-file", "--configFile", help="Configuration file's path. Default: ./event-config.json", action="store", default="event-config.json")
     parser.add_argument(

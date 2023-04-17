@@ -112,7 +112,7 @@
           "Config, sms",
           "Config, simcard",
           "Config, quota_limit",
-          "Config, gps",
+          "Config, global positioning system",
           "Config, blesem (bluetooth)",
           "Config, ioman (I/O settings)",
           "Config, wireless",

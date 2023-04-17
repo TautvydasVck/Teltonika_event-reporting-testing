@@ -8,7 +8,7 @@
     {
       "event-data": {
         "event-type": "Config",
-        "event-subtype": [   
+        "event-subtype": [
           "all",
           "openvpn",
           "events_reporting",
@@ -49,7 +49,7 @@
           "frr",
           "fstab",
           "iojuggler",
-          "ip_blockd",     
+          "ip_blockd",
           "landingpage",
           "modbus",
           "modbus_master",
@@ -91,7 +91,7 @@
           ]
         },
         "sms-config": {
-          "reciever": "+37060789118"
+          "reciever": "+37069007463"
         },
         "message": [
           "Config, all %ie",
@@ -108,16 +108,16 @@
           "Config, snmpd",
           "Config, sqm",
           "Config, ulogd",
-          "Config, modbus_data_sender",
+          "Config, modbus_data_sender %ie",
           "Config, mosquitto",
           "Config, mqtt_pub",
-          "Config, chilli (hotspot)",
+          "Config, chilli (hotspot)%ie",
           "Config, samba (network shares)",
           "Config, etherwake (Wake on Lan)",
           "Config, sms",
           "Config, simcard",
           "Config, quota_limit",
-          "Config, gps",
+          "Config, global positioning system",
           "Config, blesem (bluetooth)",
           "Config, ioman (I/O settings)",
           "Config, wireless",
@@ -169,7 +169,7 @@
           "Config, xl2tpd"
         ]
       },
-      "trigger-data": [        
+      "trigger-data": [
         {
           "steps": [
             {
@@ -1560,7 +1560,7 @@
           ]
         },
         "sms-config": {
-          "reciever": "+37060789118"
+          "reciever": "+37069007463"
         },
         "message": [
           "WiFi, all",
@@ -1583,7 +1583,7 @@
                 }
               },
               "retrieve-token": "",
-              "wait-time": "10"
+              "wait-time": ""
             }
           ]
         },
@@ -1601,7 +1601,7 @@
                 }
               },
               "retrieve-token": "",
-              "wait-time": "10"
+              "wait-time": ""
             }
           ]
         },
@@ -1619,7 +1619,7 @@
                 }
               },
               "retrieve-token": "",
-              "wait-time": "10"
+              "wait-time": ""
             }
           ]
         }
@@ -1641,7 +1641,7 @@
           ]
         },
         "sms-config": {
-          "reciever": "+37060789118"
+          "reciever": "+37069007463"
         },
         "message": [
           "SSH, all",
@@ -1709,7 +1709,7 @@
           ]
         },
         "sms-config": {
-          "reciever": "+37060789118"
+          "reciever": "+37069007463"
         },
         "message": [
           "Switch Events, all",
@@ -1831,7 +1831,7 @@
           ]
         },
         "sms-config": {
-          "reciever": "+37060789118"
+          "reciever": "+37069007463"
         },
         "message": [
           "Reboot, all",
@@ -1876,7 +1876,7 @@
             {
               "type": "api",
               "command": "",
-              "wait-time": "220",
+              "wait-time": "180",
               "method": "put",
               "api-path": "/services/auto_reboot/ping/config/cfg01c21d",
               "api-body": {
@@ -1912,7 +1912,7 @@
                   "id": "cfg01c21d"
                 }
               },
-              "retrieve-token": "0"
+              "retrieve-token": "1"
             }
           ]
         },
@@ -1947,11 +1947,11 @@
             {
               "type": "ssh",
               "command": "date -s 00:04:55",
-              "wait-time": "180",
+              "wait-time": "120",
               "method": "",
               "api-path": "",
               "api-body": {},
-              "retrieve-token": ""
+              "retrieve-token": "1"
             }
           ]
         },
@@ -1999,7 +1999,7 @@
           ]
         },
         "sms-config": {
-          "reciever": "+37060789118"
+          "reciever": "+37069007463"
         },
         "message": [
           "Failover, all",
@@ -2105,7 +2105,7 @@
           ]
         },
         "sms-config": {
-          "reciever": "+37060789118"
+          "reciever": "+37069007463"
         },
         "message": [
           "Mobile Data, all",
@@ -2169,7 +2169,7 @@
           ]
         },
         "sms-config": {
-          "reciever": "+37060789118"
+          "reciever": "+37069007463"
         },
         "message": [
           "SMS, received from"
@@ -2216,738 +2216,7 @@
           ]
         },
         "sms-config": {
-          "reciever": "+37060789118"
-        },
-        "message": [
-          "Web UI, all",
-          "Web UI, was successful",
-          "Web UI, not successful"
-        ]
-      },
-      "trigger-data": [
-        {
-          "steps": [
-            {
-              "type": "api",
-              "command": "",
-              "wait-time": "",
-              "method": "post",
-              "api-path": "/login",
-              "api-body": {
-                "username": "admin",
-                "password": "Admin123"
-              },
-              "retrieve-token": ""
-            }
-          ]
-        },
-        {
-          "steps": [
-            {
-              "type": "api",
-              "command": "",
-              "wait-time": "",
-              "method": "post",
-              "api-path": "/login",
-              "api-body": {
-                "username": "admin",
-                "password": "Admin123"
-              },
-              "retrieve-token": ""
-            }
-          ]
-        },
-        {
-          "steps": [
-            {
-              "type": "api",
-              "command": "",
-              "wait-time": "",
-              "method": "post",
-              "api-path": "/login",
-              "api-body": {
-                "username": "admin",
-                "password": "blogas"
-              },
-              "retrieve-token": ""
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "event-data": {
-        "event-type": "WiFi",
-        "event-subtype": [
-          "all",
-          "client connected",
-          "client disconnected"
-        ],
-        "email-config": {
-          "subject": "",
-          "email-acc": "",
-          "recievers": [
-            ""
-          ]
-        },
-        "sms-config": {
-          "reciever": "+37060789118"
-        },
-        "message": [
-          "WiFi, all",
-          "WiFi, client connected",
-          "WiFi, client disconnected"
-        ]
-      },
-      "trigger-data": [
-        {
-          "steps": [
-            {
-              "type": "api",
-              "command": "",
-              "method": "put",
-              "api-path": "/network/wireless/devices/config/radio1",
-              "api-body": {
-                "data": {
-                  ".type": "wifi-device",
-                  "country": "CA"
-                }
-              },
-              "retrieve-token": "",
-              "wait-time": ""
-            }
-          ]
-        },
-        {
-          "steps": [
-            {
-              "type": "api",
-              "command": "",
-              "method": "put",
-              "api-path": "/network/wireless/devices/config/radio0",
-              "api-body": {
-                "data": {
-                  ".type": "wifi-device",
-                  "country": "AL"
-                }
-              },
-              "retrieve-token": "",
-              "wait-time": ""
-            }
-          ]
-        },
-        {
-          "steps": [
-            {
-              "type": "api",
-              "command": "",
-              "method": "put",
-              "api-path": "/network/wireless/devices/config/radio0",
-              "api-body": {
-                "data": {
-                  ".type": "wifi-device",
-                  "country": "AQ"
-                }
-              },
-              "retrieve-token": "",
-              "wait-time": ""
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "event-data": {
-        "event-type": "SSH",
-        "event-subtype": [
-          "all",
-          "succeeded",
-          "bad"
-        ],
-        "email-config": {
-          "subject": "",
-          "email-acc": "",
-          "recievers": [
-            ""
-          ]
-        },
-        "sms-config": {
-          "reciever": "+37060789118"
-        },
-        "message": [
-          "SSH, all",
-          "SSH, succeeded",
-          "SSH, bad"
-        ]
-      },
-      "trigger-data": [
-        {
-          "steps": [
-            {
-              "type": "ssh",
-              "command": "",
-              "method": "",
-              "api-path": "",
-              "api-body": {},
-              "retrieve-token": "",
-              "wait-time": ""
-            }
-          ]
-        },
-        {
-          "steps": [
-            {
-              "type": "ssh",
-              "command": "",
-              "method": "",
-              "api-path": "",
-              "api-body": {},
-              "retrieve-token": "",
-              "wait-time": ""
-            }
-          ]
-        },
-        {
-          "steps": [
-            {
-              "type": "cmd",
-              "command": "sshpass -p 1324 ssh root@192.168.1.1 -o ExitOnForwardFailure='yes'",
-              "method": "",
-              "api-path": "",
-              "api-body": {},
-              "retrieve-token": "",
-              "wait-time": ""
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "event-data": {
-        "event-type": "Switch Events",
-        "event-subtype": [
-          "all",
-          "Port link state",
-          "Port speed for",
-          "changed to DOWN",
-          "changed to UP"
-        ],
-        "email-config": {
-          "subject": "",
-          "email-acc": "",
-          "recievers": [
-            ""
-          ]
-        },
-        "sms-config": {
-          "reciever": "+37060789118"
-        },
-        "message": [
-          "Switch Events, all",
-          "Switch Events, Port link state",
-          "Switch Events, Port speed for",
-          "Switch Events, changed to DOWN",
-          "Switch Events, changed to UP"
-        ]
-      },
-      "trigger-data": [
-        {
-          "steps": [
-            {
-              "type": "api",
-              "command": "",
-              "method": "put",
-              "api-path": "/network/vlan/port_based/config/cfg081ec7",
-              "api-body": {
-                "data": {
-                  ".type": "switch_vlan",
-                  "lan3": "u"
-                }
-              },
-              "retrieve-token": "",
-              "wait-time": ""
-            }
-          ]
-        },
-        {
-          "steps": [
-            {
-              "type": "api",
-              "command": "",
-              "method": "put",
-              "api-path": "/network/vlan/port_based/config/cfg081ec7",
-              "api-body": {
-                "data": {
-                  ".type": "switch_vlan",
-                  "lan3": ""
-                }
-              },
-              "retrieve-token": "",
-              "wait-time": ""
-            }
-          ]
-        },
-        {
-          "steps": [
-            {
-              "type": "api",
-              "command": "",
-              "method": "put",
-              "api-path": "/network/vlan/port_based/config/cfg081ec7",
-              "api-body": {
-                "data": {
-                  ".type": "switch_vlan",
-                  "lan3": "u"
-                }
-              },
-              "retrieve-token": "",
-              "wait-time": ""
-            }
-          ]
-        },
-        {
-          "steps": [
-            {
-              "type": "api",
-              "command": "",
-              "method": "put",
-              "api-path": "/network/vlan/port_based/config/cfg081ec7",
-              "api-body": {
-                "data": {
-                  ".type": "switch_vlan",
-                  "lan3": ""
-                }
-              },
-              "retrieve-token": "",
-              "wait-time": ""
-            }
-          ]
-        },
-        {
-          "steps": [
-            {
-              "type": "api",
-              "command": "",
-              "method": "put",
-              "api-path": "/network/vlan/port_based/config/cfg081ec7",
-              "api-body": {
-                "data": {
-                  ".type": "switch_vlan",
-                  "lan3": "u"
-                }
-              },
-              "retrieve-token": "",
-              "wait-time": ""
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "event-data": {
-        "event-type": "Reboot",
-        "event-subtype": [
-          "all",
-          "web ui",
-          "ping reboot",
-          "reboot scheduler",
-          "from button",
-          "sms reboot"
-        ],
-        "email-config": {
-          "subject": "",
-          "email-acc": "",
-          "recievers": [
-            ""
-          ]
-        },
-        "sms-config": {
-          "reciever": "+37060789118"
-        },
-        "message": [
-          "Reboot, all",
-          "Reboot, web ui",
-          "Reboot, ping reboot",
-          "Reboot, reboot scheduler",
-          "Reboot, from button",
-          "Reboot, sms reboot"
-        ]
-      },
-      "trigger-data": [
-        {
-          "steps": [
-            {
-              "type": "ssh",
-              "command": "reboot",
-              "wait-time": "120",
-              "method": "",
-              "api-path": "",
-              "api-body": {},
-              "retrieve-token": "1"
-            }
-          ]
-        },
-        {
-          "steps": [
-            {
-              "type": "api",
-              "command": "",
-              "wait-time": "120",
-              "method": "post",
-              "api-path": "/system/administration/general/actions/reboot",
-              "api-body": {
-                "data": {}
-              },
-              "retrieve-token": "1"
-            }
-          ]
-        },
-        {
-          "steps": [
-            {
-              "type": "api",
-              "command": "",
-              "wait-time": "180",
-              "method": "put",
-              "api-path": "/services/auto_reboot/ping/config/cfg01c21d",
-              "api-body": {
-                "data": {
-                  "type": "ping",
-                  "retry": "1",
-                  "enable": "1",
-                  ".type": "ping_reboot",
-                  "packet_size": "56",                  
-                  "host": "192.168.134.80",
-                  "ip_type": "ipv4",
-                  "action": "1",
-                  "stop_action": "0",
-                  "interface": "1",
-                  "time": "5",
-                  "time_out": "1",
-                  "number": ""
-                }
-              },
-              "retrieve-token": "1"
-            },
-            {
-              "type": "api",
-              "command": "",
-              "wait-time": "",
-              "method": "put",
-              "api-path": "/services/auto_reboot/ping/config/cfg01c21d",
-              "api-body": {
-                "data": {
-                  "type": "ping",
-                  "enable": "0",
-                  ".type": "ping_reboot",
-                  "id": "cfg01c21d"
-                }
-              },
-              "retrieve-token": "0"
-            }
-          ]
-        },
-        {
-          "steps": [
-            {
-              "type": "api",
-              "command": "",
-              "wait-time": "",
-              "method": "put",
-              "api-path": "/services/auto_reboot/periodic/config/cfg0210a4",
-              "api-body": {
-                "data": {
-                  "id": "cfg0210a4",
-                  "enable": "1",
-                  "action": "1",
-                  "period": "week",
-                  "days": [
-                    "mon",
-                    "tue",
-                    "wed",
-                    "thu",
-                    "fri"
-                  ],
-                  "time": [
-                    "00:05"
-                  ]
-                }
-              },
-              "retrieve-token": "1"
-            },
-            {
-              "type": "ssh",
-              "command": "date -s 00:04:55",
-              "wait-time": "120",
-              "method": "",
-              "api-path": "",
-              "api-body": {},
-              "retrieve-token": ""
-            }
-          ]
-        },
-        {
-          "steps": [
-            {
-              "type": "ssh",
-              "command": "reboot -b",
-              "wait-time": "120",
-              "method": "",
-              "api-path": "",
-              "api-body": {},
-              "retrieve-token": "1"
-            }
-          ]
-        },
-        {
-          "steps": [
-            {
-              "type": "ssh",
-              "command": "gsmctl -S -s \"+37060789118 Admin123 reboot\"",
-              "wait-time": "120",
-              "method": "",
-              "api-path": "",
-              "api-body": {},
-              "retrieve-token": "1"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "event-data": {
-        "event-type": "Failover",
-        "event-subtype": [
-          "all",
-          "Switched to main",
-          "Switched to backup"
-        ],
-        "email-config": {
-          "subject": "",
-          "email-acc": "",
-          "recievers": [
-            ""
-          ]
-        },
-        "sms-config": {
-          "reciever": "+37060789118"
-        },
-        "message": [
-          "Failover, all",
-          "Failover, Switched to main",
-          "Failover, Switched to backup"
-        ]
-      },
-      "trigger-data": [
-        {
-          "steps": [
-            {
-              "type": "api",
-              "command": "",
-              "wait-time": "",
-              "method": "put",
-              "api-path": "/network/mwan3/interfaces/config/wan",
-              "api-body": {
-                "data": {
-                  "enabled": "1",
-                  "metric": "2"
-                }
-              },
-              "retrieve-token": ""
-            },
-            {
-              "type": "api",
-              "command": "",
-              "wait-time": "10",
-              "method": "put",
-              "api-path": "/network/mwan3/interfaces/config/mob1s1a1",
-              "api-body": {
-                "data": {
-                  "enabled": "1",
-                  "metric": "1"
-                }
-              },
-              "retrieve-token": ""
-            }
-          ]
-        },
-        {
-          "steps": [
-            {
-              "type": "ssh",
-              "command": "/etc/init.d/network restart",
-              "wait-time": "30",
-              "method": "",
-              "api-path": "",
-              "api-body": {},
-              "retrieve-token": ""
-            }
-          ]
-        },
-        {
-          "steps": [
-            {
-              "type": "api",
-              "command": "",
-              "wait-time": "10",
-              "method": "put",
-              "api-path": "/network/interfaces/config/mob1s1a1",
-              "api-body": {
-                "data": {
-                  "enabled": "0",
-                  ".type": "interface",
-                  "id": "wan"
-                }
-              },
-              "retrieve-token": ""
-            },
-            {
-              "type": "api",
-              "command": "",
-              "wait-time": "10",
-              "method": "put",
-              "api-path": "/network/interfaces/config/mob1s1a1",
-              "api-body": {
-                "data": {
-                  "enabled": "1",
-                  ".type": "interface",
-                  "id": "wan"
-                }
-              },
-              "retrieve-token": ""
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "event-data": {
-        "event-type": "Mobile Data",
-        "event-subtype": [
-          "all",
-          "data connected",
-          "data disconnected"
-        ],
-        "email-config": {
-          "subject": "",
-          "email-acc": "",
-          "recievers": [
-            ""
-          ]
-        },
-        "sms-config": {
-          "reciever": "+37060789118"
-        },
-        "message": [
-          "Mobile Data, all",
-          "Mobile Data, data connected",
-          "Mobile Data, data disconnected"
-        ]
-      },
-      "trigger-data": [
-        {
-          "steps": [
-            {
-              "type": "ssh",
-              "command": "/etc/init.d/network restart",
-              "wait-time": "30",
-              "method": "",
-              "api-path": "",
-              "api-body": {},
-              "retrieve-token": ""
-            }
-          ]
-        },
-        {
-          "steps": [
-            {
-              "type": "ssh",
-              "command": "/etc/init.d/network restart",
-              "wait-time": "30",
-              "method": "",
-              "api-path": "",
-              "api-body": {},
-              "retrieve-token": ""
-            }
-          ]
-        },
-        {
-          "steps": [
-            {
-              "type": "ssh",
-              "command": "/etc/init.d/network restart",
-              "wait-time": "30",
-              "method": "",
-              "api-path": "",
-              "api-body": {},
-              "retrieve-token": ""
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "event-data": {
-        "event-type": "SMS",
-        "event-subtype": [
-          "received from"
-        ],
-        "email-config": {
-          "subject": "",
-          "email-acc": "",
-          "recievers": [
-            ""
-          ]
-        },
-        "sms-config": {
-          "reciever": "+37060789118"
-        },
-        "message": [
-          "SMS, received from"
-        ]
-      },
-      "trigger-data": [
-        {
-          "steps": [
-            {
-              "type": "ssh",
-              "command": "gsmctl -S -s \"+37060789118 SMS test\"",
-              "wait-time": "",
-              "method": "",
-              "api-path": "",
-              "api-body": {},
-              "retrieve-token": ""
-            },
-            {
-              "type": "ssh",
-              "command": "gsmctl -S -d 0",
-              "wait-time": "",
-              "method": "",
-              "api-path": "",
-              "api-body": {},
-              "retrieve-token": ""
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "event-data": {
-        "event-type": "Web UI",
-        "event-subtype": [
-          "all",
-          "was successful",
-          "not successful"
-        ],
-        "email-config": {
-          "subject": "",
-          "email-acc": "",
-          "recievers": [
-            ""
-          ]
-        },
-        "sms-config": {
-          "reciever": "+37060789118"
+          "reciever": "+37069007463"
         },
         "message": [
           "Web UI, all",
@@ -3022,7 +2291,7 @@
           ]
         },
         "sms-config": {
-          "reciever": "+37060789118"
+          "reciever": "+37069007463"
         },
         "message": [
           "DHCP, all",
