@@ -17,7 +17,7 @@ def TriggerEvent(trigger):
                 time.sleep(1)
                 response = SendTrigger(
                     step["api-path"], json.dumps(step["api-body"]), step["method"])
-                if (response["success"] == False):
+                if (response["success"] == False or response == ""):
                     print(Text.Yellow("Request using API failed"))
             case "ssh":
                 SendCommand(step["command"], dataSender)
@@ -35,7 +35,7 @@ def TriggerEvent(trigger):
         pause = step["wait-time"]
         if (pause != ""):
             print(Text.Yellow(
-                "Program is paused for: {0} seconds".format(pause)))
+                "Paused for additional: {0} sec.".format(pause)))
             time.sleep(int(pause))
         if (step["retrieve-token"] == "1"):
             GetToken()

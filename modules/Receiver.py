@@ -1,3 +1,4 @@
+import time
 import sys
 from pathlib import Path
 
@@ -9,10 +10,12 @@ from modules.MessageDecode import Decode
 
 def CheckReceive():
     CheckWhichSim()
-    res = SendCommand("gsmctl -S -l all", dataReceiver)
+    res = SendCommand("gsmctl -S -l all", dataReceiver)    
     if (len(res) == 0):
-        print(Text.Red("Device did not receive the message"))
-    elif (len(res) >= 15):
+        print(Text.Yellow("Device did not receive the message\nAfter 20 seconds program will try to read the SMS again"))
+        time.sleep(20)
+    res = SendCommand("gsmctl -S -l all", dataReceiver)        
+    if (len(res) >= 15):        
         eventResults.received = res[2].split(":\t\t")[1][:-1]
         eventResults.messageIn = res[13].split(":\t\t")[1][:-1]
         Decode()
@@ -22,9 +25,8 @@ def CheckReceive():
             print(Text.Green("Passed"))
         else:
             print(Text.Red("Failed"))
-
-    else:
-        print(Text.Red("Error reading received SMS"))
+    else:        
+        print(Text.Red("Device did not receive the message\nFailed"))        
 
 def CheckWhichSim():
     res = SendCommand("ubus call sim get", dataSender)

@@ -64,13 +64,12 @@ def TestEvents(file):
                 print(Text.Red("JSON file is misformed. Check configuration file"))
                 sys.exit()
             response = SendEvent(
-                "/services/events_reporting/config", data, "post")
-            time.sleep(2)            
+                "/services/events_reporting/config", data, "post")                       
             if (response["success"] == True):
                 eventResults.eventId = response["data"]["id"]
                 PurgeAllSms()
                 TriggerEvent(test["trigger-data"][index])                
-                time.sleep(10)                
+                time.sleep(15)                
                 CheckReceive()
                 if (eventResults.passed == True):
                     passedCnt += 1

@@ -36,7 +36,7 @@ def SendTrigger(endpoint, bodyData, type):
         case _:
             print(Text.Red(
                 "JSON file is misformed (Trigger is missing HTTP method)\nCheck configuration file"))
-            sys.exit()
+            response = ""
     return response
 
 

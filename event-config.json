@@ -307,7 +307,7 @@
                 }
               },
               "retrieve-token": "",
-              "wait-time": "10"
+              "wait-time": ""
             }
           ]
         },
@@ -590,7 +590,7 @@
                 }
               },
               "retrieve-token": "",
-              "wait-time": "10"
+              "wait-time": ""
             }
           ]
         },
@@ -1583,7 +1583,7 @@
                 }
               },
               "retrieve-token": "",
-              "wait-time": ""
+              "wait-time": "20"
             }
           ]
         },
@@ -1601,7 +1601,7 @@
                 }
               },
               "retrieve-token": "",
-              "wait-time": ""
+              "wait-time": "20"
             }
           ]
         },
@@ -1619,7 +1619,7 @@
                 }
               },
               "retrieve-token": "",
-              "wait-time": ""
+              "wait-time": "20"
             }
           ]
         }
@@ -1859,94 +1859,34 @@
         {
           "steps": [
             {
-              "type": "api",
-              "command": "",
+              "type": "ssh",
+              "command": "reboot -w",
               "wait-time": "120",
-              "method": "post",
-              "api-path": "/system/administration/general/actions/reboot",
-              "api-body": {
-                "data": {}
-              },
+              "method": "",
+              "api-path": "",
+              "api-body": {},
               "retrieve-token": "1"
             }
           ]
         },
         {
           "steps": [
-            {
-              "type": "api",
-              "command": "",
-              "wait-time": "",
-              "method": "put",
-              "api-path": "/services/auto_reboot/ping/config/cfg01c21d",
-              "api-body": {
-                "data": {
-                  "type": "ping",
-                  "retry": "1",
-                  "enable": "1",
-                  ".type": "ping_reboot",
-                  "packet_size": "56",                  
-                  "host": "192.168.134.80",
-                  "ip_type": "ipv4",
-                  "action": "1",
-                  "stop_action": "0",
-                  "interface": "1",
-                  "time": "5",
-                  "time_out": "1",
-                  "number": ""
-                }
-              },
-              "retrieve-token": "1"
-            },
-            {
-              "type": "api",
-              "command": "",
-              "wait-time": "",
-              "method": "put",
-              "api-path": "/services/auto_reboot/ping/config/cfg01c21d",
-              "api-body": {
-                "data": {
-                  "type": "ping",
-                  "enable": "0",
-                  ".type": "ping_reboot",
-                  "id": "cfg01c21d"
-                }
-              },
-              "retrieve-token": "1"
-            }
-          ]
-        },
-        {
-          "steps": [
-            {
-              "type": "api",
-              "command": "",
-              "wait-time": "",
-              "method": "put",
-              "api-path": "/services/auto_reboot/periodic/config/cfg0210a4",
-              "api-body": {
-                "data": {
-                  "id": "cfg0210a4",
-                  "enable": "1",
-                  "action": "1",
-                  "period": "week",
-                  "days": [
-                    "mon",
-                    "tue",
-                    "wed",
-                    "thu",
-                    "fri"
-                  ],
-                  "time": [
-                    "00:05"
-                  ]
-                }
-              },
-              "retrieve-token": "1"
-            },
             {
               "type": "ssh",
-              "command": "date -s 00:04:55",
+              "command": "reboot -p",
+              "wait-time": "120",
+              "method": "",
+              "api-path": "",
+              "api-body": {},
+              "retrieve-token": "1"
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "ssh",
+              "command": "reboot -e",
               "wait-time": "120",
               "method": "",
               "api-path": "",
@@ -1972,7 +1912,7 @@
           "steps": [
             {
               "type": "ssh",
-              "command": "gsmctl -S -s \"+37060789118 Admin123 reboot\"",
+              "command": "reboot -s",
               "wait-time": "120",
               "method": "",
               "api-path": "",
@@ -2013,7 +1953,7 @@
             {
               "type": "api",
               "command": "",
-              "wait-time": "",
+              "wait-time": "10",
               "method": "put",
               "api-path": "/network/mwan3/interfaces/config/wan",
               "api-body": {
@@ -2037,14 +1977,10 @@
                 }
               },
               "retrieve-token": ""
-            }
-          ]
-        },
-        {
-          "steps": [
+            },
             {
               "type": "ssh",
-              "command": "/etc/init.d/network restart",
+              "command": "ubus call network.interface.mob1s1a1 down",
               "wait-time": "30",
               "method": "",
               "api-path": "",
@@ -2056,33 +1992,34 @@
         {
           "steps": [
             {
-              "type": "api",
-              "command": "",
-              "wait-time": "10",
-              "method": "put",
-              "api-path": "/network/interfaces/config/mob1s1a1",
-              "api-body": {
-                "data": {
-                  "enabled": "0",
-                  ".type": "interface",
-                  "id": "wan"
-                }
-              },
+              "type": "ssh",
+              "command": "ubus call network.interface.mob1s1a1 up",
+              "wait-time": "30",
+              "method": "",
+              "api-path": "",
+              "api-body": {},
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "ssh",
+              "command": "ubus call network.interface.mob1s1a1 down",
+              "wait-time": "30",
+              "method": "",
+              "api-path": "",
+              "api-body": {},
               "retrieve-token": ""
             },
             {
-              "type": "api",
-              "command": "",
-              "wait-time": "10",
-              "method": "put",
-              "api-path": "/network/interfaces/config/mob1s1a1",
-              "api-body": {
-                "data": {
-                  "enabled": "1",
-                  ".type": "interface",
-                  "id": "wan"
-                }
-              },
+              "type": "ssh",
+              "command": "ubus call network.interface.mob1s1a1 up",
+              "wait-time": "30",
+              "method": "",
+              "api-path": "",
+              "api-body": {},
               "retrieve-token": ""
             }
           ]
