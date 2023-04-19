@@ -33,8 +33,6 @@ def TestEvents(file):
                         CheckReceive()
                         if (eventResults.passed == True):
                             testResults.passedCnt += 1
-                        else:
-                            testResults.failedCnt += 1
                         UpdateCSV(index, test)
                         PrepForNextEvent()
                     else:
@@ -45,6 +43,7 @@ def TestEvents(file):
                     print(Text.Red("JSON configuration file is misformed\nCheck configuration file"))
                     sys.exit()
             index = 0    
+        testResults.failedCnt = testResults.total - testResults.passedCnt
     except KeyError:
         print(Text.Red("JSON configuration file is misformed\nCheck configuration file"))
         sys.exit()

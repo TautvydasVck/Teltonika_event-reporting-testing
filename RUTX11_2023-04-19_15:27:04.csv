@@ -87,3 +87,19 @@ Switch Events;changed to UP;Switch Events, changed to UP;Switch Events, changed 
 Reboot;all;Reboot, all;Reboot, all;+37060789118;+37060789118;True
 Reboot;web ui;Reboot, web ui;Reboot, web ui;+37060789118;+37060789118;True
 Reboot;ping reboot;Reboot, ping_reboot;Reboot, ping_reboot;+37060789118;+37060789118;True
+Reboot;reboot scheduler;Reboot, reboot_scheduler;Reboot, reboot_scheduler;+37060789118;+37060789118;True
+Reboot;from button;Reboot, from button;Reboot, from button;+37060789118;+37060789118;True
+Reboot;sms reboot;Reboot, sms reboot;Reboot, sms reboot;+37060789118;+37060789118;True
+Failover;all;Failover, all;Failover, all;+37060789118;+37060789118;True
+Failover;Switched to main;Failover, Switched to main;Failover, Switched to main;+37060789118;+37060789118;True
+Failover;Switched to backup;Failover, Switched to backup;Failover, Switched to backup;+37060789118;+37060789118;True
+Mobile Data;all;Mobile Data, all;Mobile Data, all;+37060789118;+37060789118;True
+Mobile Data;data connected;Mobile Data, data connected;Mobile Data, data connected;+37060789118;+37060789118;True
+Mobile Data;data disconnected;Mobile Data, data disconnected;Mobile Data, data disconnected;+37060789118;+37060789118;True
+SMS;received from;SMS, received from;SMS, received from;+37060789118;+37060789118;True
+Web UI;all;Web UI, all;Web UI, all;+37060789118;+37060789118;True
+Web UI;was successful;Web UI, was successful;Web UI, was successful;+37060789118;+37060789118;True
+Web UI;not successful;Web UI, not successful;Web UI, not successful;+37060789118;+37060789118;True
+DHCP;all;DHCP, all;DHCP, all;+37060789118;+37060789118;True
+DHCP;lan;DHCP, lan;DHCP, lan;+37060789118;+37060789118;True
+DHCP;wifi;DHCP, wifi;DHCP, wifi;+37060789118;+37060789118;True
