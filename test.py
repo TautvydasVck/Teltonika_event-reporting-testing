@@ -4,7 +4,7 @@ from modules.DataFile import GetConfigData
 from modules.APIToken import GetToken
 from modules.Receiver import GetPhoneNumbers
 from modules.Variables import ReadArgs, fileData
-from modules.TestEvents import TestEvents
+from modules.TestEventsSMS import TestEvents
 
 print(end="\n")
 ReadArgs()
