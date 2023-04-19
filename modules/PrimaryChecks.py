@@ -3,17 +3,16 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from modules.Variables import deviceInfo, testResults
 from classes.Utilities import Text
-from modules.Variables import dataSender, deviceInfo, testResults
 
-def CheckForMobile():
-    res = GetSysInfo()
-    if (res["data"]["board"]["hwinfo"]["mobile"] == False):
-        print(Text.Yellow(
+def CheckForMobile():    
+    if (deviceInfo.sysInfo["data"]["board"]["hwinfo"]["mobile"] == False):
+        print(Text.Red(
             "Device does not have mobile capabilities"))
-        #deviceInfo.mobile = False
+        # deviceInfo.mobile = False
         sys.exit()
-    elif (res["data"]["board"]["hwinfo"]["mobile"] == True):
+    elif (deviceInfo.sysInfo["data"]["board"]["hwinfo"]["mobile"] == True):
         print(Text.Green(
             "Device has mobile capabilities"))
         deviceInfo.mobile = True
@@ -22,42 +21,39 @@ def CheckForMobile():
         sys.exit()
 
 
-def CheckForModel(file):
-    res = GetSysInfo()
+def CheckForModel(file):    
     print(
         "--Device being tested: {0}--".
-        format(res["data"]["mnfinfo"]["name"]))
-    modelA = str(res["data"]["mnfinfo"]["name"])
-    modelF = file["info"]["product"]
-    if modelA.startswith(modelF):
-        print(Text.Green("Device model in JSON matches actual device model"))
-    else:
-        print(Text.Red("Device model mismatch"))
-        sys.exit(
-            "Device model in config file ({0}) and actual model ({1}) do not match.\n" +
-            "Check JSON configuration file". format(modelF, modelA))
+        format(deviceInfo.sysInfo["data"]["mnfinfo"]["name"]))
+    modelA = str(deviceInfo.sysInfo["data"]["mnfinfo"]["name"])
+    try:
+        modelF = file["info"]["product"]
+        if modelA.startswith(modelF):
+            print(Text.Green("Device model in JSON matches actual device model"))
+        else:
+            print(Text.Red("Device model mismatch"))
+            sys.exit(
+                "Device model in config file ({0}) and actual model ({1}) do not match.\n" +
+                "Check JSON configuration file". format(modelF, modelA))
+    except KeyError:
+        print(Text.Red("JSON configuration file is misformed\nCheck configuration file"))
+        sys.exit()
+
 
 def CheckTotalEvents(file):
     events = 0
     triggers = 0
     messages = 0
-    for event in file["events-triggers"]:
-        events += len(event["event-data"]["event-subtype"])
-        triggers += len(event["trigger-data"])
-        messages += len(event["event-data"]["message"])
-        if (events != triggers or events != messages):
-            print(Text.Red(
-                "Events and their messages count does not match trigger count\nCheck JSON configuration file"))
-            sys.exit()
-    testResults.total = events 
-
-def GetSysInfo():
-    head = {"Content-Type": "application/json",
-            "Authorization": "Bearer " + dataSender.token}
-    response = requests.get(dataSender.baseURL +
-                            "/system/device/info", headers=head).json()
-    if (response["success"] == False):
-        print(Text.Red("Could not retrieve device system information."))
+    try:
+        for event in file["events-triggers"]:
+            events += len(event["event-data"]["event-subtype"])
+            triggers += len(event["trigger-data"])
+            messages += len(event["event-data"]["message"])
+            if (events != triggers or events != messages):
+                print(Text.Red(
+                    "Events and their messages count does not match trigger count\nCheck JSON configuration file"))
+                sys.exit()
+        testResults.total = events
+    except KeyError:
+        print(Text.Red("JSON configuration file is misformed\nCheck configuration file"))
         sys.exit()
-    else:
-        return response

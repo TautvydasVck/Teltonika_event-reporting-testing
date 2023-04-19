@@ -29,8 +29,12 @@ def CheckReceive():
         print(Text.Red("Device did not receive the message\nFailed"))        
 
 def GetPhoneNumbers(file):
-    deviceInfo.sims[0] = file["info"]["SIM1-nr"]
-    deviceInfo.sims[1] = file["info"]["SIM2-nr"]
+    try:
+        deviceInfo.sims[0] = file["info"]["SIM1-nr"]
+        deviceInfo.sims[1] = file["info"]["SIM2-nr"]
+    except KeyError:
+        print(Text.Red("JSON configuration file is misformed\nCheck configuration file"))
+        sys.exit()
 
 def CheckWhichSim():
     res = SendCommand("ubus call sim get", dataSender)

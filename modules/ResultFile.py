@@ -1,5 +1,4 @@
 import os
-import ftplib
 import sys
 from pathlib import Path
 

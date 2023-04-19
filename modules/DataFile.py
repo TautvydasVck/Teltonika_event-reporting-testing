@@ -19,5 +19,5 @@ def LoadFile():
                 data = json.load(f)
         return data
     except json.decoder.JSONDecodeError:
-         print(Text.Red("JSON file is misformed\nCheck configuration file"))
-         sys.exit()
+        print(Text.Red("JSON configuration file is misformed\nCheck configuration file"))
+        sys.exit()

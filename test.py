@@ -6,6 +6,7 @@ from modules.APIToken import GetToken
 from modules.Receiver import GetPhoneNumbers
 from modules.Variables import ReadArgs, testResults
 from modules.TestEventsSMS import TestEvents
+from modules.Requests import GetSysInfo
 from classes.Utilities import Text
 
 print(end="\n")
@@ -14,6 +15,7 @@ ReadArgs()
 GetToken()
 data = ReadDataFile()
 GetPhoneNumbers(data)
+GetSysInfo()
 CheckForModel(data)
 CheckForMobile()
 CheckTotalEvents(data)

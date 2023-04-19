@@ -1,7 +1,6 @@
 import json
 import sys
 import time
-from datetime import datetime
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
@@ -15,36 +14,40 @@ from modules.ResultFile import UpdateCSV
 
 def TestEvents(file):
     index = 0
-    for test in file["events-triggers"]:
-        for subtype in test["event-data"]["event-subtype"]:
-            print("Event type: " +
-                  Text.Underline("{0}".format(test["event-data"]["event-type"])))
-            print(
-                "Subtype: "+Text.Underline("{0}".format(subtype)))
-            if (test["event-data"]["sms-config"]["reciever"] != "" and deviceInfo.mobile == True):
-                data = GetEventData(test, subtype, index)                
-                response = SendEvent(
-                    "/services/events_reporting/config", data, "post")
-                if (response["success"] == True or response != ""):
-                    eventResults.eventId = response["data"]["id"]
-                    PurgeAllSms()
-                    TriggerEvent(test["trigger-data"][index])
-                    time.sleep(10)
-                    CheckReceive()
-                    if (eventResults.passed == True):
-                        testResults.passedCnt += 1
+    try:
+        for test in file["events-triggers"]:
+            for subtype in test["event-data"]["event-subtype"]:
+                print("Event type: " +
+                      Text.Underline("{0}".format(test["event-data"]["event-type"])))
+                print(
+                    "Subtype: "+Text.Underline("{0}".format(subtype)))
+                if (test["event-data"]["sms-config"]["reciever"] != "" and deviceInfo.mobile == True):
+                    data = GetEventData(test, subtype, index)                
+                    response = SendEvent(
+                        "/services/events_reporting/config", data, "post")
+                    if (response["success"] == True or response != ""):
+                        eventResults.eventId = response["data"]["id"]
+                        PurgeAllSms()
+                        TriggerEvent(test["trigger-data"][index])
+                        time.sleep(10)
+                        CheckReceive()
+                        if (eventResults.passed == True):
+                            testResults.passedCnt += 1
+                        else:
+                            testResults.failedCnt += 1
+                        UpdateCSV(index, test)
+                        PrepForNextEvent()
                     else:
-                        testResults.failedCnt += 1
-                    UpdateCSV(index, test)
-                    PrepForNextEvent()
+                        print(Text.Red("Event was not created"))
+                    index += 1
+                    print("-"*40)
                 else:
-                    print(Text.Red("Event was not created"))
-                index += 1
-                print("-"*40)
-            else:
-                print(Text.Red("JSON file is misformed. Check configuration file"))
-                sys.exit()
-        index = 0    
+                    print(Text.Red("JSON configuration file is misformed\nCheck configuration file"))
+                    sys.exit()
+            index = 0    
+    except KeyError:
+        print(Text.Red("JSON configuration file is misformed\nCheck configuration file"))
+        sys.exit()
 
 def GetEventData(test, subtype, index):
     try:
@@ -64,5 +67,5 @@ def GetEventData(test, subtype, index):
         eventResults.messageOut = test["event-data"]["message"][index]
         return data
     except KeyError:
-        print(Text.Red("JSON file is misformed\nCheck configuration file"))
+        print(Text.Red("JSON configuration file is misformed\nCheck configuration file"))
         sys.exit()
