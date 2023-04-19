@@ -1753,7 +1753,7 @@
                 }
               },
               "retrieve-token": "",
-              "wait-time": "10"
+              "wait-time": ""
             }
           ]
         },
@@ -1771,7 +1771,7 @@
                 }
               },
               "retrieve-token": "",
-              "wait-time": "10"
+              "wait-time": ""
             }
           ]
         },
@@ -1789,7 +1789,7 @@
                 }
               },
               "retrieve-token": "",
-              "wait-time": "10"
+              "wait-time": ""
             }
           ]
         },
@@ -1807,7 +1807,7 @@
                 }
               },
               "retrieve-token": "",
-              "wait-time": "10"
+              "wait-time": ""
             }
           ]
         },
@@ -1825,7 +1825,7 @@
                 }
               },
               "retrieve-token": "",
-              "wait-time": "10"
+              "wait-time": ""
             }
           ]
         }
@@ -1855,8 +1855,8 @@
         "message": [
           "Reboot, all",
           "Reboot, web ui",
-          "Reboot, ping reboot",
-          "Reboot, reboot scheduler",
+          "Reboot, ping_reboot",
+          "Reboot, reboot_scheduler",
           "Reboot, from button",
           "Reboot, sms reboot"
         ]

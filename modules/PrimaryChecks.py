@@ -46,7 +46,7 @@ def CheckTotalEvents(file):
         messages += len(event["event-data"]["message"])
         if (events != triggers or events != messages):
             print(Text.Red(
-                "Events and their messages count does not match trigger count. Check JSON configuration file"))
+                "Events and their messages count does not match trigger count\nCheck JSON configuration file"))
             sys.exit()
     return events
 
@@ -56,7 +56,7 @@ def GetSysInfo():
     response = requests.get(dataSender.baseURL +
                             "/system/device/info", headers=head).json()
     if (response["success"] == False):
-        print(Text.Red("Could not retrieve device information."))
-        sys.exit("Program will stop")
+        print(Text.Red("Could not retrieve device system information."))
+        sys.exit()
     else:
         return response

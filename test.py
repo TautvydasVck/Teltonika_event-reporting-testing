@@ -5,7 +5,6 @@ from modules.APIToken import GetToken
 from modules.Receiver import GetPhoneNumbers
 from modules.Variables import ReadArgs, fileData
 from modules.TestEvents import TestEvents
-from classes.Utilities import Text
 
 print(end="\n")
 ReadArgs()
@@ -16,4 +15,4 @@ CheckForModel(data)
 CheckForMobile()
 TestEvents(data)
 UploadCSV()
-print(Text.Purple("|---------------FINISHED---------------|"))
+print("|---------------FINISHED---------------|")
