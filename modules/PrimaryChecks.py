@@ -4,7 +4,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from classes.Utilities import Text
-from modules.Variables import dataSender, deviceInfo
+from modules.Variables import dataSender, deviceInfo, testResults
 
 def CheckForMobile():
     res = GetSysInfo()
@@ -49,7 +49,7 @@ def CheckTotalEvents(file):
             print(Text.Red(
                 "Events and their messages count does not match trigger count\nCheck JSON configuration file"))
             sys.exit()
-    return events
+    testResults.total = events 
 
 def GetSysInfo():
     head = {"Content-Type": "application/json",

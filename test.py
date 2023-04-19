@@ -1,18 +1,28 @@
-from modules.ResultFile import UploadCSV
-from modules.PrimaryChecks import CheckForMobile, CheckForModel
+from datetime import datetime
+from modules.ResultFile import UploadCSV, CreateCSV
+from modules.PrimaryChecks import CheckForMobile, CheckForModel, CheckTotalEvents
 from modules.DataFile import ReadDataFile
 from modules.APIToken import GetToken
 from modules.Receiver import GetPhoneNumbers
-from modules.Variables import ReadArgs
+from modules.Variables import ReadArgs, testResults
 from modules.TestEventsSMS import TestEvents
+from classes.Utilities import Text
 
 print(end="\n")
+testResults.startTime = datetime.now().strftime("%Y-%m-%d_%H:%M:%S")
 ReadArgs()
 GetToken()
 data = ReadDataFile()
 GetPhoneNumbers(data)
 CheckForModel(data)
 CheckForMobile()
+CheckTotalEvents(data)
+CreateCSV(data, testResults.startTime)
+print("Started at: {0}".format(testResults.startTime))
+print("Total tests: {0}\n".format(testResults.total))
 TestEvents(data)
+print("Total events tested: {0}".format(testResults.total))
+print(Text.Green("Passed: {0}".format(testResults.passedCnt)), end=" ")
+print(Text.Red("Failed: {0}".format(testResults.failedCnt)))
 UploadCSV()
 print("|---------------FINISHED---------------|")

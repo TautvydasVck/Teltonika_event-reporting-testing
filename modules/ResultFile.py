@@ -5,6 +5,8 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from modules.Variables import eventResults, deviceInfo, fileData
+from modules.FTPConnection import CreateConn
+from classes.Utilities import Text
 
 def CreateCSV(file, start):
     fileName = "{0}_{1}.csv".format(file["info"]["product"], start)
@@ -24,10 +26,13 @@ def UpdateCSV(index, test):
 
 
 def UploadCSV():
-    ftp = ftplib.FTP(host="192.168.10.44", user="ftpuser", passwd="Akademija159!")
-    ftp.encoding = "utf-8"
-    with open(fileData.outFileName, "rb") as f:
-        ftp.storbinary(f"STOR {fileData.outFileName}", f)
+    ftp = CreateConn()
+    if(ftp != ""):
+        try:
+            with open(fileData.outFileName, "rb") as f:
+                ftp.storbinary(f"STOR {fileData.outFileName}", f)
+                ftp.quit()
+        except FileNotFoundError:
+             print(Text.Red("CSV result file was not found"))        
     if (fileData.delete == True):
-        os.system("rm '{0}'".format(fileData.outFileName))
-    ftp.quit()
+            os.system("rm '{0}'".format(fileData.outFileName))

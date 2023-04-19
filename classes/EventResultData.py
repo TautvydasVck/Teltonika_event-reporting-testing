@@ -1,4 +1,4 @@
-class ResultData:
+class EventResultData:
     def __init__(self):
         self.eventId = ""
         self.passed = False

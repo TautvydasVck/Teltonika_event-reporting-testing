@@ -6,23 +6,15 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from classes.Utilities import Text
-from modules.PrimaryChecks import CheckTotalEvents
-from modules.Variables import deviceInfo, eventResults
+from modules.Variables import deviceInfo, eventResults, testResults
 from modules.Receiver import CheckReceive
 from modules.Triggering import TriggerEvent
 from modules.Requests import SendEvent
 from modules.Resets import PurgeAllSms, PrepForNextEvent
-from modules.ResultFile import CreateCSV, UpdateCSV
+from modules.ResultFile import UpdateCSV
 
 def TestEvents(file):
-    total = CheckTotalEvents(file)
     index = 0
-    failedCnt = 0
-    passedCnt = 0
-    start = datetime.now().strftime("%Y-%m-%d_%H:%M:%S")
-    CreateCSV(file, start)
-    print("Started at: {0}".format(start))
-    print("Total tests: {0}\n".format(total))
     for test in file["events-triggers"]:
         for subtype in test["event-data"]["event-subtype"]:
             print("Event type: " +
@@ -30,20 +22,7 @@ def TestEvents(file):
             print(
                 "Subtype: "+Text.Underline("{0}".format(subtype)))
             if (test["event-data"]["sms-config"]["reciever"] != "" and deviceInfo.mobile == True):
-                data = json.dumps({
-                    ".type": "rule",
-                    "enable": "1",
-                    "event": test["event-data"]["event-type"],
-                    "eventMark": subtype,
-                    "message": test["event-data"]["message"][index],
-                    "action": "sendSMS",
-                    "emailgroup": "",
-                    "recipEmail": "",
-                    "subject": "",
-                    "recipient_format": "single",
-                    "telnum": test["event-data"]["sms-config"]["reciever"]
-                })
-                eventResults.messageOut = test["event-data"]["message"][index]
+                data = GetEventData(test, subtype, index)                
                 response = SendEvent(
                     "/services/events_reporting/config", data, "post")
                 if (response["success"] == True or response != ""):
@@ -53,9 +32,9 @@ def TestEvents(file):
                     time.sleep(10)
                     CheckReceive()
                     if (eventResults.passed == True):
-                        passedCnt += 1
+                        testResults.passedCnt += 1
                     else:
-                        failedCnt += 1
+                        testResults.failedCnt += 1
                     UpdateCSV(index, test)
                     PrepForNextEvent()
                 else:
@@ -65,7 +44,25 @@ def TestEvents(file):
             else:
                 print(Text.Red("JSON file is misformed. Check configuration file"))
                 sys.exit()
-        index = 0
-    print("Total events tested: {0}".format(total))
-    print(Text.Green("Passed: {0}".format(passedCnt)), end=" ")
-    print(Text.Red("Failed: {0}".format(failedCnt)))
+        index = 0    
+
+def GetEventData(test, subtype, index):
+    try:
+        data = json.dumps({
+                        ".type": "rule",
+                        "enable": "1",
+                        "event": test["event-data"]["event-type"],
+                        "eventMark": subtype,
+                        "message": test["event-data"]["message"][index],
+                        "action": "sendSMS",
+                        "emailgroup": "",
+                        "recipEmail": "",
+                        "subject": "",
+                        "recipient_format": "single",
+                        "telnum": test["event-data"]["sms-config"]["reciever"]
+                    })
+        eventResults.messageOut = test["event-data"]["message"][index]
+        return data
+    except KeyError:
+        print(Text.Red("JSON file is misformed\nCheck configuration file"))
+        sys.exit()

@@ -5,13 +5,15 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from classes.DeviceData import DeviceData
 from classes.RequestData import RequestData
-from classes.ResultData import ResultData
+from classes.EventResultData import EventResultData
 from classes.Files import Files
+from classes.TestResultData import TestResultData
 
 deviceInfo = DeviceData()
 dataSender = RequestData()
 dataReceiver = RequestData()
-eventResults = ResultData()
+eventResults = EventResultData()
+testResults = TestResultData()
 fileData = Files()
 
 def ReadArgs():
