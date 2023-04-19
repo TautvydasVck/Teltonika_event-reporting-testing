@@ -5,7 +5,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from classes.Utilities import Text
 
-def GetConfigData(filePath):
+def ReadDataFile(filePath):
     try:
         with open(filePath) as f:
             data = json.load(f)

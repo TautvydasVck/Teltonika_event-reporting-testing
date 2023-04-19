@@ -10,11 +10,12 @@ def CheckForMobile():
     res = GetSysInfo()
     if (res["data"]["board"]["hwinfo"]["mobile"] == False):
         print(Text.Yellow(
-            "Device does not have mobile capabilities. Messages can be sent only via email"))
-        deviceInfo.mobile = False
+            "Device does not have mobile capabilities"))
+        #deviceInfo.mobile = False
+        sys.exit()
     elif (res["data"]["board"]["hwinfo"]["mobile"] == True):
         print(Text.Green(
-            "Device has mobile capabilities. Messages can be sent via email and phone number"))
+            "Device has mobile capabilities"))
         deviceInfo.mobile = True
     else:
         print(Text.Red("Could not get information about mobile capabilities"))
