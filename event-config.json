@@ -733,9 +733,7 @@
               "wait-time": "",
               "method": "",
               "api-path": "",
-              "api-body": {
-                "data": {}
-              },
+              "api-body": {},
               "retrieve-token": ""
             },
             {
