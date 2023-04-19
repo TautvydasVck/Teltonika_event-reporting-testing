@@ -79,6 +79,7 @@
           "system",
           "telnetd",
           "uhttpd",
+          "user_groups",
           "upnpd",
           "wifi_scanner",
           "xl2tpd"
@@ -164,6 +165,7 @@
           "Config, system",
           "Config, telnetd",
           "Config, uhttpd",
+          "Config, user_groups",
           "Config, upnpd",
           "Config, wifi_scanner",
           "Config, xl2tpd"
@@ -1479,6 +1481,23 @@
                   ".type": "uhttpd",
                   "enable_https": "1",
                   "listen_https": "443"
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "post",
+              "api-path": "/system/recipients/phone_groups/config",
+              "api-body": {
+                "data": {
+                  "name": "test"
                 }
               },
               "retrieve-token": ""

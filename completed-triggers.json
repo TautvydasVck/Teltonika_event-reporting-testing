@@ -74,6 +74,7 @@
           "system",
           "telnetd",
           "uhttpd",
+          "user_groups",
           "upnpd",
           "wifi_scanner",
           "xl2tpd"
@@ -86,10 +87,10 @@
           ]
         },
         "sms-config": {
-          "reciever": "+37060789118"
+          "reciever": "+37069007463"
         },
         "message": [
-          "Config, all",
+          "Config, all %ie",
           "Config, openvpn",
           "Config, events_reporting",
           "Config, periodic_reboot",
@@ -103,10 +104,10 @@
           "Config, snmpd",
           "Config, sqm",
           "Config, ulogd",
-          "Config, modbus_data_sender",
+          "Config, modbus_data_sender %ie",
           "Config, mosquitto",
           "Config, mqtt_pub",
-          "Config, chilli (hotspot)",
+          "Config, chilli (hotspot)%ie",
           "Config, samba (network shares)",
           "Config, etherwake (Wake on Lan)",
           "Config, sms",
@@ -159,6 +160,7 @@
           "Config, system",
           "Config, telnetd",
           "Config, uhttpd",
+          "Config, user_groups",
           "Config, upnpd",
           "Config, wifi_scanner",
           "Config, xl2tpd"
@@ -192,7 +194,7 @@
               "api-path": "/services/openvpn/config",
               "api-body": {
                 "data": {
-                  "id": "test",
+                  "id": "1234",
                   "type": "client"
                 }
               },
@@ -258,7 +260,7 @@
               "api-path": "/services/ipsec/config",
               "api-body": {
                 "data": {
-                  "id": "test"
+                  "id": "1234"
                 }
               },
               "retrieve-token": "",
@@ -302,7 +304,7 @@
                 }
               },
               "retrieve-token": "",
-              "wait-time": "10"
+              "wait-time": ""
             }
           ]
         },
@@ -585,7 +587,7 @@
                 }
               },
               "retrieve-token": "",
-              "wait-time": "10"
+              "wait-time": ""
             }
           ]
         },
@@ -1165,7 +1167,7 @@
               "api-path": "/services/pptp/server/config",
               "api-body": {
                 "data": {
-                  "id": "test",
+                  "id": "1234",
                   ".type": "service"
                 }
               },
@@ -1486,6 +1488,23 @@
               "type": "api",
               "command": "",
               "wait-time": "",
+              "method": "post",
+              "api-path": "/system/recipients/phone_groups/config",
+              "api-body": {
+                "data": {
+                  "name": "test"
+                }
+              },
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
               "method": "put",
               "api-path": "/services/upnp/settings/config/general",
               "api-body": {
@@ -1529,7 +1548,7 @@
               "api-path": "/services/l2tp/server/config",
               "api-body": {
                 "data": {
-                  "id": "test",
+                  "id": "1234",
                   ".type": "service"
                 }
               },
@@ -1555,7 +1574,7 @@
           ]
         },
         "sms-config": {
-          "reciever": "+37060789118"
+          "reciever": "+37069007463"
         },
         "message": [
           "WiFi, all",
@@ -1578,7 +1597,7 @@
                 }
               },
               "retrieve-token": "",
-              "wait-time": ""
+              "wait-time": "20"
             }
           ]
         },
@@ -1596,7 +1615,7 @@
                 }
               },
               "retrieve-token": "",
-              "wait-time": ""
+              "wait-time": "20"
             }
           ]
         },
@@ -1614,7 +1633,7 @@
                 }
               },
               "retrieve-token": "",
-              "wait-time": ""
+              "wait-time": "20"
             }
           ]
         }
@@ -1636,7 +1655,7 @@
           ]
         },
         "sms-config": {
-          "reciever": "+37060789118"
+          "reciever": "+37069007463"
         },
         "message": [
           "SSH, all",
@@ -1704,7 +1723,7 @@
           ]
         },
         "sms-config": {
-          "reciever": "+37060789118"
+          "reciever": "+37069007463"
         },
         "message": [
           "Switch Events, all",
@@ -1729,7 +1748,7 @@
                 }
               },
               "retrieve-token": "",
-              "wait-time": ""
+              "wait-time": "10"
             }
           ]
         },
@@ -1747,7 +1766,7 @@
                 }
               },
               "retrieve-token": "",
-              "wait-time": ""
+              "wait-time": "10"
             }
           ]
         },
@@ -1765,7 +1784,7 @@
                 }
               },
               "retrieve-token": "",
-              "wait-time": ""
+              "wait-time": "10"
             }
           ]
         },
@@ -1783,7 +1802,7 @@
                 }
               },
               "retrieve-token": "",
-              "wait-time": ""
+              "wait-time": "10"
             }
           ]
         },
@@ -1801,7 +1820,7 @@
                 }
               },
               "retrieve-token": "",
-              "wait-time": ""
+              "wait-time": "10"
             }
           ]
         }
@@ -1826,7 +1845,7 @@
           ]
         },
         "sms-config": {
-          "reciever": "+37060789118"
+          "reciever": "+37069007463"
         },
         "message": [
           "Reboot, all",
@@ -1854,99 +1873,39 @@
         {
           "steps": [
             {
-              "type": "api",
-              "command": "",
-              "wait-time": "120",
-              "method": "post",
-              "api-path": "/system/administration/general/actions/reboot",
-              "api-body": {
-                "data": {}
-              },
-              "retrieve-token": "1"
-            }
-          ]
-        },
-        {
-          "steps": [
-            {
-              "type": "api",
-              "command": "",
-              "wait-time": "220",
-              "method": "put",
-              "api-path": "/services/auto_reboot/ping/config/cfg01c21d",
-              "api-body": {
-                "data": {
-                  "type": "ping",
-                  "retry": "1",
-                  "enable": "1",
-                  ".type": "ping_reboot",
-                  "packet_size": "56",                  
-                  "host": "192.168.134.80",
-                  "ip_type": "ipv4",
-                  "action": "1",
-                  "stop_action": "0",
-                  "interface": "1",
-                  "time": "5",
-                  "time_out": "1",
-                  "number": ""
-                }
-              },
-              "retrieve-token": "1"
-            },
-            {
-              "type": "api",
-              "command": "",
-              "wait-time": "",
-              "method": "put",
-              "api-path": "/services/auto_reboot/ping/config/cfg01c21d",
-              "api-body": {
-                "data": {
-                  "type": "ping",
-                  "enable": "0",
-                  ".type": "ping_reboot",
-                  "id": "cfg01c21d"
-                }
-              },
-              "retrieve-token": "1"
-            }
-          ]
-        },
-        {
-          "steps": [
-            {
-              "type": "api",
-              "command": "",
-              "wait-time": "",
-              "method": "put",
-              "api-path": "/services/auto_reboot/periodic/config/cfg0210a4",
-              "api-body": {
-                "data": {
-                  "id": "cfg0210a4",
-                  "enable": "1",
-                  "action": "1",
-                  "period": "week",
-                  "days": [
-                    "mon",
-                    "tue",
-                    "wed",
-                    "thu",
-                    "fri"
-                  ],
-                  "time": [
-                    "00:05"
-                  ]
-                }
-              },
-              "retrieve-token": "1"
-            },
-            {
               "type": "ssh",
-              "command": "date -s 00:04:55",
+              "command": "reboot -w",
               "wait-time": "120",
               "method": "",
               "api-path": "",
               "api-body": {},
-              "retrieve-token": ""
+              "retrieve-token": "1"
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "ssh",
+              "command": "reboot -p",
+              "wait-time": "120",
+              "method": "",
+              "api-path": "",
+              "api-body": {},
+              "retrieve-token": "1"
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "ssh",
+              "command": "reboot -e",
+              "wait-time": "120",
+              "method": "",
+              "api-path": "",
+              "api-body": {},
+              "retrieve-token": "1"
             }
           ]
         },
@@ -1967,7 +1926,7 @@
           "steps": [
             {
               "type": "ssh",
-              "command": "gsmctl -S -s \"+37060789118 Admin123 reboot\"",
+              "command": "reboot -s",
               "wait-time": "120",
               "method": "",
               "api-path": "",
@@ -1994,7 +1953,7 @@
           ]
         },
         "sms-config": {
-          "reciever": "+37060789118"
+          "reciever": "+37069007463"
         },
         "message": [
           "Failover, all",
@@ -2008,7 +1967,7 @@
             {
               "type": "api",
               "command": "",
-              "wait-time": "",
+              "wait-time": "10",
               "method": "put",
               "api-path": "/network/mwan3/interfaces/config/wan",
               "api-body": {
@@ -2032,14 +1991,10 @@
                 }
               },
               "retrieve-token": ""
-            }
-          ]
-        },
-        {
-          "steps": [
+            },
             {
               "type": "ssh",
-              "command": "/etc/init.d/network restart",
+              "command": "ubus call network.interface.mob1s1a1 down",
               "wait-time": "30",
               "method": "",
               "api-path": "",
@@ -2051,33 +2006,34 @@
         {
           "steps": [
             {
-              "type": "api",
-              "command": "",
-              "wait-time": "10",
-              "method": "put",
-              "api-path": "/network/interfaces/config/mob1s1a1",
-              "api-body": {
-                "data": {
-                  "enabled": "0",
-                  ".type": "interface",
-                  "id": "wan"
-                }
-              },
+              "type": "ssh",
+              "command": "ubus call network.interface.mob1s1a1 up",
+              "wait-time": "30",
+              "method": "",
+              "api-path": "",
+              "api-body": {},
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "ssh",
+              "command": "ubus call network.interface.mob1s1a1 down",
+              "wait-time": "30",
+              "method": "",
+              "api-path": "",
+              "api-body": {},
               "retrieve-token": ""
             },
             {
-              "type": "api",
-              "command": "",
-              "wait-time": "10",
-              "method": "put",
-              "api-path": "/network/interfaces/config/mob1s1a1",
-              "api-body": {
-                "data": {
-                  "enabled": "1",
-                  ".type": "interface",
-                  "id": "wan"
-                }
-              },
+              "type": "ssh",
+              "command": "ubus call network.interface.mob1s1a1 up",
+              "wait-time": "30",
+              "method": "",
+              "api-path": "",
+              "api-body": {},
               "retrieve-token": ""
             }
           ]
@@ -2100,7 +2056,7 @@
           ]
         },
         "sms-config": {
-          "reciever": "+37060789118"
+          "reciever": "+37069007463"
         },
         "message": [
           "Mobile Data, all",
@@ -2164,7 +2120,7 @@
           ]
         },
         "sms-config": {
-          "reciever": "+37060789118"
+          "reciever": "+37069007463"
         },
         "message": [
           "SMS, received from"
@@ -2211,7 +2167,7 @@
           ]
         },
         "sms-config": {
-          "reciever": "+37060789118"
+          "reciever": "+37069007463"
         },
         "message": [
           "Web UI, all",
@@ -2286,7 +2242,7 @@
           ]
         },
         "sms-config": {
-          "reciever": "+37060789118"
+          "reciever": "+37069007463"
         },
         "message": [
           "DHCP, all",

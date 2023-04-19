@@ -81,7 +81,7 @@
 			"uhttpd",
 			"ulogd",
 			"upnpd",
-			"--user_groups",
+			"user_groups",
 			"vrrpd",
 			"--widget",
 			"wifi_scanner",
@@ -114,10 +114,10 @@
 			"changed to DOWN",
 			"changed to UP"
 		],
-		"+/-Reboot": [
+		"+Reboot": [
 			"all",
 			"web ui",
-			"--input/output",
+			"input/output",
 			"ping reboot",
 			"reboot scheduler",
 			"from button",
