@@ -26,17 +26,21 @@ def SendCommand(data, device):
 def SendTrigger(endpoint, bodyData, type):
     head = {"Content-Type": "application/json",
             "Authorization": "Bearer " + dataSender.token}
-    match type:
-        case "post":
-            response = requests.post(dataSender.baseURL+endpoint,
-                                     headers=head, data=bodyData, timeout=10).json()
-        case "put":
-            response = requests.put(dataSender.baseURL+endpoint,
-                                    headers=head, data=bodyData, timeout=10).json()
-        case _:
-            print(Text.Red(
-                "JSON file is misformed (Trigger is missing HTTP method)\nCheck configuration file"))
-            response = ""
+    try:
+        match type:
+            case "post":
+                response = requests.post(dataSender.baseURL+endpoint,
+                                         headers=head, data=bodyData, timeout=10).json()
+            case "put":
+                response = requests.put(dataSender.baseURL+endpoint,
+                                        headers=head, data=bodyData, timeout=10).json()
+            case _:
+                print(Text.Red(
+                    "JSON file is misformed (Trigger is missing HTTP method)\nCheck configuration file"))
+                response = ""
+    except OSError:
+        print(Text.Red("Could not reach device"))
+        sys.exit()
     return response
 
 
@@ -44,15 +48,19 @@ def SendEvent(endpoint, bodyData, type):
     head = {"Content-Type": "application/json",
             "Authorization": "Bearer " + dataSender.token}
     data = "{\"data\":"+bodyData+"}"
-    match type:
-        case "post":
-            response = requests.post(dataSender.baseURL+endpoint,
-                                     headers=head, data=data, timeout=10).json()
-        case "delete":
-            response = requests.delete(dataSender.baseURL+endpoint,
-                                       headers=head, timeout=10).json()
-        case _:
-            print(Text.Red(
-                "JSON file is misformed (Event is missing HTTP method)\nCheck configuration file"))
-            sys.exit()
+    try:
+        match type:
+            case "post":
+                response = requests.post(dataSender.baseURL+endpoint,
+                                         headers=head, data=data, timeout=10).json()
+            case "delete":
+                response = requests.delete(dataSender.baseURL+endpoint,
+                                           headers=head, timeout=10).json()
+            case _:
+                print(Text.Red(
+                    "JSON file is misformed (Trigger is missing HTTP method)\nCheck configuration file"))
+                response = ""
+    except OSError:
+        print(Text.Red("Could not reach device"))
+        sys.exit()
     return response

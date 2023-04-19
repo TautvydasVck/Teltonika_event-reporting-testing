@@ -46,7 +46,7 @@ def TestEvents(file):
                 eventResults.messageOut = test["event-data"]["message"][index]
                 response = SendEvent(
                     "/services/events_reporting/config", data, "post")
-                if (response["success"] == True):
+                if (response["success"] == True or response != ""):
                     eventResults.eventId = response["data"]["id"]
                     PurgeAllSms()
                     TriggerEvent(test["trigger-data"][index])
