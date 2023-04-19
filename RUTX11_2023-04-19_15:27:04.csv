@@ -86,3 +86,4 @@ Switch Events;changed to DOWN;Switch Events, changed to DOWN;Switch Events, chan
 Switch Events;changed to UP;Switch Events, changed to UP;Switch Events, changed to UP;+37060789118;+37060789118;True
 Reboot;all;Reboot, all;Reboot, all;+37060789118;+37060789118;True
 Reboot;web ui;Reboot, web ui;Reboot, web ui;+37060789118;+37060789118;True
+Reboot;ping reboot;Reboot, ping_reboot;Reboot, ping_reboot;+37060789118;+37060789118;True
