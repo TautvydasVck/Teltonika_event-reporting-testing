@@ -30,20 +30,7 @@ def TestEvents(file):
                   Text.Underline("{0}".format(test["event-data"]["event-type"])))
             print(
                 "Subtype: "+Text.Underline("{0}".format(subtype)))
-            # Eventai su el. pastu yra netestuoti
-            if (test["event-data"]["email-config"]["email-acc"] != ""):
-                data = json.dumps({
-                    ".type": "rule",
-                    "enable": "1",
-                    "event": test["event-data"]["event-type"],
-                    "eventMark": subtype,
-                    "message": test["event-data"]["message"][index],
-                    "action": "sendEmail",
-                    "subject": test["event-data"]["email-config"]["subject"],
-                    "recipEmail": test["event-data"]["email-config"]["recievers"],
-                    "emailgroup": test["event-data"]["email-config"]["email-acc"]
-                })
-            elif (test["event-data"]["sms-config"]["reciever"] != "" and deviceInfo.mobile == True):
+            if (test["event-data"]["sms-config"]["reciever"] != "" and deviceInfo.mobile == True):
                 data = json.dumps({
                     ".type": "rule",
                     "enable": "1",
@@ -58,27 +45,27 @@ def TestEvents(file):
                     "telnum": test["event-data"]["sms-config"]["reciever"]
                 })
                 eventResults.messageOut = test["event-data"]["message"][index]
+                response = SendEvent(
+                "/services/events_reporting/config", data, "post")
+                if (response["success"] == True):
+                    eventResults.eventId = response["data"]["id"]
+                    PurgeAllSms()
+                    TriggerEvent(test["trigger-data"][index])
+                    time.sleep(10)
+                    CheckReceive()
+                    if (eventResults.passed == True):
+                        passedCnt += 1
+                    else:
+                        failedCnt += 1
+                    UpdateCSV(index, test)
+                    PrepForNextEvent()
+                else:
+                    print(Text.Red("Event was not created"))
+                index += 1
+                print("-"*40)
             else:
                 print(Text.Red("JSON file is misformed. Check configuration file"))
-                sys.exit()
-            response = SendEvent(
-                "/services/events_reporting/config", data, "post")
-            if (response["success"] == True):
-                eventResults.eventId = response["data"]["id"]
-                PurgeAllSms()
-                TriggerEvent(test["trigger-data"][index])
-                time.sleep(10)
-                CheckReceive()
-                if (eventResults.passed == True):
-                    passedCnt += 1
-                else:
-                    failedCnt += 1
-                UpdateCSV(index, test)
-                PrepForNextEvent()
-            else:
-                print(Text.Red("Event was not created"))
-            index += 1
-            print("-"*40)
+                sys.exit()            
         index = 0
     print("Total events tested: {0}".format(total))
     print(Text.Green("Passed: {0}".format(passedCnt)), end=" ")
