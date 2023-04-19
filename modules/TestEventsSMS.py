@@ -1,3 +1,10 @@
+import json
+import sys
+import time
+from datetime import datetime
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from classes.Utilities import Text
 from modules.PrimaryChecks import CheckTotalEvents
 from modules.Variables import deviceInfo, eventResults
@@ -6,14 +13,6 @@ from modules.Triggering import TriggerEvent
 from modules.Requests import SendEvent
 from modules.Resets import PurgeAllSms, PrepForNextEvent
 from modules.ResultFile import CreateCSV, UpdateCSV
-import json
-import sys
-import time
-from datetime import datetime
-from pathlib import Path
-
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-
 
 def TestEvents(file):
     total = CheckTotalEvents(file)
@@ -46,7 +45,7 @@ def TestEvents(file):
                 })
                 eventResults.messageOut = test["event-data"]["message"][index]
                 response = SendEvent(
-                "/services/events_reporting/config", data, "post")
+                    "/services/events_reporting/config", data, "post")
                 if (response["success"] == True):
                     eventResults.eventId = response["data"]["id"]
                     PurgeAllSms()
@@ -65,7 +64,7 @@ def TestEvents(file):
                 print("-"*40)
             else:
                 print(Text.Red("JSON file is misformed. Check configuration file"))
-                sys.exit()            
+                sys.exit()
         index = 0
     print("Total events tested: {0}".format(total))
     print(Text.Green("Passed: {0}".format(passedCnt)), end=" ")
