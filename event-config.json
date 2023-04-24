@@ -7,7 +7,7 @@
   "events-triggers": [
     {
       "event-data": {
-        "event-type": "SIM switch",
+        "event-type": "Config",
         "event-subtype": [
           "all",
           "openvpn",

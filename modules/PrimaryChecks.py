@@ -4,7 +4,8 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from modules.Variables import deviceInfo, testResults, dataReceiver
+from modules.Requests import SendCommand
+from modules.Variables import deviceInfo, testResults, dataReceiver, dataSender
 from classes.Utilities import Text
 
 def CheckForMobile():    
@@ -52,7 +53,7 @@ def CheckTotalEvents(file):
             messages += len(event["event-data"]["message"])
             if (events != triggers or events != messages):
                 print(Text.Red(
-                    "Events and their messages count does not match trigger count\nCheck event type '{0}' config data".format(event["event-data"]["event-type"])))
+                    "Events and their messages count does not match trigger count\nCheck event type '{0}' configuration data".format(event["event-data"]["event-type"])))
                 sys.exit()
         testResults.total = events
     except KeyError:
@@ -70,3 +71,17 @@ def CheckReceiverConn():
     except paramiko.AuthenticationException:
         print(Text.Red("Could not reach the receiver\nCheck if device pswd and IP are correct"))
         sys.exit()
+
+def CheckSenderGsm():
+    cnt = 0
+    while cnt < 2:
+        sim = deviceInfo.sims[cnt]
+        if(sim != ""):            
+            resOld = SendCommand("gsmctl -S -l all", dataSender)
+            SendCommand("gsmctl -S -s \"{0} test\"".format(sim), dataSender)
+            time.sleep(4)
+            resNew = SendCommand("gsmctl -S -l all", dataSender)
+            if (len(resNew) == len(resOld)):
+                print(Text.Red("Device sent SMS to itself and did not receive the message\nCheck if phone number in configuration file is correct"))
+                sys.exit()
+        cnt+=1

@@ -1,6 +1,6 @@
 from datetime import datetime
 from modules.ResultFile import UploadCSV, CreateCSV
-from modules.PrimaryChecks import CheckForMobile, CheckForModel, CheckTotalEvents, CheckReceiverConn
+from modules.PrimaryChecks import CheckForMobile, CheckForModel, CheckTotalEvents, CheckReceiverConn, CheckSenderGsm
 from modules.DataFile import ReadDataFile
 from modules.APIToken import GetToken
 from modules.Receiver import GetPhoneNumbers
@@ -19,6 +19,7 @@ GetSysInfo()
 CheckForModel(data)
 CheckForMobile()
 CheckReceiverConn()
+CheckSenderGsm()
 CheckTotalEvents(data)
 CreateCSV(data)
 print("Started at: {0}".format(testResults.startTime))

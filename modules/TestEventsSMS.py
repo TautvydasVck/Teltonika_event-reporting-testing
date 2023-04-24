@@ -25,7 +25,7 @@ def TestEvents(file):
                     data = GetEventData(test, subtype, index)                
                     response = SendEvent(
                         "/services/events_reporting/config", data, "post")                    
-                    if (response["success"] == True or response != ""):                        
+                    if (response["success"] == True and response != ""):                        
                         eventResults.eventId = response["data"]["id"]
                         CheckWhichSim()
                         PurgeAllSms()
@@ -46,11 +46,10 @@ def TestEvents(file):
             index = 0    
         testResults.failedCnt = testResults.total - testResults.passedCnt
     except KeyError:
-        print(Text.Red("Key error while testing event\nJSON configuration file is misformed\nCheck configuration file"))
+        print(Text.Red("Key error in event testing section\nJSON configuration file is misformed\nCheck configuration file"))
         sys.exit()
 
 def GetEventData(test, subtype, index):
-    try:
         data = json.dumps({
                         ".type": "rule",
                         "enable": "1",
@@ -66,6 +65,3 @@ def GetEventData(test, subtype, index):
                     })
         eventResults.messageOut = test["event-data"]["message"][index]
         return data
-    except KeyError:
-        print(Text.Red("Key error while reading event creation data\nJSON configuration file is misformed\nCheck configuration file"))
-        sys.exit()
