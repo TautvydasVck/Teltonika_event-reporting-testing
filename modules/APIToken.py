@@ -17,5 +17,5 @@ def GetToken():
         else:
             sys.exit(Text.Red("Login was unsuccessful"))
     except OSError:
-        print(Text.Red("Error while trying to get API token\nCould not reach device"))     
+        print(Text.Red("Error while trying to get API token\nCould not reach device\nCheck if device login username and pswd are correct"))     
         sys.exit()

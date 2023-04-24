@@ -32,7 +32,7 @@
               "method": "put/post",
               "api-path": "",
               "api-body": {},
-              "wait-time": "laikas/(nieko)",
+              "wait-time": "sekundes/(nieko)",
               "retrieve-token":"1/(nieko)"
             }
           ]

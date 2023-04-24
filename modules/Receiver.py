@@ -8,8 +8,7 @@ from classes.Utilities import Text
 from modules.Variables import dataReceiver, eventResults, dataSender, deviceInfo
 from modules.MessageDecode import Decode
 
-def CheckReceive():
-    CheckWhichSim()
+def CheckReceive():    
     res = SendCommand("gsmctl -S -l all", dataReceiver)    
     if (len(res) == 0):
         print(Text.Yellow("Device did not receive the message\nAfter 20 seconds program will try to read the SMS again"))
@@ -41,4 +40,4 @@ def CheckWhichSim():
     if (res[1].__contains__('1')):
         deviceInfo.activeSim = 0
     elif (res[1].__contains__('2')):
-        deviceInfo.activeSim = 1
+        deviceInfo.activeSim = 1    

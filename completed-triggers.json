@@ -1,8 +1,13 @@
 {
+  "info": {
+    "product": "RUTX11",
+    "SIM1-nr": "+37060789118",
+    "SIM2-nr": ""
+  },
   "events-triggers": [
     {
       "event-data": {
-        "event-type": "Config",
+        "event-type": "SIM switch",
         "event-subtype": [
           "all",
           "openvpn",
@@ -728,9 +733,7 @@
               "wait-time": "",
               "method": "",
               "api-path": "",
-              "api-body": {
-                "data": {}
-              },
+              "api-body": {},
               "retrieve-token": ""
             },
             {
@@ -1748,7 +1751,7 @@
                 }
               },
               "retrieve-token": "",
-              "wait-time": "10"
+              "wait-time": ""
             }
           ]
         },
@@ -1766,7 +1769,7 @@
                 }
               },
               "retrieve-token": "",
-              "wait-time": "10"
+              "wait-time": ""
             }
           ]
         },
@@ -1784,7 +1787,7 @@
                 }
               },
               "retrieve-token": "",
-              "wait-time": "10"
+              "wait-time": ""
             }
           ]
         },
@@ -1802,7 +1805,7 @@
                 }
               },
               "retrieve-token": "",
-              "wait-time": "10"
+              "wait-time": ""
             }
           ]
         },
@@ -1820,7 +1823,7 @@
                 }
               },
               "retrieve-token": "",
-              "wait-time": "10"
+              "wait-time": ""
             }
           ]
         }
@@ -1850,8 +1853,8 @@
         "message": [
           "Reboot, all",
           "Reboot, web ui",
-          "Reboot, ping reboot",
-          "Reboot, reboot scheduler",
+          "Reboot, ping_reboot",
+          "Reboot, reboot_scheduler",
           "Reboot, from button",
           "Reboot, sms reboot"
         ]

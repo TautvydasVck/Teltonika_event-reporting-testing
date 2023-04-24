@@ -7,3 +7,7 @@ prerequisites:
 * norint testuoti DHCP wifi ir lan eventus reikia prijungti viena irengini per lan ir kita per wifi
     norint tesuoti wifi all, client conn ir client disconn reikia prijungti irengini per wifi 
 * paleisti ant svariu nustatymu (default router's settings)
+
+pasakyti Gedui
+sim switch eventai nepatrigerinami. Bandyta:keisti default sim, gsmtcl -Y, su ubus keisti sim, su data connection fail echo.
+Pats sim switch suveikia, bet netrigerina arba trigerina randomiskai (tas pats parametru keitimas randomiskai nepatrigerina)

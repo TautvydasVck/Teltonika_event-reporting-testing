@@ -6,7 +6,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from classes.Utilities import Text
 from modules.Variables import deviceInfo, eventResults, testResults
-from modules.Receiver import CheckReceive
+from modules.Receiver import CheckReceive, CheckWhichSim
 from modules.Triggering import TriggerEvent
 from modules.Requests import SendEvent
 from modules.Resets import PurgeAllSms, PrepForNextEvent
@@ -24,9 +24,10 @@ def TestEvents(file):
                 if (test["event-data"]["sms-config"]["reciever"] != "" and deviceInfo.mobile == True):
                     data = GetEventData(test, subtype, index)                
                     response = SendEvent(
-                        "/services/events_reporting/config", data, "post")
-                    if (response["success"] == True or response != ""):
+                        "/services/events_reporting/config", data, "post")                    
+                    if (response["success"] == True or response != ""):                        
                         eventResults.eventId = response["data"]["id"]
+                        CheckWhichSim()
                         PurgeAllSms()
                         TriggerEvent(test["trigger-data"][index])
                         time.sleep(10)

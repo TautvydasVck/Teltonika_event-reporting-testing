@@ -1,9 +1,10 @@
-import requests
+import paramiko
+import time
 import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from modules.Variables import deviceInfo, testResults
+from modules.Variables import deviceInfo, testResults, dataReceiver
 from classes.Utilities import Text
 
 def CheckForMobile():    
@@ -51,9 +52,21 @@ def CheckTotalEvents(file):
             messages += len(event["event-data"]["message"])
             if (events != triggers or events != messages):
                 print(Text.Red(
-                    "Events and their messages count does not match trigger count\nCheck JSON configuration file"))
+                    "Events and their messages count does not match trigger count\nCheck event type '{0}' config data".format(event["event-data"]["event-type"])))
                 sys.exit()
         testResults.total = events
     except KeyError:
-        print(Text.Red("Key error while checking events, messages and trigger cound\nJSON configuration file is misformed\nCheck configuration file"))
+        print(Text.Red("Key error while checking events, messages and trigger count\nJSON configuration file is misformed\nCheck configuration file"))
+        sys.exit()
+
+def CheckReceiverConn():
+    client = paramiko.SSHClient()
+    client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+    try:
+        client.connect(hostname=dataReceiver.ipAddr,
+                       username="root", password=dataReceiver.pswd, port=22)        
+        time.sleep(1)
+        client.close()        
+    except paramiko.AuthenticationException:
+        print(Text.Red("Could not reach the receiver\nCheck if device pswd and IP are correct"))
         sys.exit()

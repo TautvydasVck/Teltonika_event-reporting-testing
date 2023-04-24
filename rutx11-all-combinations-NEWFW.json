@@ -1,155 +1,155 @@
 {
-	"events": {
-		"Signal strength": [
-			"all",
-			"Signal strength dropped below -113 dBm",
-			"Signal strength dropped below -98 dBm",
-			"Signal strength dropped below -93 dBm",
-			"Signal strength dropped below -75 dBm",
-			"Signal strength dropped below -60 dBm",
-			"Signal strength dropped below -50 dBm",
-            "NEREIKIA"
-		],
-		"+/-Config": [
-			"all",
-			"avl",
-			"ble_devices",
-			"blesem",
-			"buttons",
-			"call_utils",
-			"chilli",
-			"cli",
-			"ddns",
-			"dhcp",
-			"dmvpn",
-			"dropbear",
-			"email_to_sms",
-			"etherwake",
-			"events_reporting",
-			"firewall",
-			"frr",
-			"fstab",
-			"gps",
-			"hostblock",
-			"iojuggler",
-			"ioman",
-			"ip_blockd",
-			"ipsec",
-			"landingpage",
-			"modbus",
-			"modbus_data_sender",
-			"modbus_master",
-			"modbusgateway",
-			"mosquitto",
-			"mqtt_pub",
-			"multi_wifi",
-			"mwan3",
-			"network",
-			"ntpclient",
-			"ntpserver",
-			"openvpn",
-			"operctl",
-			"overview",
-			"p910nd",
-			"--package_restore",
-			"periodic_reboot",
-			"ping_reboot",
-			"post_get",
-			"pptpd",
-			"privoxy",
-			"profiles",
-			"quota_limit",
-			"rms_mqtt",
-			"rpcd",
-			"rs_console",
-			"rs_modbus",
-			"rs_modem",
-			"rs_overip",
-			"rut_fota",
-			"samba",
-			"sim_switch",
-			"simcard",
-			"sms_gateway",
-			"sms_utils",
-			"snmpd",
-			"snmptrap",
-			"--socat",
-			"sqm",
-			"stunnel",
-			"system",
-			"telnetd",
-			"uhttpd",
-			"ulogd",
-			"upnpd",
-			"user_groups",
-			"vrrpd",
-			"--widget",
-			"wifi_scanner",
-			"wireless",
-			"xl2tpd"
-		],
-		"+WiFi": [
-			"all",
-			"client connected",
-			"client disconnected"
-		],
-		"GPS": [
-			"all",
-			"left geofence",
-			"entered geofence",
-            "NEREIKIA"
-		],
-		"+SSH": [
-			"all",
-			"succeeded",
-			"bad"
-		],
-		"--Switch Topology": [
-			"Changes in topology(randomiskai trigerinasi)"
-		],
-		"+Switch Events": [
-			"all",
-			"Port link state",
-			"Port speed for",
-			"changed to DOWN",
-			"changed to UP"
-		],
-		"+Reboot": [
-			"all",
-			"web ui",
-			"input/output",
-			"ping reboot",
-			"reboot scheduler",
-			"from button",
-			"sms reboot"
-		],
-		"+Failover": [
-			"all",
-			"Switched to main",
-			"Switched to backup"
-		],
-		"+Mobile Data": [
-			"all",
-			"data connected",
-			"data disconnected"
-		],
-		"+SMS": [
-			"received from"
-		],
-		"+Web UI": [
-			"all",
-			"was successful",
-			"not successful"
-		],
-		"--SIM switch": [
-			"all",
-			"to SIM1",
-			"to SIM2"
-		],
-		"+DHCP": [
-			"all",
-			"lan",
-			"wifi"
-		]
-	}
+  "events": {
+    "Signal strength": [
+      "all",
+      "Signal strength dropped below -113 dBm",
+      "Signal strength dropped below -98 dBm",
+      "Signal strength dropped below -93 dBm",
+      "Signal strength dropped below -75 dBm",
+      "Signal strength dropped below -60 dBm",
+      "Signal strength dropped below -50 dBm",
+      "NEREIKIA"
+    ],
+    "+/-Config": [
+      "all",
+      "avl",
+      "ble_devices",
+      "blesem",
+      "buttons",
+      "call_utils",
+      "chilli",
+      "cli",
+      "ddns",
+      "dhcp",
+      "dmvpn",
+      "dropbear",
+      "email_to_sms",
+      "etherwake",
+      "events_reporting",
+      "firewall",
+      "frr",
+      "fstab",
+      "gps",
+      "hostblock",
+      "iojuggler",
+      "ioman",
+      "ip_blockd",
+      "ipsec",
+      "landingpage",
+      "modbus",
+      "modbus_data_sender",
+      "modbus_master",
+      "modbusgateway",
+      "mosquitto",
+      "mqtt_pub",
+      "multi_wifi",
+      "mwan3",
+      "network",
+      "ntpclient",
+      "ntpserver",
+      "openvpn",
+      "operctl",
+      "overview",
+      "p910nd",
+      "--package_restore",
+      "periodic_reboot",
+      "ping_reboot",
+      "post_get",
+      "pptpd",
+      "privoxy",
+      "profiles",
+      "quota_limit",
+      "rms_mqtt",
+      "rpcd",
+      "rs_console",
+      "rs_modbus",
+      "rs_modem",
+      "rs_overip",
+      "rut_fota",
+      "samba",
+      "sim_switch",
+      "simcard",
+      "sms_gateway",
+      "sms_utils",
+      "snmpd",
+      "snmptrap",
+      "--socat",
+      "sqm",
+      "stunnel",
+      "system",
+      "telnetd",
+      "uhttpd",
+      "ulogd",
+      "upnpd",
+      "user_groups",
+      "vrrpd",
+      "--widget",
+      "wifi_scanner",
+      "wireless",
+      "xl2tpd"
+    ],
+    "+WiFi": [
+      "all",
+      "client connected",
+      "client disconnected"
+    ],
+    "GPS": [
+      "all",
+      "left geofence",
+      "entered geofence",
+      "NEREIKIA"
+    ],
+    "+SSH": [
+      "all",
+      "succeeded",
+      "bad"
+    ],
+    "--Switch Topology": [
+      "Changes in topology(nera normalai veikiancio trigerio)"
+    ],
+    "+Switch Events": [
+      "all",
+      "Port link state",
+      "Port speed for",
+      "changed to DOWN",
+      "changed to UP"
+    ],
+    "+Reboot": [
+      "all",
+      "web ui",
+      "input/output",
+      "ping reboot",
+      "reboot scheduler",
+      "from button",
+      "sms reboot"
+    ],
+    "+Failover": [
+      "all",
+      "Switched to main",
+      "Switched to backup"
+    ],
+    "+Mobile Data": [
+      "all",
+      "data connected",
+      "data disconnected"
+    ],
+    "+SMS": [
+      "received from"
+    ],
+    "+Web UI": [
+      "all",
+      "was successful",
+      "not successful"
+    ],
+    "--SIM switch (randomiskai trigerinasi)": [
+      "all",
+      "to SIM1",
+      "to SIM2"
+    ],
+    "+DHCP": [
+      "all",
+      "lan",
+      "wifi"
+    ]
+  }
 }

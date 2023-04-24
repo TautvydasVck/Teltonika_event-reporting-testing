@@ -36,7 +36,7 @@ def SendTrigger(endpoint, bodyData, type):
                                         headers=head, data=bodyData, timeout=10).json()
             case _:
                 print(Text.Red(
-                    "JSON file is misformed (Trigger is missing HTTP method)\nCheck configuration file"))
+                    "To trigger event reporting rule via API use only post and put HTTP methods\nJSON file is misformed\nCheck configuration file"))
                 response = ""
         return response
     except OSError:
@@ -58,7 +58,7 @@ def SendEvent(endpoint, bodyData, type):
                                            headers=head, timeout=10).json()
             case _:
                 print(Text.Red(
-                    "To send triggers via API use only POST and DELETE HTTP methods\nJSON file is misformed\nCheck configuration file"))
+                    "To send event report data use only post and delete HTTP methods"))
                 response = ""
         return response
     except OSError:
