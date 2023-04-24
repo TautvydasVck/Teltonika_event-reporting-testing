@@ -3,12 +3,12 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from modules.Variables import eventResults, deviceInfo, fileData
+from modules.Variables import eventResults, deviceInfo, fileData, testResults
 from modules.FTPConnection import CreateConn
 from classes.Utilities import Text
 
-def CreateCSV(file, start):
-    fileName = "{0}_{1}.csv".format(file["info"]["product"], start)
+def CreateCSV(file):
+    fileName = "{0}_{1}.csv".format(file["info"]["product"], testResults.startTime)
     fileInit = "echo \"Event type;Event subtype;Expected message;Received message;Sent from;Got from;Passed\" >> '{0}'".format(
         fileName)
     os.system(fileInit)

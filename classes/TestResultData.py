@@ -1,6 +1,6 @@
 class TestResultData:
     def __init__(self):
-        self.total = -1
-        self.failedCnt = -1
-        self.passedCnt = -1
+        self.total = 0
+        self.failedCnt = 0
+        self.passedCnt = 0
         self.startTime = ""

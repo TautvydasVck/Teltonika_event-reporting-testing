@@ -58,7 +58,7 @@ def SendEvent(endpoint, bodyData, type):
                                            headers=head, timeout=10).json()
             case _:
                 print(Text.Red(
-                    "JSON file is misformed (Trigger is missing HTTP method)\nCheck configuration file"))
+                    "To send triggers via API use only POST and DELETE HTTP methods\nJSON file is misformed\nCheck configuration file"))
                 response = ""
         return response
     except OSError:
@@ -70,7 +70,7 @@ def GetSysInfo():
             "Authorization": "Bearer " + dataSender.token}
     try:
         response = requests.get(dataSender.baseURL +
-                                "/system/device/info", headers=head).json()
+                                "/system/device/info", headers=head, timeout=4).json()
         if (response["success"] == False):
             print(Text.Red("Could not retrieve device system information."))
             sys.exit()

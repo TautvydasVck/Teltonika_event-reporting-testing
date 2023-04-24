@@ -17,7 +17,7 @@ def CheckForMobile():
             "Device has mobile capabilities"))
         deviceInfo.mobile = True
     else:
-        print(Text.Red("Could not get information about mobile capabilities"))
+        print(Text.Red("Could not get information about device's mobile capabilities"))
         sys.exit()
 
 
@@ -36,7 +36,7 @@ def CheckForModel(file):
                 "Device model in config file ({0}) and actual model ({1}) do not match.\n" +
                 "Check JSON configuration file". format(modelF, modelA))
     except KeyError:
-        print(Text.Red("JSON configuration file is misformed\nCheck configuration file"))
+        print(Text.Red("Key error while reading model data\nJSON configuration file is misformed\nCheck configuration file"))
         sys.exit()
 
 
@@ -55,5 +55,5 @@ def CheckTotalEvents(file):
                 sys.exit()
         testResults.total = events
     except KeyError:
-        print(Text.Red("JSON configuration file is misformed\nCheck configuration file"))
+        print(Text.Red("Key error while checking events, messages and trigger cound\nJSON configuration file is misformed\nCheck configuration file"))
         sys.exit()

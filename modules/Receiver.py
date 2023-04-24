@@ -33,7 +33,7 @@ def GetPhoneNumbers(file):
         deviceInfo.sims[0] = file["info"]["SIM1-nr"]
         deviceInfo.sims[1] = file["info"]["SIM2-nr"]
     except KeyError:
-        print(Text.Red("JSON configuration file is misformed\nCheck configuration file"))
+        print(Text.Red("Key error while reading sim data\nJSON configuration file is misformed\nCheck configuration file"))
         sys.exit()
 
 def CheckWhichSim():

@@ -45,7 +45,7 @@ def TestEvents(file):
             index = 0    
         testResults.failedCnt = testResults.total - testResults.passedCnt
     except KeyError:
-        print(Text.Red("JSON configuration file is misformed\nCheck configuration file"))
+        print(Text.Red("Key error while testing event\nJSON configuration file is misformed\nCheck configuration file"))
         sys.exit()
 
 def GetEventData(test, subtype, index):
@@ -66,5 +66,5 @@ def GetEventData(test, subtype, index):
         eventResults.messageOut = test["event-data"]["message"][index]
         return data
     except KeyError:
-        print(Text.Red("JSON configuration file is misformed\nCheck configuration file"))
+        print(Text.Red("Key error while reading event creation data\nJSON configuration file is misformed\nCheck configuration file"))
         sys.exit()

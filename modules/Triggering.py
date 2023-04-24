@@ -30,7 +30,7 @@ def TriggerEvent(trigger):
                     data[(len(data)-3):]
                 SendCommand(data, dataSender)
             case _:
-                print(Text.Red("JSON configuration file is misformed\nCheck configuration file"))
+                print(Text.Red("Use only these trigger types:api, ssh, cmd, ubus\nJSON configuration file is misformed\nCheck configuration file"))
                 sys.exit()
         pause = step["wait-time"]
         if (pause != ""):
