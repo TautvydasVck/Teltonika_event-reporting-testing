@@ -1,0 +1,8 @@
+Launching the automatic test
+    1. Retrieve all the files from GitHub repo.
+    2. Using command python3 launch the main file 'event-report-test.py' (example: python3 event-report-test.py)
+    3. Using flags, if necessary, provide login data, IP addresses of devices and JSON configuration file's path. Flag -h or --help will show you what each flag does and it equires.
+
+Configuring the JSON file
+    File's structure is in file called 'structure.json'
+    

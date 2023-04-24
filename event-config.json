@@ -186,7 +186,7 @@
                 }
               },
               "retrieve-token": "",
-              "wait-time": ""
+              "wait-time": "20"
             }
           ]
         },
@@ -644,7 +644,7 @@
                 }
               },
               "retrieve-token": "",
-              "wait-time": ""
+              "wait-time": "20"
             }
           ]
         },

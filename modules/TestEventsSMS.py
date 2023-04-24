@@ -11,6 +11,7 @@ from modules.Triggering import TriggerEvent
 from modules.Requests import SendEvent
 from modules.Resets import PurgeAllSms, PrepForNextEvent
 from modules.ResultFile import UpdateCSV
+from modules.MessageDecode import Decode
 
 def TestEvents(file):
     index = 0
@@ -30,7 +31,7 @@ def TestEvents(file):
                         CheckWhichSim()
                         PurgeAllSms()
                         TriggerEvent(test["trigger-data"][index])
-                        time.sleep(10)
+                        time.sleep(10)                        
                         CheckReceive()
                         if (eventResults.passed == True):
                             testResults.passedCnt += 1
@@ -64,4 +65,5 @@ def GetEventData(test, subtype, index):
                         "telnum": test["event-data"]["sms-config"]["reciever"]
                     })
         eventResults.messageOut = test["event-data"]["message"][index]
+        Decode()
         return data
