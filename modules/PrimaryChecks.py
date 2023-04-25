@@ -31,6 +31,9 @@ def CheckForModel(file):
     modelA = str(deviceInfo.sysInfo["data"]["mnfinfo"]["name"])
     try:
         modelF = file["info"]["product"]
+        if(modelF == ""):
+            print(Text.Red("No model was provided\nCheck JSON configuration file"))
+            sys.exit()
         if modelA.startswith(modelF):
             print(Text.Green("Device model in JSON matches actual device model"))
         else:
@@ -77,7 +80,7 @@ def CheckSenderGsm():
         if(sim != ""):            
             resOld = SendCommand("gsmctl -S -l all", dataSender)
             SendCommand("gsmctl -S -s \"{0} test\"".format(sim), dataSender)
-            time.sleep(4)
+            time.sleep(6)
             resNew = SendCommand("gsmctl -S -l all", dataSender)
             if (len(resNew) == len(resOld)):
                 print(Text.Red("Device sent SMS to itself and did not receive the message\nCheck if phone number in configuration file is correct and if SIM card can send SMS"))

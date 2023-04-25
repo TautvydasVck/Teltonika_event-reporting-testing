@@ -36,6 +36,9 @@ def GetPhoneNumbers(file):
     try:
         deviceInfo.sims[0] = file["info"]["SIM1-nr"]
         deviceInfo.sims[1] = file["info"]["SIM2-nr"]
+        if(deviceInfo.sims[0] == "" and deviceInfo.sims[1] == ""):
+            print(Text.Red("No SIM data was provided\nCheck configuration file"))
+            sys.exit()
     except KeyError:
         print(Text.Red("Key error while reading sim data\nJSON configuration file is misformed\nCheck configuration file"))
         sys.exit()

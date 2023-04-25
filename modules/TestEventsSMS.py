@@ -26,7 +26,7 @@ def TestEvents(file):
                     data = GetEventData(test, subtype, index)                
                     response = SendEvent(
                         "/services/events_reporting/config", data, "post")                    
-                    if (response["success"] == True and response != ""):                        
+                    if (response["success"] == True):                        
                         eventResults.eventId = response["data"]["id"]
                         CheckWhichSim()                        
                         PurgeAllSms()

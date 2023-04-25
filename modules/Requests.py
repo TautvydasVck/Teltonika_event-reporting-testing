@@ -37,7 +37,7 @@ def SendTrigger(endpoint, bodyData, type):
             case _:
                 print(Text.Red(
                     "To trigger event reporting rule via API use only post and put HTTP methods\nJSON file is misformed\nCheck configuration file"))
-                response = ""
+                response = {"success":False}
         return response
     except OSError:
         print(Text.Red("Could not reach device '{0}' to send trigger via API".format(dataSender.ipAddr)))
@@ -59,7 +59,7 @@ def SendEvent(endpoint, bodyData, type):
             case _:
                 print(Text.Red(
                     "To send event report data use only post and delete HTTP methods"))
-                response = ""
+                response = {"success":False}
         return response
     except OSError:
         print(Text.Red("Could not reach device '{0}' to send event reporting data via API".format(dataSender.ipAddr)))

@@ -32,7 +32,7 @@ def ReadArgs():
     parser.add_argument(
         "-file", "--configFile", help="Configuration file path. Default: ./event-config.json", action="store", default="event-config.json")
     parser.add_argument(
-        "-d", "--deleteFile", help="Delete test results file from PC. Default: false", action="store_true", default=False)
+        "-d", "--deleteFile", help="Delete test result file from PC. Default: false", action="store_true", default=False)
     args = parser.parse_args()
 
     dataSender.name = args.sName
