@@ -95,7 +95,7 @@
           "reciever": "+37069007463"
         },
         "message": [
-          "Config, \\n\\n\\n\\nal\\n\\nl\\n\\n %i\\ne",
+          "Config, all %ie",
           "Config, openvpn",
           "Config, events_reporting",
           "Config, periodic_reboot",
