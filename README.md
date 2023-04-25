@@ -39,3 +39,6 @@ All parameters that will be passed to the program as arguments at startup must b
 ### To activate virtual environment
 - Install virtualenv (python3 -m pip install virtualenv)
 - Execute the activate script (source virtualenv-folder/bin/activate)
+### Prerequisites
+- Sshpass utitlity. 
+For ubuntu it can be installed with this command: sudo apt install sshpass. 
