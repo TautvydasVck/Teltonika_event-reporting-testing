@@ -80,6 +80,6 @@ def CheckSenderGsm():
             time.sleep(4)
             resNew = SendCommand("gsmctl -S -l all", dataSender)
             if (len(resNew) == len(resOld)):
-                print(Text.Red("Device sent SMS to itself and did not receive the message\nCheck if phone number in configuration file is correct"))
+                print(Text.Red("Device sent SMS to itself and did not receive the message\nCheck if phone number in configuration file is correct and if SIM card can send SMS"))
                 sys.exit()
         cnt+=1    
