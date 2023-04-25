@@ -4,7 +4,7 @@ from modules.PrimaryChecks import CheckForMobile, CheckForModel, CheckTotalEvent
 from modules.DataFile import ReadDataFile
 from modules.APIToken import GetToken
 from modules.Receiver import GetPhoneNumbers
-from modules.Variables import ReadArgs, testResults
+from modules.Variables import ReadArgs, testResults, fileData, deviceInfo
 from modules.TestEventsSMS import TestEvents
 from modules.Requests import GetSysInfo
 from classes.Utilities import Text
@@ -21,6 +21,8 @@ CheckForMobile()
 CheckReceiverConn()
 CheckSenderGsm()
 CheckTotalEvents(data)
+print("Primary checks completed\n")
+deviceInfo.sysInfo = ""
 CreateCSV(data)
 print("Started at: {0}".format(testResults.startTime))
 print("Total tests: {0}\n".format(testResults.total))

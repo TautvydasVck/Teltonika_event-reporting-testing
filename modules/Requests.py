@@ -7,19 +7,19 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from modules.Variables import dataSender, deviceInfo
 from classes.Utilities import Text
+from modules.SSHConnection import CreateConn
 
 def SendCommand(data, device):
     client = paramiko.SSHClient()
     client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     try:
-        client.connect(hostname=device.ipAddr,
-                       username="root", password=device.pswd, port=22)
+        CreateConn(client, device)
         stdin, stdout, stderr = client.exec_command(str(data))
         time.sleep(1)
         client.close()
         return stdout.readlines()
     except paramiko.AuthenticationException:
-        print(Text.Red("Could not reach device"))
+        print(Text.Red("Could not reach device '{0}' via SSH to send command".format(device.ipAddr)))
         sys.exit()
 
 
@@ -40,7 +40,7 @@ def SendTrigger(endpoint, bodyData, type):
                 response = ""
         return response
     except OSError:
-        print(Text.Red("Could not reach device"))
+        print(Text.Red("Could not reach device '{0}' to send trigger via API".format(dataSender.ipAddr)))
         sys.exit()    
 
 
@@ -62,7 +62,7 @@ def SendEvent(endpoint, bodyData, type):
                 response = ""
         return response
     except OSError:
-        print(Text.Red("Could not reach device"))
+        print(Text.Red("Could not reach device '{0}' to send event reporting data via API".format(dataSender.ipAddr)))
         sys.exit()    
 
 def GetSysInfo():
@@ -71,11 +71,11 @@ def GetSysInfo():
     try:
         response = requests.get(dataSender.baseURL +
                                 "/system/device/info", headers=head, timeout=4).json()
-        if (response["success"] == False):
+        if (response["success"] == True):
+            deviceInfo.sysInfo = response            
+        else:
             print(Text.Red("Could not retrieve device system information."))
             sys.exit()
-        else:
-            deviceInfo.sysInfo = response
     except OSError:
-        print(Text.Red("Could not reach device"))
+        print(Text.Red("Could not reach device '{0}' to get system, hardware information via API".format(dataSender.ipAddr)))
         sys.exit()

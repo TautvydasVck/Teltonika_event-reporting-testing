@@ -29,6 +29,7 @@ def TestEvents(file):
                     if (response["success"] == True and response != ""):                        
                         eventResults.eventId = response["data"]["id"]
                         CheckWhichSim()
+                        print("Deleting all old SMS messages from reciever")
                         PurgeAllSms()
                         TriggerEvent(test["trigger-data"][index])
                         time.sleep(10)                        

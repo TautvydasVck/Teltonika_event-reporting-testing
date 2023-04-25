@@ -28,4 +28,5 @@ def PrepForNextEvent():
     eventResults.passed = False
     eventResults.messageIn = ""
     eventResults.received = ""
+    print("Deleting all old SMS messages from reciever")
     PurgeAllSms()

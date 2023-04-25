@@ -5,6 +5,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from modules.Requests import SendCommand
+from modules.SSHConnection import CreateConn
 from modules.Variables import deviceInfo, testResults, dataReceiver, dataSender
 from classes.Utilities import Text
 
@@ -62,12 +63,11 @@ def CheckReceiverConn():
     client = paramiko.SSHClient()
     client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     try:
-        client.connect(hostname=dataReceiver.ipAddr,
-                       username="root", password=dataReceiver.pswd, port=22)        
+        CreateConn(client, dataReceiver)
         time.sleep(1)
         client.close()        
     except paramiko.AuthenticationException:
-        print(Text.Red("Could not reach the receiver\nCheck if device pswd and IP are correct"))
+        print(Text.Red("Could not reach the receiver\nCheck if device password is correct"))
         sys.exit()
 
 def CheckSenderGsm():
@@ -82,4 +82,4 @@ def CheckSenderGsm():
             if (len(resNew) == len(resOld)):
                 print(Text.Red("Device sent SMS to itself and did not receive the message\nCheck if phone number in configuration file is correct"))
                 sys.exit()
-        cnt+=1
+        cnt+=1    
