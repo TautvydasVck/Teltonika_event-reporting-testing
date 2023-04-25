@@ -4,7 +4,7 @@ from modules.PrimaryChecks import CheckForMobile, CheckForModel, CheckTotalEvent
 from modules.DataFile import ReadDataFile
 from modules.APIToken import GetToken
 from modules.Receiver import GetPhoneNumbers
-from modules.Variables import ReadArgs, testResults, fileData, deviceInfo
+from modules.Variables import ReadArgs, testResults, deviceInfo
 from modules.TestEventsSMS import TestEvents
 from modules.Requests import GetSysInfo
 from classes.Utilities import Text

@@ -18,9 +18,18 @@ def CheckReceive():
     else:
         print(Text.Red("Device did not receive the message\nFailed"))        
 
-def CheckContent(message):
+def CheckContent(message):    
+    cnt = 0 
     eventResults.received = message[2].split(":\t\t")[1][:-1]
-    eventResults.messageIn = message[13].split(":\t\t")[1][:-1]        
+    eventResults.messageIn+=str(message[13+cnt].split(":\t\t")[1][:-1])    
+    temp1 = message[14+cnt] == "\n"
+    temp2 = str(message[15+cnt]).startswith("Index")        
+    temp3 = False
+    while temp3 == False:
+        temp1 = message[14+cnt] == "\n"
+        temp2 = str(message[15+cnt]).startswith("Index")        
+        eventResults.messageIn+=("\n"+str(message[14+cnt][:-1]))
+        cnt+=1    
     if (eventResults.received == deviceInfo.sims[deviceInfo.activeSim]
             and eventResults.messageIn == eventResults.messageOut):
         eventResults.passed = True

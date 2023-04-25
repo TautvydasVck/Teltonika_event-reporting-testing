@@ -95,7 +95,7 @@
           "reciever": "+37069007463"
         },
         "message": [
-          "Config, all %ie",
+          "Config, \n\n\n\n\nall %ie",
           "Config, openvpn",
           "Config, events_reporting",
           "Config, periodic_reboot",
@@ -186,7 +186,7 @@
                 }
               },
               "retrieve-token": "",
-              "wait-time": "20"
+              "wait-time": ""
             }
           ]
         },
