@@ -2,13 +2,16 @@
 ## Prerequisites
 - Installed sshpass utility  
 For ubuntu command `sudo apt install sshpass` can be used.
-- The device that is being tested should be tested on fresh settings  
-* *It is recommended to create a profile if current devices settings are important.* *
+- The device that is being tested should be tested on fresh settings
+*It is recommended to create a profile if current devices settings are important.*
 - Installed additional python packages:
     - paramiko `pip install paramiko`
     - requests `pip install requests`
-## File structure
-
+## File, Folder structure
+event-report-test.py -> Main automatic test program file
+structure.json -> JSON configuration file structure
+## Configuration file structure
+*explain config file*
 ## To create and activate virtual environment
 Virtual environment is used if it is not wanted to install packages globally
 - Install virtualenv `python3 -m pip install virtualenv`
@@ -19,7 +22,7 @@ Virtual environment is used if it is not wanted to install packages globally
 - Using command python3 launch the main file 'event-report-test.py' `python3 event-report-test.py`
 - Using flags, if necessary, provide login data, IP addresses of devices and JSON configuration file's path. Flag -h or --help will show you what each flag does and what it requires.
 ## Tips and recommendations when creating JSON config file
-
+*tips when making config file*
 # Task's information, requirements
 ## Automate the testing of Events Reporting
 The purpose of this automated test is to create a program that will test all Events Reporting rules variations and trigger these rules to check whether information is sent when it happens and if the sent information is correct.
