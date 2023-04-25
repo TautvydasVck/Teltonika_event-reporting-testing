@@ -8,27 +8,22 @@ from classes.Utilities import Text
 from modules.Variables import dataReceiver, eventResults, dataSender, deviceInfo
 
 def CheckReceive():    
-    res = SendCommand("gsmctl -S -l all", dataReceiver)    
+    res = SendCommand("gsmctl -S -r 0", dataReceiver)    
     if (len(res) == 0):
         print(Text.Yellow("Device did not receive the message\nAfter 20 seconds program will try to read the SMS again"))
         time.sleep(20)
-        res = SendCommand("gsmctl -S -l all", dataReceiver)    
-    if (len(res) >= 15):        
+        res = SendCommand("gsmctl -S -r 0", dataReceiver)    
+    if (len(res) >= 15):     
         CheckContent(res)    
     else:
-        print(Text.Red("Device did not receive the message\nFailed"))        
+        print(Text.Red("Device did not receive the message\nFailed"))
 
 def CheckContent(message):    
-    cnt = 0 
+    cnt = 14
     eventResults.received = message[2].split(":\t\t")[1][:-1]
-    eventResults.messageIn+=str(message[13+cnt].split(":\t\t")[1][:-1])    
-    temp1 = message[14+cnt] == "\n"
-    temp2 = str(message[15+cnt]).startswith("Index")        
-    temp3 = False
-    while temp3 == False:
-        temp1 = message[14+cnt] == "\n"
-        temp2 = str(message[15+cnt]).startswith("Index")        
-        eventResults.messageIn+=("\n"+str(message[14+cnt][:-1]))
+    eventResults.messageIn+=str(message[13].split(":\t\t")[1][:-1])
+    while cnt < len(message)-1:
+        eventResults.messageIn+=("\n"+str(message[cnt][:-1]))
         cnt+=1    
     if (eventResults.received == deviceInfo.sims[deviceInfo.activeSim]
             and eventResults.messageIn == eventResults.messageOut):
