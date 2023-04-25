@@ -24,6 +24,7 @@ CheckTotalEvents(data)
 print("Primary checks completed\n")
 deviceInfo.sysInfo = ""
 CreateCSV(data)
+UploadCSV()
 print("Started at: {0}".format(testResults.startTime))
 print("Total tests: {0}\n".format(testResults.total))
 TestEvents(data)

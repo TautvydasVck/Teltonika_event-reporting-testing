@@ -1,4 +1,21 @@
 # Python program to test event reporting functionality of Teltonika devices
+## User documentation (in progress)
+### Prerequisites
+- Installed sshpass utility
+For ubuntu command 'sudo apt install sshpass' can be used.
+- The device that is being tested should be tested on fresh settings
+It is recommended to create a profile if current devices settings are important.
+Installed additional python packages:
+- paramiko (pip install paramiko)
+- requests (pip install requests)
+### Launching the automatic test
+- Using command python3 launch the main file 'event-report-test.py' (example: python3 event-report-test.py)
+- Using flags, if necessary, provide login data, IP addresses of devices and JSON configuration file's path. Flag -h or --help will show you what each flag does and it equires.
+### To create and activate virtual environment
+- Install virtualenv (python3 -m pip install virtualenv)
+- Create virtual environment (virtualenv -p python3 .venv)
+- Execute the activate script (source virtualenv-folder/bin/activate)
+- To deactive virtual environment type 'deactivate' in python program folder
 ## Task's information, requirements
 ### Automate the testing of Events Reporting
 The purpose of this automated test is to create a program that will test all Events Reporting rules variations and trigger these rules to check whether information is sent when it happens and if the sent information is correct.
@@ -36,9 +53,3 @@ Methods must be clear and specific. A single method does not have to perform the
 Think about the places where the program can break and make error management so that the program does not break unexpectedly. A try and except block can help.
 
 All parameters that will be passed to the program as arguments at startup must be described as flags.
-### To activate virtual environment
-- Install virtualenv (python3 -m pip install virtualenv)
-- Execute the activate script (source virtualenv-folder/bin/activate)
-### Prerequisites
-- Sshpass utitlity. 
-For ubuntu it can be installed with this command: sudo apt install sshpass. 
