@@ -27,6 +27,5 @@ def PrepForNextEvent():
                           eventResults.eventId, "", "delete")
     eventResults.passed = False
     eventResults.messageIn = ""
-    eventResults.received = ""
-    print("Deleting all old SMS messages in reciever's device")
+    eventResults.received = ""    
     PurgeAllSms()

@@ -15,13 +15,14 @@ def CreateCSV(file):
     fileData.outFileName = fileName
 
 
-def UpdateCSV(index, test):    
+def UpdateCSV(index, test):        
         os.system("echo '{0};{1};{2};{3};{4};{5};{6}' >> '{7}'"
                   .format(test["event-data"]["event-type"],
                           test["event-data"]["event-subtype"][index],
                           eventResults.messageOut, eventResults.messageIn,
                           deviceInfo.sims[deviceInfo.activeSim], eventResults.received,
                           eventResults.passed, fileData.outFileName))
+        
 
 
 def UploadCSV():

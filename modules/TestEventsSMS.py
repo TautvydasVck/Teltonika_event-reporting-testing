@@ -28,8 +28,7 @@ def TestEvents(file):
                         "/services/events_reporting/config", data, "post")                    
                     if (response["success"] == True and response != ""):                        
                         eventResults.eventId = response["data"]["id"]
-                        CheckWhichSim()
-                        print("Deleting all old SMS messages from reciever")
+                        CheckWhichSim()                        
                         PurgeAllSms()
                         TriggerEvent(test["trigger-data"][index])
                         time.sleep(10)                        

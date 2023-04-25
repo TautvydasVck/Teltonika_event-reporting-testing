@@ -10,7 +10,7 @@ def ReadDataFile():
     try:        
         return LoadFile()
     except FileNotFoundError:
-        print(Text.Red("Error while loading configuration file\nJSON configuration file was not found"))
+        print(Text.Red("Error while loading configuration file\nProvided JSON configuration file was not found"))
         sys.exit()
 
 def LoadFile():
