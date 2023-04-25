@@ -1,7 +1,0 @@
-Launching the automatic test
-- Using command python3 launch the main file 'event-report-test.py' (example: python3 event-report-test.py)
-- Using flags, if necessary, provide login data, IP addresses of devices and JSON configuration file's path. Flag -h or --help will show you what each flag does and it equires.
-
-Configuring the JSON file
-    File's structure is in file called 'structure.json'
-    
