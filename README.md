@@ -5,8 +5,8 @@ For ubuntu command `sudo apt install sshpass` can be used.
 - The device that is being tested should be tested on fresh settings
 It is recommended to create a profile if current devices settings are important.
 - Installed additional python packages:
-paramiko `pip install paramiko`
-requests `pip install requests`
+    - paramiko `pip install paramiko`
+    - requests `pip install requests`
 ## File structure
 
 ## To create and activate virtual environment
