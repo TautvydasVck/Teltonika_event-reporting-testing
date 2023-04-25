@@ -95,7 +95,7 @@
           "reciever": "+37069007463"
         },
         "message": [
-          "Config, all %ie",
+          "Config, \\n\\n\\n\\nal\\n\\nl\\n\\n %i\\ne",
           "Config, openvpn",
           "Config, events_reporting",
           "Config, periodic_reboot",
@@ -180,7 +180,10 @@
               "method": "put",
               "api-path": "/network/wireless/devices/config/radio0",
               "api-body": {
-                "fseresr":"fsreses"
+                "data": {
+                  ".type": "wifi-device",
+                  "country": "00"
+                }
               },
               "retrieve-token": "",
               "wait-time": ""

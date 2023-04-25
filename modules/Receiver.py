@@ -8,11 +8,11 @@ from classes.Utilities import Text
 from modules.Variables import dataReceiver, eventResults, dataSender, deviceInfo
 
 def CheckReceive():    
-    res = SendCommand("gsmctl -S -r 0", dataReceiver)    
+    res = SendCommand("gsmctl -S -r 0", dataReceiver)
     if (len(res) == 0):
         print(Text.Yellow("Device did not receive the message\nAfter 20 seconds program will try to read the SMS again"))
         time.sleep(20)
-        res = SendCommand("gsmctl -S -r 0", dataReceiver)    
+        res = SendCommand("gsmctl -S -r 0", dataReceiver)
     if (len(res) >= 15):     
         CheckContent(res)    
     else:
