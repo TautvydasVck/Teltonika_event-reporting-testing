@@ -33,10 +33,8 @@ def CheckForModel(file):
         if modelA.startswith(modelF):
             print(Text.Green("Device model in JSON matches actual device model"))
         else:
-            print(Text.Red("Device model mismatch"))
-            sys.exit(
-                "Device model in config file ({0}) and actual model ({1}) do not match.\n" +
-                "Check JSON configuration file". format(modelF, modelA))
+            print(Text.Red("Device model in config file '{0}' and actual model '{1}' do not match\nCheck JSON configuration file".format(modelF, modelA)))
+            sys.exit()
     except KeyError:
         print(Text.Red("Key error while reading model data\nJSON configuration file is misformed\nCheck configuration file"))
         sys.exit()
