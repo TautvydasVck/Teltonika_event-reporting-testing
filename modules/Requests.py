@@ -19,8 +19,7 @@ def SendCommand(data, device):
         client.close()
         return stdout.readlines()
     except paramiko.AuthenticationException:
-        print(Text.Red("Could not reach device '{0}' via SSH to send command".format(device.ipAddr)))
-        sys.exit()
+        raise Exception("Could not connect to device '{0}' via SSH to send command\nCheck login data".format(device.ipAddr))    
 
 
 def SendTrigger(endpoint, bodyData, type):
@@ -57,13 +56,13 @@ def SendEvent(endpoint, bodyData, type):
                 response = requests.delete(dataSender.baseURL+endpoint,
                                            headers=head, timeout=10).json()
             case _:
-                print(Text.Red(
-                    "To send event report data use only post and delete HTTP methods"))
+                print(Text.Yellow(
+                    "To send event report data use only post and delete HTTP methods\nCheck JSON configuration file"))
                 response = {"success":False}
         return response
     except OSError:
-        print(Text.Red("Could not reach device '{0}' to send event reporting data via API".format(dataSender.ipAddr)))
-        sys.exit()    
+        print(Text.Yellow("Could not reach device '{0}' to send event reporting data via API".format(dataSender.ipAddr)))
+        return {"success":False}
 
 def GetSysInfo():
     head = {"Content-Type": "application/json",

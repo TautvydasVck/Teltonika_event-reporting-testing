@@ -16,7 +16,8 @@ def CheckReceive():
     if (len(res) >= 15):     
         CheckContent(res)    
     else:
-        print(Text.Red("Device did not receive the message\nFailed"))
+        print(Text.Yellow("Device did not receive the message"))
+        print(Text.Red("Failed"))
 
 def CheckContent(message):    
     cnt = 14

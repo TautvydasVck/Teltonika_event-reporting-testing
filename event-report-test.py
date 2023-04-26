@@ -24,10 +24,10 @@ try:
     CheckReceiverConn()
     CheckSenderGsm()
     CheckTotalEvents(data)
-    print(Text.Underline("| Primary checks passed |"))
+    print(Text.Underline("|   Primary checks passed   |"))
     deviceInfo.sysInfo = ""
 except Exception as err:
-    print(Text.Underline("| Primary checks failed |"))
+    print(Text.Underline("|   Primary checks failed   |"))
     print(Text.Red(str(err)))
     sys.exit()
 CreateCSV(data)
@@ -40,5 +40,5 @@ print(Text.Red("Failed: {0}".format(testResults.failedCnt)))
 try:
     UploadCSV()
 except Exception:
-    print(Text.Red(str(err)))
+    print(Text.Yellow(str(err)))
 print("|---------------FINISHED---------------|")

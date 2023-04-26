@@ -15,19 +15,19 @@ from modules.MessageDecode import Decode
 
 def TestEvents(file):
     index = 0
-    try:
-        for test in file["events-triggers"]:
-            for subtype in test["event-data"]["event-subtype"]:
-                print("Event type: " +
-                      Text.Underline("{0}".format(test["event-data"]["event-type"])))
-                print(
-                    "Subtype: "+Text.Underline("{0}".format(subtype)))
-                if (test["event-data"]["sms-config"]["reciever"] != "" and deviceInfo.mobile == True):
-                    data = GetEventData(test, subtype, index)                
-                    response = SendEvent(
-                        "/services/events_reporting/config", data, "post")                    
-                    if (response["success"] == True):                        
-                        eventResults.eventId = response["data"]["id"]
+    for test in file["events-triggers"]:
+        for subtype in test["event-data"]["event-subtype"]:
+            print("Event type: " +
+                  Text.Underline("{0}".format(test["event-data"]["event-type"])))
+            print(
+                "Subtype: "+Text.Underline("{0}".format(subtype)))
+            if (test["event-data"]["sms-config"]["reciever"] != "" and deviceInfo.mobile == True):
+                data = GetEventData(test, subtype, index)                
+                response = SendEvent(
+                    "/services/events_reporting/config", data, "post")                    
+                if (response["success"] == True):                        
+                    eventResults.eventId = response["data"]["id"]
+                    try:
                         CheckWhichSim()                        
                         PurgeAllSms()
                         TriggerEvent(test["trigger-data"][index])
@@ -37,20 +37,24 @@ def TestEvents(file):
                             testResults.passedCnt += 1
                         UpdateCSV(index, test)
                         PrepForNextEvent()
-                    else:
-                        print(Text.Red("Event was not created"))
-                    index += 1
-                    print("-"*40)
+                    except Exception as err:
+                        print(Text.Yellow(str(err)))                        
+                        print(Text.Red("Failed"))
+                        UpdateCSV(index, test)
+                        PrepForNextEvent()                        
                 else:
-                    print(Text.Red("JSON configuration file is misformed\nCheck configuration file"))
-                    sys.exit()
-            index = 0    
-        testResults.failedCnt = testResults.total - testResults.passedCnt
-    except KeyError:
-        print(Text.Red("Key error in event testing section\nJSON configuration file is misformed\nCheck configuration file"))
-        sys.exit()
+                    print(Text.Red("Event was not created"))                                        
+                index += 1
+                print("-"*40)
+            else:
+                print(Text.Red("JSON configuration file is misformed\nCheck configuration file"))
+                sys.exit()
+        index = 0    
+    testResults.failedCnt = testResults.total - testResults.passedCnt
+    
 
 def GetEventData(test, subtype, index):
+    try:
         data = json.dumps({
                         ".type": "rule",
                         "enable": "1",
@@ -67,3 +71,6 @@ def GetEventData(test, subtype, index):
         eventResults.messageOut = test["event-data"]["message"][index]
         Decode()
         return data
+    except KeyError:
+        print(Text.Yellow("Key error in event report configuration\nEvent with this data will not be created"))
+        eventResults.messageOut = ""
