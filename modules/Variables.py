@@ -4,11 +4,11 @@ from pathlib import Path
 
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from classes.DeviceData import DeviceData
-from classes.EventResultData import EventResultData
-from classes.Files import Files
-from classes.RequestData import RequestData
 from classes.TestResultData import TestResultData
+from classes.RequestData import RequestData
+from classes.Files import Files
+from classes.EventResultData import EventResultData
+from classes.DeviceData import DeviceData
 
 
 deviceInfo = DeviceData()
