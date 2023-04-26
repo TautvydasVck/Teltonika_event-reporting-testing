@@ -3,10 +3,10 @@ from pathlib import Path
 
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from modules.Receiver import GetMessagesIndexes
-from modules.Requests import SendCommand, SendEvent
-from modules.Variables import dataReceiver, eventResults
 from classes.Utilities import Text
+from modules.Variables import dataReceiver, eventResults
+from modules.Requests import SendCommand, SendEvent
+from modules.Receiver import GetMessagesIndexes
 
 
 def PurgeAllSms():
@@ -20,6 +20,7 @@ def PurgeAllSms():
         RecheckSms()
     except Exception as err:
         print(Text.Yellow(str(err)))
+
 
 def RecheckSms():
     res = SendCommand("gsmctl -S -l all", dataReceiver)

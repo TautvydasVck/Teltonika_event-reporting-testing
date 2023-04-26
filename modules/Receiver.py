@@ -1,23 +1,26 @@
-from modules.Variables import dataReceiver, eventResults, dataSender, deviceInfo
-from classes.Utilities import Text
-from modules.Requests import SendCommand
-import time
 import sys
+import time
 from pathlib import Path
 
+
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from classes.Utilities import Text
+from modules.Requests import SendCommand
+from modules.Variables import (dataReceiver, dataSender, deviceInfo,
+                               eventResults)
 
 
 def CheckReceive():
-    res = SendCommand("gsmctl -S -r 0", dataReceiver)
+    res = SendCommand("gsmctl -S -l all", dataReceiver)
     if (len(res) == 0):
         print(Text.Yellow(
-            "Device did not receive the message"
-            "\nAfter 20 seconds program will try to read the SMS again"))
+            "Device did not receive the message"))
+        print(
+            "After 20 seconds program will try to read the SMS again")
         time.sleep(20)
-        res = SendCommand("gsmctl -S -r 0", dataReceiver)
+        res = SendCommand("gsmctl -S -l all", dataReceiver)
     if (len(res) >= 15):
-        CheckContent(res)
+        LookThroughMessages(res)        
     else:
         print(Text.Yellow("Device did not receive the message"))
         print(Text.Red("Failed"))
@@ -32,11 +35,26 @@ def CheckContent(message):
         cnt += 1
     if (eventResults.received == deviceInfo.sims[deviceInfo.activeSim]
             and eventResults.messageIn == eventResults.messageOut):
-        eventResults.passed = True
-        print(Text.Green("Passed"))
+        eventResults.passed = True    
     else:
-        print(Text.Red("Failed"))
+        eventResults.received = ""
+        eventResults.messageIn = ""
 
+def LookThroughMessages(res):
+    try:        
+        indexes = GetMessagesIndexes(res)
+        i = 0
+        while i < len(indexes):
+            message = SendCommand("gsmctl -S -r {0}".format(indexes[i]), dataReceiver)            
+            CheckContent(message)
+            if(eventResults.passed == True):
+                print(Text.Green("Passed"))
+                break
+            i += 1        
+        if(eventResults.passed == False):
+            print(Text.Red("Failed"))
+    except Exception as err:
+        print(Text.Yellow(str(err)))
 
 def CheckWhichSim():
     res = SendCommand("ubus call sim get", dataSender)

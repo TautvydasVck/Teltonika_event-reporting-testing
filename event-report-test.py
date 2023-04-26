@@ -25,10 +25,10 @@ if __name__ == "__main__":
         CheckReceiverConn()
         CheckSenderGsm()
         CheckTotalEvents(data)
-        print(Text.Underline("|   Primary checks passed   |"))
+        print(Text.Green("Primary checks passed"))
         deviceInfo.sysInfo = ""
     except Exception as err:
-        print(Text.Underline("|   Primary checks failed   |"))
+        print(Text.Red("Primary checks failed"))
         print(Text.Red(str(err)))
         sys.exit()
     CreateCSV(data)

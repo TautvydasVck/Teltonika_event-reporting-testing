@@ -61,7 +61,7 @@ def SendEvent(endpoint, bodyData, type):
                                          headers=head, data=data, timeout=10).json()
             case "delete":
                 response = requests.delete(dataSender.baseURL+endpoint,
-                                           headers=head, timeout=10).json()
+                                           headers=head, timeout=10).json()            
             case _:
                 print(Text.Yellow(
                     "To send event report data use only post and delete HTTP methods"

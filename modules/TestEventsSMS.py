@@ -9,7 +9,7 @@ from classes.Utilities import Text
 from modules.MessageDecode import Decode
 from modules.Receiver import CheckReceive, CheckWhichSim
 from modules.Requests import SendEvent
-from modules.Resets import PrepForNextEvent, PurgeAllSms
+from modules.Resets import PrepForNextEvent
 from modules.ResultFile import UpdateCSV
 from modules.Triggering import TriggerEvent
 from modules.Variables import deviceInfo, eventResults, testResults
@@ -32,20 +32,18 @@ def TestEvents(file):
                     eventResults.eventId = response["data"]["id"]
                     try:
                         CheckWhichSim()
-                        PurgeAllSms()
                         TriggerEvent(test["trigger-data"][index])
                         time.sleep(10)
                         CheckReceive()
                         if (eventResults.passed == True):
-                            testResults.passedCnt += 1
-                        UpdateCSV(index, test)
-                        PrepForNextEvent()
+                            testResults.passedCnt += 1                                                
                     except Exception as err:
                         eventResults.passed = False
                         print(Text.Yellow(str(err)))
-                        print(Text.Red("Failed"))
-                        UpdateCSV(index, test)
+                        print(Text.Red("Failed"))                        
+                    finally:
                         PrepForNextEvent()
+                        UpdateCSV(index, test)
                 else:
                     eventResults.passed = False
                     print(Text.Yellow("Event was not created"))
