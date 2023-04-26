@@ -38,12 +38,17 @@ def TestEvents(file):
                         UpdateCSV(index, test)
                         PrepForNextEvent()
                     except Exception as err:
+                        eventResults.passed = False
                         print(Text.Yellow(str(err)))                        
                         print(Text.Red("Failed"))
                         UpdateCSV(index, test)
-                        PrepForNextEvent()                        
+                        PrepForNextEvent()        
                 else:
-                    print(Text.Red("Event was not created"))                                        
+                    eventResults.passed = False             
+                    print(Text.Yellow("Event was not created"))
+                    print(Text.Red("Failed"))
+                    UpdateCSV(index, test)
+                    PrepForNextEvent()
                 index += 1
                 print("-"*40)
             else:
@@ -72,5 +77,4 @@ def GetEventData(test, subtype, index):
         Decode()
         return data
     except KeyError:
-        print(Text.Yellow("Key error in event report configuration\nEvent with this data will not be created"))
-        eventResults.messageOut = ""
+        print(Text.Yellow("Key error in event report configuration\nEvent with this data might not be created"))        

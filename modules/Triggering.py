@@ -10,7 +10,7 @@ from modules.Requests import SendCommand, SendTrigger
 from modules.APIToken import GetToken
 from modules.Variables import dataSender
 
-def TriggerEvent(trigger):    
+def TriggerEvent(trigger):
     for step in trigger["steps"]:
         match step["type"]:
             case "api":
@@ -18,7 +18,7 @@ def TriggerEvent(trigger):
                 response = SendTrigger(
                     step["api-path"], json.dumps(step["api-body"]), step["method"])
                 if (response["success"] == False):
-                    print(Text.Yellow("Trigger using API failed"))
+                    print(Text.Yellow("Trigger via API failed"))
             case "ssh":
                 SendCommand(step["command"], dataSender)
             case "cmd":
@@ -30,8 +30,7 @@ def TriggerEvent(trigger):
                     data[(len(data)-3):]
                 SendCommand(data, dataSender)
             case _:
-                print(Text.Red("Use only these trigger types:api, ssh, cmd, ubus\nJSON configuration file is misformed\nCheck configuration file"))
-                sys.exit()
+                raise Exception("Use only these trigger types:api, ssh, cmd, ubus\nCheck configuration file")                
         pause = step["wait-time"]
         if (pause != ""):
             print(Text.Yellow(

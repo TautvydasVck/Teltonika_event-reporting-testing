@@ -14,7 +14,7 @@ def CheckReceive():
         time.sleep(20)
         res = SendCommand("gsmctl -S -r 0", dataReceiver)
     if (len(res) >= 15):     
-        CheckContent(res)    
+        CheckContent(res)
     else:
         print(Text.Yellow("Device did not receive the message"))
         print(Text.Red("Failed"))
@@ -25,7 +25,7 @@ def CheckContent(message):
     eventResults.messageIn+=str(message[13].split(":\t\t")[1][:-1])
     while cnt < len(message)-1:
         eventResults.messageIn+=("\n"+str(message[cnt][:-1]))
-        cnt+=1    
+        cnt+=1
     if (eventResults.received == deviceInfo.sims[deviceInfo.activeSim]
             and eventResults.messageIn == eventResults.messageOut):
         eventResults.passed = True
@@ -51,12 +51,10 @@ def CheckWhichSim():
 
 def GetMessagesIndexes(res):
     i = 0
-    indexes = []
-    if(len(res)!=0):
-        while i < len(res):
-            if(res[i].__contains__("Index")):
-                indexes.append(str(res[i]).split(":\t\t")[1][:-1])                
-            i+=1
-        return indexes
-    else:
-        return indexes
+    indexes = []    
+    while i < len(res):
+        if(res[i].__contains__("Index")):
+            indexes.append(str(res[i]).split(":\t\t")[1][:-1])                
+        i+=1
+    return indexes
+    

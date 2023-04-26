@@ -5,7 +5,6 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from modules.Variables import eventResults, deviceInfo, fileData, testResults
 from modules.FTPConnection import CreateConn
-from classes.Utilities import Text
 
 def CreateCSV(file):
     fileName = "{0}_{1}.csv".format(file["info"]["product"], testResults.startTime)
@@ -14,7 +13,6 @@ def CreateCSV(file):
     os.system(fileInit)
     fileData.outFileName = fileName
 
-
 def UpdateCSV(index, test):        
         os.system("echo '{0};{1};{2};{3};{4};{5};{6}' >> '{7}'"
                   .format(test["event-data"]["event-type"],
@@ -22,8 +20,6 @@ def UpdateCSV(index, test):
                           eventResults.messageOut, eventResults.messageIn,
                           deviceInfo.sims[deviceInfo.activeSim], eventResults.received,
                           eventResults.passed, fileData.outFileName))
-        
-
 
 def UploadCSV():
     ftp = CreateConn()
