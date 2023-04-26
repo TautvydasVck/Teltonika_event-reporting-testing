@@ -67,11 +67,12 @@ def CheckTotalEvents(file):
             events += len(event["event-data"]["event-subtype"])
             triggers += len(event["trigger-data"])
             messages += len(event["event-data"]["message"])
+            eventType = event["event-data"]["event-type"]
             if (events != triggers or events != messages):
                 raise Exception(
                     "Events and their messages count does not match trigger count"
                     "\nCheck event type '{0}' configuration data"
-                    .format(event["event-data"]["event-type"]))
+                    .format(eventType))
         testResults.total = events
     except KeyError:
         raise Exception(

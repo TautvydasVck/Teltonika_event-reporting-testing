@@ -23,7 +23,7 @@ def PurgeAllSms(device):
 
 
 def RecheckSms(device):
-    res = SendCommand("gsmctl -S -l all", dataReceiver)
+    res = SendCommand("gsmctl -S -l all", device)
     if (len(res) != 0):
         PurgeAllSms(device)
 
