@@ -25,6 +25,7 @@ def SendCommand(data, device):
 def SendTrigger(endpoint, bodyData, type):
     head = {"Content-Type": "application/json",
             "Authorization": "Bearer " + dataSender.token}
+    response = {"success":False}
     try:
         match type:
             case "post":
@@ -36,11 +37,10 @@ def SendTrigger(endpoint, bodyData, type):
             case _:
                 print(Text.Red(
                     "To trigger event reporting rule via API use only post and put HTTP methods\nJSON file is misformed\nCheck configuration file"))
-                response = {"success":False}
-        return response
+        if(response["success"] == False):
+            print(Text.Yellow("Trigger via API failed"))
     except OSError:
-        print(Text.Red("Could not reach device '{0}' to send trigger via API".format(dataSender.ipAddr)))
-        sys.exit()    
+        print(Text.Yellow("Could not reach device '{0}' to send event reporting data via API".format(dataSender.ipAddr)))
 
 
 def SendEvent(endpoint, bodyData, type):

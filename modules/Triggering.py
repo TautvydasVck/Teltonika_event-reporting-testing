@@ -15,10 +15,8 @@ def TriggerEvent(trigger):
         match step["type"]:
             case "api":
                 time.sleep(1)
-                response = SendTrigger(
-                    step["api-path"], json.dumps(step["api-body"]), step["method"])
-                if (response["success"] == False):
-                    print(Text.Yellow("Trigger via API failed"))
+                SendTrigger(
+                    step["api-path"], json.dumps(step["api-body"]), step["method"])                
             case "ssh":
                 SendCommand(step["command"], dataSender)
             case "cmd":
