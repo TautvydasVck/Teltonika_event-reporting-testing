@@ -1,14 +1,16 @@
-import time
+import json
 import os
 import sys
-import json
+import time
 from pathlib import Path
+
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from classes.Utilities import Text
-from modules.Requests import SendCommand, SendTrigger
 from modules.APIToken import GetToken
+from modules.Requests import SendCommand, SendTrigger
 from modules.Variables import dataSender
+
 
 def TriggerEvent(trigger):
     for step in trigger["steps"]:
@@ -16,7 +18,7 @@ def TriggerEvent(trigger):
             case "api":
                 time.sleep(1)
                 SendTrigger(
-                    step["api-path"], json.dumps(step["api-body"]), step["method"])                
+                    step["api-path"], json.dumps(step["api-body"]), step["method"])
             case "ssh":
                 SendCommand(step["command"], dataSender)
             case "cmd":
@@ -30,7 +32,7 @@ def TriggerEvent(trigger):
             case _:
                 raise Exception(
                     "Use only these trigger types:api, ssh, cmd, ubus"
-                    +"\nCheck configuration file")                
+                    + "\nCheck configuration file")
         pause = step["wait-time"]
         if (pause != ""):
             print(Text.Yellow(

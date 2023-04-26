@@ -1,11 +1,13 @@
 import sys
 from pathlib import Path
-from collections import Counter
+
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from modules.Receiver import GetMessagesIndexes
 from modules.Requests import SendCommand, SendEvent
 from modules.Variables import dataReceiver, eventResults
-from modules.Receiver import GetMessagesIndexes
+from classes.Utilities import Text
+
 
 def PurgeAllSms():
     res = SendCommand("gsmctl -S -l all", dataReceiver)
@@ -16,18 +18,22 @@ def PurgeAllSms():
         i += 1
     RecheckSms()
 
+
 def RecheckSms():
     res = SendCommand("gsmctl -S -l all", dataReceiver)
-    if(len(res)!=0):
+    if (len(res) != 0):
         PurgeAllSms()
 
 
 def PrepForNextEvent():
-    SendEvent("/services/events_reporting/config/" +
-                          eventResults.eventId, "", "delete")
-    eventResults.passed = False
-    eventResults.messageIn = ""
-    eventResults.received = ""    
-    eventResults.eventId = ""
-    eventResults.messageOut = ""
-    PurgeAllSms()
+    try:
+        SendEvent("/services/events_reporting/config/" +
+                  eventResults.eventId, "", "delete")
+        eventResults.passed = False
+        eventResults.messageIn = ""
+        eventResults.received = ""
+        eventResults.eventId = ""
+        eventResults.messageOut = ""
+        PurgeAllSms()
+    except Exception as err:
+        print(Text.Yellow(str(err)))

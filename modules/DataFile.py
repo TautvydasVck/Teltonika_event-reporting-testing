@@ -5,19 +5,21 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from modules.Variables import fileData
 
+
 def ReadDataFile():
-    try:        
+    try:
         return LoadFile()
     except FileNotFoundError:
         raise Exception(
             "Error while loading configuration file"
-            +"\nProvided JSON configuration file was not found")
+            "\nProvided JSON configuration file was not found")
+
 
 def LoadFile():
     try:
         with open(fileData.dataFileName) as f:
-                data = json.load(f)
+            data = json.load(f)
         return data
     except json.decoder.JSONDecodeError:
         raise Exception("Error while loading configuration file"
-                        +"\nJSON configuration file is misformed")
+                        "\nJSON configuration file is misformed")
