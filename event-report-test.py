@@ -38,7 +38,7 @@ if __name__ == "__main__":
     print("Total events tested: {0}".format(testResults.total))
     print(Text.Green("Passed: {0}".format(testResults.passedCnt)), end=" ")
     print(Text.Red("Failed: {0}".format(testResults.failedCnt)))
-    try:
+    try
         UploadCSV()
     except Exception:
         print(Text.Yellow(str(err)))
