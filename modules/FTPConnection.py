@@ -11,5 +11,6 @@ def CreateConn():
         ftp.encoding = "utf-8"
         return ftp
     except ftplib.all_errors:
+        ftp.close()
         print(Text.Red("Could not connect to FTP server\nResult file will not be uploaded"))
         return ""

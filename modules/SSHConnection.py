@@ -10,6 +10,7 @@ def CreateConn(client, device):
         client.connect(hostname=device.ipAddr,
                            username="root", password=device.pswd, port=22, timeout=4)
     except OSError:
+        client.close()
         print(Text.Red("Unable to connect to device '{0}' via SSH".format(device.ipAddr)))
         sys.exit()
     

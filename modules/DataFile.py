@@ -10,8 +10,7 @@ def ReadDataFile():
     try:        
         return LoadFile()
     except FileNotFoundError:
-        print(Text.Red("Error while loading configuration file\nProvided JSON configuration file was not found"))
-        sys.exit()
+        raise Exception("Error while loading configuration file\nProvided JSON configuration file was not found\nProgram stopped")        
 
 def LoadFile():
     try:
@@ -19,5 +18,4 @@ def LoadFile():
                 data = json.load(f)
         return data
     except json.decoder.JSONDecodeError:
-        print(Text.Red("Error while loading configuration file\nJSON configuration file is misformed\nCheck configuration file"))
-        sys.exit()
+        raise Exception("Error while loading configuration file\nJSON configuration file is misformed\nProgram stopped")        

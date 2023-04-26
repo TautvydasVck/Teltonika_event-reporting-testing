@@ -1,3 +1,4 @@
+import sys
 from datetime import datetime
 from modules.ResultFile import UploadCSV, CreateCSV
 from modules.PrimaryChecks import CheckForMobile, CheckForModel, CheckTotalEvents, CheckReceiverConn, CheckSenderGsm
@@ -12,11 +13,16 @@ from classes.Utilities import Text
 print(end="\n")
 testResults.startTime = datetime.now().strftime("%Y-%m-%d_%H:%M:%S")
 ReadArgs()
-GetToken()
-data = ReadDataFile()
-GetPhoneNumbers(data)
-GetSysInfo()
-CheckForModel(data)
+try:
+    GetToken()
+    data = ReadDataFile()
+    GetPhoneNumbers(data)
+    GetSysInfo()
+    CheckForModel(data)
+except Exception as err:
+    print(Text.Underline("Primary checks failed"))
+    print(Text.Red(str(err)))
+    sys.exit()
 CheckForMobile()
 CheckReceiverConn()
 CheckSenderGsm()

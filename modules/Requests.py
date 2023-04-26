@@ -74,8 +74,6 @@ def GetSysInfo():
         if (response["success"] == True):
             deviceInfo.sysInfo = response            
         else:
-            print(Text.Red("Could not retrieve device system information."))
-            sys.exit()
+            raise Exception("Could not retrieve device system information")            
     except OSError:
-        print(Text.Red("Could not reach device '{0}' to get system, hardware information via API".format(dataSender.ipAddr)))
-        sys.exit()
+        raise Exception("Could not reach device '{0}' to get system, hardware information via API".format(dataSender.ipAddr))        

@@ -11,10 +11,7 @@ from classes.Utilities import Text
 
 def CheckForMobile():    
     if (deviceInfo.sysInfo["data"]["board"]["hwinfo"]["mobile"] == False):
-        print(Text.Red(
-            "Device does not have mobile capabilities"))
-        # deviceInfo.mobile = False
-        sys.exit()
+        raise Exception("Device does not have mobile capabilities")        
     elif (deviceInfo.sysInfo["data"]["board"]["hwinfo"]["mobile"] == True):
         print(Text.Green(
             "Device has mobile capabilities"))
@@ -37,11 +34,9 @@ def CheckForModel(file):
         if modelA.startswith(modelF):
             print(Text.Green("Device model in JSON matches actual device model"))
         else:
-            print(Text.Red("Device model in config file '{0}' and actual model '{1}' do not match\nCheck JSON configuration file".format(modelF, modelA)))
-            sys.exit()
+            raise Exception("Device model in config file '{0}' and actual model '{1}' do not match\nCheck JSON configuration file".format(modelF, modelA))            
     except KeyError:
-        print(Text.Red("Key error while reading model data\nJSON configuration file is misformed\nCheck configuration file"))
-        sys.exit()
+        raise Exception("Key error while reading model data\nJSON configuration file is misformed\nCheck configuration file")        
 
 
 def CheckTotalEvents(file):

@@ -40,8 +40,7 @@ def GetPhoneNumbers(file):
             print(Text.Red("No SIM data was provided\nCheck configuration file"))
             sys.exit()
     except KeyError:
-        print(Text.Red("Key error while reading sim data\nJSON configuration file is misformed\nCheck configuration file"))
-        sys.exit()
+        raise Exception("Key error while reading sim data\nJSON configuration file is misformed\nCheck configuration file")        
 
 def CheckWhichSim():
     res = SendCommand("ubus call sim get", dataSender)

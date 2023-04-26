@@ -28,4 +28,6 @@ def PrepForNextEvent():
     eventResults.passed = False
     eventResults.messageIn = ""
     eventResults.received = ""    
+    eventResults.eventId = ""
+    eventResults.messageOut = ""
     PurgeAllSms()
