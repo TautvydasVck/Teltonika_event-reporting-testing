@@ -2010,6 +2010,19 @@
           "steps": [
             {
               "type": "ssh",
+              "command": "ubus call network.interface.mob1s1a1 up",
+              "wait-time": "30",
+              "method": "",
+              "api-path": "",
+              "api-body": {},
+              "retrieve-token": ""
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "type": "ssh",
               "command": "ubus call network.interface.mob1s1a1 down",
               "wait-time": "30",
               "method": "",
