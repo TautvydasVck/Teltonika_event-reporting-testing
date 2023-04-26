@@ -7,13 +7,12 @@ For ubuntu command `sudo apt install sshpass` can be used.
     - paramiko `pip install paramiko`
     - requests `pip install requests`
 ## File, Folder structure
-- event-report-test.py -> main automatic test program file
+- event-report-test.py -> main program file
 - structure.json -> JSON configuration file structure
 - event-config.json -> configuration file example for RUTX11 with FW: RUTX_R_00.07.04.2
 - classes
     - DeviceData.py -> stores data about device system, hardware information, SIM card numbers
     - EventResultsData.py -> stores data about created if
-
 ## Configuration file structure
 *explain config file*
 ## To create and activate virtual environment
