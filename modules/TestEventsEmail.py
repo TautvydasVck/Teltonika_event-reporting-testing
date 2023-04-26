@@ -1,4 +1,6 @@
 """
+siuo metu nera zinomo budo kaip patikrinti laisko turini ir siunteja is gavejo puses
+
 eventu su email json nuskaitymas
 # Eventai su el. pastu yra netestuoti
             if (test["event-data"]["email-config"]["email-acc"] != ""):

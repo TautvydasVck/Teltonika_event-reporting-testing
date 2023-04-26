@@ -5,4 +5,3 @@ class EventResultData:
         self.messageOut = ""
         self.messageIn = ""
         self.received = ""        
-        self.delete = False
