@@ -9,10 +9,10 @@ from classes.Utilities import Text
 from modules.MessageDecode import Decode
 from modules.Receiver import CheckReceive, CheckWhichSim
 from modules.Requests import SendEvent
-from modules.Resets import PrepForNextEvent
+from modules.Resets import PrepForNextEvent, PurgeAllSms
 from modules.ResultFile import UpdateCSV
 from modules.Triggering import TriggerEvent
-from modules.Variables import deviceInfo, eventResults, testResults
+from modules.Variables import deviceInfo, eventResults, testResults, dataReceiver
 
 
 def TestEvents(file):
@@ -30,8 +30,9 @@ def TestEvents(file):
                     "/services/events_reporting/config", data, "post")
                 if (response["success"] == True):
                     eventResults.eventId = response["data"]["id"]
-                    try:
+                    try:                        
                         CheckWhichSim()
+                        PurgeAllSms(dataReceiver)
                         TriggerEvent(test["trigger-data"][index])
                         time.sleep(10)
                         CheckReceive()

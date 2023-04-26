@@ -7,6 +7,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from classes.Utilities import Text
 from modules.Requests import SendCommand
 from modules.SSHConnection import CreateConn
+from modules.Resets import PurgeAllSms
 from modules.Variables import dataReceiver, dataSender, deviceInfo, testResults
 
 
@@ -90,8 +91,9 @@ def CheckReceiverConn():
             "Could not reach the receiver\nCheck if device password is correct")
 
 
-def CheckSenderGsm():
+def CheckSenderGsm():    
     cnt = 0
+    gotMessage = False
     while cnt < 2:
         sim = deviceInfo.sims[cnt]
         if (sim != ""):
@@ -99,9 +101,12 @@ def CheckSenderGsm():
             SendCommand("gsmctl -S -s \"{0} test\"".format(sim), dataSender)
             time.sleep(6)
             resNew = SendCommand("gsmctl -S -l all", dataSender)
-            if (len(resNew) == len(resOld)):
-                raise Exception(
-                    "Device sent SMS to itself and did not receive the message"
-                    "\nCheck if phone number in configuration file is correct"
-                    " and if SIM card can send SMS")
+            if (len(resNew) > len(resOld)):
+                gotMessage = True                
         cnt += 1
+    PurgeAllSms(dataSender)
+    if(gotMessage == False):
+        raise Exception(
+                "Device sent SMS to itself and did not receive the message"
+                "\nCheck if phone number in configuration file is correct"
+                " and if SIM card can send SMS")

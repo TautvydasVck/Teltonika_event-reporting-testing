@@ -9,23 +9,23 @@ from modules.Requests import SendCommand, SendEvent
 from modules.Receiver import GetMessagesIndexes
 
 
-def PurgeAllSms():
+def PurgeAllSms(device):
     try:
-        res = SendCommand("gsmctl -S -l all", dataReceiver)
+        res = SendCommand("gsmctl -S -l all", device)
         indexes = GetMessagesIndexes(res)
         i = 0
         while i < len(indexes):
-            SendCommand("gsmctl -S -d {0}".format(indexes[i]), dataReceiver)
+            SendCommand("gsmctl -S -d {0}".format(indexes[i]), device)
             i += 1
-        RecheckSms()
+        RecheckSms(device)
     except Exception as err:
         print(Text.Yellow(str(err)))
 
 
-def RecheckSms():
+def RecheckSms(device):
     res = SendCommand("gsmctl -S -l all", dataReceiver)
     if (len(res) != 0):
-        PurgeAllSms()
+        PurgeAllSms(device)
 
 
 def PrepForNextEvent():
@@ -36,4 +36,4 @@ def PrepForNextEvent():
     eventResults.received = ""
     eventResults.eventId = ""
     eventResults.messageOut = ""
-    PurgeAllSms()
+    PurgeAllSms(dataReceiver)
