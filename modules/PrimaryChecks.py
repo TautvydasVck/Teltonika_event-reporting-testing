@@ -17,8 +17,7 @@ def CheckForMobile():
             "Device has mobile capabilities"))
         deviceInfo.mobile = True
     else:
-        print(Text.Red("Could not get information about device's mobile capabilities"))
-        sys.exit()
+        raise Exception("Could not get information about device's mobile capabilities")        
 
 
 def CheckForModel(file):    
@@ -49,13 +48,10 @@ def CheckTotalEvents(file):
             triggers += len(event["trigger-data"])
             messages += len(event["event-data"]["message"])
             if (events != triggers or events != messages):
-                print(Text.Red(
-                    "Events and their messages count does not match trigger count\nCheck event type '{0}' configuration data".format(event["event-data"]["event-type"])))
-                sys.exit()
+                raise Exception("Events and their messages count does not match trigger count\nCheck event type '{0}' configuration data".format(event["event-data"]["event-type"]))                
         testResults.total = events
     except KeyError:
-        print(Text.Red("Key error while checking events, messages and trigger count\nJSON configuration file is misformed\nCheck configuration file"))
-        sys.exit()
+        raise Exception("Key error while checking events, messages and trigger count\nJSON configuration file is misformed\nCheck configuration file")        
 
 def CheckReceiverConn():
     client = paramiko.SSHClient()
@@ -65,8 +61,7 @@ def CheckReceiverConn():
         time.sleep(1)
         client.close()        
     except paramiko.AuthenticationException:
-        print(Text.Red("Could not reach the receiver\nCheck if device password is correct"))
-        sys.exit()
+        raise Exception("Could not reach the receiver\nCheck if device password is correct")        
 
 def CheckSenderGsm():
     cnt = 0
@@ -78,6 +73,5 @@ def CheckSenderGsm():
             time.sleep(6)
             resNew = SendCommand("gsmctl -S -l all", dataSender)
             if (len(resNew) == len(resOld)):
-                print(Text.Red("Device sent SMS to itself and did not receive the message\nCheck if phone number in configuration file is correct and if SIM card can send SMS"))
-                sys.exit()
+                raise Exception("Device sent SMS to itself and did not receive the message\nCheck if phone number in configuration file is correct and if SIM card can send SMS")                
         cnt+=1    

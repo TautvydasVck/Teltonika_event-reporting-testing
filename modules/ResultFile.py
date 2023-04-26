@@ -35,4 +35,4 @@ def UploadCSV():
             if (fileData.delete == True):
                 os.system("rm '{0}'".format(fileData.outFileName))
         except FileNotFoundError:
-             print(Text.Red("CSV result file was not found\nIt will not be uploaded to FTP server"))
+            raise Exception("CSV result file was not found\nIt will not be uploaded to FTP server")             

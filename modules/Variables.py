@@ -44,5 +44,5 @@ def ReadArgs():
     dataReceiver.pswd = args.rPassword
     dataReceiver.ipAddr = args.rAddress
 
-    fileData.dataFileName = "nera"
+    fileData.dataFileName = args.configFile
     fileData.delete = args.deleteFile
