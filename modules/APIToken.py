@@ -15,4 +15,5 @@ def GetToken():
         else:         
             dataSender.token = ""
     except OSError:
-            raise Exception("Could not reach device '{0}' to retrieve API token\nAll following API requests will fail".format(dataSender.ipAddr))                
+            raise Exception("Could not reach device '{0}' to retrieve API token\nAll following API requests will fail".format(dataSender.ipAddr))
+            

@@ -28,8 +28,7 @@ def CheckForModel(file):
     try:
         modelF = file["info"]["product"]
         if(modelF == ""):
-            print(Text.Red("No model was provided\nCheck JSON configuration file"))
-            sys.exit()
+            raise Exception("No model was provided\nCheck JSON configuration file")            
         if modelA.startswith(modelF):
             print(Text.Green("Device model in JSON matches actual device model"))
         else:

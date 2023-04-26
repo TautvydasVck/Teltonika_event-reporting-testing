@@ -31,7 +31,7 @@ def ReadArgs():
     parser.add_argument(
         "-rip", "--rAddress", help="SMS receiver device IP address. Default: 192.168.1.2", action="store", default="192.168.1.2")
     parser.add_argument(
-        "-f", "--configFile", help="Configuration file path. Default: ./event-config.json", action="store", default="event-config.json")
+        "-file", "--configFile", help="Configuration file path. Default: ./event-config.json", action="store", default="event-config.json")
     parser.add_argument(
         "-d", "--deleteFile", help="Delete test result file from PC. Default: false", action="store_true", default=False)
     args = parser.parse_args()
@@ -44,5 +44,5 @@ def ReadArgs():
     dataReceiver.pswd = args.rPassword
     dataReceiver.ipAddr = args.rAddress
 
-    fileData.dataFileName = args.configFile
+    fileData.dataFileName = "23"
     fileData.delete = args.deleteFile
