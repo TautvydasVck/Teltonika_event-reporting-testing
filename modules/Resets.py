@@ -10,14 +10,16 @@ from classes.Utilities import Text
 
 
 def PurgeAllSms():
-    res = SendCommand("gsmctl -S -l all", dataReceiver)
-    indexes = GetMessagesIndexes(res)
-    i = 0
-    while i < len(indexes):
-        SendCommand("gsmctl -S -d {0}".format(indexes[i]), dataReceiver)
-        i += 1
-    RecheckSms()
-
+    try:
+        res = SendCommand("gsmctl -S -l all", dataReceiver)
+        indexes = GetMessagesIndexes(res)
+        i = 0
+        while i < len(indexes):
+            SendCommand("gsmctl -S -d {0}".format(indexes[i]), dataReceiver)
+            i += 1
+        RecheckSms()
+    except Exception as err:
+        print(Text.Yellow(str(err)))
 
 def RecheckSms():
     res = SendCommand("gsmctl -S -l all", dataReceiver)
@@ -26,14 +28,11 @@ def RecheckSms():
 
 
 def PrepForNextEvent():
-    try:
-        SendEvent("/services/events_reporting/config/" +
-                  eventResults.eventId, "", "delete")
-        eventResults.passed = False
-        eventResults.messageIn = ""
-        eventResults.received = ""
-        eventResults.eventId = ""
-        eventResults.messageOut = ""
-        PurgeAllSms()
-    except Exception as err:
-        print(Text.Yellow(str(err)))
+    SendEvent("/services/events_reporting/config/" +
+              eventResults.eventId, "", "delete")
+    eventResults.passed = False
+    eventResults.messageIn = ""
+    eventResults.received = ""
+    eventResults.eventId = ""
+    eventResults.messageOut = ""
+    PurgeAllSms()

@@ -1,3 +1,4 @@
+
 import json
 import os
 import sys
@@ -6,10 +7,10 @@ from pathlib import Path
 
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from classes.Utilities import Text
-from modules.APIToken import GetToken
-from modules.Requests import SendCommand, SendTrigger
 from modules.Variables import dataSender
+from modules.Requests import SendCommand, SendTrigger
+from modules.APIToken import GetToken
+from classes.Utilities import Text
 
 
 def TriggerEvent(trigger):
