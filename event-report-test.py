@@ -30,7 +30,7 @@ if __name__ == "__main__":
         deviceInfo.sysInfo = ""
     except Exception as err:
         print(Text.Red("Primary checks failed"))
-        print(Text.Red(str(err)))
+        print(str(err))
         sys.exit()
     CreateCSV(data)
     print("Started at: {0}".format(testResults.startTime))

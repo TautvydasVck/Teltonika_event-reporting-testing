@@ -103,5 +103,5 @@ def CheckSenderGsm():
                 raise Exception(
                     "Device sent SMS to itself and did not receive the message"
                     "\nCheck if phone number in configuration file is correct"
-                    "and if SIM card can send SMS")
+                    " and if SIM card can send SMS")
         cnt += 1
