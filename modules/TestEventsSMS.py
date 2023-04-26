@@ -41,9 +41,9 @@ def TestEvents(file):
                         eventResults.passed = False
                         print(Text.Yellow(str(err)))
                         print(Text.Red("Failed"))                        
-                    finally:
-                        PrepForNextEvent()
+                    finally:                        
                         UpdateCSV(index, test)
+                        PrepForNextEvent()
                 else:
                     eventResults.passed = False
                     print(Text.Yellow("Event was not created"))

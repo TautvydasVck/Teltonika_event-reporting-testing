@@ -1,0 +1,6 @@
+Event type;Event subtype;Expected message;Received message;Sent from;Got from;Passed
+Config;all;Config, all 868759037198787;Config, all 868759037198787;+37060789118;+37060789118;True
+Config;openvpn;Config, openvpn;;+37060789118;;False
+Config;events_reporting;Config, events_reporting;Config, events_reporting;+37060789118;+37060789118;True
+Config;periodic_reboot;Config, periodic_reboot;Config, periodic_reboot;+37060789118;+37060789118;True
+Config;ping_reboot;Config, ping_reboot;;+37060789118;;False
