@@ -1,4 +1,4 @@
-# User documentation (in progress)
+# Documentation (in progress)
 ## Prerequisites
 - Installed sshpass utility  
 For ubuntu command `sudo apt install sshpass` can be used.
