@@ -10,6 +10,7 @@ from modules.ResultFile import CreateCSV, UploadCSV
 from modules.TestEventsSMS import TestEvents
 from modules.Variables import ReadArgs, deviceInfo, testResults
 
+
 if __name__ == "__main__":
     print(end="\n")
     testResults.startTime = datetime.now().strftime("%Y-%m-%d_%H:%M:%S")
