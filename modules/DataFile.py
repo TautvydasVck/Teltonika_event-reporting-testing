@@ -9,7 +9,9 @@ def ReadDataFile():
     try:        
         return LoadFile()
     except FileNotFoundError:
-        raise Exception("Error while loading configuration file\nProvided JSON configuration file was not found")
+        raise Exception(
+            "Error while loading configuration file"
+            +"\nProvided JSON configuration file was not found")
 
 def LoadFile():
     try:
@@ -17,4 +19,5 @@ def LoadFile():
                 data = json.load(f)
         return data
     except json.decoder.JSONDecodeError:
-        raise Exception("Error while loading configuration file\nJSON configuration file is misformed")        
+        raise Exception("Error while loading configuration file"
+                        +"\nJSON configuration file is misformed")

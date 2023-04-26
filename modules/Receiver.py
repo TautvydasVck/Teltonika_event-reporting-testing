@@ -10,7 +10,9 @@ from modules.Variables import dataReceiver, eventResults, dataSender, deviceInfo
 def CheckReceive():    
     res = SendCommand("gsmctl -S -r 0", dataReceiver)
     if (len(res) == 0):
-        print(Text.Yellow("Device did not receive the message\nAfter 20 seconds program will try to read the SMS again"))
+        print(Text.Yellow(
+            "Device did not receive the message"
+            +"\nAfter 20 seconds program will try to read the SMS again"))
         time.sleep(20)
         res = SendCommand("gsmctl -S -r 0", dataReceiver)
     if (len(res) >= 15):     
@@ -32,15 +34,6 @@ def CheckContent(message):
         print(Text.Green("Passed"))
     else:
         print(Text.Red("Failed"))
-
-def GetPhoneNumbers(file):
-    try:
-        deviceInfo.sims[0] = file["info"]["SIM1-nr"]
-        deviceInfo.sims[1] = file["info"]["SIM2-nr"]
-        if(deviceInfo.sims[0] == "" and deviceInfo.sims[1] == ""):
-            raise Exception("No SIM data was provided\nCheck configuration file")            
-    except KeyError:
-        raise Exception("Key error while reading sim data\nJSON configuration file is misformed\nCheck configuration file")        
 
 def CheckWhichSim():
     res = SendCommand("ubus call sim get", dataSender)

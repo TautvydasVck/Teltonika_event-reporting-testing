@@ -8,8 +8,8 @@ from modules.FTPConnection import CreateConn
 
 def CreateCSV(file):
     fileName = "{0}_{1}.csv".format(file["info"]["product"], testResults.startTime)
-    fileInit = "echo \"Event type;Event subtype;Expected message;Received message;Sent from;Got from;Passed\" >> '{0}'".format(
-        fileName)
+    fileInit = "echo \"Event type;Event subtype;Expected message;"
+    +"Received message;Sent from;Got from;Passed\" >> '{0}'".format(fileName)
     os.system(fileInit)
     fileData.outFileName = fileName
 
@@ -31,4 +31,6 @@ def UploadCSV():
             if (fileData.delete == True):
                 os.system("rm '{0}'".format(fileData.outFileName))
         except FileNotFoundError:
-            raise Exception("CSV result file was not found\nIt will not be uploaded to FTP server")             
+            raise Exception(
+                "CSV result file was not found"
+                +"\nIt will not be uploaded to FTP server")             

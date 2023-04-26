@@ -28,7 +28,9 @@ def TriggerEvent(trigger):
                     data[(len(data)-3):]
                 SendCommand(data, dataSender)
             case _:
-                raise Exception("Use only these trigger types:api, ssh, cmd, ubus\nCheck configuration file")                
+                raise Exception(
+                    "Use only these trigger types:api, ssh, cmd, ubus"
+                    +"\nCheck configuration file")                
         pause = step["wait-time"]
         if (pause != ""):
             print(Text.Yellow(

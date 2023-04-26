@@ -19,7 +19,9 @@ def SendCommand(data, device):
         client.close()
         return stdout.readlines()
     except paramiko.AuthenticationException:
-        raise Exception("Could not connect to device '{0}' via SSH to send command\nCheck login data".format(device.ipAddr))    
+        raise Exception(
+            "Could not connect to device '{device.ipAddr}' via SSH to send command"
+            +"\nCheck login data")
 
 
 def SendTrigger(endpoint, bodyData, type):
@@ -36,11 +38,14 @@ def SendTrigger(endpoint, bodyData, type):
                                         headers=head, data=bodyData, timeout=10).json()
             case _:
                 print(Text.Red(
-                    "To trigger event reporting rule via API use only post and put HTTP methods\nJSON file is misformed\nCheck configuration file"))
+                    "To trigger event reporting rule via API use only post and put HTTP methods"
+                    +"\nJSON file is misformed\nCheck configuration file"))
         if(response["success"] == False):
             print(Text.Yellow("Trigger via API failed"))
     except OSError:
-        print(Text.Yellow("Could not reach device '{0}' to send event reporting data via API".format(dataSender.ipAddr)))
+        print(Text.Yellow(
+                        "Could not reach device '{dataSender.ipAddr}'"
+                        +" to send event reporting data via API"))
 
 
 def SendEvent(endpoint, bodyData, type):
@@ -57,11 +62,13 @@ def SendEvent(endpoint, bodyData, type):
                                            headers=head, timeout=10).json()
             case _:
                 print(Text.Yellow(
-                    "To send event report data use only post and delete HTTP methods\nCheck JSON configuration file"))
+                    "To send event report data use only post and delete HTTP methods"
+                    +"\nCheck JSON configuration file"))
                 response = {"success":False}
         return response
     except OSError:
-        print(Text.Yellow("Could not reach device '{0}' to send event reporting data via API".format(dataSender.ipAddr)))
+        print(Text.Yellow(
+            "Could not reach device '{dataSender.ipAddr}' to send event reporting data via API"))
         return {"success":False}
 
 def GetSysInfo():
@@ -75,4 +82,5 @@ def GetSysInfo():
         else:
             raise Exception("Could not retrieve device system information")            
     except OSError:
-        raise Exception("Could not reach device '{0}' to get system, hardware information via API".format(dataSender.ipAddr))        
+        raise Exception(
+            "Could not reach device '{dataSender.ipAddr}' to get system, hardware information via API")

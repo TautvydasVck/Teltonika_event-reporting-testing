@@ -21,7 +21,8 @@ def TestEvents(file):
                   Text.Underline("{0}".format(test["event-data"]["event-type"])))
             print(
                 "Subtype: "+Text.Underline("{0}".format(subtype)))
-            if (test["event-data"]["sms-config"]["reciever"] != "" and deviceInfo.mobile == True):
+            if (test["event-data"]["sms-config"]["reciever"] != "" 
+                and deviceInfo.mobile == True):
                 data = GetEventData(test, subtype, index)                
                 response = SendEvent(
                     "/services/events_reporting/config", data, "post")                    
@@ -52,7 +53,8 @@ def TestEvents(file):
                 index += 1
                 print("-"*40)
             else:
-                print(Text.Red("JSON configuration file is misformed\nCheck configuration file"))
+                print(Text.Red("JSON configuration file is misformed"
+                              +"\nCheck configuration file"))
                 sys.exit()
         index = 0    
     testResults.failedCnt = testResults.total - testResults.passedCnt
@@ -77,4 +79,5 @@ def GetEventData(test, subtype, index):
         Decode()
         return data
     except KeyError:
-        print(Text.Yellow("Key error in event report configuration\nEvent with this data might not be created"))        
+        print(Text.Yellow("Key error in event report configuration"
+                         +"\nEvent with this data might not be created"))        

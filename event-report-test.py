@@ -1,10 +1,9 @@
 import sys
 from datetime import datetime
 from modules.ResultFile import UploadCSV, CreateCSV
-from modules.PrimaryChecks import CheckForMobile, CheckForModel, CheckTotalEvents, CheckReceiverConn, CheckSenderGsm
+from modules.PrimaryChecks import *
 from modules.DataFile import ReadDataFile
 from modules.APIToken import GetToken
-from modules.Receiver import GetPhoneNumbers
 from modules.Variables import ReadArgs, testResults, deviceInfo
 from modules.TestEventsSMS import TestEvents
 from modules.Requests import GetSysInfo
