@@ -16,7 +16,7 @@ Virtual environment is used if it is not wanted to install packages globally
 - Execute the activate script `source .venv/bin/activate`
 - To deactive virtual environment type `deactivate`
 ## JSON configuration file structure
-Explanation of configuration [files's](/structure.json)
+Explanation of configuration [files's](/structure.json) structure.
 ![JSON structure](/structureExplained.png)
 ## Tips and recommendations when creating JSON configuration file
 *tips when making config file*
