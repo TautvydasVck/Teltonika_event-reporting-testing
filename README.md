@@ -28,7 +28,7 @@ For ubuntu command `sudo apt install sshpass` can be used.
     - **Resets.py** -> delete all old SMS messages and prepare for next event testing (resets event, that was tested, results and deletes event report, that was created)
     - **ResultFile.py** -> create, updat and upload csv result file.
     - **SSHConnection.py** -> create SSH connection with device.
-    - ***TestEventsMail.py*** *-> not used*
+    - ~~**TestEventsMail.py**~~ ~~-> not used~~
     - **TestEventsSMS.py** -> test event reporting with SMS messages (main file for event testing but not main program file).
     - **Triggering.py** -> handle 4 different kind of triggers (API, SSH, CMD, UBUS).
     - **Variables.py** -> read and store arguments provided on program start.
