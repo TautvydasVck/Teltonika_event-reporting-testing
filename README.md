@@ -110,7 +110,7 @@ To quickly get all event types and subtypes you can send a GET request to device
 - If trigger is a restart always set `wait-time`. If not than a trigger will be sent when the device is restarting and the test will fail. Also always set `retrieve-token:"1"`. If not than after the restart test will continue with wrong old API token and following API requests will fail.
 - If durring a trigger there is some sort of a network restart it is recommended to set `wait-time`. If not than a trigger will be sent when network interface is not ready and the test will fail.
 - If a package is needed to trigger the event. Than use an API request to install. It is recommended to set `wait-time`.
-## File, Folder structure
+## Files, Folders structure
 - [**event-report-test.py**](event-report-test.py) -> main program file
 - [**structure.json**](structure.json) -> JSON configuration file structure
 - [**event-config.json**](event-config.json) -> configuration file example for RUTX11 with FW: RUTX_R_00.07.04.2
