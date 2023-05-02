@@ -10,7 +10,7 @@ It is recommended to create a profile if current device settings are important.
 - Using python3 launch the main file `python3 event-report-test.py`.
 - Using flags, if necessary, provide login data, IP addresses of devices and JSON configuration file's path. Flag `-h` or `--help` will show you what each flag means and what it requires.
 # JSON configuration file structure
-![JSON structure](/structureExplained.png)
+![JSON structure](/structure.png)
 
 One object in `events-triggers` list is one type of event (and its subtypes) `event-data{}` with corresponding triggers `trigger-data{}`.
 ## About event data
