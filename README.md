@@ -27,7 +27,7 @@ One object in `events-triggers` list is one type of event (and its subtypes)`eve
 - There must be a trigger for each event subtype
 - Each trigger can have multiple steps.
 - Trigger step can only be: api, ssh, cmd, ubus.
-- `"wait-time":""` is time in seconds for program to pause before continuing to next step or next trigger.
+- `"wait-time":""` is time in seconds for program to pause before continuing to the next step or a next trigger.
 - If you need to retrieve API token after a trigger in order to continue the test set `"retrieve-token":"1"`. If you do not want to retrieve the token leave as is `"retrieve-token":""`
 - Trigger step type api:
     - **required data**: api-path (example: `"api-path": "/network/mobile/operator_lists/config"`) and api-body (example: 
