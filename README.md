@@ -1,8 +1,8 @@
 # Documentation
 ## Prerequisites
-- Installed sshpass utility  
+- Installed sshpass utility.  
 For ubuntu command `sudo apt install sshpass` can be used.
-- The device that is being tested should be tested on fresh settings  
+- The device that is being tested should be tested on fresh settings.  
 It is recommended to create a profile if current device settings are important.
 - Installed additional python packages (with dependencies):
     - paramiko `pip install paramiko`
@@ -20,11 +20,11 @@ One object in `events-triggers` list is one type of event (and its subtypes) `ev
 - Event report message can be multiline (can have `\n` inside string).
 - Event report message can have device's (that is being tested) IMEI. Type `%ie` inside string.
 ### About trigger data
-- There must be a trigger for each event subtype
+- There must be a trigger for each event subtype.
 - Each trigger can have multiple steps (a list of steps).
 - `"wait-time":""` is time in seconds for program to pause before continuing to the next step or a next trigger.
 - After each complete trigger (**not** each trigger's step) a 10 second delay is automatically added before SMS content is checked.
-- If you need to retrieve API token after a trigger in order to continue the test set `"retrieve-token":"1"`. If you do not want to retrieve the token leave as is `"retrieve-token":""`
+- If you need to retrieve API token after a trigger in order to continue the test set `"retrieve-token":"1"`. If you do not want to retrieve the token leave as is `"retrieve-token":""`.
 - Trigger step can **only** be api/ssh/cmd/ubus.
 - Trigger step type api:
     - Sends data to device via API.
@@ -82,7 +82,7 @@ One object in `events-triggers` list is one type of event (and its subtypes) `ev
     - Sends an UBUS command to device via SSH.
     - **Required data**: command.
     - **Additional data**: wait-time and retrieve token.
-    - Every command **must** end with `\"ubus_rpc_session\":\"\"}'`. Because the program adds a token at the end of the command
+    - Every command **must** end with `\"ubus_rpc_session\":\"\"}'`. Because the program adds a token at the end of the command.
     - Quotes `"` inside string must be escaped `\"`. If not the program might stop during primary checks.
     - Example: 
     ```
