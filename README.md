@@ -16,6 +16,51 @@ Virtual environment is used if it is not wanted to install packages globally
 - Execute the activate script `source .venv/bin/activate`
 - To deactive virtual environment type `deactivate`
 ## JSON configuration file structure
+```
+{
+  "info": {
+    "product": ""
+  },
+  "events-triggers": [
+    {
+      "event-data": {
+        "event-type": "",
+        "event-subtype": [
+          ""
+        ],
+        "email-config": {
+          "subject": "",
+          "email-acc": "",
+          "recievers": [
+            ""
+          ]
+        },
+        "sms-config": {
+          "reciever": ""
+        },
+        "message": [
+          ""
+        ]
+      },
+      "trigger-data": [
+        {                  
+          "steps": [
+            {
+              "type":"",
+              "command": "",      
+              "method": "",
+              "api-path": "",
+              "api-body": {},
+              "wait-time": "",
+              "retrieve-token":""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
 *explain config file*
 ## Tips and recommendations when creating JSON configuration file
 *tips when making config file*
@@ -45,7 +90,7 @@ Virtual environment is used if it is not wanted to install packages globally
     - [**TestEventsSMS.py**](/modules/TestEventsSMS.py) -> test event reporting with SMS messages (main file for event testing but not main program file).
     - [**Triggering.py**](/modules/Triggering.py) -> handle 4 different kind of triggers (API, SSH, CMD, UBUS).
     - [**Variables.py**](/modules/Variables.py) -> read and store arguments provided on program start.
-# Task's information, requirements
+# Task's information, requirements (temporary)
 ## Automate the testing of Events Reporting
 The purpose of this automated test is to create a program that will test all Events Reporting rules variations and trigger these rules to check whether information is sent when it happens and if the sent information is correct.
 

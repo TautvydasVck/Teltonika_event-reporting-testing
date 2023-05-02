@@ -27,13 +27,13 @@
         {                  
           "steps": [
             {
-              "type":"api/ssh/cmd/ubus",
+              "type":"",
               "command": "",      
-              "method": "put/post",
+              "method": "",
               "api-path": "",
               "api-body": {},
-              "wait-time": "sekundes/(nieko)",
-              "retrieve-token":"1/(nieko)"
+              "wait-time": "",
+              "retrieve-token":""
             }
           ]
         }
