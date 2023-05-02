@@ -29,11 +29,11 @@ One object in `events-triggers` list is one type of event (and its subtypes)`eve
 - Each trigger can have multiple steps.
 - `"wait-time":""` is time in seconds for program to pause before continuing to the next step or a next trigger.
 - If you need to retrieve API token after a trigger in order to continue the test set `"retrieve-token":"1"`. If you do not want to retrieve the token leave as is `"retrieve-token":""`
-- Trigger step can only be: api, ssh, cmd, ubus.
+- Trigger step can **only** be api/ssh/cmd/ubus.
 - Trigger step type api:
     - Sends data to device via API.
-    - **required data**: method (can be **only** put/post), api-path and api-body. 
-    - **additional data**: wait-time and retrieve token.
+    - **Required data**: method (can **only** be put/post), api-path and api-body. 
+    - **Additional data**: wait-time and retrieve token.
     - Example: 
     ```    
     {
@@ -52,8 +52,8 @@ One object in `events-triggers` list is one type of event (and its subtypes)`eve
     ```
 - Trigger step type ssh:
     - Sends a standard command to device via SSH.
-    - **required data**: command. 
-    - **additional data**: wait-time and retrieve token.
+    - **Required data**: command. 
+    - **Additional data**: wait-time and retrieve token.
     - Example: 
     ```
     {
@@ -68,8 +68,8 @@ One object in `events-triggers` list is one type of event (and its subtypes)`eve
     ```
 - Trigger step type cmd:
     - Writes a command in pc's (the one that is being used) terminal.
-    - **required data**: command. 
-    - **additional data**: wait-time and retrieve token.
+    - **Required data**: command. 
+    - **Additional data**: wait-time and retrieve token.
     - Example: 
     ```
     {
@@ -84,10 +84,10 @@ One object in `events-triggers` list is one type of event (and its subtypes)`eve
     ```
 - Trigger step type: ubus:
     - Sends an UBUS command to device via SSH.
-    - **required data**: command.
-    - **additional data**: wait-time and retrieve token.
-    - every command **must** end with `\"ubus_rpc_session\":\"\"}'`. Because the program adds a token at the end of the command
-    - quotes `"` must be escaped `\"`. If not the program might exit during primary checks.
+    - **Required data**: command.
+    - **Additional data**: wait-time and retrieve token.
+    - Every command **must** end with `\"ubus_rpc_session\":\"\"}'`. Because the program adds a token at the end of the command
+    - Quotes `"` must be escaped `\"`. If not the program might exit during primary checks.
     - Example: 
     ```
     {
@@ -104,7 +104,7 @@ One object in `events-triggers` list is one type of event (and its subtypes)`eve
 ### Creating event data
 To quickly get all event types and subtypes you can send a GET request to device's API endpoint `/api/services/events_reporting/options`. *To use this endpoint provide Bearer token in header.*
 ### Creating triggers
-An example of test configuration can be found in [event-config.json](/event-config.json) file. That file is created for RUTX11 with FW: RUTX_R_00.07.04.2. When creating triggers for another device with same FW you can reuse some triggers from the example file.
+An example of test configuration can be found in [event-config.json](/event-config.json) file. That file is created for RUTX11 with FW: RUTX_R_00.07.04.2. When creating triggers for another device with same FW you can reuse most (maybe even all) of the triggers from the example file.
 ## File, Folder structure
 - [**event-report-test.py**](event-report-test.py) -> main program file
 - [**structure.json**](structure.json) -> JSON configuration file structure
