@@ -2,7 +2,7 @@
 ## Prerequisites
 - Installed sshpass utility  
 For ubuntu command `sudo apt install sshpass` can be used.
-- The device that is being tested should be tested on fresh settings. It is recommended to create a profile if current devices settings are important.
+- The device that is being tested should be tested on fresh settings. It is recommended to create a profile if current device settings are important.
 - Installed additional python packages (with dependencies):
     - paramiko `pip install paramiko`
     - requests `pip install requests`
@@ -11,8 +11,16 @@ For ubuntu command `sudo apt install sshpass` can be used.
 - structure.json -> JSON configuration file structure
 - event-config.json -> configuration file example for RUTX11 with FW: RUTX_R_00.07.04.2
 - classes
-    - DeviceData.py -> stores data about device system, hardware information, SIM card numbers
-    - EventResultsData.py -> stores data about created if
+    - DeviceData.py -> stores data about device system, hardware information, SIM card numbers.
+    - EventResultsData.py -> stores data about event that is being tested.
+    - Files.py -> stores data configuration file's, result file's location/name.
+    - RequestData.py -> stores data about device connection settings (ip, token, login name, login password).
+    - TestResultData.py -> stores data about whole test results (total events, passed/failed count, test start time).
+    - Text.py -> used for changing text format (changing color, underline).
+- modules
+    - APIToken.py -> used to get and store ubuc rpc session token from device that is being tested
+    - DataFile.py -> used to load configuration file.
+    - FTPConnection.py -> used 
 ## Configuration file structure
 *explain config file*
 ## To create and activate virtual environment
@@ -24,7 +32,7 @@ Virtual environment is used if it is not wanted to install packages globally
 ## Launching the automatic test
 - Using command python3 launch the main file 'event-report-test.py' `python3 event-report-test.py`
 - Using flags, if necessary, provide login data, IP addresses of devices and JSON configuration file's path. Flag -h or --help will show you what each flag does and what it requires.
-## Tips and recommendations when creating JSON config file
+## Tips and recommendations when creating JSON config file0
 *tips when making config file*
 # Task's information, requirements
 ## Automate the testing of Events Reporting

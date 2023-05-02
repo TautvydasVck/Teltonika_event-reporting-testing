@@ -41,6 +41,6 @@ if __name__ == "__main__":
     print(Text.Red("Failed: {0}".format(testResults.failedCnt)))
     try:
         UploadCSV()
-    except Exception:
+    except Exception as err:
         print(Text.Yellow(str(err)))
     print("|---------------FINISHED---------------|")
