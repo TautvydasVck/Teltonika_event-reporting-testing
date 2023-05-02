@@ -16,53 +16,7 @@ Virtual environment is used if it is not wanted to install packages globally
 - Execute the activate script `source .venv/bin/activate`
 - To deactive virtual environment type `deactivate`
 ## JSON configuration file structure
-```
-{
-  "info": {
-    "product": "",
-    "SIM1-nr": "",
-    "SIM2-nr": ""
-  },
-  "events-triggers": [
-    {
-      "event-data": {
-        "event-type": "",
-        "event-subtype": [
-          ""
-        ],
-        "email-config": {
-          "subject": "",
-          "email-acc": "",
-          "recievers": [
-            ""
-          ]
-        },
-        "sms-config": {
-          "reciever": ""
-        },
-        "message": [
-          ""
-        ]
-      },
-      "trigger-data": [
-        {                  
-          "steps": [
-            {
-              "type":"",
-              "command": "",      
-              "method": "",
-              "api-path": "",
-              "api-body": {},
-              "wait-time": "",
-              "retrieve-token":""
-            }
-          ]
-        }
-      ]
-    }
-  ]
-}
-```
+
 *explain config file*
 ## Tips and recommendations when creating JSON configuration file
 *tips when making config file*
