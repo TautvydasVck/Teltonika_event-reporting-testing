@@ -7,31 +7,31 @@ For ubuntu command `sudo apt install sshpass` can be used.
     - paramiko `pip install paramiko`
     - requests `pip install requests`
 ## File, Folder structure
-- **event-report-test.py** -> main program file
-- **structure.json** -> JSON configuration file structure
-- **event-config.json ->** configuration file example for RUTX11 with FW: RUTX_R_00.07.04.2
+- [**event-report-test.py**](event-report-test.py) -> main program file
+- [**structure.json**](structure.json) -> JSON configuration file structure
+- [**event-config.json**](event-config.json) -> configuration file example for RUTX11 with FW: RUTX_R_00.07.04.2
 - **classes**
-    - **DeviceData.py** -> stores data about device system, hardware information, SIM card numbers.
-    - **EventResultsData.py** -> stores data about event that is being tested.
-    - **Files.py** -> stores data configuration file's, result file's location/name.
-    - **RequestData.py** -> stores data about device connection settings (ip, token, login name, login password).
-    - **TestResultData.py** -> stores data about whole test results (total events, passed/failed count, test start time).
-    - **Text.py** -> used for changing text format (changing color, underline).
+    - [**DeviceData.py**](/classes/DeviceData.py) -> stores data about device system, hardware information, SIM card numbers.
+    - [**EventResultsData.py**](/classes/EventResultData.py) -> stores data about event that is being tested.
+    - [**Files.py**](/classes/Files.py) -> stores data configuration file's, result file's location/name.
+    - [**RequestData.py**](/classes/RequestData.py) -> stores data about device connection settings (ip, token, login name, login password).
+    - [**TestResultData.py**](/classes/TestResultData.py) -> stores data about whole test results (total events, passed/failed count, test start time).
+    - [**Utilities.py**](/classes/Utilities.py) -> used for changing text format (changing color, underline).
 - **modules**
-    - **APIToken.py** -> get and store ubuc rpc session token from device that is being tested
-    - **DataFile.py** -> load configuration file.
-    - **FTPConnection.py** -> create FTP connection to upload result csv file.
-    - **MessageDecode.py** -> decode sender's imei (if there is one in the event report message)
-    - **PrimaryChecks.py** -> make primary checks before the actual testing starts. Checks if the device that is being tested has mobile funcionalities, get's device phone number/-s. Checks if the model in configuration file matches actual device model. Checks if event subtypes, triggers and messages count matches. Checks if test can connect to receiver via SSH. Checks if device that is being tested can send SMS messages and receive them.
-    - **Receiver.py** -> check what a second device received from event reporting (the device that is being tested) and tell if SMS message is the same and if it was received from correct phone number. Also get amount of received messages and there indexes
-    - **Requests.py** -> send event reporting data via API and trigger data via API and/or SSH. Also get device hardware, software information via API.
-    - **Resets.py** -> delete all old SMS messages and prepare for next event testing (resets event, that was tested, results and deletes event report, that was created)
-    - **ResultFile.py** -> create, updat and upload csv result file.
-    - **SSHConnection.py** -> create SSH connection with device.
-    - ~~**TestEventsMail.py** -> not used~~
-    - **TestEventsSMS.py** -> test event reporting with SMS messages (main file for event testing but not main program file).
-    - **Triggering.py** -> handle 4 different kind of triggers (API, SSH, CMD, UBUS).
-    - **Variables.py** -> read and store arguments provided on program start.
+    - [**APIToken.py**](/modules/APIToken.py) -> get and store ubuc rpc session token from device that is being tested
+    - [**DataFile.py**](/modules/DataFile.py) -> load configuration file.
+    - [**FTPConnection.py**](/modules/FTPConnection.py) -> create FTP connection to upload result csv file.
+    - [**MessageDecode.py**](/modules/MessageDecode.py) -> decode sender's imei (if there is one in the event report message)
+    - [**PrimaryChecks.py**](/modules/PrimaryChecks.py) -> make primary checks before the actual testing starts. Checks if the device that is being tested has mobile funcionalities, get's device phone number/-s. Checks if the model in configuration file matches actual device model. Checks if event subtypes, triggers and messages count matches. Checks if test can connect to receiver via SSH. Checks if device that is being tested can send SMS messages and receive them.
+    - [**Receiver.py**](/modules/Receiver.py) -> check what a second device received from event reporting (the device that is being tested) and tell if SMS message is the same and if it was received from correct phone number. Also get amount of received messages and there indexes
+    - [**Requests.py**](/modules/Requests.py) -> send event reporting data via API and trigger data via API and/or SSH. Also get device hardware, software information via API.
+    - [**Resets.py**](/modules/Resets.py) -> delete all old SMS messages and prepare for next event testing (resets event, that was tested, results and deletes event report, that was created)
+    - [**ResultFile.py**](/modules/ResultFile.py) -> create, update and upload csv result file.
+    - [**SSHConnection.py**](/modules/SSHConnection.py) -> create SSH connection with device.
+    - ~~[**TestEventsMail.py**](/modules/TestEventsEmail.py) -> currently not used~~
+    - [**TestEventsSMS.py**](/modules/TestEventsSMS.py) -> test event reporting with SMS messages (main file for event testing but not main program file).
+    - [**Triggering.py**](/modules/Triggering.py) -> handle 4 different kind of triggers (API, SSH, CMD, UBUS).
+    - [**Variables.py**](/modules/Variables.py) -> read and store arguments provided on program start.
 ## Configuration file structure
 *explain config file*
 ## To create and activate virtual environment
