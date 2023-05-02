@@ -16,19 +16,33 @@ Virtual environment is used if it is not wanted to install packages globally
 - Execute the activate script `source .venv/bin/activate`
 - To deactive virtual environment type `deactivate`
 ## JSON configuration file structure
-Explanation of configuration files's [structure](/structure.json).
 ![JSON structure](/structureExplained.png)
+One object in `events-triggers` list is one type of event (and its subtypes)`event-data{}` with corresponding triggers `trigger-data{}`.
 ### About event report data
-- Since event reporting with email is not tested email-config part can be an empty object `email-config:{}` or simply omitted.
+- There must be a message for each event subtype.
+- Since event reporting with email is not tested `"email-config"` part can be an empty object `"email-config":{}` or simply omitted.
 - Event report message can be multiline (can have `\n` inside string).
 - Event report message can have device's (that is being tested) IMEI. Type `%ie` inside string.
 ### About trigger data
-- Trigger type can only be: api, ssh, cmd, ubus.
-- Trigger type api:
-    - required data is api-path and api-body. Wait-time and retrieve token
+- There must be a trigger for each event subtype
+- Each trigger can have multiple steps.
+- Trigger step can only be: api, ssh, cmd, ubus.
+- `"wait-time":""` is time in seconds for program to pause before continuing to next step or next trigger.
+- If you need to retrieve API token after a trigger in order to continue the test set `"retrieve-token":"1"`. If you do not want to retrieve the token leave as is `"retrieve-token":""`
+- Trigger step type api:
+    - **required data**: api-path (example: `"api-path": "/network/mobile/operator_lists/config"`) and api-body (example: 
+    ```
+    "api-body": {
+                "data": {
+                  "name": "test"
+                }
+              }
+    ```).
+    - **additional data**: Wait-time and retrieve token are additional
+    - required 
 ## Tips and recommendations when creating JSON configuration file
 ### Creating event data
-- To quickly get all event types and subtypes you can send a GET request to device's API endpoint `/api/services/events_reporting/options`. *To use this endpoint provide Bearer token in header.*
+To quickly get all event types and subtypes you can send a GET request to device's API endpoint `/api/services/events_reporting/options`. *To use this endpoint provide Bearer token in header.*
 ### Creating triggers
 An example of test configuration can be found in [event-config.json](/event-config.json) file. That file is created for RUTX11 with FW: RUTX_R_00.07.04.2. When creating triggers for another device with same FW you can reuse some triggers from the example file.
 ## File, Folder structure
