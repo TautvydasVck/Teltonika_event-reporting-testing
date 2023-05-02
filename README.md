@@ -37,7 +37,8 @@ One object in `events-triggers` list is one type of event (and its subtypes)`eve
                   "name": "test"
                 }
               }
-    ```).
+    ```
+    ).
     - **additional data**: Wait-time and retrieve token are additional
     - required 
 ## Tips and recommendations when creating JSON configuration file
