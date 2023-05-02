@@ -6,6 +6,19 @@ For ubuntu command `sudo apt install sshpass` can be used.
 - Installed additional python packages (with dependencies):
     - paramiko `pip install paramiko`
     - requests `pip install requests`
+## Launching the automatic test
+- Using command python3 launch the main file 'event-report-test.py' `python3 event-report-test.py`
+- Using flags, if necessary, provide login data, IP addresses of devices and JSON configuration file's path. Flag -h or --help will show you what each flag means and what it requires.
+## To create and activate virtual environment
+Virtual environment is used if it is not wanted to install packages globally
+- Install virtualenv `python3 -m pip install virtualenv`
+- Create virtual environment `virtualenv -p python3 .venv`
+- Execute the activate script `source .venv/bin/activate`
+- To deactive virtual environment type `deactivate`
+## JSON configuration file structure
+*explain config file*
+## Tips and recommendations when creating JSON configuration file
+*tips when making config file*
 ## File, Folder structure
 - [**event-report-test.py**](event-report-test.py) -> main program file
 - [**structure.json**](structure.json) -> JSON configuration file structure
@@ -32,19 +45,6 @@ For ubuntu command `sudo apt install sshpass` can be used.
     - [**TestEventsSMS.py**](/modules/TestEventsSMS.py) -> test event reporting with SMS messages (main file for event testing but not main program file).
     - [**Triggering.py**](/modules/Triggering.py) -> handle 4 different kind of triggers (API, SSH, CMD, UBUS).
     - [**Variables.py**](/modules/Variables.py) -> read and store arguments provided on program start.
-## Configuration file structure
-*explain config file*
-## To create and activate virtual environment
-Virtual environment is used if it is not wanted to install packages globally
-- Install virtualenv `python3 -m pip install virtualenv`
-- Create virtual environment `virtualenv -p python3 .venv`
-- Execute the activate script `source .venv/bin/activate`
-- To deactive virtual environment type `deactivate`
-## Launching the automatic test
-- Using command python3 launch the main file 'event-report-test.py' `python3 event-report-test.py`
-- Using flags, if necessary, provide login data, IP addresses of devices and JSON configuration file's path. Flag -h or --help will show you what each flag does and what it requires.
-## Tips and recommendations when creating JSON config file0
-*tips when making config file*
 # Task's information, requirements
 ## Automate the testing of Events Reporting
 The purpose of this automated test is to create a program that will test all Events Reporting rules variations and trigger these rules to check whether information is sent when it happens and if the sent information is correct.
