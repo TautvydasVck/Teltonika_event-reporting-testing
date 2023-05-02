@@ -19,7 +19,9 @@ Virtual environment is used if it is not wanted to install packages globally
 ```
 {
   "info": {
-    "product": ""
+    "product": "",
+    "SIM1-nr": "",
+    "SIM2-nr": ""
   },
   "events-triggers": [
     {

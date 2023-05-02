@@ -1,6 +1,8 @@
 {
   "info": {
-    "product": ""
+    "product": "",
+    "SIM1-nr": "",
+    "SIM2-nr": ""
   },
   "events-triggers": [
     {
