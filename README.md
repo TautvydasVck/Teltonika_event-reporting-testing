@@ -18,8 +18,19 @@ Virtual environment is used if it is not wanted to install packages globally
 ## JSON configuration file structure
 Explanation of configuration files's [structure](/structure.json).
 ![JSON structure](/structureExplained.png)
+### About event report data
+- Since event reporting with email is not tested email-config part can be an empty object `email-config:{}` or simply omitted.
+- Event report message can be multiline (can have `\n` inside string).
+- Event report message can have device's (that is being tested) IMEI. Type `%ie` inside string.
+### About trigger data
+- Trigger type can only be: api, ssh, cmd, ubus.
+- Trigger type api:
+    - required data is api-path and api-body. Wait-time and retrieve token
 ## Tips and recommendations when creating JSON configuration file
-*tips when making config file*
+### Creating event data
+- To quickly get all event types and subtypes you can send a GET request to device's API endpoint `/api/services/events_reporting/options`. *To use this endpoint provide Bearer token in header.*
+### Creating triggers
+An example of test configuration can be found in [event-config.json](/event-config.json) file. That file is created for RUTX11 with FW: RUTX_R_00.07.04.2. When creating triggers for another device with same FW you can reuse some triggers from the example file.
 ## File, Folder structure
 - [**event-report-test.py**](event-report-test.py) -> main program file
 - [**structure.json**](structure.json) -> JSON configuration file structure
@@ -27,7 +38,7 @@ Explanation of configuration files's [structure](/structure.json).
 - **classes**
     - [**DeviceData.py**](/classes/DeviceData.py) -> stores data about device system, hardware information, SIM card numbers.
     - [**EventResultsData.py**](/classes/EventResultData.py) -> stores data about event that is being tested.
-    - [**Files.py**](/classes/Files.py) -> stores data configuration file's, result file's location/name.
+    - [**Files.py**](/classes/Files.py) -> stores data about configuration file's, result file's location/name.
     - [**RequestData.py**](/classes/RequestData.py) -> stores data about device connection settings (ip, token, login name, login password).
     - [**TestResultData.py**](/classes/TestResultData.py) -> stores data about whole test results (total events, passed/failed count, test start time).
     - [**Utilities.py**](/classes/Utilities.py) -> used for changing text format (changing color, underline).

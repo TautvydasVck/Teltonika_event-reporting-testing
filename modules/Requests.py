@@ -34,10 +34,10 @@ def SendTrigger(endpoint, bodyData, type):
         match type:
             case "post":
                 response = requests.post(dataSender.baseURL+endpoint,
-                                         headers=head, data=bodyData, timeout=10).json()
+                                         headers=head, data=bodyData, timeout=20).json()
             case "put":
                 response = requests.put(dataSender.baseURL+endpoint,
-                                        headers=head, data=bodyData, timeout=10).json()
+                                        headers=head, data=bodyData, timeout=20).json()
             case _:
                 print(Text.Red(
                     "To trigger event reporting rule via API use only post and put HTTP methods"
@@ -58,10 +58,10 @@ def SendEvent(endpoint, bodyData, type):
         match type:
             case "post":
                 response = requests.post(dataSender.baseURL+endpoint,
-                                         headers=head, data=data, timeout=10).json()
+                                         headers=head, data=data, timeout=20).json()
             case "delete":
                 response = requests.delete(dataSender.baseURL+endpoint,
-                                           headers=head, timeout=10).json()            
+                                           headers=head, timeout=20).json()            
             case _:
                 print(Text.Yellow(
                     "To send event report data use only post and delete HTTP methods"

@@ -83,14 +83,7 @@
           "upnpd",
           "wifi_scanner",
           "xl2tpd"
-        ],
-        "email-config": {
-          "subject": "",
-          "email-acc": "",
-          "recievers": [
-            ""
-          ]
-        },
+        ],        
         "sms-config": {
           "reciever": "+37069007463"
         },
@@ -1569,13 +1562,6 @@
           "client connected",
           "client disconnected"
         ],
-        "email-config": {
-          "subject": "",
-          "email-acc": "",
-          "recievers": [
-            ""
-          ]
-        },
         "sms-config": {
           "reciever": "+37069007463"
         },
@@ -1650,13 +1636,6 @@
           "succeeded",
           "bad"
         ],
-        "email-config": {
-          "subject": "",
-          "email-acc": "",
-          "recievers": [
-            ""
-          ]
-        },
         "sms-config": {
           "reciever": "+37069007463"
         },
@@ -1718,13 +1697,6 @@
           "changed to DOWN",
           "changed to UP"
         ],
-        "email-config": {
-          "subject": "",
-          "email-acc": "",
-          "recievers": [
-            ""
-          ]
-        },
         "sms-config": {
           "reciever": "+37069007463"
         },
@@ -1840,13 +1812,6 @@
           "from button",
           "sms reboot"
         ],
-        "email-config": {
-          "subject": "",
-          "email-acc": "",
-          "recievers": [
-            ""
-          ]
-        },
         "sms-config": {
           "reciever": "+37069007463"
         },
@@ -1948,13 +1913,6 @@
           "Switched to main",
           "Switched to backup"
         ],
-        "email-config": {
-          "subject": "",
-          "email-acc": "",
-          "recievers": [
-            ""
-          ]
-        },
         "sms-config": {
           "reciever": "+37069007463"
         },
@@ -2051,13 +2009,6 @@
           "data connected",
           "data disconnected"
         ],
-        "email-config": {
-          "subject": "",
-          "email-acc": "",
-          "recievers": [
-            ""
-          ]
-        },
         "sms-config": {
           "reciever": "+37069007463"
         },
@@ -2115,13 +2066,6 @@
         "event-subtype": [
           "received from"
         ],
-        "email-config": {
-          "subject": "",
-          "email-acc": "",
-          "recievers": [
-            ""
-          ]
-        },
         "sms-config": {
           "reciever": "+37069007463"
         },
@@ -2162,13 +2106,6 @@
           "was successful",
           "not successful"
         ],
-        "email-config": {
-          "subject": "",
-          "email-acc": "",
-          "recievers": [
-            ""
-          ]
-        },
         "sms-config": {
           "reciever": "+37069007463"
         },
@@ -2237,13 +2174,6 @@
           "lan",
           "wifi"
         ],
-        "email-config": {
-          "subject": "",
-          "email-acc": "",
-          "recievers": [
-            ""
-          ]
-        },
         "sms-config": {
           "reciever": "+37069007463"
         },
