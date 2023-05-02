@@ -17,6 +17,7 @@ Virtual environment is used if it is not wanted to install packages globally
 - To deactive virtual environment type `deactivate`
 ## JSON configuration file structure
 ![JSON structure](/structureExplained.png)
+
 One object in `events-triggers` list is one type of event (and its subtypes)`event-data{}` with corresponding triggers `trigger-data{}`.
 ### About event report data
 - There must be a message for each event subtype.
@@ -31,24 +32,38 @@ One object in `events-triggers` list is one type of event (and its subtypes)`eve
 - If you need to retrieve API token after a trigger in order to continue the test set `"retrieve-token":"1"`. If you do not want to retrieve the token leave as is `"retrieve-token":""`
 - Trigger step type api:
     - **required data**: method, api-path and api-body. 
-    - **additional data**: Wait-time and retrieve token are additional
+    - **additional data**: Wait-time and retrieve token.
+    - Example: 
+    ```    
+    {
+      "type": "api",
+      "command": "",
+      "wait-time": "",
+      "method": "post",
+      "api-path": "/network/mobile/operator_lists/config",
+      "api-body": {
+        "data": {
+          "name": "test"
+        }
+      },
+      "retrieve-token": ""
+    }   
+    ```
+- Trigger step type ssh:
+     - **required data**: command. 
+    - **additional data**: Wait-time and retrieve token.
     - Example: 
     ```
-    "steps": [
-            {
-              "type": "api",
-              "command": "",
-              "wait-time": "",
-              "method": "post",
-              "api-path": "/network/mobile/operator_lists/config",
-              "api-body": {
-                "data": {
-                  "name": "test"
-                }
-              },
-              "retrieve-token": ""
-            }
-          ]
+    {
+      "type": "ssh",
+      "command": "reboot -p",
+      "wait-time": "120",
+      "method": "",
+      "api-path": "",
+      "api-body": {},
+      "retrieve-token": "1"
+    }
+          
     ```
 ## Tips and recommendations when creating JSON configuration file
 ### Creating event data
