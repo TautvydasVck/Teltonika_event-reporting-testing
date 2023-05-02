@@ -27,12 +27,13 @@ One object in `events-triggers` list is one type of event (and its subtypes)`eve
 ### About trigger data
 - There must be a trigger for each event subtype
 - Each trigger can have multiple steps.
-- Trigger step can only be: api, ssh, cmd, ubus.
 - `"wait-time":""` is time in seconds for program to pause before continuing to the next step or a next trigger.
 - If you need to retrieve API token after a trigger in order to continue the test set `"retrieve-token":"1"`. If you do not want to retrieve the token leave as is `"retrieve-token":""`
+- Trigger step can only be: api, ssh, cmd, ubus.
 - Trigger step type api:
-    - **required data**: method, api-path and api-body. 
-    - **additional data**: Wait-time and retrieve token.
+    - Sends data to device via API.
+    - **required data**: method (can be **only** put/post), api-path and api-body. 
+    - **additional data**: wait-time and retrieve token.
     - Example: 
     ```    
     {
@@ -50,8 +51,9 @@ One object in `events-triggers` list is one type of event (and its subtypes)`eve
     }   
     ```
 - Trigger step type ssh:
-     - **required data**: command. 
-    - **additional data**: Wait-time and retrieve token.
+    - Sends a standard command to device via SSH.
+    - **required data**: command. 
+    - **additional data**: wait-time and retrieve token.
     - Example: 
     ```
     {
@@ -62,8 +64,41 @@ One object in `events-triggers` list is one type of event (and its subtypes)`eve
       "api-path": "",
       "api-body": {},
       "retrieve-token": "1"
+    }          
+    ```
+- Trigger step type cmd:
+    - Writes a command in pc's (the one that is being used) terminal.
+    - **required data**: command. 
+    - **additional data**: wait-time and retrieve token.
+    - Example: 
+    ```
+    {
+      "type": "cmd",
+      "command": "sshpass -p 1324 ssh root@192.168.1.1 -o ExitOnForwardFailure='yes'",
+      "method": "",
+      "api-path": "",
+      "api-body": {},
+      "retrieve-token": "",
+      "wait-time": ""
     }
-          
+    ```
+- Trigger step type: ubus:
+    - Sends an UBUS command to device via SSH.
+    - **required data**: command.
+    - **additional data**: wait-time and retrieve token.
+    - every command **must** end with `\"ubus_rpc_session\":\"\"}'`. Because the program adds a token at the end of the command
+    - quotes `"` must be escaped `\"`. If not the program might exit during primary checks.
+    - Example: 
+    ```
+    {
+      "type": "ubus",
+      "command": "ubus call uci set '{\"config\":\"frr\", \"section\":\"bgp\", \"values\":{\"enabled\":true}, \"ubus_rpc_session\":\"\"}'",
+      "wait-time": "",
+      "method": "",
+      "api-path": "",
+      "api-body": {},
+      "retrieve-token": ""
+    }
     ```
 ## Tips and recommendations when creating JSON configuration file
 ### Creating event data

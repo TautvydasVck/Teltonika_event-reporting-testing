@@ -125,7 +125,7 @@
           "Config, cli",
           "Config, dmvpn",
           "Config, email_to_sms",
-          "Config, frr",
+          "Config, frr (dybamic routes)",
           "Config, fstab",
           "Config, iojuggler",
           "Config, ip_blockd",
