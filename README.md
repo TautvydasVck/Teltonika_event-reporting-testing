@@ -13,7 +13,7 @@ It is recommended to create a profile if current device settings are important.
 ![JSON structure](/structureExplained.png)
 
 One object in `events-triggers` list is one type of event (and its subtypes) `event-data{}` with corresponding triggers `trigger-data{}`.
-## About event report data
+## About event data
 - There must be a message for each event subtype.
 - Since event reporting with email is not tested `"email-config"` part can be an empty object `"email-config":{}` or simply omitted.
 - Event report message can be multiline (can have `\n` inside string).
