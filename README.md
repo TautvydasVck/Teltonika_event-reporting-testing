@@ -10,12 +10,6 @@ It is recommended to create a profile if current device settings are important.
 ## Launching the automatic test
 - Using python3 launch the main file `python3 event-report-test.py`.
 - Using flags, if necessary, provide login data, IP addresses of devices and JSON configuration file's path. Flag `-h` or `--help` will show you what each flag means and what it requires.
-## To create and activate virtual environment
-Virtual environment is used if it is not wanted to install packages globally.
-- Install virtualenv `python3 -m pip install virtualenv`
-- Create virtual environment `virtualenv -p python3 .venv`
-- Execute the activate script `source .venv/bin/activate`
-- To deactive virtual environment type `deactivate`
 ## JSON configuration file structure
 ![JSON structure](/structureExplained.png)
 
@@ -110,6 +104,12 @@ To quickly get all event types and subtypes you can send a GET request to device
 - If trigger is a restart always set `wait-time`. If not than a trigger will be sent when the device is restarting and the test will fail. Also always set `retrieve-token:"1"`. If not than after the restart test will continue with wrong old API token and following API requests will fail.
 - If durring a trigger there is some sort of a network restart it is recommended to set `wait-time`. If not than a trigger will be sent when network interface is not ready and the test will fail.
 - If a package is needed to trigger the event. Than use an API request to install. It is recommended to set `wait-time`.
+## To create and activate virtual environment
+Virtual environment is used if it is not wanted to install packages globally.
+- Install virtualenv `python3 -m pip install virtualenv`
+- Create virtual environment `virtualenv -p python3 .venv`
+- Execute the activate script `source .venv/bin/activate`
+- To deactive virtual environment type `deactivate`
 ## Files, Folders structure
 - [**event-report-test.py**](event-report-test.py) -> main program file
 - [**structure.json**](structure.json) -> JSON configuration file structure
