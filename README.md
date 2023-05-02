@@ -18,7 +18,7 @@ Virtual environment is used if it is not wanted to install packages globally
 ## JSON configuration file structure
 ![JSON structure](/structureExplained.png)
 
-One object in `events-triggers` list is one type of event (and its subtypes)`event-data{}` with corresponding triggers `trigger-data{}`.
+One object in `events-triggers` list is one type of event (and its subtypes) `event-data{}` with corresponding triggers `trigger-data{}`.
 ### About event report data
 - There must be a message for each event subtype.
 - Since event reporting with email is not tested `"email-config"` part can be an empty object `"email-config":{}` or simply omitted.
@@ -26,8 +26,9 @@ One object in `events-triggers` list is one type of event (and its subtypes)`eve
 - Event report message can have device's (that is being tested) IMEI. Type `%ie` inside string.
 ### About trigger data
 - There must be a trigger for each event subtype
-- Each trigger can have multiple steps.
+- Each trigger can have multiple steps (a list of steps).
 - `"wait-time":""` is time in seconds for program to pause before continuing to the next step or a next trigger.
+- After each complete trigger (**not** each trigger's step) a 10 second delay is automatically added before SMS content is checked.
 - If you need to retrieve API token after a trigger in order to continue the test set `"retrieve-token":"1"`. If you do not want to retrieve the token leave as is `"retrieve-token":""`
 - Trigger step can **only** be api/ssh/cmd/ubus.
 - Trigger step type api:
@@ -87,7 +88,7 @@ One object in `events-triggers` list is one type of event (and its subtypes)`eve
     - **Required data**: command.
     - **Additional data**: wait-time and retrieve token.
     - Every command **must** end with `\"ubus_rpc_session\":\"\"}'`. Because the program adds a token at the end of the command
-    - Quotes `"` must be escaped `\"`. If not the program might exit during primary checks.
+    - Quotes `"` inside string must be escaped `\"`. If not the program might stop during primary checks.
     - Example: 
     ```
     {
@@ -104,7 +105,10 @@ One object in `events-triggers` list is one type of event (and its subtypes)`eve
 ### Creating event data
 To quickly get all event types and subtypes you can send a GET request to device's API endpoint `/api/services/events_reporting/options`. *To use this endpoint provide Bearer token in header.*
 ### Creating triggers
-An example of test configuration can be found in [event-config.json](/event-config.json) file. That file is created for RUTX11 with FW: RUTX_R_00.07.04.2. When creating triggers for another device with same FW you can reuse most (maybe even all) of the triggers from the example file.
+- An example of test configuration can be found in [event-config.json](/event-config.json) file. That file is created for RUTX11 with FW: RUTX_R_00.07.04.2. When creating triggers for another device with same FW you can reuse most (maybe even all) of the triggers from the example file.
+- If trigger is a restart always set `wait-time`. If not than a trigger will be sent when the device is restarting and the test will fail. Also always set `retrieve-token:"1"`. If not than after the restart test will continue with wrong old API token and following API requests will fail.
+- If durring a trigger there is some sort of a network restart it is recommended to set `wait-time`. If not than a trigger will be sent when network interface is not ready and the test will fail.
+- If a package is needed to trigger the event. Than use an API request to install. It is recommended to set `wait-time`.
 ## File, Folder structure
 - [**event-report-test.py**](event-report-test.py) -> main program file
 - [**structure.json**](structure.json) -> JSON configuration file structure
@@ -139,7 +143,7 @@ The assignment must be completed using the Python programming language. Use thir
 
 [API documentation](https://teltonikalt.sharepoint.com/sites/NetworksIoTakademija/SitePages/API.aspx#to-read-api-documentation-upload-it-here).
 ## Test functionality
-The test must have a JSON configuration file that fill hold all Events reporting rules configurations and triggers that will make the device send SMS message or email about it to another device. Configuration file must also contain information what information the received message on certain events reporting rule will contain and from which number it must come. When starting the test, it is necessary to check whether the connected product is the one indicated as being tested.
+The test must have a JSON configuration file that fill hold all Events reporting rules configurations and triggers that will make the device send SMS message about it to another device. Configuration file must also contain information what information the received message on certain events reporting rule will contain and from which number it must come. When starting the test, it is necessary to check whether the connected product is the one indicated as being tested.
 
 When the other device receives SMS message about the event it is needed to check the content and sender of the SMS message.
 
