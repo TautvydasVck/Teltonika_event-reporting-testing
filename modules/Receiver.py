@@ -57,7 +57,7 @@ def LookThroughMessages(res):
         print(Text.Yellow(str(err)))
 
 def CheckWhichSim():
-    res = SendCommand("ubus call sim get", dataSender)
+    res = SendCommand("ubus call sim get", dataSender)    
     if (res[1].__contains__("1")):
         deviceInfo.activeSim = 0
     elif (res[1].__contains__("2")):

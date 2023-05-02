@@ -20,7 +20,18 @@ For ubuntu command `sudo apt install sshpass` can be used.
 - modules
     - APIToken.py -> used to get and store ubuc rpc session token from device that is being tested
     - DataFile.py -> used to load configuration file.
-    - FTPConnection.py -> used 
+    - FTPConnection.py -> used to create FTP connection to upload result csv file.
+    - MessageDecode.py -> used to decode sender's imei (if there is one in the event report message)
+    - PrimaryChecks.py -> used to make primary checks before the actual testing starts. Checks if the device that is being tested has mobile funcionalities, get's device phone number/-s. Checks if the model in configuration file matches actual device model. Checks if event subtypes, triggers and messages count matches. Checks if test can connect to receiver via SSH. Checks if device that is being tested can send SMS messages and receive them.
+    - Receiver.py -> used to check what a second device received from event reporting (the device that is being tested) and tell if SMS message is the same and if it was received from correct phone number. Also used to get amount of received messages and there indexes
+    - Requests.py -> used to send event reporting data via API and trigger data via API and/or SSH. Also used to get device hardware, software information via API.
+    - Resets.py -> used to delete all old SMS messages and prepare for next event testing (resets event, that was tested, results and deletes event report, that was created)
+    - ResultFile.py -> used to create, updat and upload csv result file.
+    - SSHConnection.py -> used to create SSH connection with device.
+    - *TestEventsMail.py -> not used*
+    - TestEventsSMS.py -> used to test event reporting with SMS messages (main file for event testing but not main program file).
+    - Triggering.py -> used to handle 4 different kind of triggers (API, SSH, CMD, UBUS).
+    - Variables.py -> used to read and store arguments provided on program start.
 ## Configuration file structure
 *explain config file*
 ## To create and activate virtual environment
