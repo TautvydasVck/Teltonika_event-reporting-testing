@@ -34,7 +34,7 @@ Explanation of configuration files's [structure](/structure.json).
 - **modules**
     - [**APIToken.py**](/modules/APIToken.py) -> get and store ubuc rpc session token from device that is being tested
     - [**DataFile.py**](/modules/DataFile.py) -> load configuration file.
-    - [**FTPConnection.py**](/modules/FTPConnection.py) -> create FTP connection to upload result csv file.
+    - [**FTPConnection.py**](/modules/FTPConnection.py) -> create FTP connection to upload csv result file.
     - [**MessageDecode.py**](/modules/MessageDecode.py) -> decode sender's imei (if there is one in the event report message)
     - [**PrimaryChecks.py**](/modules/PrimaryChecks.py) -> make primary checks before the actual testing starts. Checks if the device that is being tested has mobile functionalities, get's device phone number/-s. Checks if the model in configuration file matches actual device model. Checks if event subtypes, triggers and messages count matches. Checks if test can connect to receiver via SSH. Checks if device that is being tested can send SMS messages and receive them.
     - [**Receiver.py**](/modules/Receiver.py) -> check what a second device received from event reporting (the device that is being tested) and tell if SMS message is the same and if it was received from correct phone number. Also get amount of received messages and there indexes
@@ -42,7 +42,7 @@ Explanation of configuration files's [structure](/structure.json).
     - [**Resets.py**](/modules/Resets.py) -> delete all old SMS messages and prepare for next event testing (resets event, that was tested, results and deletes event report, that was created)
     - [**ResultFile.py**](/modules/ResultFile.py) -> create, update and upload csv result file.
     - [**SSHConnection.py**](/modules/SSHConnection.py) -> create SSH connection with device.
-    - ~~[**TestEventsMail.py**](/modules/TestEventsEmail.py) -> currently not used~~
+    - ~~[**TestEventsMail.py**](/modules/TestEventsEmail.py) -> currently not used.~~
     - [**TestEventsSMS.py**](/modules/TestEventsSMS.py) -> test event reporting with SMS messages (main file for event testing but not main program file).
     - [**Triggering.py**](/modules/Triggering.py) -> handle 4 different kind of triggers (API, SSH, CMD, UBUS).
     - [**Variables.py**](/modules/Variables.py) -> read and store arguments provided on program start.
