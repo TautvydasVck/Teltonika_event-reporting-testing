@@ -30,17 +30,26 @@ One object in `events-triggers` list is one type of event (and its subtypes)`eve
 - `"wait-time":""` is time in seconds for program to pause before continuing to the next step or a next trigger.
 - If you need to retrieve API token after a trigger in order to continue the test set `"retrieve-token":"1"`. If you do not want to retrieve the token leave as is `"retrieve-token":""`
 - Trigger step type api:
-    - **required data**: api-path (example: `"api-path": "/network/mobile/operator_lists/config"`) and api-body (example: 
+    - **required data**: method, api-path and api-body. 
+    - **additional data**: Wait-time and retrieve token are additional
+    - Example: 
     ```
-    "api-body": {
+    "steps": [
+            {
+              "type": "api",
+              "command": "",
+              "wait-time": "",
+              "method": "post",
+              "api-path": "/network/mobile/operator_lists/config",
+              "api-body": {
                 "data": {
                   "name": "test"
                 }
-              }
+              },
+              "retrieve-token": ""
+            }
+          ]
     ```
-    ).
-    - **additional data**: Wait-time and retrieve token are additional
-    - required 
 ## Tips and recommendations when creating JSON configuration file
 ### Creating event data
 To quickly get all event types and subtypes you can send a GET request to device's API endpoint `/api/services/events_reporting/options`. *To use this endpoint provide Bearer token in header.*
