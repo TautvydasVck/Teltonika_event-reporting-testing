@@ -20,7 +20,20 @@ It is recommended to create a profile if current device settings are important.
 # JSON configuration file structure
 ![JSON structure](/structure.png)
 
-One object in `events-triggers` list is one type of event (and its subtypes) `event-data{}` with corresponding triggers `trigger-data{}`.
+One object in `events-triggers` list is one type of event (and its subtypes) with corresponding triggers.
+```
+"events-triggers":[
+  {
+    "event-data":{}
+    "trigger-data":[{},{},...]
+  },
+  {
+    "event-data":{}
+    "trigger-data":[{},{},...]
+  },
+  ...
+] 
+```
 ## About event data
 - There must be a message for each event subtype.
 - Since event reporting with email is not tested `"email-config"` part can be an empty object `"email-config":{}` or simply omitted.

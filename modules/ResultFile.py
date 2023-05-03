@@ -1,10 +1,10 @@
-from modules.FTPConnection import CreateConn
-from modules.Variables import eventResults, deviceInfo, fileData, testResults
 import os
 import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from modules.FTPConnection import CreateConn
+from modules.Variables import eventResults, deviceInfo, fileData, testResults
 
 
 def CreateCSV(file):
