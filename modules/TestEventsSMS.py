@@ -13,6 +13,7 @@ from modules.Resets import PrepForNextEvent, PurgeAllSms
 from modules.ResultFile import UpdateCSV
 from modules.Triggering import TriggerEvent
 from modules.Variables import deviceInfo, eventResults, testResults, dataReceiver
+from modules.APIToken import GetToken
 
 
 def TestEvents(file):
@@ -50,7 +51,7 @@ def TestEvents(file):
                     print(Text.Yellow("Event was not created"))
                     print(Text.Red("Failed"))
                     UpdateCSV(index, test)
-                    PrepForNextEvent()
+                    PrepForNextEvent()                    
                 index += 1
                 print("-"*40)
             else:
