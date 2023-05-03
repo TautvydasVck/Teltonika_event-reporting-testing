@@ -9,6 +9,15 @@ It is recommended to create a profile if current device settings are important.
 # Launching the automatic test
 - Using python3 launch the main file `python3 event-report-test.py`.
 - Using flags, if necessary, provide login data, IP addresses of devices and JSON configuration file's path. Flag `-h` or `--help` will show you what each flag means and what it requires.
+## Explanation of flags
+- **[-sn --sName]** Provide SMS sender (device that is being tested) login name. Default value: `admin`.
+- **[-sp --sPassword]** Provide SMS sender (device that is being tested) login password. Default value: `Admin123`.
+- **[-sip --sAddress]** Provide SMS sender (device that is being tested) IP address. Default value: `192.168.1.1`.
+- **[-rp --rPassword]** Provide SMS receiver (device that will get the event report message) login password. Default value: `Admin123`
+- **[-rip --rAddress]** Provide SMS receiver (device that will get the event report message) IP address. Default value: `192.168.1.2`.
+- **[-file --configFile]** Provide JSON configuration file path. Default value: `./event-config.json`.
+- **[-file --configFile]** Provide JSON configuration file path. Default value: `./event-config.json`.
+- **[-d --deleteFile]** Set the flag of you want to delete CSV result file from PC. Default value: `false`.
 # JSON configuration file structure
 ![JSON structure](/structure.png)
 
@@ -25,7 +34,7 @@ One object in `events-triggers` list is one type of event (and its subtypes) `ev
 - After each complete trigger (**not** each trigger's step) a 10 second delay is automatically added before SMS content is checked.
 - If you need to retrieve API token after a trigger in order to continue the test set `"retrieve-token":"1"`. If you do not want to retrieve the token leave as is `"retrieve-token":""`.
 - Trigger step can **only** be api/ssh/cmd/ubus.
-### Trigger step type api
+### Trigger step type - api
 - Sends data to device via API.
 - **Required data**: method (can **only** be put/post), api-path and api-body. 
 - **Additional data**: wait-time and retrieve token.
@@ -45,7 +54,7 @@ One object in `events-triggers` list is one type of event (and its subtypes) `ev
   "retrieve-token": ""
 }   
 ```
-### Trigger step type ssh
+### Trigger step type - ssh
 - Sends a standard command to device via SSH.
 - **Required data**: command. 
 - **Additional data**: wait-time and retrieve token.
@@ -61,7 +70,7 @@ One object in `events-triggers` list is one type of event (and its subtypes) `ev
   "retrieve-token": "1"
 }          
 ```
-### Trigger step type cmd
+### Trigger step type - cmd
 - Writes a command in pc's (the one that is being used) terminal.
 - **Required data**: command. 
 - **Additional data**: wait-time and retrieve token.
@@ -77,7 +86,7 @@ One object in `events-triggers` list is one type of event (and its subtypes) `ev
   "wait-time": ""
 }
 ```
-### Trigger step type: ubus
+### Trigger step type - ubus
 - Sends an UBUS command to device via SSH.
 - **Required data**: command.
 - **Additional data**: wait-time and retrieve token.
