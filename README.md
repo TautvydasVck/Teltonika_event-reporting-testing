@@ -16,8 +16,7 @@ It is recommended to create a profile if current device settings are important.
 - **[-rp --rPassword]** Provide SMS receiver (device that will get the event report message) login password. Default value: `Admin123`
 - **[-rip --rAddress]** Provide SMS receiver (device that will get the event report message) IP address. Default value: `192.168.1.2`.
 - **[-file --configFile]** Provide JSON configuration file path. Default value: `./event-config.json`.
-- **[-file --configFile]** Provide JSON configuration file path. Default value: `./event-config.json`.
-- **[-d --deleteFile]** Set the flag of you want to delete CSV result file from PC. Default value: `false`.
+- **[-d --deleteFile]** Set the flag of you want to delete CSV result file from PC after it was uploaded to FTP server. Default value: `false`.
 # JSON configuration file structure
 ![JSON structure](/structure.png)
 
