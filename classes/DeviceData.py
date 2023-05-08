@@ -4,3 +4,4 @@ class DeviceData:
         self.sims = ["", ""]
         self.activeSim = 0
         self.sysInfo = ""
+        self.failedConn = False

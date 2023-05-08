@@ -5,15 +5,14 @@ from pathlib import Path
 
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from classes.Utilities import Text
-from modules.MessageDecode import Decode
-from modules.Receiver import CheckReceive, CheckWhichSim
-from modules.Requests import SendEvent
-from modules.Resets import PrepForNextEvent, PurgeAllSms
-from modules.ResultFile import UpdateCSV
-from modules.Triggering import TriggerEvent
 from modules.Variables import deviceInfo, eventResults, testResults, dataReceiver
-from modules.APIToken import GetToken
+from modules.Triggering import TriggerEvent
+from modules.ResultFile import UpdateCSV
+from modules.Resets import PrepForNextEvent, PurgeAllSms
+from modules.Requests import SendEvent, RetryToGetToken
+from modules.Receiver import CheckReceive, CheckWhichSim
+from modules.MessageDecode import Decode
+from classes.Utilities import Text
 
 
 def TestEvents(file):
@@ -27,31 +26,36 @@ def TestEvents(file):
             if (test["event-data"]["sms-config"]["reciever"] != ""
                     and deviceInfo.mobile == True):
                 data = GetEventData(test, subtype, index)
+                if (deviceInfo.failedConn == True):
+                    RetryToGetToken()
                 response = SendEvent(
                     "/services/events_reporting/config", data, "post")
                 if (response["success"] == True):
+                    deviceInfo.failedConn = False
                     eventResults.eventId = response["data"]["id"]
-                    try:                        
+                    try:
                         CheckWhichSim()
                         PurgeAllSms(dataReceiver)
                         TriggerEvent(test["trigger-data"][index])
                         time.sleep(10)
                         CheckReceive()
                         if (eventResults.passed == True):
-                            testResults.passedCnt += 1                                                
+                            testResults.passedCnt += 1
                     except Exception as err:
                         eventResults.passed = False
+                        deviceInfo.failedConn = True
                         print(Text.Yellow(str(err)))
-                        print(Text.Red("Failed"))                        
-                    finally:                        
+                        print(Text.Red("Failed"))
+                    finally:
                         UpdateCSV(index, test)
                         PrepForNextEvent()
                 else:
                     eventResults.passed = False
+                    deviceInfo.failedConn = True
                     print(Text.Yellow("Event was not created"))
                     print(Text.Red("Failed"))
                     UpdateCSV(index, test)
-                    PrepForNextEvent()                    
+                    PrepForNextEvent()
                 index += 1
                 print("-"*40)
             else:

@@ -6,9 +6,10 @@ import requests
 
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from classes.Utilities import Text
-from modules.SSHConnection import CreateConn
+from modules.APIToken import GetToken
 from modules.Variables import dataSender, deviceInfo
+from modules.SSHConnection import CreateConn
+from classes.Utilities import Text
 
 
 def SendCommand(data, device):
@@ -61,7 +62,7 @@ def SendEvent(endpoint, bodyData, type):
                                          headers=head, data=data, timeout=20).json()
             case "delete":
                 response = requests.delete(dataSender.baseURL+endpoint,
-                                           headers=head, timeout=20).json()            
+                                           headers=head, timeout=20).json()
             case _:
                 print(Text.Yellow(
                     "To send event report data use only post and delete HTTP methods"
@@ -89,3 +90,10 @@ def GetSysInfo():
         raise Exception(
             "Could not reach device '{0}'"
             " to get system, hardware information via API".format(dataSender.ipAddr))
+
+
+def RetryToGetToken():
+    try:
+        GetToken()
+    except Exception as err:
+        print(Text.Yellow(str(err)))
