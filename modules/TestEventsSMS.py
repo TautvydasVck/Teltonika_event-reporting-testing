@@ -59,9 +59,8 @@ def TestEvents(file):
                 index += 1
                 print("-"*40)
             else:
-                print(Text.Red("JSON configuration file is misformed"
-                               "\nCheck configuration file"))
-                sys.exit()
+                print(Text.Yellow("JSON configuration file is misformed"
+                               "\nCheck configuration file"))                
         index = 0
     testResults.failedCnt = testResults.total - testResults.passedCnt
 
